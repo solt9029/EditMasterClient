@@ -11,10 +11,6 @@ export default function configureStore() {
       ...reducers,
       router: routerReducer,
     }),
-    applyMiddleware(
-      logger,
-      thunk,
-      routerMiddleware(history)
-    )
+    applyMiddleware(logger, thunk, routerMiddleware(history))
   );
 }
