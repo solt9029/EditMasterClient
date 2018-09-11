@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
-import { Jumbotron as ReactstrapJumbotron, Container } from 'reactstrap';
+import {
+  Jumbotron as ReactstrapJumbotron,
+  Container,
+  Button,
+} from 'reactstrap';
 import styled from 'styled-components';
 
 const StyledJumbotron = styled(ReactstrapJumbotron)`
@@ -28,6 +32,18 @@ const Subtitle = styled.div`
   font-size: 1em;
 `;
 
+const StyledButton = styled(Button)`
+  width: 9.5em;
+  margin: 15px;
+  background: rgb(200, 200, 200);
+`;
+
+const ButtonText = styled.span`
+  font-size: 0.9em;
+  font-weight: 500;
+  color: #fff;
+`;
+
 export default class Jumbotron extends Component {
   render() {
     return (
@@ -42,6 +58,12 @@ export default class Jumbotron extends Component {
               "創作の達人"でオリジナルの譜面を創作しよう。誰でも簡単に始められる、創作譜面支援アプリ。
             </p>
           </Subtitle>
+          <StyledButton color="primary" size="lg" href="/scores/new">
+            <ButtonText>創作譜面を始める</ButtonText>
+          </StyledButton>
+          <StyledButton color="warning" size="lg" href="/scores">
+            <ButtonText>作品一覧を見る</ButtonText>
+          </StyledButton>
         </Container>
       </StyledJumbotron>
     );
