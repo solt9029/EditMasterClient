@@ -24,14 +24,29 @@ class Navbar extends Component {
           <NavbarToggler onClick={this.props.toggle} />
           <Collapse isOpen={this.props.isOpen} navbar>
             <Nav className="mr-auto" navbar>
-              <NavItem>
-                <NavLink href="/scores/new">創作</NavLink>
+              <NavItem active={this.props.active === 'scoresNew'}>
+                <NavLink
+                  href="/scores/new"
+                  target={this.props.targetBlank ? '_blank' : ''}
+                >
+                  創作
+                </NavLink>
               </NavItem>
-              <NavItem>
-                <NavLink href="/scores">作品一覧</NavLink>
+              <NavItem active={this.props.active === 'scoresIndex'}>
+                <NavLink
+                  href="/scores"
+                  target={this.props.targetBlank ? '_blank' : ''}
+                >
+                  作品一覧
+                </NavLink>
               </NavItem>
-              <NavItem>
-                <NavLink href="/help">ヘルプ</NavLink>
+              <NavItem active={this.props.active === 'help'}>
+                <NavLink
+                  href="/help"
+                  target={this.props.targetBlank ? '_blank' : ''}
+                >
+                  ヘルプ
+                </NavLink>
               </NavItem>
             </Nav>
             <Form inline onSubmit={e => e.preventDefault()}>
