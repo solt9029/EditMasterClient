@@ -9,8 +9,8 @@ import styled from 'styled-components';
 const StyledJumbotron = styled(ReactstrapJumbotron)`
   background: linear-gradient(
       45deg,
-      rgba(50, 180, 150, 0.9),
-      rgba(80, 170, 200, 0.8)
+      rgba(20, 160, 140, 0.9),
+      rgba(70, 150, 180, 0.8)
     ),
     url('/images/header.jpg') center no-repeat;
   background-size: cover;
