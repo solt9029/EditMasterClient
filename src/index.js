@@ -6,6 +6,7 @@ import { history } from './history';
 import App from './components/App';
 import registerServiceWorker from './registerServiceWorker';
 import configureStore from './configureStore';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const store = configureStore();
 
