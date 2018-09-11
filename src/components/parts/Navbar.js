@@ -35,8 +35,13 @@ class Navbar extends Component {
               </NavItem>
             </Nav>
             <Form inline onSubmit={e => e.preventDefault()}>
-              <Input type="search" placeholder="検索" />
-              <Button outline color="success" type="submit">
+              <Input type="search" className="mr-sm-2" placeholder="検索" />
+              <Button
+                outline
+                color="success"
+                className="my-2 my-sm-0"
+                type="submit"
+              >
                 検索
               </Button>
             </Form>
