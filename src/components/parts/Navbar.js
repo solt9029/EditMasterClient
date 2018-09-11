@@ -18,7 +18,7 @@ import { toggle } from '../../actions/navbar';
 class Navbar extends Component {
   render() {
     return (
-      <ReactstrapNavbar color="light" light expand="md">
+      <ReactstrapNavbar fixed="top" color="light" light expand="md">
         <Container>
           <NavbarBrand href="/" target={this.props.targetBlank ? '_blank' : ''}>
             創作の達人
