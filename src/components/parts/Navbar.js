@@ -20,7 +20,9 @@ class Navbar extends Component {
     return (
       <ReactstrapNavbar color="light" light expand="md">
         <Container>
-          <NavbarBrand href="/">創作の達人</NavbarBrand>
+          <NavbarBrand href="/" target={this.props.targetBlank ? '_blank' : ''}>
+            創作の達人
+          </NavbarBrand>
           <NavbarToggler onClick={this.props.toggle} />
           <Collapse isOpen={this.props.isOpen} navbar>
             <Nav className="mr-auto" navbar>
