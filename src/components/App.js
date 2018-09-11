@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import Index from '../pages/Index';
-import ScoresIndex from '../pages/scores/Index';
-import ScoresNew from '../pages/scores/New';
-import ScoresShow from '../pages/scores/Show';
+import Index from './pages/Index';
+import ScoresIndex from './pages/scores/Index';
+import ScoresNew from './pages/scores/New';
+import ScoresShow from './pages/scores/Show';
 import { Switch, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
