@@ -8,7 +8,7 @@ class Index extends Component {
   render() {
     return (
       <div>
-        <Navbar active="scoresIndex" />
+        <Navbar active="scoresIndex" form />
         <div>Scores Index Page!</div>
         <Footer />
       </div>
