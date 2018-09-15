@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import {
   Collapse,
   Navbar as ReactstrapNavbar,
@@ -35,7 +34,7 @@ const StyledNavLink = styled(NavLink)`
   font-size: 1em;
 `;
 
-class Navbar extends Component {
+export default class Navbar extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -118,10 +117,3 @@ class Navbar extends Component {
     );
   }
 }
-
-const mapStateToProps = state => ({});
-const mapDispatchToProps = dispatch => ({});
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Navbar);
