@@ -3,6 +3,10 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import Navbar from '../../parts/Navbar';
 import SplitterLayout from 'react-splitter-layout';
+import Config from '../../parts/Config';
+import Player from '../../parts/Player';
+import Editor from '../../parts/Editor';
+import Palette from '../../parts/Palette';
 
 class Show extends Component {
   render() {
@@ -11,12 +15,12 @@ class Show extends Component {
         <Navbar active="scoresNew" />
         <div>
           <SplitterLayout vertical percentage secondaryInitialSize={80}>
-            <div>1</div>
+            <Player />
             <SplitterLayout percentage secondaryInitialSize={70}>
-              <div>2</div>
+              <Config />
               <SplitterLayout percentage secondaryInitialSize={43}>
-                <div>3</div>
-                <div>4</div>
+                <Editor />
+                <Palette />
               </SplitterLayout>
             </SplitterLayout>
           </SplitterLayout>
