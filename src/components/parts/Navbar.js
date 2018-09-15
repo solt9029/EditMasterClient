@@ -96,7 +96,7 @@ export default class Navbar extends Component {
                 </StyledNavLink>
               </NavItem>
             </Nav>
-            {this.props.form ? (
+            {this.props.form && (
               <Form inline onSubmit={e => e.preventDefault()}>
                 <Input type="search" className="mr-sm-2" placeholder="検索" />
                 <Button
@@ -108,8 +108,6 @@ export default class Navbar extends Component {
                   検索
                 </Button>
               </Form>
-            ) : (
-              ''
             )}
           </Collapse>
         </Container>
