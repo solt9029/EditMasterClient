@@ -34,6 +34,14 @@ const StyledNavLink = styled(NavLink)`
   font-size: 17px;
 `;
 
+const StyledButton = styled(Button)`
+  font-family: 'HG行書体';
+`;
+
+const StyledInput = styled(Input)`
+  font-family: 'HG行書体';
+`;
+
 class Navbar extends Component {
   render() {
     return (
@@ -84,15 +92,19 @@ class Navbar extends Component {
             </Nav>
             {this.props.form ? (
               <Form inline onSubmit={e => e.preventDefault()}>
-                <Input type="search" className="mr-sm-2" placeholder="検索" />
-                <Button
+                <StyledInput
+                  type="search"
+                  className="mr-sm-2"
+                  placeholder="検索"
+                />
+                <StyledButton
                   outline
                   color="success"
                   className="my-2 my-sm-0"
                   type="submit"
                 >
                   検索
-                </Button>
+                </StyledButton>
               </Form>
             ) : (
               ''
