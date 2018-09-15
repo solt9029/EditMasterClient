@@ -15,6 +15,7 @@ import {
 } from 'reactstrap';
 import { toggle } from '../../actions/navbar';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 const Logo = styled(NavbarBrand)`
   background: url('/images/icon.png') no-repeat left center;
@@ -38,8 +39,16 @@ class Navbar extends Component {
     return (
       <ReactstrapNavbar className="py-0" color="light" light expand="md">
         <Container>
-          <Logo href="/" target={this.props.targetBlank ? '_blank' : ''} />
-          <NavbarBrand href="/" target={this.props.targetBlank ? '_blank' : ''}>
+          <Logo
+            tag={Link}
+            to="/"
+            target={this.props.targetBlank ? '_blank' : ''}
+          />
+          <NavbarBrand
+            tag={Link}
+            to="/"
+            target={this.props.targetBlank ? '_blank' : ''}
+          >
             <StyledBrandSpan>創作の達人</StyledBrandSpan>
           </NavbarBrand>
           <NavbarToggler onClick={this.props.toggle} />
@@ -47,7 +56,8 @@ class Navbar extends Component {
             <Nav className="mr-auto" navbar>
               <NavItem active={this.props.active === 'scoresNew'}>
                 <StyledNavLink
-                  href="/scores/new"
+                  tag={Link}
+                  to="/scores/new"
                   target={this.props.targetBlank ? '_blank' : ''}
                 >
                   創作
@@ -55,7 +65,8 @@ class Navbar extends Component {
               </NavItem>
               <NavItem active={this.props.active === 'scoresIndex'}>
                 <StyledNavLink
-                  href="/scores"
+                  tag={Link}
+                  to="/scores"
                   target={this.props.targetBlank ? '_blank' : ''}
                 >
                   作品一覧
@@ -63,7 +74,8 @@ class Navbar extends Component {
               </NavItem>
               <NavItem active={this.props.active === 'help'}>
                 <StyledNavLink
-                  href="/help"
+                  tag={Link}
+                  to="/help"
                   target={this.props.targetBlank ? '_blank' : ''}
                 >
                   ヘルプ

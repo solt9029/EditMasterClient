@@ -5,6 +5,7 @@ import {
   Button,
 } from 'reactstrap';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 const StyledJumbotron = styled(ReactstrapJumbotron)`
   background: linear-gradient(
@@ -58,10 +59,10 @@ export default class Jumbotron extends Component {
               "創作の達人"でオリジナルの譜面を創作しよう。誰でも簡単に始められる、創作譜面支援アプリ。
             </p>
           </Subtitle>
-          <StyledButton color="primary" size="lg" href="/scores/new">
+          <StyledButton color="primary" size="lg" tag={Link} to="/scores/new">
             <ButtonText>創作譜面を始める</ButtonText>
           </StyledButton>
-          <StyledButton color="warning" size="lg" href="/scores">
+          <StyledButton color="warning" size="lg" tag={Link} to="/scores">
             <ButtonText>作品一覧を見る</ButtonText>
           </StyledButton>
         </Container>
