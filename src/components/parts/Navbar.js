@@ -13,7 +13,6 @@ import {
   Container,
   Button,
 } from 'reactstrap';
-import { toggle } from '../../actions/navbar';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
@@ -37,6 +36,20 @@ const StyledNavLink = styled(NavLink)`
 `;
 
 class Navbar extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isOpen: false,
+    };
+    this.toggle = this.toggle.bind(this);
+  }
+
+  toggle() {
+    this.setState({
+      isOpen: !this.state.isOpen,
+    });
+  }
+
   render() {
     return (
       <StyledNavbar className="py-0" color="light" light expand="md">
@@ -53,8 +66,8 @@ class Navbar extends Component {
           >
             <StyledSpan>創作の達人</StyledSpan>
           </NavbarBrand>
-          <NavbarToggler onClick={this.props.toggle} />
-          <Collapse isOpen={this.props.isOpen} navbar>
+          <NavbarToggler onClick={this.toggle} />
+          <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="mr-auto" navbar>
               <NavItem active={this.props.active === 'scoresNew'}>
                 <StyledNavLink
@@ -90,7 +103,7 @@ class Navbar extends Component {
                 <Button
                   outline
                   color="success"
-                  className="my-2 my-sm-0"
+                  className="my-2 my-sm-2"
                   type="submit"
                 >
                   検索
@@ -106,14 +119,8 @@ class Navbar extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  isOpen: state.navbar.isOpen,
-});
-const mapDispatchToProps = dispatch => ({
-  toggle() {
-    dispatch(toggle());
-  },
-});
+const mapStateToProps = state => ({});
+const mapDispatchToProps = dispatch => ({});
 export default connect(
   mapStateToProps,
   mapDispatchToProps
