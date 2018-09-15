@@ -1,10 +1,18 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import Navbar from '../../parts/Navbar';
+import Footer from '../../parts/Footer';
 
 class New extends Component {
   render() {
-    return <div>Scores New Page!</div>;
+    return (
+      <div>
+        <Navbar active="scoresNew" />
+        <div>Scores New Page!</div>
+        <Footer />
+      </div>
+    );
   }
 }
 

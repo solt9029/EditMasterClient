@@ -11,6 +11,7 @@ const StyledContainer = styled(Container)`
     rgba(70, 150, 180, 0.8)
   );
   color: #fff;
+  margin-top: 50px;
 `;
 
 export default class Footer extends Component {

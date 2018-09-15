@@ -36,13 +36,7 @@ const StyledNavLink = styled(NavLink)`
 class Navbar extends Component {
   render() {
     return (
-      <ReactstrapNavbar
-        className="py-0"
-        fixed="top"
-        color="light"
-        light
-        expand="md"
-      >
+      <ReactstrapNavbar className="py-0" color="light" light expand="md">
         <Container>
           <Logo href="/" target={this.props.targetBlank ? '_blank' : ''} />
           <NavbarBrand href="/" target={this.props.targetBlank ? '_blank' : ''}>

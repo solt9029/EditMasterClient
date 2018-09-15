@@ -20,7 +20,7 @@ const StyledJumbotron = styled(ReactstrapJumbotron)`
 const Title = styled.h1`
   color: #fff;
   font-size: 3.9em;
-  margin-top: 100px;
+  margin-top: 50px;
   margin-bottom: 50px;
   font-weight: bold;
 `;
