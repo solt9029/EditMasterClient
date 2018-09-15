@@ -14,12 +14,21 @@ import {
   Button,
 } from 'reactstrap';
 import { toggle } from '../../actions/navbar';
+import styled from 'styled-components';
+
+const Logo = styled(NavbarBrand)`
+  background: url('/images/icon.png') no-repeat left center;
+  background-size: contain;
+  height: 40px;
+  width: 40px;
+`;
 
 class Navbar extends Component {
   render() {
     return (
       <ReactstrapNavbar fixed="top" color="light" light expand="md">
         <Container>
+          <Logo href="/" target={this.props.targetBlank ? '_blank' : ''} />
           <NavbarBrand href="/" target={this.props.targetBlank ? '_blank' : ''}>
             創作の達人
           </NavbarBrand>
