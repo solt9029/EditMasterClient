@@ -24,28 +24,22 @@ const Logo = styled(NavbarBrand)`
   width: 45px;
 `;
 
-const StyledBrandSpan = styled.span`
+const StyledNavbar = styled(ReactstrapNavbar)`
   font-family: 'HG行書体';
-  font-size: 30px;
+`;
+
+const StyledSpan = styled.span`
+  font-size: 1.5em;
 `;
 
 const StyledNavLink = styled(NavLink)`
-  font-family: 'HG行書体';
-  font-size: 17px;
-`;
-
-const StyledButton = styled(Button)`
-  font-family: 'HG行書体';
-`;
-
-const StyledInput = styled(Input)`
-  font-family: 'HG行書体';
+  font-size: 1em;
 `;
 
 class Navbar extends Component {
   render() {
     return (
-      <ReactstrapNavbar className="py-0" color="light" light expand="md">
+      <StyledNavbar className="py-0" color="light" light expand="md">
         <Container>
           <Logo
             tag={Link}
@@ -57,7 +51,7 @@ class Navbar extends Component {
             to="/"
             target={this.props.targetBlank ? '_blank' : ''}
           >
-            <StyledBrandSpan>創作の達人</StyledBrandSpan>
+            <StyledSpan>創作の達人</StyledSpan>
           </NavbarBrand>
           <NavbarToggler onClick={this.props.toggle} />
           <Collapse isOpen={this.props.isOpen} navbar>
@@ -92,26 +86,22 @@ class Navbar extends Component {
             </Nav>
             {this.props.form ? (
               <Form inline onSubmit={e => e.preventDefault()}>
-                <StyledInput
-                  type="search"
-                  className="mr-sm-2"
-                  placeholder="検索"
-                />
-                <StyledButton
+                <Input type="search" className="mr-sm-2" placeholder="検索" />
+                <Button
                   outline
                   color="success"
                   className="my-2 my-sm-0"
                   type="submit"
                 >
                   検索
-                </StyledButton>
+                </Button>
               </Form>
             ) : (
               ''
             )}
           </Collapse>
         </Container>
-      </ReactstrapNavbar>
+      </StyledNavbar>
     );
   }
 }
