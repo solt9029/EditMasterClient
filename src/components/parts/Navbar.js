@@ -19,45 +19,61 @@ import styled from 'styled-components';
 const Logo = styled(NavbarBrand)`
   background: url('/images/icon.png') no-repeat left center;
   background-size: contain;
-  height: 40px;
-  width: 40px;
+  height: 45px;
+  width: 45px;
+`;
+
+const StyledBrandSpan = styled.span`
+  font-family: 'HG行書体';
+  font-size: 30px;
+`;
+
+const StyledNavLink = styled(NavLink)`
+  font-family: 'HG行書体';
+  font-size: 17px;
 `;
 
 class Navbar extends Component {
   render() {
     return (
-      <ReactstrapNavbar fixed="top" color="light" light expand="md">
+      <ReactstrapNavbar
+        className="py-0"
+        fixed="top"
+        color="light"
+        light
+        expand="md"
+      >
         <Container>
           <Logo href="/" target={this.props.targetBlank ? '_blank' : ''} />
           <NavbarBrand href="/" target={this.props.targetBlank ? '_blank' : ''}>
-            創作の達人
+            <StyledBrandSpan>創作の達人</StyledBrandSpan>
           </NavbarBrand>
           <NavbarToggler onClick={this.props.toggle} />
           <Collapse isOpen={this.props.isOpen} navbar>
             <Nav className="mr-auto" navbar>
               <NavItem active={this.props.active === 'scoresNew'}>
-                <NavLink
+                <StyledNavLink
                   href="/scores/new"
                   target={this.props.targetBlank ? '_blank' : ''}
                 >
                   創作
-                </NavLink>
+                </StyledNavLink>
               </NavItem>
               <NavItem active={this.props.active === 'scoresIndex'}>
-                <NavLink
+                <StyledNavLink
                   href="/scores"
                   target={this.props.targetBlank ? '_blank' : ''}
                 >
                   作品一覧
-                </NavLink>
+                </StyledNavLink>
               </NavItem>
               <NavItem active={this.props.active === 'help'}>
-                <NavLink
+                <StyledNavLink
                   href="/help"
                   target={this.props.targetBlank ? '_blank' : ''}
                 >
                   ヘルプ
-                </NavLink>
+                </StyledNavLink>
               </NavItem>
             </Nav>
             {this.props.form ? (
