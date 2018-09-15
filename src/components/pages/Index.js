@@ -9,7 +9,7 @@ class Index extends Component {
   render() {
     return (
       <div>
-        <Navbar form />
+        <Navbar />
         <Jumbotron />
         <Footer />
       </div>
