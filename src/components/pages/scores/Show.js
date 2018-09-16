@@ -23,6 +23,20 @@ class Show extends Component {
       editor: React.createRef(),
       palette: React.createRef(),
     };
+    this.setPanes = this.setPanes.bind(this);
+  }
+
+  setPanes() {
+    this.props.setPanes(this.references);
+  }
+
+  componentDidMount() {
+    this.props.setPanes(this.references);
+    window.addEventListener('resize', this.setPanes);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.setPanes);
   }
 
   render() {
