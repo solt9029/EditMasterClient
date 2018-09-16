@@ -18,7 +18,7 @@ class NoteRadio extends Component {
     let colSize = 3;
     if (this.props.paletteWidth < 200) {
       colSize = 12;
-    } else if (this.props.paletteWidth < 400) {
+    } else if (this.props.paletteWidth < 360) {
       colSize = 6;
     }
 
