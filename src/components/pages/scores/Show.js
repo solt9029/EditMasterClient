@@ -7,15 +7,24 @@ import Config from '../../parts/Config';
 import Player from '../../parts/Player';
 import Editor from '../../parts/Editor';
 import Palette from '../../parts/Palette';
-import styled from 'styled-components';
+import { setPanes } from '../../../actions/pane';
 
-const StyledDiv = styled.div`
-  background-color: #222;
-  height: 100%;
-  min-height: 100%;
-`;
+const divInlineStyle = {
+  backgroundColor: '#222',
+  height: '100%',
+};
 
 class Show extends Component {
+  constructor(props) {
+    super(props);
+    this.references = {
+      player: React.createRef(),
+      config: React.createRef(),
+      editor: React.createRef(),
+      palette: React.createRef(),
+    };
+  }
+
   render() {
     return (
       <div>
@@ -26,21 +35,36 @@ class Show extends Component {
             vertical
             percentage
             secondaryInitialSize={20}
+            onSecondaryPaneSizeChange={() => {
+              this.props.setPanes(this.references);
+            }}
           >
-            <StyledDiv>
+            <div style={divInlineStyle} ref={this.references.player}>
               <Player />
-            </StyledDiv>
-            <SplitterLayout percentage secondaryInitialSize={70}>
-              <StyledDiv>
+            </div>
+            <SplitterLayout
+              percentage
+              secondaryInitialSize={70}
+              onSecondaryPaneSizeChange={() => {
+                this.props.setPanes(this.references);
+              }}
+            >
+              <div style={divInlineStyle} ref={this.references.config}>
                 <Config />
-              </StyledDiv>
-              <SplitterLayout percentage secondaryInitialSize={43}>
-                <StyledDiv>
+              </div>
+              <SplitterLayout
+                percentage
+                secondaryInitialSize={43}
+                onSecondaryPaneSizeChange={() => {
+                  this.props.setPanes(this.references);
+                }}
+              >
+                <div style={divInlineStyle} ref={this.references.editor}>
                   <Editor />
-                </StyledDiv>
-                <StyledDiv>
+                </div>
+                <div style={divInlineStyle} ref={this.references.palette}>
                   <Palette />
-                </StyledDiv>
+                </div>
               </SplitterLayout>
             </SplitterLayout>
           </SplitterLayout>
@@ -50,8 +74,14 @@ class Show extends Component {
   }
 }
 
-const mapStateToProps = state => ({});
-const mapDispatchToProps = dispatch => ({});
+const mapStateToProps = state => ({
+  panes: state.pane.panes,
+});
+const mapDispatchToProps = dispatch => ({
+  setPanes(panes) {
+    dispatch(setPanes(panes));
+  },
+});
 export default withRouter(
   connect(
     mapStateToProps,

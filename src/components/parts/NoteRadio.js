@@ -14,10 +14,17 @@ const StyledImg = styled.img`
 
 class NoteRadio extends Component {
   render() {
+    // recalculate col size
+    let colSize = 3;
+    if (this.props.paletteWidth < 200) {
+      colSize = 12;
+    } else if (this.props.paletteWidth < 400) {
+      colSize = 6;
+    }
+
     return (
       <Col
-        lg={3}
-        xs={12}
+        xs={colSize}
         className="btn-group-toggle"
         style={{ padding: '3px' }} // styled-components doesn't apply this style: used inline style
       >
@@ -38,6 +45,7 @@ class NoteRadio extends Component {
 
 const mapStateToProps = state => ({
   note: state.form.palette.values.note,
+  paletteWidth: state.pane.palette.width,
 });
 export default connect(
   mapStateToProps,
