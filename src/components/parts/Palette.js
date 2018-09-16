@@ -3,7 +3,6 @@ import { Row, Container } from 'reactstrap';
 import styled from 'styled-components';
 import { Field, reduxForm } from 'redux-form';
 import NoteRadio from './NoteRadio';
-import { connect } from 'react-redux';
 
 const StyledDiv = styled.div`
   padding: 15px;
@@ -67,6 +66,7 @@ class Palette extends Component {
   render() {
     return (
       <StyledDiv>
+        <label>譜面の種類</label>
         <Container>
           <Row>
             {noteFields.map((field, i) => {
