@@ -10,6 +10,8 @@
 ## Setup
 
 ```
+git clone git@github.com:solt9029/EditMasterClient.git
+cd EditMasterClient
 yarn install
 ```
 
@@ -32,4 +34,17 @@ yarn build
 
 ```
 yarn deploy
+```
+
+
+## Deploy
+
+- gh-pages branch of this repo has production js files and Dockerfile and docker-compose.yml
+
+```
+git clone git@github.com:solt9029/EditMasterClient.git
+cd EditMasterClient
+git branch gh-pages origin/gh-pages
+git checkout gh-pages
+docker-compose up -d
 ```
