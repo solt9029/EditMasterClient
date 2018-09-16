@@ -1,4 +1,3 @@
-// this part should use forEach statement
 export const setPanes = references => ({
   type: 'SET_PANES',
   payload: {
@@ -20,3 +19,17 @@ export const setPanes = references => ({
     },
   },
 });
+
+// export const setPanes = references => {
+//   let panes = {};
+//   Object.keys(references).forEach(key => {
+//     panes[key] = {
+//       width: references[key].current.offsetWidth,
+//       height: references[key].current.offsetHeight,
+//     };
+//   });
+//   return {
+//     type: 'SET_PANES',
+//     payload: panes,
+//   };
+// };
