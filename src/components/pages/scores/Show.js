@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import Navbar from '../../parts/Navbar';
-import SplitterLayout from 'react-splitter-layout';
+import SplitterLayout from '../../parts/SplitterLayout';
 import Config from '../../parts/Config';
 import Player from '../../parts/Player';
 import Editor from '../../parts/Editor';
