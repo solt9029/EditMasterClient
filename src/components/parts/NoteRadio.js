@@ -1,18 +1,33 @@
 import React, { Component } from 'react';
-import { Button, Col } from 'reactstrap';
+import { Button, Col, CardImg } from 'reactstrap';
 import { connect } from 'react-redux';
+import styled from 'styled-components';
+
+const StyledButton = styled(Button)`
+  min-width: 75px;
+`;
 
 class NoteRadio extends Component {
   render() {
     return (
-      <Button
-        tag="label"
-        color="primary"
-        active={this.props.note === this.props.input.value}
+      <Col
+        lg={3}
+        xs={6}
+        className="btn-group-toggle"
+        style={{ padding: '3px' }}
       >
-        <input {...this.props.input} type={this.props.type} />
-        {this.props.label}
-      </Button>
+        <StyledButton
+          block
+          tag="label"
+          color={this.props.color}
+          active={this.props.note === this.props.input.value}
+        >
+          <div>{this.props.label}</div>
+          <img src={this.props.img} width="100%" height="auto" />
+
+          <input {...this.props.input} type={this.props.type} />
+        </StyledButton>
+      </Col>
     );
   }
 }
