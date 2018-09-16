@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Col, CardImg } from 'reactstrap';
+import { Button, Col } from 'reactstrap';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 
@@ -7,14 +7,19 @@ const StyledButton = styled(Button)`
   min-width: 75px;
 `;
 
+const StyledImg = styled.img`
+  width: 100%;
+  height: auto;
+`;
+
 class NoteRadio extends Component {
   render() {
     return (
       <Col
         lg={3}
-        xs={6}
+        xs={12}
         className="btn-group-toggle"
-        style={{ padding: '3px' }}
+        style={{ padding: '3px' }} // styled-components doesn't apply this style: used inline style
       >
         <StyledButton
           block
@@ -23,8 +28,7 @@ class NoteRadio extends Component {
           active={this.props.note === this.props.input.value}
         >
           <div>{this.props.label}</div>
-          <img src={this.props.img} width="100%" height="auto" />
-
+          <StyledImg src={this.props.img} alt={this.props.img} />
           <input {...this.props.input} type={this.props.type} />
         </StyledButton>
       </Col>

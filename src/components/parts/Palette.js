@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, Row, Container, Col } from 'reactstrap';
+import { Row, Container } from 'reactstrap';
 import styled from 'styled-components';
 import { Field, reduxForm } from 'redux-form';
 import NoteRadio from './NoteRadio';
