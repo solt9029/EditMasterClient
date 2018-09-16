@@ -21,7 +21,12 @@ class Show extends Component {
       <div>
         <Navbar active="scoresNew" />
         <div>
-          <SplitterLayout vertical percentage secondaryInitialSize={80}>
+          <SplitterLayout
+            primaryIndex={1}
+            vertical
+            percentage
+            secondaryInitialSize={20}
+          >
             <StyledDiv>
               <Player />
             </StyledDiv>
