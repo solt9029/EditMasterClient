@@ -3,12 +3,17 @@ import { Row, Container } from 'reactstrap';
 import styled from 'styled-components';
 import { Field, reduxForm } from 'redux-form';
 import NoteRadio from './NoteRadio';
+import DivisionRadio from './DivisionRadio';
 
 const StyledDiv = styled.div`
   padding: 15px;
   background-color: #222;
   color: white;
   font-weight: 500;
+`;
+
+const StyledContainer = styled(Container)`
+  margin-bottom: 20px;
 `;
 
 const noteFields = [
@@ -62,12 +67,14 @@ const noteFields = [
   },
 ];
 
+const divisionFields = ['12', '16', '32', '48'];
+
 class Palette extends Component {
   render() {
     return (
       <StyledDiv>
         <label>譜面の種類</label>
-        <Container>
+        <StyledContainer>
           <Row>
             {noteFields.map((field, i) => {
               return (
@@ -84,7 +91,23 @@ class Palette extends Component {
               );
             })}
           </Row>
-        </Container>
+        </StyledContainer>
+        <label>1小節あたりの分割数</label>
+        <StyledContainer>
+          <Row>
+            {divisionFields.map((value, i) => {
+              return (
+                <Field
+                  key={i}
+                  name="division"
+                  component={DivisionRadio}
+                  type="radio"
+                  value={value}
+                />
+              );
+            })}
+          </Row>
+        </StyledContainer>
       </StyledDiv>
     );
   }
