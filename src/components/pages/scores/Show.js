@@ -7,6 +7,13 @@ import Config from '../../parts/Config';
 import Player from '../../parts/Player';
 import Editor from '../../parts/Editor';
 import Palette from '../../parts/Palette';
+import styled from 'styled-components';
+
+const StyledDiv = styled.div`
+  background-color: #222;
+  height: 100%;
+  min-height: 100%;
+`;
 
 class Show extends Component {
   render() {
@@ -15,12 +22,20 @@ class Show extends Component {
         <Navbar active="scoresNew" />
         <div>
           <SplitterLayout vertical percentage secondaryInitialSize={80}>
-            <Player />
+            <StyledDiv>
+              <Player />
+            </StyledDiv>
             <SplitterLayout percentage secondaryInitialSize={70}>
-              <Config />
+              <StyledDiv>
+                <Config />
+              </StyledDiv>
               <SplitterLayout percentage secondaryInitialSize={43}>
-                <Editor />
-                <Palette />
+                <StyledDiv>
+                  <Editor />
+                </StyledDiv>
+                <StyledDiv>
+                  <Palette />
+                </StyledDiv>
               </SplitterLayout>
             </SplitterLayout>
           </SplitterLayout>

@@ -1,15 +1,12 @@
 import React, { Component } from 'react';
 import { reduxForm } from 'redux-form';
-import { Form } from 'reactstrap';
 import styled from 'styled-components';
 import { Field } from 'redux-form';
 import ValidationField from './ValidationField';
 import { required, number } from '../../validation';
 
-const StyledForm = styled(Form)`
+const StyledDiv = styled.div`
   padding: 15px;
-  width: 100%;
-  height: 100%;
   background-color: #222;
   color: white;
   font-weight: 500;
@@ -57,7 +54,7 @@ const fields = [
 class Config extends Component {
   render() {
     return (
-      <StyledForm>
+      <StyledDiv>
         {fields.map((field, i) => {
           return (
             <Field
@@ -71,7 +68,7 @@ class Config extends Component {
             />
           );
         })}
-      </StyledForm>
+      </StyledDiv>
     );
   }
 }
