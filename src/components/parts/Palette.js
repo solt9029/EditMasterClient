@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { Field, reduxForm } from 'redux-form';
 import NoteRadio from './NoteRadio';
 import DivisionRadio from './DivisionRadio';
+import { initialValues } from '../../reducers/form/palette';
 
 const StyledDiv = styled.div`
   padding: 15px;
@@ -125,8 +126,5 @@ class Palette extends Component {
 
 export default reduxForm({
   form: 'palette',
-  initialValues: {
-    note: 'don',
-    division: '16',
-  },
+  initialValues,
 })(Palette);
