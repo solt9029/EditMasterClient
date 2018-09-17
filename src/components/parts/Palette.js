@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Row, Container } from 'reactstrap';
+import { Row, Container, Button } from 'reactstrap';
 import styled from 'styled-components';
 import { Field, reduxForm } from 'redux-form';
 import NoteRadio from './NoteRadio';
@@ -13,7 +13,11 @@ const StyledDiv = styled.div`
 `;
 
 const StyledContainer = styled(Container)`
-  margin-bottom: 20px;
+  margin-bottom: 30px;
+`;
+
+const StyledButton = styled(Button)`
+  min-width: 90px;
 `;
 
 const noteFields = [
@@ -108,6 +112,12 @@ class Palette extends Component {
             })}
           </Row>
         </StyledContainer>
+        <StyledButton block color="success">
+          行を追加
+        </StyledButton>
+        <StyledButton block color="danger">
+          行を削除
+        </StyledButton>
       </StyledDiv>
     );
   }
