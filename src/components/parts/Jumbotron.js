@@ -36,7 +36,6 @@ const Subtitle = styled.div`
 const StyledButton = styled(Button)`
   width: 9.5em;
   margin: 15px;
-  background: rgb(200, 200, 200);
 `;
 
 const ButtonText = styled.span`
