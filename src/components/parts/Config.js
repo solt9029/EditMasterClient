@@ -6,6 +6,7 @@ import ValidationField from './ValidationField';
 import { required, number } from '../../validation';
 import { initialValues } from '../../reducers/form/config';
 import { connect } from 'react-redux';
+import urlParse from 'url-parse';
 
 const StyledDiv = styled.div`
   padding: 15px;
@@ -59,10 +60,12 @@ class Config extends Component {
   }
 
   formatVideoId(event) {
-    const value = event.target.value;
+    let value = event.target.value;
     event.preventDefault();
 
-    // do some format here
+    // format url to videoId
+    const url = urlParse(value, true);
+    value = url.query.v && url.query.v;
 
     this.props.setVideoId('videoId', value);
   }
