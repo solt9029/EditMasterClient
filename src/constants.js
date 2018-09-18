@@ -37,6 +37,12 @@ export const position = {
   },
 };
 
+export const number = {
+  score: {
+    column: 48,
+  },
+};
+
 export const validation = {
   required: value => (value ? undefined : '必須項目です'),
   maxLength: max => value =>
