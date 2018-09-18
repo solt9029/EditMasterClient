@@ -65,7 +65,9 @@ class Config extends Component {
 
     // format url to videoId
     const url = urlParse(value, true);
-    value = url.query.v && url.query.v;
+    if (url.query.v) {
+      value = url.query.v;
+    }
 
     this.props.setVideoId('videoId', value);
   }
