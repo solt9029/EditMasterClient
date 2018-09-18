@@ -1,4 +1,4 @@
-import { id } from '../../note';
+import { id } from '../../constants';
 
 export const initialValues = {
   note: id.don,

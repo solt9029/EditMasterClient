@@ -3,7 +3,7 @@ import { reduxForm } from 'redux-form';
 import styled from 'styled-components';
 import { Field } from 'redux-form';
 import ValidationField from './ValidationField';
-import { required, number } from '../../validation';
+import { validation } from '../../constants';
 import { initialValues } from '../../reducers/form/config';
 import { connect } from 'react-redux';
 import urlParse from 'url-parse';
@@ -18,28 +18,28 @@ const StyledDiv = styled.div`
 const fields = [
   {
     label: 'ユーザ名',
-    validate: required,
+    validate: validation.required,
     type: 'text',
     name: 'username',
     placeholder: 'ユーザ名（例：通りすがりの創作の達人）',
   },
   {
     label: 'YouTube動画ID',
-    validate: required,
+    validate: validation.required,
     type: 'text',
     name: 'videoId',
     placeholder: 'YouTube動画ID（例：PqJNc9KVIZE）',
   },
   {
     label: 'BPM',
-    validate: [required, number],
+    validate: [validation.required, validation.number],
     type: 'number',
     name: 'bpm',
     placeholder: 'BPM（例：200）',
   },
   {
     label: 'OFFSET：曲の始まる時間（秒）',
-    validate: [required, number],
+    validate: [validation.required, validation.number],
     type: 'number',
     name: 'offset',
     placeholder: 'OFFSET（例：1.5）',

@@ -5,7 +5,7 @@ import { Field, reduxForm } from 'redux-form';
 import NoteRadio from './NoteRadio';
 import DivisionRadio from './DivisionRadio';
 import { initialValues } from '../../reducers/form/palette';
-import { id } from '../../note';
+import { id } from '../../constants';
 
 const StyledDiv = styled.div`
   padding: 15px;

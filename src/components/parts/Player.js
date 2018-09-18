@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import NoteCircle from './NoteCircle';
 import JudgeCircle from './JudgeCircle';
 import NoteExtension from './NoteExtension';
-import { size, id, position } from '../../note';
+import { size, id, position } from '../../constants';
 import NoteEnd from './NoteEnd';
 
 class Player extends Component {

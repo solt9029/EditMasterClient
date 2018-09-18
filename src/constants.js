@@ -36,3 +36,13 @@ export const position = {
     x: 50,
   },
 };
+
+export const validation = {
+  required: value => (value ? undefined : '必須項目です'),
+  maxLength: max => value =>
+    value && value.length > max
+      ? `${max}文字以下で入力してください`
+      : undefined,
+  number: value =>
+    value && isNaN(Number(value)) ? '数字で入力してください' : undefined,
+};

@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { Circle } from 'react-konva';
-import { color, size } from '../../note';
+import { color, size } from '../../constants';
 
 export default class NoteCircle extends Component {
   render() {
