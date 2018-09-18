@@ -26,7 +26,7 @@ class IDE extends Component {
 
     this.setPanes = debounce(() => {
       this.props.setPanes(this.references);
-    }, 300).bind(this);
+    }, 100).bind(this);
   }
 
   componentDidMount() {
