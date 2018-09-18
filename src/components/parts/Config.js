@@ -22,12 +22,11 @@ const fields = [
     placeholder: 'ユーザ名（例：通りすがりの創作の達人）',
   },
   {
-    label: 'YouTube動画URL',
+    label: 'YouTube動画ID',
     validate: required,
     type: 'text',
     name: 'videoId',
-    placeholder:
-      'YouTube動画URL（例：https://www.youtube.com/watch?v=PqJNc9KVIZE）',
+    placeholder: 'YouTube動画ID（例：PqJNc9KVIZE）',
   },
   {
     label: 'BPM',

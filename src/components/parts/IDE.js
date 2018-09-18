@@ -6,6 +6,8 @@ import Player from './Player';
 import Editor from './Editor';
 import Palette from './Palette';
 import { setPanes } from '../../actions/pane';
+import YouTube from 'react-youtube';
+import { setYtPlayer } from '../../actions/player';
 
 const divInlineStyle = {
   backgroundColor: '#222',
@@ -40,6 +42,19 @@ class IDE extends Component {
   render() {
     return (
       <div>
+        <YouTube
+          opts={{
+            height: '300',
+            width: '400',
+            playerVars: {
+              autoplay: 1,
+            },
+          }}
+          videoId={this.props.config && this.props.config.values.videoId}
+          onReady={event => {
+            this.props.setYtPlayer(event.target);
+          }}
+        />
         <SplitterLayout
           primaryIndex={1}
           vertical
@@ -83,12 +98,18 @@ class IDE extends Component {
   }
 }
 
+// redux-form doesn't create state (state.form.config is undefined until Config component is mounted)
+// this shouldn't specify like 'videoId: state.form.config.values.videoId' since state.form.config is already undefined
 const mapStateToProps = state => ({
   panes: state.pane.panes,
+  config: state.form.config,
 });
 const mapDispatchToProps = dispatch => ({
   setPanes(panes) {
     dispatch(setPanes(panes));
+  },
+  setYtPlayer(ytPlayer) {
+    dispatch(setYtPlayer(ytPlayer));
   },
 });
 export default connect(
