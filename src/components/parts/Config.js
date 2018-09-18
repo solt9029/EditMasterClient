@@ -59,17 +59,14 @@ class Config extends Component {
     this.formatVideoId = this.formatVideoId.bind(this);
   }
 
-  formatVideoId(event) {
-    let value = event.target.value;
-    event.preventDefault();
-
+  formatVideoId(value) {
     // format url to videoId
     const url = urlParse(value, true);
     if (url.query.v) {
       value = url.query.v;
     }
 
-    this.props.setVideoId('videoId', value);
+    return value;
   }
 
   render() {
@@ -85,7 +82,7 @@ class Config extends Component {
               type={field.type}
               name={field.name}
               placeholder={field.placeholder}
-              onChange={field.name === 'videoId' && this.formatVideoId}
+              normalize={field.name === 'videoId' && this.formatVideoId}
             />
           );
         })}
@@ -97,14 +94,9 @@ class Config extends Component {
 const mapStateToProps = state => ({
   config: state.form.config,
 });
-const mapDispatchToProps = dispatch => ({
-  setVideoId(field, value) {
-    dispatch(change('config', field, value));
-  },
-});
 Config = connect(
   mapStateToProps,
-  mapDispatchToProps
+  null
 )(Config);
 
 export default reduxForm({
