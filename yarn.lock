@@ -4252,6 +4252,10 @@ klaw@^1.0.0:
   optionalDependencies:
     graceful-fs "^4.1.9"
 
+konva@^2.3.0:
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/konva/-/konva-2.3.0.tgz#d6ff0f85838f4fb5da34d148b79eeb6c6e14ed9c"
+
 latest-version@^3.0.0:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/latest-version/-/latest-version-3.1.0.tgz#a205383fea322b33b5ae3b18abee0dc2f356ee15"
