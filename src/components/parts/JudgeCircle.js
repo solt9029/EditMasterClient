@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Circle } from 'react-konva';
-import { white, normalSize } from '../../note';
+import { color, size } from '../../note';
 
 export default class JudgeCircle extends Component {
   render() {
@@ -8,8 +8,8 @@ export default class JudgeCircle extends Component {
       <Circle
         x={this.props.x}
         y={this.props.y}
-        radius={normalSize.outside}
-        stroke={white}
+        radius={size.normal.outside}
+        stroke={color.white}
       />
     );
   }
