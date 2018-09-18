@@ -49,13 +49,6 @@ class IDE extends Component {
           secondaryInitialSize={20}
           onSecondaryPaneSizeChange={() => {
             this.props.setPanes(this.references);
-            // if (this.props.ytPlayer) {
-            //   // console.log(this.props.ytPlayer.showVideoInfo());
-            //   this.props.ytPlayer.setOption({
-            //     width: 500,
-            //     height: 500,
-            //   });
-            // }
           }}
         >
           <div style={divInlineStyle} ref={this.references.player}>
