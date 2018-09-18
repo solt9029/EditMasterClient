@@ -61,10 +61,9 @@ class IDE extends Component {
             }}
           >
             <SplitterLayout
-              primaryIndex={1}
               percentage
               vertical
-              secondaryInitialSize={80}
+              secondaryInitialSize={20}
               onSecondaryPaneSizeChange={() => {
                 this.props.setPanes(this.references);
               }}

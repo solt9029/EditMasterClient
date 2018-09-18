@@ -8,8 +8,8 @@ class YouTube extends Component {
     return (
       <ReactYouTube
         opts={{
-          height: '300',
-          width: '400',
+          height: '95%',
+          width: '100%',
           playerVars: {
             autoplay: 1,
           },
