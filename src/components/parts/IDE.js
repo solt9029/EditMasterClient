@@ -7,6 +7,7 @@ import Editor from './Editor';
 import Palette from './Palette';
 import { setPanes } from '../../actions/pane';
 import YouTube from './YouTube';
+import { debounce } from 'lodash';
 
 const divInlineStyle = {
   height: '100%',
@@ -22,20 +23,19 @@ class IDE extends Component {
       palette: React.createRef(),
       youtube: React.createRef(),
     };
-    this.setPanes = this.setPanes.bind(this);
-  }
 
-  setPanes() {
-    this.props.setPanes(this.references);
+    this.setPanes = debounce(() => {
+      this.props.setPanes(this.references);
+    }, 300).bind(this);
   }
 
   componentDidMount() {
     this.props.setPanes(this.references);
-    window.addEventListener('resize', this.setPanes);
+    window.addEventListener('resize', this.setPanes, false);
   }
 
   componentWillUnmount() {
-    window.removeEventListener('resize', this.setPanes);
+    window.removeEventListener('resize', this.setPanes, false);
   }
 
   render() {
@@ -46,9 +46,7 @@ class IDE extends Component {
           vertical
           percentage
           secondaryInitialSize={20}
-          onSecondaryPaneSizeChange={() => {
-            this.props.setPanes(this.references);
-          }}
+          onSecondaryPaneSizeChange={this.setPanes}
         >
           <div style={divInlineStyle} ref={this.references.player}>
             <Player />
@@ -56,17 +54,13 @@ class IDE extends Component {
           <SplitterLayout
             percentage
             secondaryInitialSize={70}
-            onSecondaryPaneSizeChange={() => {
-              this.props.setPanes(this.references);
-            }}
+            onSecondaryPaneSizeChange={this.setPanes}
           >
             <SplitterLayout
               percentage
               vertical
               secondaryInitialSize={20}
-              onSecondaryPaneSizeChange={() => {
-                this.props.setPanes(this.references);
-              }}
+              onSecondaryPaneSizeChange={this.setPanes}
             >
               <div style={divInlineStyle} ref={this.references.config}>
                 <Config />
@@ -78,9 +72,7 @@ class IDE extends Component {
             <SplitterLayout
               percentage
               secondaryInitialSize={43}
-              onSecondaryPaneSizeChange={() => {
-                this.props.setPanes(this.references);
-              }}
+              onSecondaryPaneSizeChange={this.setPanes}
             >
               <div style={divInlineStyle} ref={this.references.editor}>
                 <Editor />
