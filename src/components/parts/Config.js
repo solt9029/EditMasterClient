@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { reduxForm, change } from 'redux-form';
+import { reduxForm } from 'redux-form';
 import styled from 'styled-components';
 import { Field } from 'redux-form';
 import ValidationField from './ValidationField';
