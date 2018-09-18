@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Stage, Layer } from 'react-konva';
 import { connect } from 'react-redux';
 import NoteCircle from './NoteCircle';
+import JudgeCircle from './JudgeCircle';
 
 class Player extends Component {
   render() {
@@ -9,12 +10,13 @@ class Player extends Component {
       <div>
         <Stage
           width={this.props.player.width - 1}
-          height={this.props.player.height * 0.9}
+          height={this.props.player.height - 1}
         >
           <Layer>
+            <JudgeCircle x={50} y={this.props.player.height / 2} />
             <NoteCircle
-              x={50}
-              y={this.props.player.height * 0.45}
+              x={100}
+              y={this.props.player.height / 2}
               size="normal"
               color="red"
             />
