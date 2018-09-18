@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { Stage, Layer, Circle } from 'react-konva';
+import { Stage, Layer } from 'react-konva';
 import { connect } from 'react-redux';
+import NoteCircle from './NoteCircle';
 
 class Player extends Component {
   render() {
@@ -11,11 +12,11 @@ class Player extends Component {
           height={this.props.player.height * 0.9}
         >
           <Layer>
-            <Circle
+            <NoteCircle
               x={50}
               y={this.props.player.height * 0.45}
-              radius={15}
-              fill="#999"
+              size="normal"
+              color="red"
             />
           </Layer>
         </Stage>
