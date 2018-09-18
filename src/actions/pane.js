@@ -7,7 +7,11 @@ export const setPanes = references => ({
     },
     config: {
       width: references.config.current.offsetWidth,
-      height: references.config.current.offsetHeight,
+      // can't get height straight forward, calculate height from values of palette and youtube panes
+      height:
+        references.palette.current.offsetHeight -
+        references.youtube.current.offsetHeight -
+        4,
     },
     editor: {
       width: references.editor.current.offsetWidth,
@@ -19,11 +23,7 @@ export const setPanes = references => ({
     },
     youtube: {
       width: references.youtube.current.offsetWidth,
-      // can't get height straight forward, calculate height from values of palette and config
-      height:
-        references.palette.current.offsetHeight -
-        references.config.current.offsetHeight -
-        4,
+      height: references.youtube.current.offsetHeight,
     },
   },
 });
