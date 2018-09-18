@@ -3,16 +3,17 @@ export const color = {
   yellow: '#ff0',
   blue: '#00f',
   white: '#fff',
+  black: '#000',
 };
 
 export const size = {
   normal: {
     outside: 16,
-    inside: 13,
+    inside: 12,
   },
   big: {
-    utside: 21,
-    inside: 18,
+    outside: 21,
+    inside: 17,
   },
 };
 
@@ -25,4 +26,8 @@ export const id = {
   renda: 5,
   bigrenda: 6,
   balloon: 7,
+};
+
+export const judge = {
+  x: 50,
 };

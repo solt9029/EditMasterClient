@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { Circle } from 'react-konva';
 import { color, size } from '../../note';
 
-export default class NoteCircle extends Component {
+export default class NoteEnd extends Component {
   render() {
     return (
       <Fragment>
@@ -10,12 +10,6 @@ export default class NoteCircle extends Component {
           x={this.props.x}
           y={this.props.y}
           radius={size[this.props.size].outside}
-          fill={color.white}
-        />
-        <Circle
-          x={this.props.x}
-          y={this.props.y}
-          radius={size[this.props.size].inside}
           fill={color[this.props.color]}
         />
         <Circle
