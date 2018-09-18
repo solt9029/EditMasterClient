@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Stage, Layer, Circle, Text } from 'react-konva';
+import { Stage, Layer, Circle } from 'react-konva';
 import { connect } from 'react-redux';
 
 class Player extends Component {
