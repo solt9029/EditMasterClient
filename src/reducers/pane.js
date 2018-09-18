@@ -15,6 +15,10 @@ const initialState = {
     width: 0,
     height: 0,
   },
+  youtube: {
+    width: 0,
+    height: 0,
+  },
 };
 
 export default (state = initialState, action) => {

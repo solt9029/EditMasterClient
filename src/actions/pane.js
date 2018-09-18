@@ -17,6 +17,14 @@ export const setPanes = references => ({
       width: references.palette.current.offsetWidth,
       height: references.palette.current.offsetHeight,
     },
+    youtube: {
+      width: references.youtube.current.offsetWidth,
+      // can't get height straight forward, calculate height from values of palette and config
+      height:
+        references.palette.current.offsetHeight -
+        references.config.current.offsetHeight -
+        4,
+    },
   },
 });
 

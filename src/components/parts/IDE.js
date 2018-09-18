@@ -6,8 +6,7 @@ import Player from './Player';
 import Editor from './Editor';
 import Palette from './Palette';
 import { setPanes } from '../../actions/pane';
-import YouTube from 'react-youtube';
-import { setYtPlayer } from '../../actions/player';
+import YouTube from './YouTube';
 
 const divInlineStyle = {
   backgroundColor: '#222',
@@ -22,6 +21,7 @@ class IDE extends Component {
       config: React.createRef(),
       editor: React.createRef(),
       palette: React.createRef(),
+      youtube: React.createRef(),
     };
     this.setPanes = this.setPanes.bind(this);
   }
@@ -42,19 +42,6 @@ class IDE extends Component {
   render() {
     return (
       <div>
-        <YouTube
-          opts={{
-            height: '300',
-            width: '400',
-            playerVars: {
-              autoplay: 1,
-            },
-          }}
-          videoId={this.props.config && this.props.config.values.videoId}
-          onReady={event => {
-            this.props.setYtPlayer(event.target);
-          }}
-        />
         <SplitterLayout
           primaryIndex={1}
           vertical
@@ -62,6 +49,13 @@ class IDE extends Component {
           secondaryInitialSize={20}
           onSecondaryPaneSizeChange={() => {
             this.props.setPanes(this.references);
+            // if (this.props.ytPlayer) {
+            //   // console.log(this.props.ytPlayer.showVideoInfo());
+            //   this.props.ytPlayer.setOption({
+            //     width: 500,
+            //     height: 500,
+            //   });
+            // }
           }}
         >
           <div style={divInlineStyle} ref={this.references.player}>
@@ -74,9 +68,22 @@ class IDE extends Component {
               this.props.setPanes(this.references);
             }}
           >
-            <div style={divInlineStyle} ref={this.references.config}>
-              <Config />
-            </div>
+            <SplitterLayout
+              primaryIndex={1}
+              percentage
+              vertical
+              secondaryInitialSize={80}
+              onSecondaryPaneSizeChange={() => {
+                this.props.setPanes(this.references);
+              }}
+            >
+              <div style={divInlineStyle} ref={this.references.config}>
+                <Config />
+              </div>
+              <div style={divInlineStyle} ref={this.references.youtube}>
+                <YouTube />
+              </div>
+            </SplitterLayout>
             <SplitterLayout
               percentage
               secondaryInitialSize={43}
@@ -102,13 +109,11 @@ class IDE extends Component {
 // this shouldn't specify like 'videoId: state.form.config.values.videoId' since state.form.config is already undefined
 const mapStateToProps = state => ({
   config: state.form.config,
+  ytPlayer: state.player.ytPlayer,
 });
 const mapDispatchToProps = dispatch => ({
   setPanes(panes) {
     dispatch(setPanes(panes));
-  },
-  setYtPlayer(ytPlayer) {
-    dispatch(setYtPlayer(ytPlayer));
   },
 });
 export default connect(
