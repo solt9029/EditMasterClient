@@ -101,7 +101,6 @@ class IDE extends Component {
 // redux-form doesn't create state (state.form.config is undefined until Config component is mounted)
 // this shouldn't specify like 'videoId: state.form.config.values.videoId' since state.form.config is already undefined
 const mapStateToProps = state => ({
-  panes: state.pane.panes,
   config: state.form.config,
 });
 const mapDispatchToProps = dispatch => ({
