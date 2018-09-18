@@ -71,14 +71,15 @@ class IDE extends Component {
             <SplitterLayout
               percentage
               vertical
+              primaryIndex={1}
               secondaryInitialSize={20}
               onSecondaryPaneSizeChange={this.setPanes}
             >
-              <div style={divInlineStyle} ref={this.references.config}>
-                <Config />
-              </div>
               <div style={divInlineStyle} ref={this.references.youtube}>
                 <YouTube />
+              </div>
+              <div style={divInlineStyle} ref={this.references.config}>
+                <Config />
               </div>
             </SplitterLayout>
             <SplitterLayout
