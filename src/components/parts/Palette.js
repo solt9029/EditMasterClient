@@ -5,6 +5,7 @@ import { Field, reduxForm } from 'redux-form';
 import NoteRadio from './NoteRadio';
 import DivisionRadio from './DivisionRadio';
 import { initialValues } from '../../reducers/form/palette';
+import { id } from '../../note';
 
 const StyledDiv = styled.div`
   padding: 15px;
@@ -24,55 +25,55 @@ const StyledButton = styled(Button)`
 const noteFields = [
   {
     label: 'ドン',
-    value: 'don',
+    value: id.don,
     color: 'danger',
     img: '/images/don.png',
   },
   {
     label: 'カッ',
-    value: 'ka',
+    value: id.ka,
     color: 'primary',
     img: '/images/ka.png',
   },
   {
     label: '大ドン',
-    value: 'bigdon',
+    value: id.bigdon,
     color: 'danger',
     img: '/images/bigdon.png',
   },
   {
     label: '大カッ',
-    value: 'bigka',
+    value: id.bigka,
     color: 'primary',
     img: '/images/bigka.png',
   },
   {
     label: '連打',
-    value: 'renda',
+    value: id.renda,
     color: 'warning',
     img: '/images/renda.png',
   },
   {
     label: '大連打',
-    value: 'bigrenda',
+    value: id.bigrenda,
     color: 'warning',
     img: '/images/bigrenda.png',
   },
   {
     label: '風船',
-    value: 'balloon',
+    value: id.balloon,
     color: 'danger',
     img: '/images/balloon.png',
   },
   {
     label: '空白',
-    value: 'space',
+    value: id.space,
     color: 'light',
     img: '/images/space.png',
   },
 ];
 
-const divisionFields = ['12', '16', '32', '48'];
+const divisionFields = [12, 16, 32, 48];
 
 class Palette extends Component {
   render() {
@@ -92,6 +93,7 @@ class Palette extends Component {
                   component={NoteRadio}
                   type="radio"
                   value={field.value}
+                  normalize={value => +value}
                 />
               );
             })}
@@ -108,6 +110,7 @@ class Palette extends Component {
                   component={DivisionRadio}
                   type="radio"
                   value={value}
+                  normalize={value => +value}
                 />
               );
             })}

@@ -1,4 +1,6 @@
+import { id } from '../../note';
+
 export const initialValues = {
-  note: 'don',
-  division: '16',
+  note: id.don,
+  division: 16,
 };
