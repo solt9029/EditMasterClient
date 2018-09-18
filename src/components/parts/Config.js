@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { reduxForm } from 'redux-form';
+import { reduxForm, change } from 'redux-form';
 import styled from 'styled-components';
 import { Field } from 'redux-form';
 import ValidationField from './ValidationField';
 import { required, number } from '../../validation';
 import { initialValues } from '../../reducers/form/config';
+import { connect } from 'react-redux';
 
 const StyledDiv = styled.div`
   padding: 15px;
@@ -52,6 +53,20 @@ const fields = [
 ];
 
 class Config extends Component {
+  constructor(props) {
+    super(props);
+    this.formatVideoId = this.formatVideoId.bind(this);
+  }
+
+  formatVideoId(event) {
+    const value = event.target.value;
+    event.preventDefault();
+
+    // do some format here
+
+    this.props.setVideoId('videoId', value);
+  }
+
   render() {
     return (
       <StyledDiv>
@@ -65,6 +80,7 @@ class Config extends Component {
               type={field.type}
               name={field.name}
               placeholder={field.placeholder}
+              onChange={field.name === 'videoId' && this.formatVideoId}
             />
           );
         })}
@@ -72,6 +88,19 @@ class Config extends Component {
     );
   }
 }
+
+const mapStateToProps = state => ({
+  config: state.form.config,
+});
+const mapDispatchToProps = dispatch => ({
+  setVideoId(field, value) {
+    dispatch(change('config', field, value));
+  },
+});
+Config = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Config);
 
 export default reduxForm({
   form: 'config',
