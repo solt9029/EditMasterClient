@@ -15,6 +15,9 @@ export const size = {
     outside: 21,
     inside: 17,
   },
+  space: {
+    width: 1,
+  },
 };
 
 export const id = {
@@ -28,6 +31,8 @@ export const id = {
   balloon: 7,
 };
 
-export const judge = {
-  x: 50,
+export const position = {
+  judge: {
+    x: 50,
+  },
 };

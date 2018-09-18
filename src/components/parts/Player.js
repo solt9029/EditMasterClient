@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import NoteCircle from './NoteCircle';
 import JudgeCircle from './JudgeCircle';
 import NoteExtension from './NoteExtension';
-import { size, id, judge } from '../../note';
+import { size, id, position } from '../../note';
 import NoteEnd from './NoteEnd';
 
 class Player extends Component {
@@ -18,12 +18,15 @@ class Player extends Component {
           height={this.props.player.height - 1}
         >
           <Layer>
-            <JudgeCircle x={judge.x} y={this.props.player.height / 2} />
+            <JudgeCircle
+              x={position.judge.x}
+              y={this.props.player.height / 2}
+            />
             {score.map((note, index) => {
               const x =
-                judge.x +
-                score.length * size.normal.outside -
-                index * size.normal.outside;
+                position.judge.x +
+                score.length * size.space.width -
+                index * size.space.width;
               const y = this.props.player.height / 2;
               const previous =
                 index < score.length - 1 ? score[index + 1] : id.space;

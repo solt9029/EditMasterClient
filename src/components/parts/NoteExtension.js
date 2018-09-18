@@ -7,9 +7,9 @@ export default class NoteExtension extends Component {
     return (
       <Fragment>
         <Rect
-          x={this.props.x - size.normal.outside}
+          x={this.props.x - size.space.width}
           y={this.props.y - size[this.props.size].outside}
-          width={size.normal.outside * 2}
+          width={size.space.width * 2}
           height={size[this.props.size].outside * 2}
           fill={color[this.props.color]}
         />
@@ -17,9 +17,9 @@ export default class NoteExtension extends Component {
           x={this.props.x}
           y={this.props.y}
           points={[
-            -size.normal.outside,
+            -size.space.width,
             -size[this.props.size].outside,
-            size.normal.outside,
+            size.space.width,
             -size[this.props.size].outside,
           ]}
           stroke={color.black}
@@ -28,9 +28,9 @@ export default class NoteExtension extends Component {
           x={this.props.x}
           y={this.props.y}
           points={[
-            -size.normal.outside,
+            -size.space.width,
             size[this.props.size].outside,
-            size.normal.outside,
+            size.space.width,
             size[this.props.size].outside,
           ]}
           stroke={color.black}
