@@ -24,6 +24,7 @@ class Player extends Component {
             />
             {score.map((note, index) => {
               const x =
+                -this.props.currentTime * 100 +
                 position.judge.x +
                 score.length * size.space.width -
                 index * size.space.width;
@@ -94,6 +95,7 @@ class Player extends Component {
 const mapStateToProps = state => ({
   player: state.pane.player,
   score: state.editor.score,
+  currentTime: state.player.currentTime,
 });
 export default connect(
   mapStateToProps,

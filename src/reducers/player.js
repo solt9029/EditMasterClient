@@ -11,6 +11,11 @@ export default (state = initialState, action) => {
         ...state,
         ytPlayer: action.payload.ytPlayer,
       };
+    case 'SET_CURRENT_TIME':
+      return {
+        ...state,
+        currentTime: action.payload.currentTime,
+      };
     default:
       return state;
   }

@@ -4,3 +4,10 @@ export const setYtPlayer = ytPlayer => ({
     ytPlayer,
   },
 });
+
+export const setCurrentTime = currentTime => ({
+  type: 'SET_CURRENT_TIME',
+  payload: {
+    currentTime,
+  },
+});

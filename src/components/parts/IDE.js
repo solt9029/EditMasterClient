@@ -6,6 +6,7 @@ import Player from './Player';
 import Editor from './Editor';
 import Palette from './Palette';
 import { setPanes } from '../../actions/pane';
+import { setCurrentTime } from '../../actions/player';
 import YouTube from './YouTube';
 import { debounce } from 'lodash';
 
@@ -23,19 +24,30 @@ class IDE extends Component {
       palette: React.createRef(),
       youtube: React.createRef(),
     };
-
     this.setPanes = debounce(() => {
       this.props.setPanes(this.references);
     }, 100).bind(this);
+    this.loop = this.loop.bind(this);
+    this.frameId = null;
+  }
+
+  loop() {
+    console.log('loop');
+    this.props.setCurrentTime(
+      this.props.ytPlayer ? this.props.ytPlayer.getCurrentTime() : 0
+    );
+    this.frameId = window.requestAnimationFrame(this.loop);
   }
 
   componentDidMount() {
     this.props.setPanes(this.references);
     window.addEventListener('resize', this.setPanes, false);
+    this.frameId = window.requestAnimationFrame(this.loop);
   }
 
   componentWillUnmount() {
     window.removeEventListener('resize', this.setPanes, false);
+    window.cancelAnimationFrame(this.frameId);
   }
 
   render() {
@@ -97,6 +109,9 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   setPanes(panes) {
     dispatch(setPanes(panes));
+  },
+  setCurrentTime(currentTime) {
+    dispatch(setCurrentTime(currentTime));
   },
 });
 export default connect(
