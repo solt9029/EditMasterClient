@@ -43,6 +43,7 @@
     "react": "^16.5.0",
     "react-dev-utils": "^5.0.2",
     "react-dom": "^16.5.0",
+    "react-konva": "^1.7.15",
     "react-redux": "^5.0.6",
     "react-router-dom": "^4.2.2",
     "react-router-redux": "^5.0.0-alpha.9",
