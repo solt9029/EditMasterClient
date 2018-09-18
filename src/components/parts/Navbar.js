@@ -65,7 +65,7 @@ export default class Navbar extends Component {
           >
             <StyledSpan>創作の達人</StyledSpan>
           </NavbarBrand>
-          <NavbarToggler onClick={this.toggle} />
+          <NavbarToggler onClick={this.toggle} className="my-2" />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="mr-auto" navbar>
               <NavItem active={this.props.active === 'scoresNew'}>
