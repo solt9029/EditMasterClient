@@ -9,7 +9,6 @@ import { setPanes } from '../../actions/pane';
 import YouTube from './YouTube';
 
 const divInlineStyle = {
-  backgroundColor: '#222',
   height: '100%',
 };
 
