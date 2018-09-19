@@ -30,20 +30,20 @@ class Player extends Component {
                 index * size.space.width;
               const y = this.props.player.height / 2;
               const previous =
-                index < notes.length - 1 ? notes[index + 1] : id.space;
-              const next = index > 0 ? notes[index - 1] : id.space;
+                index < notes.length - 1 ? notes[index + 1] : id.note.space;
+              const next = index > 0 ? notes[index - 1] : id.note.space;
               switch (note) {
-                case id.don:
+                case id.note.don:
                   return <NoteCircle x={x} y={y} size="normal" color="red" />;
-                case id.ka:
+                case id.note.ka:
                   return <NoteCircle x={x} y={y} size="normal" color="blue" />;
-                case id.bigdon:
+                case id.note.bigdon:
                   return <NoteCircle x={x} y={y} size="big" color="red" />;
-                case id.bigka:
+                case id.note.bigka:
                   return <NoteCircle x={x} y={y} size="big" color="blue" />;
-                case id.renda:
-                  if (previous === id.renda) {
-                    if (next === id.renda) {
+                case id.note.renda:
+                  if (previous === id.note.renda) {
+                    if (next === id.note.renda) {
                       return (
                         <NoteExtension
                           size="normal"
@@ -59,9 +59,9 @@ class Player extends Component {
                       <NoteCircle x={x} y={y} size="normal" color="yellow" />
                     );
                   }
-                case id.bigrenda:
-                  if (previous === id.bigrenda) {
-                    if (next === id.bigrenda) {
+                case id.note.bigrenda:
+                  if (previous === id.note.bigrenda) {
+                    if (next === id.note.bigrenda) {
                       return (
                         <NoteExtension size="big" x={x} y={y} color="yellow" />
                       );
@@ -70,9 +70,9 @@ class Player extends Component {
                   } else {
                     return <NoteCircle x={x} y={y} size="big" color="yellow" />;
                   }
-                case id.balloon:
-                  if (previous === id.balloon) {
-                    if (next === id.balloon) {
+                case id.note.balloon:
+                  if (previous === id.note.balloon) {
+                    if (next === id.note.balloon) {
                       return (
                         <NoteExtension size="normal" x={x} y={y} color="red" />
                       );

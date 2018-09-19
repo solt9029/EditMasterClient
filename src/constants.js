@@ -21,14 +21,22 @@ export const size = {
 };
 
 export const id = {
-  space: 0,
-  don: 1,
-  ka: 2,
-  bigdon: 3,
-  bigka: 4,
-  renda: 5,
-  bigrenda: 6,
-  balloon: 7,
+  note: {
+    space: 0,
+    don: 1,
+    ka: 2,
+    bigdon: 3,
+    bigka: 4,
+    renda: 5,
+    bigrenda: 6,
+    balloon: 7,
+  },
+  state: {
+    fresh: 0,
+    good: 1,
+    ok: 2,
+    bad: 3,
+  },
 };
 
 export const position = {
