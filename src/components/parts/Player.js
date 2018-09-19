@@ -6,6 +6,7 @@ import JudgeCircle from './JudgeCircle';
 import NoteExtension from './NoteExtension';
 import { size, id, position, number, sound, second } from '../../constants';
 import NoteEnd from './NoteEnd';
+import { setState } from '../../actions/editor';
 
 class Player extends Component {
   renderNotes() {
@@ -55,18 +56,32 @@ class Player extends Component {
         secondsPerNote
     );
 
-    if (judgeInitialNoteIndex >= 0) {
-      if (this.props.notes[judgeInitialNoteIndex].id === 1) {
-        sound.don.trigger();
-      }
-    }
-
     const judgeFinalNoteIndex = Math.floor(
       (this.props.currentTime +
         second.range.good -
         this.props.config.values.offset) /
         secondsPerNote
     );
+
+    const judgeMiddleNoteIndex = Math.round(
+      (judgeInitialNoteIndex + judgeFinalNoteIndex) / 2
+    );
+
+    // sample code sound (not good)
+    if (this.props.isAutoMode) {
+      if (
+        judgeMiddleNoteIndex >= 0 &&
+        judgeMiddleNoteIndex < this.props.notes.length
+      ) {
+        if (
+          this.props.notes[judgeMiddleNoteIndex].id === id.note.don &&
+          this.props.notes[judgeMiddleNoteIndex].state === id.state.fresh
+        ) {
+          sound.don.trigger();
+          this.props.setState(judgeMiddleNoteIndex, id.state.good);
+        }
+      }
+    }
 
     return reversedSlicedNotes.map((note, index) => {
       const x =
@@ -148,8 +163,14 @@ const mapStateToProps = state => ({
   notes: state.editor.notes,
   currentTime: state.player.currentTime,
   config: state.form.config,
+  isAutoMode: state.player.isAutoMode,
+});
+const mapDispatchToProps = dispatch => ({
+  setState(index, state) {
+    dispatch(setState(index, state));
+  },
 });
 export default connect(
   mapStateToProps,
-  null
+  mapDispatchToProps
 )(Player);

@@ -31,6 +31,13 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
+    case 'SET_STATE':
+      const notes = state.notes.concat();
+      notes[action.payload.index].state = action.payload.state;
+      return {
+        ...state,
+        notes,
+      };
     default:
       return state;
   }
