@@ -49,6 +49,7 @@ export const number = {
   score: {
     column: 48,
   },
+  beat: 4,
 };
 
 export const second = {
