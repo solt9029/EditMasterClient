@@ -9,6 +9,19 @@ import NoteEnd from './NoteEnd';
 import { setState } from '../../actions/editor';
 
 class Player extends Component {
+  constructor(props) {
+    super(props);
+    this.calcSecondsPerNote = this.calcSecondsPerNote.bind(this);
+  }
+
+  calcSecondsPerNote(bpm) {
+    const barPerMinute = bpm / number.beat;
+    const barPerSecond = barPerMinute / 60;
+    const notesPerSecond = barPerSecond * number.score.column;
+    const secondsPerNote = 1 / notesPerSecond;
+    return secondsPerNote;
+  }
+
   renderNotes() {
     if (!this.props.config) {
       return;
@@ -17,10 +30,9 @@ class Player extends Component {
       return;
     }
 
-    const barPerMinute = this.props.config.values.bpm / number.beat;
-    const barPerSecond = barPerMinute / 60;
-    const notesPerSecond = barPerSecond * number.score.column;
-    const secondsPerNote = 1 / notesPerSecond;
+    const secondsPerNote = this.calcSecondsPerNote(
+      this.props.config.values.bpm
+    );
 
     // x position of initial note
     const initialNoteX =
