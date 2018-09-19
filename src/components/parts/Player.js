@@ -17,8 +17,8 @@ class Player extends Component {
 
     // x position of initial note
     const initialNoteX =
-      ((offset - this.props.currentTime) / secondsPerNote) * size.space.width +
-      position.judge.x;
+      position.judge.x -
+      ((this.props.currentTime - offset) / secondsPerNote) * size.space.width;
 
     // index of initial note in canvas
     const canvasInitialNoteIndex =
