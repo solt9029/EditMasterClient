@@ -9,17 +9,37 @@ import NoteEnd from './NoteEnd';
 import { setState } from '../../actions/editor';
 
 class Player extends Component {
-  constructor(props) {
-    super(props);
-    this.calcSecondsPerNote = this.calcSecondsPerNote.bind(this);
-  }
-
-  calcSecondsPerNote(bpm) {
-    const barPerMinute = bpm / number.beat;
+  calcSecondsPerNote() {
+    const barPerMinute = this.props.config.values.bpm / number.beat;
     const barPerSecond = barPerMinute / 60;
     const notesPerSecond = barPerSecond * number.score.column;
     const secondsPerNote = 1 / notesPerSecond;
     return secondsPerNote;
+  }
+
+  calcNoteIndexesInRange(rangeSecond, secondsPerNote) {
+    const initialNoteIndex = Math.ceil(
+      (this.props.currentTime - rangeSecond - this.props.config.values.offset) /
+        secondsPerNote
+    );
+    const finalNoteIndex = Math.floor(
+      (this.props.currentTime + rangeSecond - this.props.config.values.offset) /
+        secondsPerNote
+    );
+    let indexes = [];
+    for (let i = initialNoteIndex; i <= finalNoteIndex; i++) {
+      indexes.push(i);
+    }
+    return indexes;
+  }
+
+  calcInitialNoteX(secondsPerNote) {
+    const initialNoteX =
+      position.judge.x +
+      ((this.props.config.values.offset - this.props.currentTime) /
+        secondsPerNote) *
+        size.space.width;
+    return initialNoteX;
   }
 
   renderNotes() {
@@ -30,16 +50,10 @@ class Player extends Component {
       return;
     }
 
-    const secondsPerNote = this.calcSecondsPerNote(
-      this.props.config.values.bpm
-    );
+    const secondsPerNote = this.calcSecondsPerNote();
 
     // x position of initial note
-    const initialNoteX =
-      position.judge.x +
-      ((this.props.config.values.offset - this.props.currentTime) /
-        secondsPerNote) *
-        size.space.width;
+    const initialNoteX = this.calcInitialNoteX(secondsPerNote);
 
     // Math.floor(-initialNoteX / size.space.width) is the number of notes that already passed from canvas
     let canvasInitialNoteIndex =
@@ -61,36 +75,29 @@ class Player extends Component {
     );
     const reversedSlicedNotes = slicedNotes.reverse();
 
-    const judgeInitialNoteIndex = Math.ceil(
-      (this.props.currentTime -
-        second.range.good -
-        this.props.config.values.offset) /
-        secondsPerNote
-    );
-
-    const judgeFinalNoteIndex = Math.floor(
-      (this.props.currentTime +
-        second.range.good -
-        this.props.config.values.offset) /
-        secondsPerNote
-    );
-
-    const judgeMiddleNoteIndex = Math.round(
-      (judgeInitialNoteIndex + judgeFinalNoteIndex) / 2
-    );
-
     // sample code sound (not good)
     if (this.props.isAutoMode) {
-      if (
-        judgeMiddleNoteIndex >= 0 &&
-        judgeMiddleNoteIndex < this.props.notes.length
-      ) {
+      const noteIndexesInGoodJudgeRange = this.calcNoteIndexesInRange(
+        second.range.good,
+        secondsPerNote
+      );
+
+      // if you use forEach here, you can use return instead of continue, but it doesn't have the same function of break
+      for (let i = 0; i < noteIndexesInGoodJudgeRange.length; i++) {
         if (
-          this.props.notes[judgeMiddleNoteIndex].id === id.note.don &&
-          this.props.notes[judgeMiddleNoteIndex].state === id.state.fresh
+          noteIndexesInGoodJudgeRange[i] < 0 ||
+          noteIndexesInGoodJudgeRange[i] >= this.props.notes.length
+        ) {
+          continue;
+        }
+        if (
+          this.props.notes[noteIndexesInGoodJudgeRange[i]].id === id.note.don &&
+          this.props.notes[noteIndexesInGoodJudgeRange[i]].state ===
+            id.state.fresh
         ) {
           sound.don.trigger();
-          this.props.setState(judgeMiddleNoteIndex, id.state.good);
+          this.props.setState(noteIndexesInGoodJudgeRange[i], id.state.good);
+          break;
         }
       }
     }
