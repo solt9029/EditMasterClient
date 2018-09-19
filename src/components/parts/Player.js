@@ -10,7 +10,7 @@ import NoteEnd from './NoteEnd';
 class Player extends Component {
   render() {
     // one-dimensional and reversed
-    const score = Array.prototype.concat.apply([], this.props.score).reverse();
+    const notes = Array.prototype.concat.apply([], this.props.notes).reverse();
     return (
       <div>
         <Stage
@@ -22,16 +22,16 @@ class Player extends Component {
               x={position.judge.x}
               y={this.props.player.height / 2}
             />
-            {score.map((note, index) => {
+            {notes.map((note, index) => {
               const x =
                 -this.props.currentTime * 100 +
                 position.judge.x +
-                score.length * size.space.width -
+                notes.length * size.space.width -
                 index * size.space.width;
               const y = this.props.player.height / 2;
               const previous =
-                index < score.length - 1 ? score[index + 1] : id.space;
-              const next = index > 0 ? score[index - 1] : id.space;
+                index < notes.length - 1 ? notes[index + 1] : id.space;
+              const next = index > 0 ? notes[index - 1] : id.space;
               switch (note) {
                 case id.don:
                   return <NoteCircle x={x} y={y} size="normal" color="red" />;
@@ -94,7 +94,7 @@ class Player extends Component {
 
 const mapStateToProps = state => ({
   player: state.pane.player,
-  score: state.editor.score,
+  notes: state.editor.notes,
   currentTime: state.player.currentTime,
 });
 export default connect(
