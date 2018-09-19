@@ -4,17 +4,39 @@ import { connect } from 'react-redux';
 import NoteCircle from './NoteCircle';
 import JudgeCircle from './JudgeCircle';
 import NoteExtension from './NoteExtension';
-import { size, id, position } from '../../constants';
+import { size, id, position, number } from '../../constants';
 import NoteEnd from './NoteEnd';
 
 class Player extends Component {
   render() {
     const notesPerSecond = this.props.config
-      ? (this.props.config.values.bpm * 4) / 60
+      ? (this.props.config.values.bpm * number.score.column) / 4 / 60
       : 1;
     const secondsPerNote = notesPerSecond !== 0 ? 1 / notesPerSecond : 1;
     const offset = this.props.config ? this.props.config.values.offset : 0;
-    const notes = this.props.notes.concat().reverse();
+
+    // x position of initial note
+    const initialNoteX =
+      ((offset - this.props.currentTime) / secondsPerNote) * size.space.width +
+      position.judge.x;
+
+    // index of initial note in canvas
+    const canvasInitialNoteIndex =
+      Math.floor(-initialNoteX / size.space.width) > 0
+        ? Math.floor(-initialNoteX / size.space.width) - 1
+        : 0;
+
+    const canvasFinalNoteIndex =
+      canvasInitialNoteIndex +
+      Math.ceil((this.props.player.width - 1) / size.space.width) +
+      2;
+
+    const slicedNotes = this.props.notes.slice(
+      canvasInitialNoteIndex,
+      canvasFinalNoteIndex
+    );
+
+    const reversedSlicedNotes = slicedNotes.reverse();
 
     return (
       <div>
@@ -27,22 +49,20 @@ class Player extends Component {
               x={position.judge.x}
               y={this.props.player.height / 2}
             />
-            {notes.map((note, index) => {
+            {reversedSlicedNotes.map((note, index) => {
               const x =
-                ((offset - this.props.currentTime) / secondsPerNote) *
-                  size.space.width +
-                position.judge.x +
-                notes.length * size.space.width -
-                index * size.space.width;
+                initialNoteX +
+                (canvasInitialNoteIndex +
+                  (reversedSlicedNotes.length - index)) *
+                  size.space.width;
 
-              if (x > this.props.player.width) {
-                return null;
-              }
-
-              const y = this.props.player.height / 2;
+              const y = (this.props.player.height - 1) / 2;
               const previous =
-                index < notes.length - 1 ? notes[index + 1].id : id.note.space;
-              const next = index > 0 ? notes[index - 1].id : id.note.space;
+                index < reversedSlicedNotes.length - 1
+                  ? reversedSlicedNotes[index + 1].id
+                  : id.note.space;
+              const next =
+                index > 0 ? reversedSlicedNotes[index - 1].id : id.note.space;
               switch (note.id) {
                 case id.note.don:
                   return <NoteCircle x={x} y={y} size="normal" color="red" />;

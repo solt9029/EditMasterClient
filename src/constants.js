@@ -16,7 +16,7 @@ export const size = {
     inside: 17,
   },
   space: {
-    width: 16,
+    width: 8,
   },
 };
 
