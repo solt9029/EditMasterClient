@@ -26,6 +26,7 @@ const LineButton = styled(Button)`
 
 const ModeButton = styled(Button)`
   margin-bottom: 30px;
+  min-width: 180px;
 `;
 
 const noteFields = [
