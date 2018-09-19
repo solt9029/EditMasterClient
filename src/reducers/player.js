@@ -1,7 +1,7 @@
 const initialState = {
   ytPlayer: null,
   currentTime: 0,
-  isChangingSlider: false,
+  isAutoMode: true,
 };
 
 export default (state = initialState, action) => {
@@ -15,6 +15,11 @@ export default (state = initialState, action) => {
       return {
         ...state,
         currentTime: action.payload.currentTime,
+      };
+    case 'TOGGLE_MODE':
+      return {
+        ...state,
+        isAutoMode: !state.isAutoMode,
       };
     default:
       return state;

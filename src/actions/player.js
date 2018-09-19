@@ -11,3 +11,7 @@ export const setCurrentTime = currentTime => ({
     currentTime,
   },
 });
+
+export const toggleMode = () => ({
+  type: 'TOGGLE_MODE',
+});
