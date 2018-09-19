@@ -6,9 +6,6 @@ export default class Note {
     this.state = id.state.fresh;
   }
   isFresh() {
-    if (this.state === id.state.fresh) {
-      return true;
-    }
-    return false;
+    return this.state === id.state.fresh;
   }
 }
