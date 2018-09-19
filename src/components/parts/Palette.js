@@ -6,6 +6,8 @@ import NoteRadio from './NoteRadio';
 import DivisionRadio from './DivisionRadio';
 import { initialValues } from '../../reducers/form/palette';
 import { id } from '../../constants';
+import { connect } from 'react-redux';
+import { toggleMode } from '../../actions/player';
 
 const StyledDiv = styled.div`
   padding: 15px;
@@ -18,8 +20,12 @@ const StyledContainer = styled(Container)`
   margin-bottom: 30px;
 `;
 
-const StyledButton = styled(Button)`
+const LineButton = styled(Button)`
   min-width: 90px;
+`;
+
+const ModeButton = styled(Button)`
+  margin-bottom: 30px;
 `;
 
 const noteFields = [
@@ -79,6 +85,15 @@ class Palette extends Component {
   render() {
     return (
       <StyledDiv>
+        <ModeButton
+          block
+          color="info"
+          onClick={() => {
+            this.props.toggleMode();
+          }}
+        >
+          {this.props.isAutoMode ? 'プレイモードにする' : 'オート再生にする'}
+        </ModeButton>
         <label>譜面の種類</label>
         <StyledContainer>
           <Row>
@@ -116,16 +131,29 @@ class Palette extends Component {
             })}
           </Row>
         </StyledContainer>
-        <StyledButton block color="success">
+        <LineButton block color="success">
           行を追加
-        </StyledButton>
-        <StyledButton block color="danger">
+        </LineButton>
+        <LineButton block color="danger">
           行を削除
-        </StyledButton>
+        </LineButton>
       </StyledDiv>
     );
   }
 }
+
+const mapStateToProps = state => ({
+  isAutoMode: state.player.isAutoMode,
+});
+const mapDispatchToProps = dispatch => ({
+  toggleMode() {
+    dispatch(toggleMode());
+  },
+});
+Palette = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Palette);
 
 export default reduxForm({
   form: 'palette',
