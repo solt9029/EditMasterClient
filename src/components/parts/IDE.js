@@ -32,7 +32,6 @@ class IDE extends Component {
   }
 
   loop() {
-    console.log('loop');
     this.props.setCurrentTime(
       this.props.ytPlayer ? this.props.ytPlayer.getCurrentTime() : 0
     );

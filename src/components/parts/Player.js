@@ -9,8 +9,7 @@ import NoteEnd from './NoteEnd';
 
 class Player extends Component {
   render() {
-    // one-dimensional and reversed
-    const notes = Array.prototype.concat.apply([], this.props.notes).reverse();
+    const notes = this.props.notes.concat().reverse();
     return (
       <div>
         <Stage
@@ -28,11 +27,16 @@ class Player extends Component {
                 position.judge.x +
                 notes.length * size.space.width -
                 index * size.space.width;
+
+              if (x > this.props.player.width) {
+                return null;
+              }
+
               const y = this.props.player.height / 2;
               const previous =
-                index < notes.length - 1 ? notes[index + 1] : id.note.space;
-              const next = index > 0 ? notes[index - 1] : id.note.space;
-              switch (note) {
+                index < notes.length - 1 ? notes[index + 1].id : id.note.space;
+              const next = index > 0 ? notes[index - 1].id : id.note.space;
+              switch (note.id) {
                 case id.note.don:
                   return <NoteCircle x={x} y={y} size="normal" color="red" />;
                 case id.note.ka:
