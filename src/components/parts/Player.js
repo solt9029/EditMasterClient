@@ -9,7 +9,13 @@ import NoteEnd from './NoteEnd';
 
 class Player extends Component {
   render() {
+    const notesPerSecond = this.props.config
+      ? (this.props.config.values.bpm * 4) / 60
+      : 1;
+    const secondsPerNote = notesPerSecond !== 0 ? 1 / notesPerSecond : 1;
+    const offset = this.props.config ? this.props.config.values.offset : 0;
     const notes = this.props.notes.concat().reverse();
+
     return (
       <div>
         <Stage
@@ -23,7 +29,8 @@ class Player extends Component {
             />
             {notes.map((note, index) => {
               const x =
-                -this.props.currentTime * 100 +
+                ((offset - this.props.currentTime) / secondsPerNote) *
+                  size.space.width +
                 position.judge.x +
                 notes.length * size.space.width -
                 index * size.space.width;
@@ -100,6 +107,7 @@ const mapStateToProps = state => ({
   player: state.pane.player,
   notes: state.editor.notes,
   currentTime: state.player.currentTime,
+  config: state.form.config,
 });
 export default connect(
   mapStateToProps,
