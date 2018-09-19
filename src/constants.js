@@ -59,6 +59,23 @@ export const second = {
   },
 };
 
+export const sound = {
+  don: {
+    audio: new Audio('/files/don.wav'),
+    trigger: () => {
+      sound.don.audio.currentTime = 0;
+      sound.don.audio.play();
+    },
+  },
+  ka: {
+    audio: new Audio('/files/ka.wav'),
+    trigger: () => {
+      sound.ka.audio.currentTime = 0;
+      sound.ka.audio.play();
+    },
+  },
+};
+
 export const validation = {
   required: value => (value ? undefined : '必須項目です'),
   maxLength: max => value =>
