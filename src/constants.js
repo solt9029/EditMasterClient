@@ -51,6 +51,14 @@ export const number = {
   },
 };
 
+export const second = {
+  range: {
+    good: 0.034,
+    ok: 0.117,
+    bad: 0.15,
+  },
+};
+
 export const validation = {
   required: value => (value ? undefined : '必須項目です'),
   maxLength: max => value =>
