@@ -19,6 +19,12 @@ export const size = {
   space: {
     width: 3,
   },
+  barStartLine: {
+    width: 2,
+  },
+  editorLine: {
+    height: 31,
+  },
 };
 
 export const id = {

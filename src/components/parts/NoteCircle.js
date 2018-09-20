@@ -9,12 +9,12 @@ class NoteCircle extends Component {
       <Fragment>
         {this.props.barStart && (
           <Rect
-            x={this.props.x - 1}
+            x={this.props.x - size.barStartLine.width / 2}
             y={
               this.props.playerPane &&
               this.props.y - (this.props.playerPane.height - 1) / 2
             }
-            width={2}
+            width={size.barStartLine.width}
             height={this.props.playerPane && this.props.playerPane.height - 1}
             fill={color.gray}
           />
