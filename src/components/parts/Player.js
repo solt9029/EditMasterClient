@@ -11,6 +11,10 @@ import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
 import { setCurrentTime, setChangingSlider } from '../../actions/player';
 
+const divInlineStyle = {
+  outline: 'none',
+};
+
 const sliderInlineStyle = {
   width: '95%',
   position: 'absolute',
@@ -212,7 +216,11 @@ class Player extends Component {
 
   render() {
     return (
-      <div>
+      <div
+        style={divInlineStyle}
+        tabindex="0"
+        onKeyDown={e => console.log(e.key)}
+      >
         <Stage
           width={this.props.player.width - 1}
           height={this.props.player.height - 15 - 1}
