@@ -4,6 +4,10 @@ import { color, percentage, number, size } from '../../constants';
 
 export default class Bar extends Component {
   render() {
+    const insideY =
+      this.props.y +
+      (size.editor.bar.outside.height - size.editor.bar.inside.height) / 2;
+
     let beatLines = [];
     for (let i = 0; i < number.beat; i++) {
       beatLines.push(
@@ -14,9 +18,9 @@ export default class Bar extends Component {
               (percentage.editor.barStartLine + i / number.beat) -
             size.editor.beatLine.width / 2
           }
-          y={this.props.y - 1}
+          y={insideY - 1}
           width={size.editor.beatLine.width}
-          height={this.props.height + 2}
+          height={size.editor.bar.inside.height + 2}
           fill={color.white}
         />
       );
@@ -26,9 +30,9 @@ export default class Bar extends Component {
       <Fragment>
         <Rect
           x={this.props.x}
-          y={this.props.y}
+          y={insideY}
           width={this.props.width}
-          height={this.props.height}
+          height={size.editor.bar.inside.height}
           fill={color.gray}
         />
         {beatLines}

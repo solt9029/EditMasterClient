@@ -63,7 +63,7 @@ export default (state = initialState, action) => {
           x: action.payload.x,
           y: action.payload.y,
         },
-      }
+      };
     default:
       return state;
   }
