@@ -4,6 +4,7 @@ export const color = {
   blue: '#00f',
   white: '#fff',
   black: '#000',
+  gray: '#999',
 };
 
 export const size = {

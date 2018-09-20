@@ -1,11 +1,24 @@
 import React, { Component, Fragment } from 'react';
-import { Circle } from 'react-konva';
+import { Circle, Rect } from 'react-konva';
 import { color, size } from '../../constants';
+import { connect } from 'react-redux';
 
-export default class NoteCircle extends Component {
+class NoteCircle extends Component {
   render() {
     return (
       <Fragment>
+        {this.props.barStart && (
+          <Rect
+            x={this.props.x - 1}
+            y={
+              this.props.playerPane &&
+              this.props.y - (this.props.playerPane.height - 1) / 2
+            }
+            width={2}
+            height={this.props.playerPane && this.props.playerPane.height - 1}
+            fill={color.gray}
+          />
+        )}
         <Circle
           x={this.props.x}
           y={this.props.y}
@@ -28,3 +41,11 @@ export default class NoteCircle extends Component {
     );
   }
 }
+
+const mapStateToProps = state => ({
+  playerPane: state.pane.player,
+});
+export default connect(
+  mapStateToProps,
+  null
+)(NoteCircle);

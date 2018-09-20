@@ -163,49 +163,154 @@ class Player extends Component {
       const index = reversedSlicedNotes.length - 1 - reversedIndex;
       const x =
         initialNoteX + (noteIndexesInCanvas[0] + index) * size.space.width;
-      const y = (this.props.player.height - 15 - 1) / 2;
+      const y = (this.props.player.height - 1) / 2;
       const previousNoteId =
         index > 0 ? reversedSlicedNotes[reversedIndex + 1].id : id.note.space;
       const nextNoteId =
         index < reversedSlicedNotes.length - 1
           ? reversedSlicedNotes[reversedIndex - 1].id
           : id.note.space;
-
+      const isBarStart =
+        (noteIndexesInCanvas[0] + index) % number.score.column === 0;
       switch (note.id) {
         case id.note.don:
-          return <NoteCircle x={x} y={y} size="normal" color="red" />;
+          return (
+            <NoteCircle
+              barStart={isBarStart}
+              x={x}
+              y={y}
+              size="normal"
+              color="red"
+            />
+          );
         case id.note.ka:
-          return <NoteCircle x={x} y={y} size="normal" color="blue" />;
+          return (
+            <NoteCircle
+              barStart={isBarStart}
+              x={x}
+              y={y}
+              size="normal"
+              color="blue"
+            />
+          );
         case id.note.bigdon:
-          return <NoteCircle x={x} y={y} size="big" color="red" />;
+          return (
+            <NoteCircle
+              barStart={isBarStart}
+              x={x}
+              y={y}
+              size="big"
+              color="red"
+            />
+          );
         case id.note.bigka:
-          return <NoteCircle x={x} y={y} size="big" color="blue" />;
+          return (
+            <NoteCircle
+              barStart={isBarStart}
+              x={x}
+              y={y}
+              size="big"
+              color="blue"
+            />
+          );
         case id.note.renda:
           if (previousNoteId === id.note.renda) {
             if (nextNoteId === id.note.renda) {
-              return <NoteExtension size="normal" x={x} y={y} color="yellow" />;
+              return (
+                <NoteExtension
+                  barStart={isBarStart}
+                  size="normal"
+                  x={x}
+                  y={y}
+                  color="yellow"
+                />
+              );
             }
-            return <NoteEnd x={x} y={y} size="normal" color="yellow" />;
+            return (
+              <NoteEnd
+                barStart={isBarStart}
+                x={x}
+                y={y}
+                size="normal"
+                color="yellow"
+              />
+            );
           } else {
-            return <NoteCircle x={x} y={y} size="normal" color="yellow" />;
+            return (
+              <NoteCircle
+                barStart={isBarStart}
+                x={x}
+                y={y}
+                size="normal"
+                color="yellow"
+              />
+            );
           }
         case id.note.bigrenda:
           if (previousNoteId === id.note.bigrenda) {
             if (nextNoteId === id.note.bigrenda) {
-              return <NoteExtension size="big" x={x} y={y} color="yellow" />;
+              return (
+                <NoteExtension
+                  barStart={isBarStart}
+                  size="big"
+                  x={x}
+                  y={y}
+                  color="yellow"
+                />
+              );
             }
-            return <NoteEnd x={x} y={y} size="big" color="yellow" />;
+            return (
+              <NoteEnd
+                barStart={isBarStart}
+                x={x}
+                y={y}
+                size="big"
+                color="yellow"
+              />
+            );
           } else {
-            return <NoteCircle x={x} y={y} size="big" color="yellow" />;
+            return (
+              <NoteCircle
+                barStart={isBarStart}
+                x={x}
+                y={y}
+                size="big"
+                color="yellow"
+              />
+            );
           }
         case id.note.balloon:
           if (previousNoteId === id.note.balloon) {
             if (nextNoteId === id.note.balloon) {
-              return <NoteExtension size="normal" x={x} y={y} color="red" />;
+              return (
+                <NoteExtension
+                  barStart={isBarStart}
+                  size="normal"
+                  x={x}
+                  y={y}
+                  color="red"
+                />
+              );
             }
-            return <NoteEnd x={x} y={y} size="normal" color="red" />;
+            return (
+              <NoteEnd
+                barStart={isBarStart}
+                x={x}
+                y={y}
+                size="normal"
+                color="red"
+              />
+            );
           } else {
-            return <NoteCircle x={x} y={y} size="normal" color="red" />;
+            return (
+              <NoteCircle
+                barStart={isBarStart}
+                x={x}
+                y={y}
+                size="normal"
+                color="red"
+              />
+            );
           }
         default:
           return null;
@@ -222,12 +327,12 @@ class Player extends Component {
       >
         <Stage
           width={this.props.player.width - 1}
-          height={this.props.player.height - 15 - 1}
+          height={this.props.player.height - 1}
         >
           <Layer>
             <JudgeCircle
               x={position.judge.x}
-              y={(this.props.player.height - 15 - 1) / 2}
+              y={(this.props.player.height - 1) / 2}
             />
             {this.renderNotes()}
           </Layer>
