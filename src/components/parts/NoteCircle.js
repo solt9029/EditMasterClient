@@ -22,19 +22,19 @@ class NoteCircle extends Component {
         <Circle
           x={this.props.x}
           y={this.props.y}
-          radius={size.player[this.props.size].outside}
+          radius={size[this.props.pane][this.props.size].outside}
           fill={color.white}
         />
         <Circle
           x={this.props.x}
           y={this.props.y}
-          radius={size.player[this.props.size].inside}
+          radius={size[this.props.pane][this.props.size].inside}
           fill={color[this.props.color]}
         />
         <Circle
           x={this.props.x}
           y={this.props.y}
-          radius={size.player[this.props.size].outside}
+          radius={size[this.props.pane][this.props.size].outside}
           stroke={color.black}
         />
       </Fragment>

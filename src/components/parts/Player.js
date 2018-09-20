@@ -229,7 +229,13 @@ class Player extends Component {
     return this.shots.map(shot => {
       shot.move(this.props.player.width / 100, this.props.player.height / 10);
       return (
-        <NoteCircle x={shot.x} y={shot.y} size={shot.size} color={shot.color} />
+        <NoteCircle
+          pane="player"
+          x={shot.x}
+          y={shot.y}
+          size={shot.size}
+          color={shot.color}
+        />
       );
     });
   }
@@ -279,6 +285,7 @@ class Player extends Component {
         case id.note.don:
           return (
             <NoteCircle
+              pane="player"
               barStart={isBarStart}
               x={x}
               y={y}
@@ -289,6 +296,7 @@ class Player extends Component {
         case id.note.ka:
           return (
             <NoteCircle
+              pane="player"
               barStart={isBarStart}
               x={x}
               y={y}
@@ -299,6 +307,7 @@ class Player extends Component {
         case id.note.bigdon:
           return (
             <NoteCircle
+              pane="player"
               barStart={isBarStart}
               x={x}
               y={y}
@@ -309,6 +318,7 @@ class Player extends Component {
         case id.note.bigka:
           return (
             <NoteCircle
+              pane="player"
               barStart={isBarStart}
               x={x}
               y={y}
@@ -321,6 +331,7 @@ class Player extends Component {
             if (nextNoteId === id.note.renda) {
               return (
                 <NoteExtension
+                  pane="player"
                   barStart={isBarStart}
                   size="normal"
                   x={x}
@@ -331,6 +342,7 @@ class Player extends Component {
             }
             return (
               <NoteEnd
+                pane="player"
                 barStart={isBarStart}
                 x={x}
                 y={y}
@@ -341,6 +353,7 @@ class Player extends Component {
           } else {
             return (
               <NoteCircle
+                pane="player"
                 barStart={isBarStart}
                 x={x}
                 y={y}
@@ -354,6 +367,7 @@ class Player extends Component {
             if (nextNoteId === id.note.bigrenda) {
               return (
                 <NoteExtension
+                  pane="player"
                   barStart={isBarStart}
                   size="big"
                   x={x}
@@ -364,6 +378,7 @@ class Player extends Component {
             }
             return (
               <NoteEnd
+                pane="player"
                 barStart={isBarStart}
                 x={x}
                 y={y}
@@ -374,6 +389,7 @@ class Player extends Component {
           } else {
             return (
               <NoteCircle
+                pane="player"
                 barStart={isBarStart}
                 x={x}
                 y={y}
@@ -387,6 +403,7 @@ class Player extends Component {
             if (nextNoteId === id.note.balloon) {
               return (
                 <NoteExtension
+                  pane="player"
                   barStart={isBarStart}
                   size="normal"
                   x={x}
@@ -397,6 +414,7 @@ class Player extends Component {
             }
             return (
               <NoteEnd
+                pane="player"
                 barStart={isBarStart}
                 x={x}
                 y={y}
@@ -407,6 +425,7 @@ class Player extends Component {
           } else {
             return (
               <NoteCircle
+                pane="player"
                 barStart={isBarStart}
                 x={x}
                 y={y}
