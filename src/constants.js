@@ -7,6 +7,12 @@ export const color = {
   gray: '#bbb',
 };
 
+export const percentage = {
+  editor: {
+    barStartLine: 0.02,
+  },
+};
+
 export const size = {
   player: {
     normal: {
@@ -32,6 +38,9 @@ export const size = {
       inside: {
         height: 32,
       },
+    },
+    beatLine: {
+      width: 2,
     },
   },
 };
