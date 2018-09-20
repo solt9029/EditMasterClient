@@ -159,18 +159,17 @@ class Player extends Component {
       this.autoMode(secondsPerNote);
     }
 
-    return reversedSlicedNotes.map((note, index) => {
+    return reversedSlicedNotes.map((note, reversedIndex) => {
+      const index = reversedSlicedNotes.length - 1 - reversedIndex;
       const x =
-        initialNoteX +
-        (noteIndexesInCanvas[0] + (reversedSlicedNotes.length - index)) *
-          size.space.width;
+        initialNoteX + (noteIndexesInCanvas[0] + index) * size.space.width;
       const y = (this.props.player.height - 15 - 1) / 2;
       const previousNoteId =
-        index < reversedSlicedNotes.length - 1
-          ? reversedSlicedNotes[index + 1].id
-          : id.note.space;
+        index > 0 ? reversedSlicedNotes[reversedIndex + 1].id : id.note.space;
       const nextNoteId =
-        index > 0 ? reversedSlicedNotes[index - 1].id : id.note.space;
+        index < reversedSlicedNotes.length - 1
+          ? reversedSlicedNotes[reversedIndex - 1].id
+          : id.note.space;
 
       switch (note.id) {
         case id.note.don:
