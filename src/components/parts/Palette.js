@@ -80,7 +80,7 @@ const noteFields = [
   },
 ];
 
-const divisionFields = [12, 16, 24, 48];
+const divisionFields = [16, 24, 32, 48];
 
 class Palette extends Component {
   render() {
