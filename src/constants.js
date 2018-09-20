@@ -16,7 +16,7 @@ export const size = {
     inside: 17,
   },
   space: {
-    width: 8,
+    width: 3,
   },
 };
 
@@ -47,7 +47,7 @@ export const position = {
 
 export const number = {
   score: {
-    column: 48,
+    column: 160,
   },
   beat: 4,
 };
