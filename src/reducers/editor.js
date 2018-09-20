@@ -33,6 +33,10 @@ noteIds.forEach(noteId => {
 
 const initialState = {
   notes,
+  mousePosition: {
+    x: 0,
+    y: 0,
+  },
 };
 
 export default (state = initialState, action) => {
@@ -52,6 +56,14 @@ export default (state = initialState, action) => {
         ...state,
         notes,
       };
+    case 'SET_MOUSE_POSITION':
+      return {
+        ...state,
+        mousePosition: {
+          x: action.payload.x,
+          y: action.payload.y,
+        },
+      }
     default:
       return state;
   }
