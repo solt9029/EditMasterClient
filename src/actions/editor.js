@@ -5,3 +5,7 @@ export const setState = (index, state) => ({
     state,
   },
 });
+
+export const resetState = () => ({
+  type: 'RESET_STATE',
+});

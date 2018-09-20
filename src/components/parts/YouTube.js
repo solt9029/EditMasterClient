@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ReactYouTube from 'react-youtube';
 import { setYtPlayer } from '../../actions/player';
+import { resetState } from '../../actions/editor';
 
 class YouTube extends Component {
   render() {
@@ -19,6 +20,9 @@ class YouTube extends Component {
           this.props.setYtPlayer(event.target);
           event.target.playVideo();
         }}
+        onStateChange={() => {
+          this.props.resetState();
+        }}
       />
     );
   }
@@ -31,6 +35,9 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   setYtPlayer(ytPlayer) {
     dispatch(setYtPlayer(ytPlayer));
+  },
+  resetState() {
+    dispatch(resetState());
   },
 });
 export default connect(
