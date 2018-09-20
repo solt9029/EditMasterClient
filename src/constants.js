@@ -4,7 +4,7 @@ export const color = {
   blue: '#00f',
   white: '#fff',
   black: '#000',
-  gray: '#999',
+  gray: '#bbb',
 };
 
 export const size = {
@@ -23,7 +23,12 @@ export const size = {
     width: 2,
   },
   editorLine: {
-    height: 31,
+    outside: {
+      height: 62,
+    },
+    inside: {
+      height: 42,
+    },
   },
 };
 
@@ -49,6 +54,9 @@ export const id = {
 export const position = {
   judge: {
     x: 50,
+  },
+  editorLine: {
+    x: 10,
   },
 };
 
