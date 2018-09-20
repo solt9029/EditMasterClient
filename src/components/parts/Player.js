@@ -4,12 +4,21 @@ import { connect } from 'react-redux';
 import NoteCircle from './NoteCircle';
 import JudgeCircle from './JudgeCircle';
 import NoteExtension from './NoteExtension';
-import { size, id, position, number, sound, second } from '../../constants';
+import {
+  size,
+  id,
+  position,
+  number,
+  sound,
+  second,
+  color,
+} from '../../constants';
 import NoteEnd from './NoteEnd';
 import { setState } from '../../actions/editor';
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
 import { setCurrentTime, setChangingSlider } from '../../actions/player';
+import Shot from '../../Shot';
 
 const divInlineStyle = {
   outline: 'none',
@@ -25,6 +34,11 @@ const sliderInlineStyle = {
 };
 
 class Player extends Component {
+  constructor(props) {
+    super(props);
+    this.shots = [];
+  }
+
   calcSecondsPerNote() {
     const barPerMinute = this.props.config.values.bpm / number.beat;
     const barPerSecond = barPerMinute / 60;
@@ -105,36 +119,126 @@ class Player extends Component {
         continue;
       }
 
+      let hit = false;
+
       switch (this.props.notes[noteIndexesInGoodJudgeRange[i]].id) {
         case id.note.don:
           sound.don.trigger();
           this.props.setState(noteIndexesInGoodJudgeRange[i], id.state.good);
+          this.shots.push(
+            new Shot(
+              position.judge.x,
+              (this.props.player.height - 1) / 2,
+              'normal',
+              'red'
+            )
+          );
+          hit = true;
           break;
         case id.note.ka:
           sound.ka.trigger();
           this.props.setState(noteIndexesInGoodJudgeRange[i], id.state.good);
+          this.shots.push(
+            new Shot(
+              position.judge.x,
+              (this.props.player.height - 1) / 2,
+              'normal',
+              'blue'
+            )
+          );
+          hit = true;
           break;
         case id.note.bigdon:
           sound.don.trigger();
           this.props.setState(noteIndexesInGoodJudgeRange[i], id.state.good);
+          this.shots.push(
+            new Shot(
+              position.judge.x,
+              (this.props.player.height - 1) / 2,
+              'big',
+              'red'
+            )
+          );
+          hit = true;
           break;
         case id.note.bigka:
           sound.ka.trigger();
           this.props.setState(noteIndexesInGoodJudgeRange[i], id.state.good);
+          this.shots.push(
+            new Shot(
+              position.judge.x,
+              (this.props.player.height - 1) / 2,
+              'big',
+              'blue'
+            )
+          );
+          hit = true;
           break;
         case id.note.renda:
           sound.don.trigger();
+          this.shots.push(
+            new Shot(
+              position.judge.x,
+              (this.props.player.height - 1) / 2,
+              'normal',
+              'yellow'
+            )
+          );
+          hit = true;
           break;
         case id.note.bigrenda:
           sound.don.trigger();
+          this.shots.push(
+            new Shot(
+              position.judge.x,
+              (this.props.player.height - 1) / 2,
+              'big',
+              'yellow'
+            )
+          );
+          hit = true;
           break;
         case id.note.balloon:
           sound.don.trigger();
+          this.shots.push(
+            new Shot(
+              position.judge.x,
+              (this.props.player.height - 1) / 2,
+              'normal',
+              'red'
+            )
+          );
+          hit = true;
           break;
         default:
           break;
       }
+      if (hit) {
+        break;
+      }
     }
+  }
+
+  renderShots() {
+    if (!this.props.config) {
+      return;
+    }
+    if (!this.props.config.values.bpm) {
+      return;
+    }
+
+    for (let i = this.shots.length - 1; i >= 0; i--) {
+      if (this.shots[i].limit < 0) {
+        this.shots.splice(i, 1);
+      }
+    }
+
+    return this.shots.map(shot => {
+      shot.move(this.props.player.width / 100, this.props.player.height / 10);
+      return (
+        <NoteCircle x={shot.x} y={shot.y} size={shot.size} color={shot.color} />
+      );
+    });
   }
 
   renderNotes() {
@@ -160,6 +264,10 @@ class Player extends Component {
     }
 
     return reversedSlicedNotes.map((note, reversedIndex) => {
+      if (note.state !== id.state.fresh) {
+        return null;
+      }
+
       const index = reversedSlicedNotes.length - 1 - reversedIndex;
       const x =
         initialNoteX + (noteIndexesInCanvas[0] + index) * size.space.width;
@@ -172,6 +280,7 @@ class Player extends Component {
           : id.note.space;
       const isBarStart =
         (noteIndexesInCanvas[0] + index) % number.score.column === 0;
+
       switch (note.id) {
         case id.note.don:
           return (
@@ -335,6 +444,7 @@ class Player extends Component {
               y={(this.props.player.height - 1) / 2}
             />
             {this.renderNotes()}
+            {this.renderShots()}
           </Layer>
         </Stage>
         <Slider
