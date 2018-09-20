@@ -56,12 +56,13 @@ class Player extends Component {
   }
 
   calcNoteIndexesInCanvas(initialNoteX) {
-    // Math.floor(-initialNoteX / size.space.width) is the number of notes that already passed from canvas
-    let initialNoteIndex = Math.floor(-initialNoteX / size.space.width) - 3;
+    // Math.floor(-initialNoteX / size.play.space.width) is the number of notes that already passed from canvas
+    let initialNoteIndex =
+      Math.floor(-initialNoteX / size.play.space.width) - 3;
 
     // the number of notes that canvas can display in it
     const notesNumber = Math.ceil(
-      (this.props.player.width - 1) / size.space.width
+      (this.props.player.width - 1) / size.play.space.width
     );
 
     let finalNoteIndex = initialNoteIndex + notesNumber + 6;
@@ -86,7 +87,7 @@ class Player extends Component {
       position.judge.x +
       ((this.props.config.values.offset - this.props.currentTime) /
         secondsPerNote) *
-        size.space.width;
+        size.play.space.width;
     return initialNoteX;
   }
 
@@ -262,7 +263,7 @@ class Player extends Component {
 
       const index = reversedSlicedNotes.length - 1 - reversedIndex;
       const x =
-        initialNoteX + (noteIndexesInCanvas[0] + index) * size.space.width;
+        initialNoteX + (noteIndexesInCanvas[0] + index) * size.play.space.width;
       const y = (this.props.player.height - 1) / 2;
       const previousNoteId =
         index > 0 ? reversedSlicedNotes[reversedIndex + 1].id : id.note.space;

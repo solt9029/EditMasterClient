@@ -9,12 +9,12 @@ class NoteCircle extends Component {
       <Fragment>
         {this.props.barStart && (
           <Rect
-            x={this.props.x - size.barStartLine.width / 2}
+            x={this.props.x - size.play.barStartLine.width / 2}
             y={
               this.props.playerPane &&
               this.props.y - (this.props.playerPane.height - 1) / 2
             }
-            width={size.barStartLine.width}
+            width={size.play.barStartLine.width}
             height={this.props.playerPane && this.props.playerPane.height - 1}
             fill={color.gray}
           />
@@ -22,19 +22,19 @@ class NoteCircle extends Component {
         <Circle
           x={this.props.x}
           y={this.props.y}
-          radius={size[this.props.size].outside}
+          radius={size.play[this.props.size].outside}
           fill={color.white}
         />
         <Circle
           x={this.props.x}
           y={this.props.y}
-          radius={size[this.props.size].inside}
+          radius={size.play[this.props.size].inside}
           fill={color[this.props.color]}
         />
         <Circle
           x={this.props.x}
           y={this.props.y}
-          radius={size[this.props.size].outside}
+          radius={size.play[this.props.size].outside}
           stroke={color.black}
         />
       </Fragment>

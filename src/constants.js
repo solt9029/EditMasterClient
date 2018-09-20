@@ -8,19 +8,21 @@ export const color = {
 };
 
 export const size = {
-  normal: {
-    outside: 16,
-    inside: 12,
-  },
-  big: {
-    outside: 21,
-    inside: 17,
-  },
-  space: {
-    width: 3,
-  },
-  barStartLine: {
-    width: 2,
+  play: {
+    normal: {
+      outside: 16,
+      inside: 12,
+    },
+    big: {
+      outside: 21,
+      inside: 17,
+    },
+    space: {
+      width: 3,
+    },
+    barStartLine: {
+      width: 2,
+    },
   },
   editorLine: {
     outside: {
