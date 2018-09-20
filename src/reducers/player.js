@@ -2,6 +2,7 @@ const initialState = {
   ytPlayer: null,
   currentTime: 0,
   isAutoMode: true,
+  isChangingSlider: false,
 };
 
 export default (state = initialState, action) => {
@@ -20,6 +21,11 @@ export default (state = initialState, action) => {
       return {
         ...state,
         isAutoMode: !state.isAutoMode,
+      };
+    case 'SET_CHANGING_SLIDER':
+      return {
+        ...state,
+        isChangingSlider: action.payload.isChangingSlider,
       };
     default:
       return state;

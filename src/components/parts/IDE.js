@@ -32,9 +32,9 @@ class IDE extends Component {
   }
 
   loop() {
-    this.props.setCurrentTime(
-      this.props.ytPlayer ? this.props.ytPlayer.getCurrentTime() : 0
-    );
+    if (this.props.ytPlayer && !this.props.isChangingSlider) {
+      this.props.setCurrentTime(this.props.ytPlayer.getCurrentTime());
+    }
     this.frameId = window.requestAnimationFrame(this.loop);
   }
 
@@ -105,6 +105,7 @@ class IDE extends Component {
 const mapStateToProps = state => ({
   config: state.form.config,
   ytPlayer: state.player.ytPlayer,
+  isChangingSlider: state.player.isChangingSlider,
 });
 const mapDispatchToProps = dispatch => ({
   setPanes(panes) {

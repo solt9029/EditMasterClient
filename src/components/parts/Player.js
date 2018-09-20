@@ -7,6 +7,18 @@ import NoteExtension from './NoteExtension';
 import { size, id, position, number, sound, second } from '../../constants';
 import NoteEnd from './NoteEnd';
 import { setState } from '../../actions/editor';
+import Slider from 'rc-slider';
+import 'rc-slider/assets/index.css';
+import { setCurrentTime, setChangingSlider } from '../../actions/player';
+
+const sliderInlineStyle = {
+  width: '95%',
+  position: 'absolute',
+  bottom: '5px',
+  left: '0',
+  right: '0',
+  margin: 'auto',
+};
 
 class Player extends Component {
   calcSecondsPerNote() {
@@ -148,7 +160,7 @@ class Player extends Component {
         initialNoteX +
         (noteIndexesInCanvas[0] + (reversedSlicedNotes.length - index)) *
           size.space.width;
-      const y = (this.props.player.height - 1) / 2;
+      const y = (this.props.player.height - 15 - 1) / 2;
       const previousNoteId =
         index < reversedSlicedNotes.length - 1
           ? reversedSlicedNotes[index + 1].id
@@ -203,16 +215,32 @@ class Player extends Component {
       <div>
         <Stage
           width={this.props.player.width - 1}
-          height={this.props.player.height - 1}
+          height={this.props.player.height - 15 - 1}
         >
           <Layer>
             <JudgeCircle
               x={position.judge.x}
-              y={this.props.player.height / 2}
+              y={(this.props.player.height - 15 - 1) / 2}
             />
             {this.renderNotes()}
           </Layer>
         </Stage>
+        <Slider
+          style={sliderInlineStyle}
+          min={0}
+          max={this.props.ytPlayer ? this.props.ytPlayer.getDuration() : 0}
+          value={this.props.currentTime}
+          onBeforeChange={() => {
+            this.props.setChangingSlider(true);
+          }}
+          onChange={value => {
+            this.props.setCurrentTime(value);
+          }}
+          onAfterChange={() => {
+            this.props.ytPlayer.seekTo(this.props.currentTime);
+            this.props.setChangingSlider(false);
+          }}
+        />
       </div>
     );
   }
@@ -224,10 +252,18 @@ const mapStateToProps = state => ({
   currentTime: state.player.currentTime,
   config: state.form.config,
   isAutoMode: state.player.isAutoMode,
+  ytPlayer: state.player.ytPlayer,
+  isChangingSlider: state.player.isChangingSlider,
 });
 const mapDispatchToProps = dispatch => ({
   setState(index, state) {
     dispatch(setState(index, state));
+  },
+  setCurrentTime(currentTime) {
+    dispatch(setCurrentTime(currentTime));
+  },
+  setChangingSlider(isChangingSlider) {
+    dispatch(setChangingSlider(isChangingSlider));
   },
 });
 export default connect(

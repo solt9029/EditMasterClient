@@ -15,3 +15,10 @@ export const setCurrentTime = currentTime => ({
 export const toggleMode = () => ({
   type: 'TOGGLE_MODE',
 });
+
+export const setChangingSlider = isChangingSlider => ({
+  type: 'SET_CHANGING_SLIDER',
+  payload: {
+    isChangingSlider,
+  },
+});
