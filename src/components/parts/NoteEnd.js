@@ -9,13 +9,13 @@ export default class NoteEnd extends Component {
         <Circle
           x={this.props.x}
           y={this.props.y}
-          radius={size.play[this.props.size].outside}
+          radius={size.player[this.props.size].outside}
           fill={color[this.props.color]}
         />
         <Circle
           x={this.props.x}
           y={this.props.y}
-          radius={size.play[this.props.size].outside}
+          radius={size.player[this.props.size].outside}
           stroke={color.black}
         />
       </Fragment>

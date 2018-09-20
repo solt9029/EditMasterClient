@@ -8,7 +8,7 @@ export default class JudgeCircle extends Component {
       <Circle
         x={this.props.x}
         y={this.props.y}
-        radius={size.play.normal.outside}
+        radius={size.player.normal.outside}
         stroke={color.white}
       />
     );

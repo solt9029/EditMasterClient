@@ -8,7 +8,7 @@ export const color = {
 };
 
 export const size = {
-  play: {
+  player: {
     normal: {
       outside: 16,
       inside: 12,
@@ -24,12 +24,14 @@ export const size = {
       width: 2,
     },
   },
-  editorLine: {
-    outside: {
-      height: 62,
-    },
-    inside: {
-      height: 42,
+  editor: {
+    bar: {
+      outside: {
+        height: 52,
+      },
+      inside: {
+        height: 32,
+      },
     },
   },
 };
@@ -54,11 +56,15 @@ export const id = {
 };
 
 export const position = {
-  judge: {
-    x: 50,
+  player: {
+    judge: {
+      x: 50,
+    },
   },
-  editorLine: {
-    x: 10,
+  editor: {
+    bar: {
+      x: 10,
+    },
   },
 };
 

@@ -56,13 +56,13 @@ class Player extends Component {
   }
 
   calcNoteIndexesInCanvas(initialNoteX) {
-    // Math.floor(-initialNoteX / size.play.space.width) is the number of notes that already passed from canvas
+    // Math.floor(-initialNoteX / size.player.space.width) is the number of notes that already passed from canvas
     let initialNoteIndex =
-      Math.floor(-initialNoteX / size.play.space.width) - 3;
+      Math.floor(-initialNoteX / size.player.space.width) - 3;
 
     // the number of notes that canvas can display in it
     const notesNumber = Math.ceil(
-      (this.props.player.width - 1) / size.play.space.width
+      (this.props.player.width - 1) / size.player.space.width
     );
 
     let finalNoteIndex = initialNoteIndex + notesNumber + 6;
@@ -84,10 +84,10 @@ class Player extends Component {
 
   calcInitialNoteX(secondsPerNote) {
     const initialNoteX =
-      position.judge.x +
+      position.player.judge.x +
       ((this.props.config.values.offset - this.props.currentTime) /
         secondsPerNote) *
-        size.play.space.width;
+        size.player.space.width;
     return initialNoteX;
   }
 
@@ -120,7 +120,7 @@ class Player extends Component {
           this.props.setState(noteIndexesInGoodJudgeRange[i], id.state.good);
           this.shots.push(
             new Shot(
-              position.judge.x,
+              position.player.judge.x,
               (this.props.player.height - 1) / 2,
               'normal',
               'red'
@@ -133,7 +133,7 @@ class Player extends Component {
           this.props.setState(noteIndexesInGoodJudgeRange[i], id.state.good);
           this.shots.push(
             new Shot(
-              position.judge.x,
+              position.player.judge.x,
               (this.props.player.height - 1) / 2,
               'normal',
               'blue'
@@ -146,7 +146,7 @@ class Player extends Component {
           this.props.setState(noteIndexesInGoodJudgeRange[i], id.state.good);
           this.shots.push(
             new Shot(
-              position.judge.x,
+              position.player.judge.x,
               (this.props.player.height - 1) / 2,
               'big',
               'red'
@@ -159,7 +159,7 @@ class Player extends Component {
           this.props.setState(noteIndexesInGoodJudgeRange[i], id.state.good);
           this.shots.push(
             new Shot(
-              position.judge.x,
+              position.player.judge.x,
               (this.props.player.height - 1) / 2,
               'big',
               'blue'
@@ -171,7 +171,7 @@ class Player extends Component {
           sound.don.trigger();
           this.shots.push(
             new Shot(
-              position.judge.x,
+              position.player.judge.x,
               (this.props.player.height - 1) / 2,
               'normal',
               'yellow'
@@ -183,7 +183,7 @@ class Player extends Component {
           sound.don.trigger();
           this.shots.push(
             new Shot(
-              position.judge.x,
+              position.player.judge.x,
               (this.props.player.height - 1) / 2,
               'big',
               'yellow'
@@ -195,7 +195,7 @@ class Player extends Component {
           sound.don.trigger();
           this.shots.push(
             new Shot(
-              position.judge.x,
+              position.player.judge.x,
               (this.props.player.height - 1) / 2,
               'normal',
               'red'
@@ -263,7 +263,8 @@ class Player extends Component {
 
       const index = reversedSlicedNotes.length - 1 - reversedIndex;
       const x =
-        initialNoteX + (noteIndexesInCanvas[0] + index) * size.play.space.width;
+        initialNoteX +
+        (noteIndexesInCanvas[0] + index) * size.player.space.width;
       const y = (this.props.player.height - 1) / 2;
       const previousNoteId =
         index > 0 ? reversedSlicedNotes[reversedIndex + 1].id : id.note.space;
@@ -433,7 +434,7 @@ class Player extends Component {
         >
           <Layer>
             <JudgeCircle
-              x={position.judge.x}
+              x={position.player.judge.x}
               y={(this.props.player.height - 1) / 2}
             />
             {this.renderNotes()}

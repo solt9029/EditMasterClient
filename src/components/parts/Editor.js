@@ -11,13 +11,13 @@ class Editor extends Component {
     for (let i = 0; i < barNum; i++) {
       bars.push(
         <Bar
-          x={position.editorLine.x}
+          x={position.editor.bar.x}
           y={
-            i * size.editorLine.outside.height +
-            (size.editorLine.outside.height - size.editorLine.inside.height) / 2
+            i * size.editor.bar.outside.height +
+            (size.editor.bar.outside.height - size.editor.bar.inside.height) / 2
           }
-          width={this.props.editorPane.width - 1 - position.editorLine.x * 2}
-          height={size.editorLine.inside.height}
+          width={this.props.editorPane.width - 1 - position.editor.bar.x * 2}
+          height={size.editor.bar.inside.height}
         />
       );
     }
@@ -26,7 +26,7 @@ class Editor extends Component {
       <div>
         <Stage
           width={this.props.editorPane.width - 1}
-          height={barNum * size.editorLine.outside.height}
+          height={barNum * size.editor.bar.outside.height}
         >
           <Layer>{bars}</Layer>
         </Stage>
