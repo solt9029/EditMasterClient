@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { Rect } from 'react-konva';
-import { size, color, position } from '../../constants';
+import { color } from '../../constants';
 
 export default class Bar extends Component {
   render() {

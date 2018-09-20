@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Stage, Layer, Rect } from 'react-konva';
-import { number, size, color, position } from '../../constants';
+import { Stage, Layer } from 'react-konva';
+import { number, size, position } from '../../constants';
 import Bar from './Bar';
 
 class Editor extends Component {

@@ -4,15 +4,7 @@ import { connect } from 'react-redux';
 import NoteCircle from './NoteCircle';
 import JudgeCircle from './JudgeCircle';
 import NoteExtension from './NoteExtension';
-import {
-  size,
-  id,
-  position,
-  number,
-  sound,
-  second,
-  color,
-} from '../../constants';
+import { size, id, position, number, sound, second } from '../../constants';
 import NoteEnd from './NoteEnd';
 import { setState } from '../../actions/editor';
 import Slider from 'rc-slider';
