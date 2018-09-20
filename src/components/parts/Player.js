@@ -342,10 +342,8 @@ class Player extends Component {
           min={0}
           max={this.props.ytPlayer ? this.props.ytPlayer.getDuration() : 0}
           value={this.props.currentTime}
-          onBeforeChange={() => {
-            this.props.setChangingSlider(true);
-          }}
           onChange={value => {
+            this.props.setChangingSlider(true);
             this.props.setCurrentTime(value);
           }}
           onAfterChange={() => {
