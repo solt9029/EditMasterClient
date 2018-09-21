@@ -243,7 +243,7 @@ class Player extends Component {
     return (
       <div
         style={divInlineStyle}
-        tabindex="0"
+        tabIndex="0"
         onKeyDown={e => console.log(e.key)}
       >
         <Stage
