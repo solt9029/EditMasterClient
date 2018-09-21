@@ -1,9 +1,41 @@
 import React, { Component, Fragment } from 'react';
 import { Circle, Rect } from 'react-konva';
-import { color, size } from '../../constants';
+import { color, size, id } from '../../constants';
 import { connect } from 'react-redux';
 
 class NoteCircle extends Component {
+  constructor(props) {
+    super(props);
+    this.color = color.red;
+    this.size = 'normal';
+
+    switch (props.id) {
+      case id.note.don:
+        break;
+      case id.note.ka:
+        this.color = color.blue;
+        break;
+      case id.note.bigdon:
+        this.size = 'big';
+        break;
+      case id.note.bigka:
+        this.size = 'big';
+        this.color = 'blue';
+        break;
+      case id.note.renda:
+        this.color = 'yellow';
+        break;
+      case id.note.bigrenda:
+        this.color = 'yellow';
+        this.size = 'big';
+        break;
+      case id.note.balloon:
+        break;
+      default:
+        break;
+    }
+  }
+
   render() {
     return (
       <Fragment>
@@ -22,19 +54,19 @@ class NoteCircle extends Component {
         <Circle
           x={this.props.x}
           y={this.props.y}
-          radius={size[this.props.pane][this.props.size].outside}
+          radius={size[this.props.pane][this.size].outside}
           fill={color.white}
         />
         <Circle
           x={this.props.x}
           y={this.props.y}
-          radius={size[this.props.pane][this.props.size].inside}
-          fill={color[this.props.color]}
+          radius={size[this.props.pane][this.size].inside}
+          fill={this.color}
         />
         <Circle
           x={this.props.x}
           y={this.props.y}
-          radius={size[this.props.pane][this.props.size].outside}
+          radius={size[this.props.pane][this.size].outside}
           stroke={color.black}
         />
       </Fragment>
