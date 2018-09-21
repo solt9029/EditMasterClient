@@ -15,42 +15,35 @@ class Editor extends Component {
     super(props);
     this.setMousePosition = throttle(event => {
       this.props.setMousePosition(event.evt.offsetX, event.evt.offsetY);
-    }, 50).bind(this);
+    }, 100).bind(this);
   }
 
-  render() {
-    if (!this.props.palette) {
-      return <Fragment />;
+  calcMouseNoteIndex(barWidth, barStartLineX) {
+    let mouseNoteIndex = Math.round(
+      (this.props.mousePosition.x - barStartLineX) /
+        ((barWidth * (1 - percentage.editor.barStartLine)) /
+          this.props.palette.values.division)
+    );
+    if (mouseNoteIndex < 0) {
+      mouseNoteIndex = 0;
     }
+    if (mouseNoteIndex >= this.props.palette.values.division) {
+      mouseNoteIndex = this.props.palette.values.division - 1;
+    }
+    return mouseNoteIndex;
+  }
 
-    const barNum = this.props.notes.length / number.score.column;
+  renderNotes() {
+    if (!this.props.palette) {
+      return;
+    }
 
     const barWidth =
       this.props.editorPane.width - 1 - position.editor.bar.x * 2;
-
-    // left side of initial beat line is not available
-    const actualBarWidth = barWidth * (1 - percentage.editor.barStartLine);
-
+    const actualBarWidth = barWidth * (1 - percentage.editor.barStartLine); // left side of initial beat line is not available
     const spaceWidth = actualBarWidth / number.score.column;
-
-    // const mouseBarIndex = Math.floor(
-    //   this.props.mousePosition.y / size.editor.bar.outside.height
-    // );
-
     const barStartLineX =
       position.editor.bar.x + barWidth * percentage.editor.barStartLine;
-
-    // let mouseNoteIndex = Math.round(
-    //   (this.props.mousePosition.x - barStartLineX) /
-    //     ((barWidth * (1 - percentage.editor.barStartLine)) /
-    //       this.props.palette.values.division)
-    // );
-    // if (mouseNoteIndex < 0) {
-    //   mouseNoteIndex = 0;
-    // }
-    // if (mouseNoteIndex >= this.props.palette.values.division) {
-    //   mouseNoteIndex = this.props.palette.values.division - 1;
-    // }
 
     let notes = [];
     for (let i = this.props.notes.length - 1; i >= 0; i--) {
@@ -61,7 +54,7 @@ class Editor extends Component {
       const c = i % number.score.column;
       const l = Math.floor(i / number.score.column);
       const x = barStartLineX + spaceWidth * c;
-      const y = (l + 0.5) * size.editor.bar.outside.height;
+      const y = size.editor.bar.outside.height * (l + 0.5);
       const previousNoteId = i > 0 ? this.props.notes[i - 1].id : id.note.space;
       const nextNoteId =
         i < this.props.notes.length - 1
@@ -76,6 +69,7 @@ class Editor extends Component {
           if (nextNoteId === note.id) {
             notes.push(
               <NoteExtension
+                key={i}
                 pane="editor"
                 spaceWidth={spaceWidth}
                 x={x}
@@ -83,16 +77,35 @@ class Editor extends Component {
                 id={note.id}
               />
             );
-          } else {
-            notes.push(<NoteEnd pane="editor" x={x} y={y} id={note.id} />);
+            continue;
           }
-        } else {
-          notes.push(<NoteCircle pane="editor" x={x} y={y} id={note.id} />);
+          notes.push(
+            <NoteEnd key={i} pane="editor" x={x} y={y} id={note.id} />
+          );
+          continue;
         }
-      } else {
-        notes.push(<NoteCircle pane="editor" x={x} y={y} id={note.id} />);
       }
+      notes.push(<NoteCircle key={i} pane="editor" x={x} y={y} id={note.id} />);
     }
+    return notes;
+  }
+
+  render() {
+    if (!this.props.palette || this.props.palette) {
+      return <Fragment />;
+    }
+
+    const barNum = Math.ceil(this.props.notes.length / number.score.column);
+    const barWidth =
+      this.props.editorPane.width - 1 - position.editor.bar.x * 2;
+    const actualBarWidth = barWidth * (1 - percentage.editor.barStartLine); // left side of initial beat line is not available
+    const spaceWidth = actualBarWidth / number.score.column;
+    const barStartLineX =
+      position.editor.bar.x + barWidth * percentage.editor.barStartLine;
+    const mouseBarIndex = Math.floor(
+      this.props.mousePosition.y / size.editor.bar.outside.height
+    );
+    let mouseNoteIndex = this.calcMouseNoteIndex(barWidth, barStartLineX);
 
     return (
       <div>
@@ -104,7 +117,7 @@ class Editor extends Component {
           <Layer>
             <Bars />
             <Caret />
-            {notes}
+            {this.renderNotes()}
           </Layer>
         </Stage>
       </div>
