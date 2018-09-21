@@ -50,7 +50,7 @@ class Editor extends Component {
           height={barNum * size.editor.bar.outside.height}
         >
           <Layer>
-            <Bars />
+            <Bars x={0} y={0} num={barNum} barWidth={barWidth} />
             <Rect
               x={
                 initialNoteX +
