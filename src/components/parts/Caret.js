@@ -12,6 +12,9 @@ class Caret extends Component {
     const barWidth =
       this.props.editorPane.width - 1 - position.editor.bar.x * 2;
 
+    // left side of initial beat line is not available
+    const actualBarWidth = barWidth * (1 - percentage.editor.barStartLine);
+
     const mouseBarIndex = Math.floor(
       this.props.mousePosition.y / size.editor.bar.outside.height
     );
@@ -35,8 +38,7 @@ class Caret extends Component {
       <Rect
         x={
           barStartLineX +
-          barWidth *
-            (1 - percentage.editor.barStartLine) *
+          actualBarWidth *
             (mouseNoteIndex / this.props.palette.values.division) -
           size.editor.caret.width / 2
         }
