@@ -198,6 +198,7 @@ class Player extends Component {
           if (nextNoteId === note.id) {
             return (
               <NoteExtension
+                spaceWidth={size.player.space.width}
                 pane="player"
                 barStart={isBarStart}
                 x={x}
