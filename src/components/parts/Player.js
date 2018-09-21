@@ -136,16 +136,25 @@ class Player extends Component {
   }
 
   renderShots() {
+    let shots = [];
     for (let i = this.shots.length - 1; i >= 0; i--) {
+      this.shots[i].move(
+        this.props.player.width / 100,
+        this.props.player.height / 10
+      );
+      shots.push(
+        <NoteCircle
+          pane="player"
+          x={this.shots[i].x}
+          y={this.shots[i].y}
+          id={this.shots[i].id}
+        />
+      );
       if (this.shots[i].limit < 0) {
         this.shots.splice(i, 1);
       }
     }
-
-    return this.shots.map(shot => {
-      shot.move(this.props.player.width / 100, this.props.player.height / 10);
-      return <NoteCircle pane="player" x={shot.x} y={shot.y} id={shot.id} />;
-    });
+    return shots;
   }
 
   renderNotes() {
