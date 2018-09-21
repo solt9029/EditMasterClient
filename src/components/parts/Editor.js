@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Stage, Layer, Rect } from 'react-konva';
-import { number, size, position, color, percentage } from '../../constants';
+import { Stage, Layer } from 'react-konva';
+import { number, size } from '../../constants';
 import Bars from './Bars';
 import { throttle } from 'lodash';
 import { setMousePosition } from '../../actions/editor';
