@@ -31,6 +31,14 @@ export const size = {
     },
   },
   editor: {
+    normal: {
+      outside: 11,
+      inside: 8,
+    },
+    big: {
+      outside: 16,
+      inside: 13,
+    },
     bar: {
       outside: {
         height: 52,

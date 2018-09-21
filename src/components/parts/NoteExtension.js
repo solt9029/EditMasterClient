@@ -26,9 +26,9 @@ export default class NoteExtension extends Component {
     return (
       <Fragment>
         <Rect
-          x={this.props.x - this.props.spaceWidth / 2}
-          y={this.props.y - size.player[this.size].outside}
-          width={this.props.spaceWidth}
+          x={this.props.x - this.props.spaceWidth / 2 - 1}
+          y={this.props.y - size[this.props.pane][this.size].outside}
+          width={this.props.spaceWidth + 2}
           height={size[this.props.pane][this.size].outside * 2}
           fill={this.color}
         />
@@ -36,9 +36,9 @@ export default class NoteExtension extends Component {
           x={this.props.x}
           y={this.props.y}
           points={[
-            -this.props.spaceWidth / 2,
+            -this.props.spaceWidth / 2 - 1,
             -size[this.props.pane][this.size].outside,
-            this.props.spaceWidth / 2,
+            this.props.spaceWidth / 2 + 1,
             -size[this.props.pane][this.size].outside,
           ]}
           stroke={color.black}
@@ -47,9 +47,9 @@ export default class NoteExtension extends Component {
           x={this.props.x}
           y={this.props.y}
           points={[
-            -this.props.spaceWidth / 2,
+            -this.props.spaceWidth / 2 - 1,
             size[this.props.pane][this.size].outside,
-            this.props.spaceWidth / 2,
+            this.props.spaceWidth / 2 + 1,
             size[this.props.pane][this.size].outside,
           ]}
           stroke={color.black}
