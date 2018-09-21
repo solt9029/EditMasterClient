@@ -67,7 +67,8 @@ class Editor extends Component {
                 initialNoteX +
                 barWidth *
                   (1 - percentage.editor.barStartLine) *
-                  (mouseNoteIndex / division)
+                  (mouseNoteIndex / division) -
+                size.editor.caret.width / 2
               }
               y={
                 mouseBarIndex * size.editor.bar.outside.height +
@@ -76,7 +77,7 @@ class Editor extends Component {
                   2 -
                 2
               }
-              width={2}
+              width={size.editor.caret.width}
               height={size.editor.bar.inside.height + 4}
               fill={color.yellow}
             />

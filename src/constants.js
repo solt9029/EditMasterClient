@@ -42,6 +42,9 @@ export const size = {
     beatLine: {
       width: 2,
     },
+    caret: {
+      width: 2,
+    },
   },
 };
 
