@@ -97,122 +97,45 @@ class Player extends Component {
       second.range.good
     );
 
-    // if you use forEach here, you can use return instead of continue, but it doesn't have the same function of break
     for (let i = 0; i < noteIndexesInGoodJudgeRange.length; i++) {
-      if (
-        noteIndexesInGoodJudgeRange[i] < 0 ||
-        noteIndexesInGoodJudgeRange[i] >= this.props.notes.length
-      ) {
-        continue;
-      }
-      if (
-        this.props.notes[noteIndexesInGoodJudgeRange[i]].state !==
-        id.state.fresh
-      ) {
+      const index = noteIndexesInGoodJudgeRange[i];
+      if (index < 0 || index >= this.props.notes.length) {
         continue;
       }
 
-      let hit = false;
+      const note = this.props.notes[index];
+      if (note.state !== id.state.fresh || note.id === id.note.space) {
+        continue;
+      }
 
-      switch (this.props.notes[noteIndexesInGoodJudgeRange[i]].id) {
-        case id.note.don:
-          sound.don.trigger();
-          this.props.setState(noteIndexesInGoodJudgeRange[i], id.state.good);
-          this.shots.push(
-            new Shot(
-              position.player.judge.x,
-              (this.props.player.height - 1) / 2,
-              id.note.don
-            )
-          );
-          hit = true;
-          break;
-        case id.note.ka:
-          sound.ka.trigger();
-          this.props.setState(noteIndexesInGoodJudgeRange[i], id.state.good);
-          this.shots.push(
-            new Shot(
-              position.player.judge.x,
-              (this.props.player.height - 1) / 2,
-              id.note.ka
-            )
-          );
-          hit = true;
-          break;
-        case id.note.bigdon:
-          sound.don.trigger();
-          this.props.setState(noteIndexesInGoodJudgeRange[i], id.state.good);
-          this.shots.push(
-            new Shot(
-              position.player.judge.x,
-              (this.props.player.height - 1) / 2,
-              id.note.bigdon
-            )
-          );
-          hit = true;
-          break;
-        case id.note.bigka:
-          sound.ka.trigger();
-          this.props.setState(noteIndexesInGoodJudgeRange[i], id.state.good);
-          this.shots.push(
-            new Shot(
-              position.player.judge.x,
-              (this.props.player.height - 1) / 2,
-              id.note.bigka
-            )
-          );
-          hit = true;
-          break;
-        case id.note.renda:
-          sound.don.trigger();
-          this.shots.push(
-            new Shot(
-              position.player.judge.x,
-              (this.props.player.height - 1) / 2,
-              id.note.renda
-            )
-          );
-          hit = true;
-          break;
-        case id.note.bigrenda:
-          sound.don.trigger();
-          this.shots.push(
-            new Shot(
-              position.player.judge.x,
-              (this.props.player.height - 1) / 2,
-              id.note.bigrenda
-            )
-          );
-          hit = true;
-          break;
-        case id.note.balloon:
-          sound.don.trigger();
-          this.shots.push(
-            new Shot(
-              position.player.judge.x,
-              (this.props.player.height - 1) / 2,
-              id.note.balloon
-            )
-          );
-          hit = true;
-          break;
-        default:
-          break;
+      this.shots.push(
+        new Shot(
+          position.player.judge.x,
+          (this.props.player.height - 1) / 2,
+          note.id
+        )
+      );
+
+      if (
+        note.id === id.note.don ||
+        note.id === id.note.ka ||
+        note.id === id.note.bigdon ||
+        note.id === id.note.bigka
+      ) {
+        this.props.setState(index, id.state.good);
       }
-      if (hit) {
-        break;
+
+      if (note.id === id.note.ka || note.id === id.note.bigka) {
+        sound.ka.trigger();
+      } else {
+        sound.don.trigger();
       }
+
+      break;
     }
   }
 
   renderShots() {
-    if (!this.props.config) {
-      return;
-    }
-    if (!this.props.config.values.bpm) {
-      return;
-    }
-
     for (let i = this.shots.length - 1; i >= 0; i--) {
       if (this.shots[i].limit < 0) {
         this.shots.splice(i, 1);

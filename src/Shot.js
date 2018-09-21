@@ -5,7 +5,7 @@ export default class Shot {
     this.y = y;
     this.g = 1;
 
-    this.limit = 10;
+    this.limit = 5;
   }
   move(x, y) {
     this.x += x;
