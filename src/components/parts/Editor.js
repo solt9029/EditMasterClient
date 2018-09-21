@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Stage, Layer, Rect } from 'react-konva';
 import { number, size, position, color, percentage } from '../../constants';
-import Bar from './Bar';
+import Bars from './Bars';
 import { throttle } from 'lodash';
 import { setMousePosition } from '../../actions/editor';
 
@@ -18,17 +18,6 @@ class Editor extends Component {
     const barNum = this.props.notes.length / number.score.column;
     const barWidth =
       this.props.editorPane.width - 1 - position.editor.bar.x * 2;
-    let bars = [];
-    for (let i = 0; i < barNum; i++) {
-      bars.push(
-        <Bar
-          key={i}
-          x={position.editor.bar.x}
-          y={i * size.editor.bar.outside.height}
-          width={barWidth}
-        />
-      );
-    }
 
     const mouseBarIndex = Math.floor(
       this.props.mousePosition.y / size.editor.bar.outside.height
@@ -61,7 +50,7 @@ class Editor extends Component {
           height={barNum * size.editor.bar.outside.height}
         >
           <Layer>
-            {bars}
+            <Bars />
             <Rect
               x={
                 initialNoteX +
