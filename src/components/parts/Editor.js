@@ -5,6 +5,7 @@ import { number, size, position, color, percentage } from '../../constants';
 import Bars from './Bars';
 import { throttle } from 'lodash';
 import { setMousePosition } from '../../actions/editor';
+import Caret from './Caret';
 
 class Editor extends Component {
   constructor(props) {
@@ -16,31 +17,6 @@ class Editor extends Component {
 
   render() {
     const barNum = this.props.notes.length / number.score.column;
-    const barWidth =
-      this.props.editorPane.width - 1 - position.editor.bar.x * 2;
-
-    const mouseBarIndex = Math.floor(
-      this.props.mousePosition.y / size.editor.bar.outside.height
-    );
-    const initialNoteX = position.editor.bar.x + barWidth * 0.02;
-    const division = this.props.palette
-      ? this.props.palette.values.division
-      : 1;
-    let mouseNoteIndex = this.props.palette
-      ? Math.round(
-          (this.props.mousePosition.x - initialNoteX) /
-            ((barWidth * (1 - percentage.editor.barStartLine)) / division)
-        )
-      : 0;
-    if (mouseNoteIndex < 0) {
-      mouseNoteIndex = 0;
-    }
-    if (mouseNoteIndex >= division) {
-      mouseNoteIndex = division - 1;
-    }
-
-    console.log(mouseBarIndex);
-    console.log(mouseNoteIndex);
 
     return (
       <div>
@@ -51,25 +27,7 @@ class Editor extends Component {
         >
           <Layer>
             <Bars />
-            <Rect
-              x={
-                initialNoteX +
-                barWidth *
-                  (1 - percentage.editor.barStartLine) *
-                  (mouseNoteIndex / division) -
-                size.editor.caret.width / 2
-              }
-              y={
-                mouseBarIndex * size.editor.bar.outside.height +
-                (size.editor.bar.outside.height -
-                  size.editor.bar.inside.height) /
-                  2 -
-                2
-              }
-              width={size.editor.caret.width}
-              height={size.editor.bar.inside.height + 4}
-              fill={color.yellow}
-            />
+            <Caret />
           </Layer>
         </Stage>
       </div>
