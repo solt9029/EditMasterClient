@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Stage, Layer, Rect } from 'react-konva';
-import { number, size, position, color } from '../../constants';
+import { number, size, position, color, percentage } from '../../constants';
 import Bar from './Bar';
 import { throttle } from 'lodash';
 import { setMousePosition } from '../../actions/editor';
@@ -36,14 +36,18 @@ class Editor extends Component {
     const initialNoteX = position.editor.bar.x + barWidth * 0.02;
     const division = this.props.palette
       ? this.props.palette.values.division
-      : 0;
+      : 1;
     let mouseNoteIndex = this.props.palette
       ? Math.round(
-          (this.props.mousePosition.x - initialNoteX) / (barWidth / division)
+          (this.props.mousePosition.x - initialNoteX) /
+            ((barWidth * (1 - percentage.editor.barStartLine)) / division)
         )
       : 0;
-    if (mouseNoteIndex >= 16) {
-      mouseNoteIndex = 15;
+    if (mouseNoteIndex < 0) {
+      mouseNoteIndex = 0;
+    }
+    if (mouseNoteIndex >= division) {
+      mouseNoteIndex = division - 1;
     }
 
     console.log(mouseBarIndex);
@@ -59,7 +63,12 @@ class Editor extends Component {
           <Layer>
             {bars}
             <Rect
-              x={initialNoteX + (barWidth * mouseNoteIndex) / division}
+              x={
+                initialNoteX +
+                barWidth *
+                  (1 - percentage.editor.barStartLine) *
+                  (mouseNoteIndex / division)
+              }
               y={
                 mouseBarIndex * size.editor.bar.outside.height +
                 (size.editor.bar.outside.height -

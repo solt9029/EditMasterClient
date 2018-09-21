@@ -15,7 +15,8 @@ export default class Bar extends Component {
           x={
             this.props.x +
             this.props.width *
-              (percentage.editor.barStartLine + i / number.beat) -
+              (percentage.editor.barStartLine +
+                ((1 - percentage.editor.barStartLine) * i) / number.beat) -
             size.editor.beatLine.width / 2
           }
           y={insideY - 1}
