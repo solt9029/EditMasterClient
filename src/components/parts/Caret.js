@@ -1,31 +1,34 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Rect } from 'react-konva';
 import { size, position, color, percentage } from '../../constants';
 
 class Caret extends Component {
   render() {
+    if (!this.props.palette) {
+      return <Fragment />;
+    }
+
     const barWidth =
       this.props.editorPane.width - 1 - position.editor.bar.x * 2;
+
     const mouseBarIndex = Math.floor(
       this.props.mousePosition.y / size.editor.bar.outside.height
     );
+
     const barStartLineX =
       position.editor.bar.x + barWidth * percentage.editor.barStartLine;
-    const division = this.props.palette
-      ? this.props.palette.values.division
-      : 1;
-    let mouseNoteIndex = this.props.palette
-      ? Math.round(
-          (this.props.mousePosition.x - barStartLineX) /
-            ((barWidth * (1 - percentage.editor.barStartLine)) / division)
-        )
-      : 0;
+
+    let mouseNoteIndex = Math.round(
+      (this.props.mousePosition.x - barStartLineX) /
+        ((barWidth * (1 - percentage.editor.barStartLine)) /
+          this.props.palette.values.division)
+    );
     if (mouseNoteIndex < 0) {
       mouseNoteIndex = 0;
     }
-    if (mouseNoteIndex >= division) {
-      mouseNoteIndex = division - 1;
+    if (mouseNoteIndex >= this.props.palette.values.division) {
+      mouseNoteIndex = this.props.palette.values.division - 1;
     }
 
     return (
@@ -34,7 +37,7 @@ class Caret extends Component {
           barStartLineX +
           barWidth *
             (1 - percentage.editor.barStartLine) *
-            (mouseNoteIndex / division) -
+            (mouseNoteIndex / this.props.palette.values.division) -
           size.editor.caret.width / 2
         }
         y={
