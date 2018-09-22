@@ -22,10 +22,10 @@ class Editor extends Component {
   }
 
   shouldComponentUpdate(nextProps) {
-    // temporary fix (later notes have only id and states of notes will be made separately)
     return (
       this.props.palette !== nextProps.palette ||
-      this.props.editorPane !== nextProps.editorPane
+      this.props.editorPane !== nextProps.editorPane ||
+      this.props.noteIds !== nextProps.noteIds
     );
   }
 
@@ -39,7 +39,7 @@ class Editor extends Component {
     }
 
     // bars
-    const barNum = this.props.notes.length / number.score.column;
+    const barNum = this.props.noteIds.length / number.score.column;
     const barWidth =
       this.props.editorPane.width - 1 - position.editor.bar.x * 2;
     for (let i = 0; i < barNum; i++) {
@@ -56,26 +56,26 @@ class Editor extends Component {
     const barStartLineX =
       position.editor.bar.x + barWidth * percentage.editor.barStartLine;
 
-    for (let i = this.props.notes.length - 1; i >= 0; i--) {
-      const note = this.props.notes[i];
-      if (note.id === id.note.space) {
+    for (let i = this.props.noteIds.length - 1; i >= 0; i--) {
+      const noteId = this.props.noteIds[i];
+      if (noteId === id.note.space) {
         continue;
       }
       const c = i % number.score.column;
       const l = Math.floor(i / number.score.column);
       const x = barStartLineX + spaceWidth * c;
       const y = size.editor.bar.outside.height * (l + 0.5);
-      const previousNoteId = i > 0 ? this.props.notes[i - 1].id : id.note.space;
+      const previousNoteId = i > 0 ? this.props.noteIds[i - 1] : id.note.space;
       const nextNoteId =
-        i < this.props.notes.length - 1
-          ? this.props.notes[i + 1].id
+        i < this.props.noteIds.length - 1
+          ? this.props.noteIds[i + 1]
           : id.note.space;
 
       this.canvas.drawNote(
         x,
         y,
         'editor',
-        note.id,
+        noteId,
         previousNoteId,
         nextNoteId,
         spaceWidth
@@ -114,7 +114,7 @@ class Editor extends Component {
 
 const mapStateToProps = state => ({
   editorPane: state.pane.editor,
-  notes: state.editor.notes,
+  noteIds: state.editor.noteIds,
   mousePosition: state.editor.mousePosition,
   palette: state.form.palette,
 });

@@ -1,5 +1,10 @@
 import { id } from '../constants';
 
+let noteStates = [];
+for (let i = 0; i < 3200; i++) {
+  noteStates.push(id.state.fresh);
+}
+
 const initialState = {
   ytPlayer: null,
   ytPlayerState: id.youtube.unstarted,
@@ -7,6 +12,7 @@ const initialState = {
   isAutoMode: true,
   isChangingSlider: false,
   secondsPerNote: 1,
+  noteStates,
 };
 
 export default (state = initialState, action) => {
@@ -41,6 +47,24 @@ export default (state = initialState, action) => {
         ...state,
         ytPlayerState: action.payload.ytPlayerState,
       };
+    case 'SET_STATE': {
+      const noteStates = state.noteStates.concat();
+      noteStates[action.payload.index] = action.payload.state;
+      return {
+        ...state,
+        noteStates,
+      };
+    }
+    case 'RESET_STATE': {
+      const noteStates = state.noteStates.concat();
+      for (let i = 0; i < noteStates.length; i++) {
+        noteStates[i] = id.state.fresh;
+      }
+      return {
+        ...state,
+        noteStates,
+      };
+    }
     default:
       return state;
   }

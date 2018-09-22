@@ -6,8 +6,8 @@ import {
   setCurrentTime,
   setChangingSlider,
   setYtPlayerState,
+  resetState,
 } from '../../actions/player';
-import { resetState } from '../../actions/editor';
 import { id } from '../../constants';
 
 class YouTube extends Component {

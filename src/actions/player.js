@@ -46,3 +46,15 @@ export const setSecondsPerNote = secondsPerNote => ({
     secondsPerNote,
   },
 });
+
+export const setState = (index, state) => ({
+  type: 'SET_STATE',
+  payload: {
+    index,
+    state,
+  },
+});
+
+export const resetState = () => ({
+  type: 'RESET_STATE',
+});

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { size, id, position, sound, second } from '../../constants';
-import { setState } from '../../actions/editor';
+import { setState } from '../../actions/player';
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
 import { setCurrentTime, setChangingSlider } from '../../actions/player';
@@ -72,15 +72,15 @@ class Player extends Component {
     if (initialNoteIndex < 0) {
       initialNoteIndex = 0;
     }
-    if (initialNoteIndex >= this.props.notes.length) {
+    if (initialNoteIndex >= this.props.noteIds.length) {
       return null;
     }
 
     if (finalNoteIndex < 0) {
       return null;
     }
-    if (finalNoteIndex >= this.props.notes.length) {
-      finalNoteIndex = this.props.notes.length - 1;
+    if (finalNoteIndex >= this.props.noteIds.length) {
+      finalNoteIndex = this.props.noteIds.length - 1;
     }
 
     return [initialNoteIndex, finalNoteIndex];
@@ -105,12 +105,13 @@ class Player extends Component {
       i <= noteIndexRangeInGoodJudgeRange[1];
       i++
     ) {
-      if (i < 0 || i >= this.props.notes.length) {
+      if (i < 0 || i >= this.props.noteIds.length) {
         continue;
       }
 
-      const note = this.props.notes[i];
-      if (note.state !== id.state.fresh || note.id === id.note.space) {
+      const noteId = this.props.noteIds[i];
+      const noteState = this.props.noteStates[i];
+      if (noteState !== id.state.fresh || noteId === id.note.space) {
         continue;
       }
 
@@ -118,20 +119,20 @@ class Player extends Component {
         new Shot(
           position.player.judge.x,
           (this.props.player.height - 1) / 2,
-          note.id
+          noteId
         )
       );
 
       if (
-        note.id === id.note.don ||
-        note.id === id.note.ka ||
-        note.id === id.note.bigdon ||
-        note.id === id.note.bigka
+        noteId === id.note.don ||
+        noteId === id.note.ka ||
+        noteId === id.note.bigdon ||
+        noteId === id.note.bigka
       ) {
         this.props.setState(i, id.state.good);
       }
 
-      if (note.id === id.note.ka || note.id === id.note.bigka) {
+      if (noteId === id.note.ka || noteId === id.note.bigka) {
         sound.ka.trigger();
       } else {
         sound.don.trigger();
@@ -169,20 +170,21 @@ class Player extends Component {
       i >= noteIndexRangeInCanvas[0];
       i--
     ) {
-      const note = this.props.notes[i];
+      const noteId = this.props.noteIds[i];
+      const noteState = this.props.noteStates[i];
 
-      if (note.state !== id.state.fresh || note.id === id.note.space) {
+      if (noteState !== id.state.fresh || noteId === id.note.space) {
         continue;
       }
       const x = initialNoteX + i * size.player.space.width;
       const y = (this.props.player.height - 1) / 2;
-      const previousNoteId = i > 0 ? this.props.notes[i - 1].id : id.note.space;
+      const previousNoteId = i > 0 ? this.props.noteIds[i - 1] : id.note.space;
       const nextNoteId =
-        i < this.props.notes.length - 1
-          ? this.props.notes[i + 1].id
+        i < this.props.noteIds.length - 1
+          ? this.props.noteIds[i + 1]
           : id.note.space;
 
-      this.canvas.drawNote(x, y, 'player', note.id, previousNoteId, nextNoteId);
+      this.canvas.drawNote(x, y, 'player', noteId, previousNoteId, nextNoteId);
     }
 
     for (let i = this.shots.length - 1; i >= 0; i--) {
@@ -238,7 +240,8 @@ class Player extends Component {
 
 const mapStateToProps = state => ({
   player: state.pane.player,
-  notes: state.editor.notes,
+  noteIds: state.editor.noteIds,
+  noteStates: state.player.noteStates,
   currentTime: state.player.currentTime,
   config: state.form.config,
   isAutoMode: state.player.isAutoMode,
