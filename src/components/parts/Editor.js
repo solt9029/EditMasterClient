@@ -21,6 +21,14 @@ class Editor extends Component {
     this.updateCanvas();
   }
 
+  shouldComponentUpdate(nextProps) {
+    // temporary fix (later notes have only id and states of notes will be made separately)
+    return (
+      this.props.palette !== nextProps.palette ||
+      this.props.editorPane !== nextProps.editorPane
+    );
+  }
+
   componentDidUpdate() {
     this.updateCanvas();
   }
@@ -29,8 +37,20 @@ class Editor extends Component {
     if (!this.props.palette) {
       return;
     }
+
+    // bars
+    const barNum = this.props.notes.length / number.score.column;
     const barWidth =
       this.props.editorPane.width - 1 - position.editor.bar.x * 2;
+    for (let i = 0; i < barNum; i++) {
+      this.canvas.drawBar(
+        position.editor.bar.x,
+        i * size.editor.bar.outside.height,
+        barWidth
+      );
+    }
+
+    // notes
     const actualBarWidth = barWidth * (1 - percentage.editor.barStartLine); // left side of initial beat line is not available
     const spaceWidth = actualBarWidth / number.score.column;
     const barStartLineX =

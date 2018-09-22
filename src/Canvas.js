@@ -1,4 +1,4 @@
-import { color, size, id, position } from './constants';
+import { color, size, id, position, number, percentage } from './constants';
 
 export default class Canvas {
   constructor(ctx) {
@@ -22,6 +22,29 @@ export default class Canvas {
     );
     this.ctx.stroke();
     return;
+  }
+
+  drawBar(x, y, width) {
+    const insideY =
+      y + (size.editor.bar.outside.height - size.editor.bar.inside.height) / 2;
+    this.ctx.fillStyle = color.gray;
+    this.ctx.fillRect(x, insideY, width, size.editor.bar.inside.height);
+
+    this.ctx.fillStyle = color.white;
+    for (let i = 0; i < number.beat; i++) {
+      const beatLineX =
+        x +
+        width *
+          (percentage.editor.barStartLine +
+            ((1 - percentage.editor.barStartLine) * i) / number.beat) -
+        size.editor.beatLine.width / 2;
+      this.ctx.fillRect(
+        beatLineX,
+        insideY - 1,
+        size.editor.beatLine.width,
+        size.editor.bar.inside.height + 2
+      );
+    }
   }
 
   drawNote(
