@@ -3,7 +3,7 @@ const initialState = {
   currentTime: 0,
   isAutoMode: true,
   isChangingSlider: false,
-  secondsPerNote: 0,
+  secondsPerNote: 1,
 };
 
 export default (state = initialState, action) => {

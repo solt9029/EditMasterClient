@@ -27,7 +27,6 @@ class Player extends Component {
     this.shots = [];
     this.canvasRef = React.createRef();
     this.canvas = null;
-    this.secondsPerNote = 0;
   }
 
   componentDidMount() {
@@ -40,9 +39,9 @@ class Player extends Component {
     if (!this.props.config) {
       return;
     }
-    if (!this.props.config.values.bpm) {
-      return;
-    }
+    // if (!this.props.secondsPerNote) {
+    //   return;
+    // }
 
     this.canvas.clear(
       this.props.player.width - 1,
@@ -51,8 +50,7 @@ class Player extends Component {
 
     this.canvas.drawJudgeMark((this.props.player.height - 1) / 2);
 
-    const secondsPerNote = this.calcSecondsPerNote();
-    const initialNoteX = this.calcInitialNoteX(secondsPerNote); // x position of initial note
+    const initialNoteX = this.calcInitialNoteX(); // x position of initial note
     const noteIndexRangeInCanvas = this.calcNoteIndexRangeInCanvas(
       initialNoteX
     );
@@ -100,25 +98,17 @@ class Player extends Component {
 
   componentDidUpdate() {
     this.updateCanvas();
-    this.autoMode(this.calcSecondsPerNote());
+    this.autoMode();
   }
 
-  calcSecondsPerNote() {
-    const barPerMinute = this.props.config.values.bpm / number.beat;
-    const barPerSecond = barPerMinute / 60;
-    const notesPerSecond = barPerSecond * number.score.column;
-    const secondsPerNote = 1 / notesPerSecond;
-    return secondsPerNote;
-  }
-
-  calcNoteIndexRangeInRangeSecond(secondsPerNote, rangeSecond) {
+  calcNoteIndexRangeInSecondRange(secondRange) {
     const initialNoteIndex = Math.ceil(
-      (this.props.currentTime - rangeSecond - this.props.config.values.offset) /
-        secondsPerNote
+      (this.props.currentTime - secondRange - this.props.config.values.offset) /
+        this.props.secondsPerNote
     );
     const finalNoteIndex = Math.floor(
-      (this.props.currentTime + rangeSecond - this.props.config.values.offset) /
-        secondsPerNote
+      (this.props.currentTime + secondRange - this.props.config.values.offset) /
+        this.props.secondsPerNote
     );
     return [initialNoteIndex, finalNoteIndex];
   }
@@ -152,18 +142,17 @@ class Player extends Component {
     return [initialNoteIndex, finalNoteIndex];
   }
 
-  calcInitialNoteX(secondsPerNote) {
+  calcInitialNoteX() {
     const initialNoteX =
       position.player.judge.x +
       ((this.props.config.values.offset - this.props.currentTime) /
-        secondsPerNote) *
+        this.props.secondsPerNote) *
         size.player.space.width;
     return initialNoteX;
   }
 
-  autoMode(secondsPerNote) {
-    const noteIndexRangeInGoodJudgeRange = this.calcNoteIndexRangeInRangeSecond(
-      secondsPerNote,
+  autoMode() {
+    const noteIndexRangeInGoodJudgeRange = this.calcNoteIndexRangeInSecondRange(
       second.range.auto
     );
 
@@ -250,6 +239,7 @@ const mapStateToProps = state => ({
   isAutoMode: state.player.isAutoMode,
   ytPlayer: state.player.ytPlayer,
   isChangingSlider: state.player.isChangingSlider,
+  secondsPerNote: state.player.secondsPerNote,
 });
 const mapDispatchToProps = dispatch => ({
   setState(index, state) {
