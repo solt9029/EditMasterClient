@@ -3,6 +3,7 @@ const initialState = {
   currentTime: 0,
   isAutoMode: true,
   isChangingSlider: false,
+  secondsPerNote: 0,
 };
 
 export default (state = initialState, action) => {
@@ -26,6 +27,11 @@ export default (state = initialState, action) => {
       return {
         ...state,
         isChangingSlider: action.payload.isChangingSlider,
+      };
+    case 'SET_SECONDS_PER_NOTE':
+      return {
+        ...state,
+        secondsPerNote: action.payload.secondsPerNote,
       };
     default:
       return state;

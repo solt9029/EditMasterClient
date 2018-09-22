@@ -27,6 +27,7 @@ class Player extends Component {
     this.shots = [];
     this.canvasRef = React.createRef();
     this.canvas = null;
+    this.secondsPerNote = 0;
   }
 
   componentDidMount() {
@@ -47,6 +48,8 @@ class Player extends Component {
       this.props.player.width - 1,
       this.props.player.height - 1
     );
+
+    this.canvas.drawJudgeMark((this.props.player.height - 1) / 2);
 
     const secondsPerNote = this.calcSecondsPerNote();
     const initialNoteX = this.calcInitialNoteX(secondsPerNote); // x position of initial note

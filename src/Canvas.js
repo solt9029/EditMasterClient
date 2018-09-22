@@ -1,4 +1,4 @@
-import { color, size, id } from './constants';
+import { color, size, id, position } from './constants';
 
 export default class Canvas {
   constructor(ctx) {
@@ -7,6 +7,21 @@ export default class Canvas {
 
   clear(width, height) {
     this.ctx.clearRect(0, 0, width, height);
+    return;
+  }
+
+  drawJudgeMark(y) {
+    this.ctx.beginPath();
+    this.ctx.strokeStyle = color.white;
+    this.ctx.arc(
+      position.player.judge.x,
+      y,
+      size.player.normal.outside,
+      0,
+      Math.PI * 2
+    );
+    this.ctx.stroke();
+    return;
   }
 
   drawNote(

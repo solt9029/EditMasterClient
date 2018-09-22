@@ -7,6 +7,7 @@ import { validation } from '../../constants';
 import { initialValues } from '../../reducers/form/config';
 import { connect } from 'react-redux';
 import urlParse from 'url-parse';
+import { calcSecondsPerNote } from '../../actions/player';
 
 const StyledDiv = styled.div`
   padding: 15px;
@@ -15,77 +16,64 @@ const StyledDiv = styled.div`
   font-weight: 500;
 `;
 
-const fields = [
-  {
-    label: 'ユーザ名',
-    validate: validation.required,
-    type: 'text',
-    name: 'username',
-    placeholder: 'ユーザ名（例：通りすがりの創作の達人）',
-  },
-  {
-    label: 'YouTube動画ID',
-    validate: validation.required,
-    type: 'text',
-    name: 'videoId',
-    placeholder: 'YouTube動画ID（例：PqJNc9KVIZE）',
-  },
-  {
-    label: 'BPM',
-    validate: [validation.required, validation.number],
-    type: 'number',
-    name: 'bpm',
-    placeholder: 'BPM（例：200）',
-  },
-  {
-    label: 'OFFSET：曲の始まる時間（秒）',
-    validate: [validation.required, validation.number],
-    type: 'number',
-    name: 'offset',
-    placeholder: 'OFFSET（例：1.5）',
-  },
-  {
-    label: 'コメント',
-    validate: null,
-    type: 'text',
-    name: 'comment',
-    placeholder: 'コメント（例：創作の達人で創作譜面をしました！）',
-  },
-];
-
 class Config extends Component {
-  constructor(props) {
-    super(props);
-    this.formatVideoId = this.formatVideoId.bind(this);
-  }
-
-  formatVideoId(value) {
-    // format url to videoId
-    const url = urlParse(value, true);
-    if (url.query.v) {
-      value = url.query.v;
-    }
-
-    return value;
+  componentDidMount() {
+    this.props.calcSecondsPerNote(this.props.config.values.bpm);
   }
 
   render() {
     return (
       <StyledDiv>
-        {fields.map((field, i) => {
-          return (
-            <Field
-              key={i}
-              label={field.label}
-              component={ValidationField}
-              validate={field.validate}
-              type={field.type}
-              name={field.name}
-              placeholder={field.placeholder}
-              normalize={field.name === 'videoId' && this.formatVideoId}
-            />
-          );
-        })}
+        <Field
+          label="ユーザ名"
+          component={ValidationField}
+          validate={validation.required}
+          type="text"
+          name="username"
+          placeholder="ユーザ名（例：通りすがりの創作の達人）"
+        />
+        <Field
+          label="YouTube動画ID"
+          component={ValidationField}
+          validate={validation.required}
+          type="text"
+          name="videoId"
+          placeholder="YouTube動画ID（例：PqJNc9KVIZE）"
+          normalize={value => {
+            // format url to videoId
+            const url = urlParse(value, true);
+            if (url.query.v) {
+              value = url.query.v;
+            }
+            return value;
+          }}
+        />
+        <Field
+          label="BPM"
+          component={ValidationField}
+          validate={[validation.required, validation.number]}
+          type="number"
+          name="bpm"
+          placeholder="BPM（例：200）"
+          onChange={event => {
+            this.props.calcSecondsPerNote(event.target.value);
+          }}
+        />
+        <Field
+          label="OFFSET：曲の始まる時間（秒）"
+          component={ValidationField}
+          validate={[validation.required, validation.number]}
+          type="number"
+          name="offset"
+          placeholder="OFFSET（例：1.5）"
+        />
+        <Field
+          label="コメント"
+          component={ValidationField}
+          type="text"
+          name="comment"
+          placeholder="コメント（例：創作の達人で創作譜面をしました！）"
+        />
       </StyledDiv>
     );
   }
@@ -93,10 +81,16 @@ class Config extends Component {
 
 const mapStateToProps = state => ({
   config: state.form.config,
+  secondsPerNote: state.player.secondsPerNote,
+});
+const mapDispatchToProps = dispatch => ({
+  calcSecondsPerNote(bpm) {
+    dispatch(calcSecondsPerNote(bpm));
+  },
 });
 Config = connect(
   mapStateToProps,
-  null
+  mapDispatchToProps
 )(Config);
 
 export default reduxForm({
