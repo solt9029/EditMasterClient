@@ -5,6 +5,8 @@ import { throttle } from 'lodash';
 import { setMousePosition } from '../../actions/editor';
 import Canvas from '../../Canvas';
 
+const canvasInlineStyle = { position: 'absolute', top: '0', left: '0' };
+
 class Editor extends Component {
   constructor(props) {
     super(props);
@@ -103,10 +105,15 @@ class Editor extends Component {
       <div>
         <canvas
           ref={this.canvasRef}
-          style={{ display: 'block' }}
+          style={canvasInlineStyle}
           width={this.props.editorPane.width - 1}
           height={this.props.editorPane.height - 1}
         />
+        {/* <canvas
+          style={canvasInlineStyle}
+          width={this.props.editorPane.width - 1}
+          height={this.props.editorPane.height - 1}
+        /> */}
       </div>
     );
   }
