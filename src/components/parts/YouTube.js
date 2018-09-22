@@ -12,7 +12,7 @@ class YouTube extends Component {
   }
 
   loop() {
-    if (this.props.ytPlayer && !this.props.isChangingSlider) {
+    if (this.props.ytPlayer !== null && !this.props.isChangingSlider) {
       this.props.setCurrentTime(this.props.ytPlayer.getCurrentTime());
     }
     this.frameId = window.requestAnimationFrame(this.loop);
