@@ -329,7 +329,9 @@ class Player extends Component {
             this.props.setCurrentTime(value);
           }}
           onAfterChange={() => {
-            this.props.ytPlayer.seekTo(this.props.currentTime);
+            if (this.props.ytPlayer) {
+              this.props.ytPlayer.seekTo(this.props.currentTime);
+            }
             this.props.setChangingSlider(false);
           }}
         />
