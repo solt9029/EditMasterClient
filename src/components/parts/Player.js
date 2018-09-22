@@ -45,14 +45,44 @@ class Player extends Component {
   componentDidMount() {
     const ctx = this.canvasRef.current.getContext('2d');
     this.canvas = new Canvas(ctx);
+
     this.updateCanvas();
   }
 
   updateCanvas() {
+    if (!this.props.config) {
+      return;
+    }
+    if (!this.props.config.values.bpm) {
+      return;
+    }
+
     this.canvas.clear(
       this.props.player.width - 1,
       this.props.player.height - 1
     );
+
+    const secondsPerNote = this.calcSecondsPerNote();
+    const initialNoteX = this.calcInitialNoteX(secondsPerNote); // x position of initial note
+    const noteIndexesInCanvas = this.calcNoteIndexesInCanvas(initialNoteX);
+
+    for (let i = noteIndexesInCanvas.length - 1; i >= 0; i--) {
+      const index = noteIndexesInCanvas[i];
+      const note = this.props.notes[index];
+      if (note.state !== id.state.fresh || note.id === id.note.space) {
+        continue;
+      }
+      const x = initialNoteX + index * size.player.space.width;
+      const y = (this.props.player.height - 1) / 2;
+      const previousNoteId =
+        index > 0 ? this.props.notes[index - 1].id : id.note.space;
+      const nextNoteId =
+        index < this.props.notes.length - 1
+          ? this.props.notes[index + 1].id
+          : id.note.space;
+
+      this.canvas.drawNote(x, y, 'player', id.note.don);
+    }
     this.canvas.drawNote(this.props.currentTime * 10, 10, 'player', id.note.ka);
   }
 
