@@ -34,7 +34,6 @@ class YouTube extends Component {
         }}
         videoId={this.props.config && this.props.config.values.videoId}
         onReady={event => {
-          console.log(event);
           this.props.setYtPlayer(event.target);
           event.target.playVideo();
         }}
