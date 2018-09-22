@@ -35,67 +35,6 @@ class Player extends Component {
     this.updateCanvas();
   }
 
-  updateCanvas() {
-    if (!this.props.config) {
-      return;
-    }
-    // if (!this.props.secondsPerNote) {
-    //   return;
-    // }
-
-    this.canvas.clear(
-      this.props.player.width - 1,
-      this.props.player.height - 1
-    );
-
-    this.canvas.drawJudgeMark((this.props.player.height - 1) / 2);
-
-    const initialNoteX = this.calcInitialNoteX(); // x position of initial note
-    const noteIndexRangeInCanvas = this.calcNoteIndexRangeInCanvas(
-      initialNoteX
-    );
-    if (!noteIndexRangeInCanvas) {
-      return;
-    }
-
-    for (
-      let i = noteIndexRangeInCanvas[1];
-      i >= noteIndexRangeInCanvas[0];
-      i--
-    ) {
-      const note = this.props.notes[i];
-
-      if (note.state !== id.state.fresh || note.id === id.note.space) {
-        continue;
-      }
-      const x = initialNoteX + i * size.player.space.width;
-      const y = (this.props.player.height - 1) / 2;
-      const previousNoteId = i > 0 ? this.props.notes[i - 1].id : id.note.space;
-      const nextNoteId =
-        i < this.props.notes.length - 1
-          ? this.props.notes[i + 1].id
-          : id.note.space;
-
-      this.canvas.drawNote(x, y, 'player', note.id, previousNoteId, nextNoteId);
-    }
-
-    for (let i = this.shots.length - 1; i >= 0; i--) {
-      this.shots[i].move(
-        this.props.player.width / 100,
-        this.props.player.height / 10
-      );
-      this.canvas.drawNote(
-        this.shots[i].x,
-        this.shots[i].y,
-        'player',
-        this.shots[i].id
-      );
-      if (this.shots[i].limit < 0) {
-        this.shots.splice(i, 1);
-      }
-    }
-  }
-
   componentDidUpdate() {
     this.updateCanvas();
     if (this.props.isAutoMode) {
@@ -196,6 +135,67 @@ class Player extends Component {
       }
 
       break;
+    }
+  }
+
+  updateCanvas() {
+    if (!this.props.config) {
+      return;
+    }
+    // if (!this.props.secondsPerNote) {
+    //   return;
+    // }
+
+    this.canvas.clear(
+      this.props.player.width - 1,
+      this.props.player.height - 1
+    );
+
+    this.canvas.drawJudgeMark((this.props.player.height - 1) / 2);
+
+    const initialNoteX = this.calcInitialNoteX(); // x position of initial note
+    const noteIndexRangeInCanvas = this.calcNoteIndexRangeInCanvas(
+      initialNoteX
+    );
+    if (!noteIndexRangeInCanvas) {
+      return;
+    }
+
+    for (
+      let i = noteIndexRangeInCanvas[1];
+      i >= noteIndexRangeInCanvas[0];
+      i--
+    ) {
+      const note = this.props.notes[i];
+
+      if (note.state !== id.state.fresh || note.id === id.note.space) {
+        continue;
+      }
+      const x = initialNoteX + i * size.player.space.width;
+      const y = (this.props.player.height - 1) / 2;
+      const previousNoteId = i > 0 ? this.props.notes[i - 1].id : id.note.space;
+      const nextNoteId =
+        i < this.props.notes.length - 1
+          ? this.props.notes[i + 1].id
+          : id.note.space;
+
+      this.canvas.drawNote(x, y, 'player', note.id, previousNoteId, nextNoteId);
+    }
+
+    for (let i = this.shots.length - 1; i >= 0; i--) {
+      this.shots[i].move(
+        this.props.player.width / 100,
+        this.props.player.height / 10
+      );
+      this.canvas.drawNote(
+        this.shots[i].x,
+        this.shots[i].y,
+        'player',
+        this.shots[i].id
+      );
+      if (this.shots[i].limit < 0) {
+        this.shots.splice(i, 1);
+      }
     }
   }
 
