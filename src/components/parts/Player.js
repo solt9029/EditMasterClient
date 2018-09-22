@@ -225,7 +225,7 @@ class Player extends Component {
           style={sliderInlineStyle}
           min={0}
           max={this.props.ytPlayer ? this.props.ytPlayer.getDuration() : 0}
-          value={this.props.currentTime}
+          value={this.props.currentTime ? this.props.currentTime : 0} // to fix the problem that slider doesn't move after pasting url on videoId form
           onChange={value => {
             this.props.setChangingSlider(true);
             this.props.setCurrentTime(value);
