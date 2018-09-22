@@ -7,7 +7,8 @@ import DivisionRadio from './DivisionRadio';
 import { initialValues } from '../../reducers/form/palette';
 import { id } from '../../constants';
 import { connect } from 'react-redux';
-import { toggleMode } from '../../actions/player';
+import { toggleMode, addStateBar } from '../../actions/player';
+import { addIdBar } from '../../actions/editor';
 
 const StyledDiv = styled.div`
   padding: 15px;
@@ -83,6 +84,16 @@ const noteFields = [
 const divisionFields = [16, 24, 32, 48];
 
 class Palette extends Component {
+  constructor(props) {
+    super(props);
+    this.addBar = this.addBar.bind(this);
+  }
+
+  addBar() {
+    this.props.addIdBar();
+    this.props.addStateBar();
+  }
+
   render() {
     return (
       <StyledDiv>
@@ -132,7 +143,7 @@ class Palette extends Component {
             })}
           </Row>
         </StyledContainer>
-        <LineButton block color="success">
+        <LineButton block color="success" onClick={this.addBar}>
           行を追加
         </LineButton>
         <LineButton block color="danger">
@@ -149,6 +160,12 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   toggleMode() {
     dispatch(toggleMode());
+  },
+  addStateBar() {
+    dispatch(addStateBar());
+  },
+  addIdBar() {
+    dispatch(addIdBar());
   },
 });
 Palette = connect(

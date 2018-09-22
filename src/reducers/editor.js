@@ -1,3 +1,5 @@
+import { number, id } from '../constants';
+
 /* eslint-disable */
 const noteIds = [
   1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0,
@@ -14,7 +16,7 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case 'SET_NOTE_IDS':
+    case 'SET_NOTE_IDS': {
       let noteIds = state.noteIds.concat();
       for (let n = 0; n < action.payload.num; n++) {
         noteIds[action.payload.index + n] = action.payload.noteId;
@@ -23,6 +25,18 @@ export default (state = initialState, action) => {
         ...state,
         noteIds,
       };
+    }
+    case 'ADD_ID_BAR': {
+      let noteIds = state.noteIds.concat();
+      for (let i = 0; i < number.score.column; i++) {
+        noteIds.push(id.note.space);
+      }
+      return {
+        ...state,
+        noteIds,
+      };
+    }
+
     default:
       return state;
   }

@@ -58,3 +58,7 @@ export const setState = (index, state) => ({
 export const resetState = () => ({
   type: 'RESET_STATE',
 });
+
+export const addStateBar = () => ({
+  type: 'ADD_STATE_BAR',
+});

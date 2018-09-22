@@ -25,7 +25,8 @@ class EditorCaretCanvas extends Component {
   shouldComponentUpdate(nextProps) {
     return (
       this.props.palette !== nextProps.palette ||
-      this.props.editorPane !== nextProps.editorPane
+      this.props.editorPane !== nextProps.editorPane ||
+      this.props.noteIds.length !== nextProps.noteIds.length
     );
   }
 

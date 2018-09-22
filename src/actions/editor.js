@@ -6,3 +6,7 @@ export const setNoteIds = (index, num, noteId) => ({
     noteId,
   },
 });
+
+export const addIdBar = () => ({
+  type: 'ADD_ID_BAR',
+});

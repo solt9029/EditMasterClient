@@ -1,4 +1,4 @@
-import { id } from '../constants';
+import { id, number } from '../constants';
 
 let noteStates = [];
 for (let i = 0; i < 96 * 5; i++) {
@@ -48,7 +48,7 @@ export default (state = initialState, action) => {
         ytPlayerState: action.payload.ytPlayerState,
       };
     case 'SET_STATE': {
-      const noteStates = state.noteStates.concat();
+      let noteStates = state.noteStates.concat();
       noteStates[action.payload.index] = action.payload.state;
       return {
         ...state,
@@ -56,9 +56,19 @@ export default (state = initialState, action) => {
       };
     }
     case 'RESET_STATE': {
-      const noteStates = state.noteStates.concat();
+      let noteStates = state.noteStates.concat();
       for (let i = 0; i < noteStates.length; i++) {
         noteStates[i] = id.state.fresh;
+      }
+      return {
+        ...state,
+        noteStates,
+      };
+    }
+    case 'ADD_STATE_BAR': {
+      let noteStates = state.noteStates.concat();
+      for (let i = 0; i < number.score.column; i++) {
+        noteStates.push(id.note.space);
       }
       return {
         ...state,
