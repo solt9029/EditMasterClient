@@ -25,22 +25,10 @@ const noteIds = [
 
 const initialState = {
   noteIds,
-  mousePosition: {
-    x: 0,
-    y: 0,
-  },
 };
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case 'SET_MOUSE_POSITION':
-      return {
-        ...state,
-        mousePosition: {
-          x: action.payload.x,
-          y: action.payload.y,
-        },
-      };
     default:
       return state;
   }

@@ -10,6 +10,17 @@ export default class Canvas {
     return;
   }
 
+  drawCaret(x, y) {
+    this.ctx.fillStyle = color.yellow;
+    this.ctx.fillRect(
+      x - size.editor.caret.width / 2,
+      y - 2,
+      size.editor.caret.width,
+      size.editor.bar.inside.height + 4
+    );
+    return;
+  }
+
   drawJudgeMark(y) {
     this.ctx.beginPath();
     this.ctx.strokeStyle = color.white;
