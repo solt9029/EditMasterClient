@@ -9,11 +9,15 @@ export default class Canvas {
     this.ctx.clearRect(0, 0, width, height);
   }
 
-  drawNote(x, y, pane, noteId, previousNoteId, nextNoteId, spaceWidth) {
-    if (pane === 'player') {
-      spaceWidth = size.player.space.width;
-    }
-
+  drawNote(
+    x,
+    y,
+    pane,
+    noteId,
+    previousNoteId = id.note.space,
+    nextNoteId = id.note.space,
+    spaceWidth = size.player.space.width
+  ) {
     let noteSize = 'normal';
     let noteColor = color.red;
 

@@ -97,6 +97,7 @@ export const number = {
 
 export const second = {
   range: {
+    auto: 0.02,
     good: 0.034,
     ok: 0.117,
     bad: 0.15,

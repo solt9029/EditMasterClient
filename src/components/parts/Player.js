@@ -1,19 +1,6 @@
 import React, { Component } from 'react';
-import { Stage, Layer } from 'react-konva';
 import { connect } from 'react-redux';
-import NoteCircle from './NoteCircle';
-import JudgeCircle from './JudgeCircle';
-import NoteExtension from './NoteExtension';
-import {
-  size,
-  id,
-  position,
-  number,
-  sound,
-  second,
-  color,
-} from '../../constants';
-import NoteEnd from './NoteEnd';
+import { size, id, position, number, sound, second } from '../../constants';
 import { setState } from '../../actions/editor';
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
@@ -90,10 +77,27 @@ class Player extends Component {
 
       this.canvas.drawNote(x, y, 'player', note.id, previousNoteId, nextNoteId);
     }
+
+    for (let i = this.shots.length - 1; i >= 0; i--) {
+      this.shots[i].move(
+        this.props.player.width / 100,
+        this.props.player.height / 10
+      );
+      this.canvas.drawNote(
+        this.shots[i].x,
+        this.shots[i].y,
+        'player',
+        this.shots[i].id
+      );
+      if (this.shots[i].limit < 0) {
+        this.shots.splice(i, 1);
+      }
+    }
   }
 
   componentDidUpdate() {
     this.updateCanvas();
+    this.autoMode(this.calcSecondsPerNote());
   }
 
   calcSecondsPerNote() {
@@ -104,7 +108,7 @@ class Player extends Component {
     return secondsPerNote;
   }
 
-  calcNoteIndexesInRangeSecond(secondsPerNote, rangeSecond) {
+  calcNoteIndexRangeInRangeSecond(secondsPerNote, rangeSecond) {
     const initialNoteIndex = Math.ceil(
       (this.props.currentTime - rangeSecond - this.props.config.values.offset) /
         secondsPerNote
@@ -113,11 +117,7 @@ class Player extends Component {
       (this.props.currentTime + rangeSecond - this.props.config.values.offset) /
         secondsPerNote
     );
-    let indexes = [];
-    for (let i = initialNoteIndex; i <= finalNoteIndex; i++) {
-      indexes.push(i);
-    }
-    return indexes;
+    return [initialNoteIndex, finalNoteIndex];
   }
 
   calcNoteIndexRangeInCanvas(initialNoteX) {
@@ -159,18 +159,21 @@ class Player extends Component {
   }
 
   autoMode(secondsPerNote) {
-    const noteIndexesInGoodJudgeRange = this.calcNoteIndexesInRangeSecond(
+    const noteIndexRangeInGoodJudgeRange = this.calcNoteIndexRangeInRangeSecond(
       secondsPerNote,
-      second.range.good
+      second.range.auto
     );
 
-    for (let i = 0; i < noteIndexesInGoodJudgeRange.length; i++) {
-      const index = noteIndexesInGoodJudgeRange[i];
-      if (index < 0 || index >= this.props.notes.length) {
+    for (
+      let i = noteIndexRangeInGoodJudgeRange[0];
+      i <= noteIndexRangeInGoodJudgeRange[1];
+      i++
+    ) {
+      if (i < 0 || i >= this.props.notes.length) {
         continue;
       }
 
-      const note = this.props.notes[index];
+      const note = this.props.notes[i];
       if (note.state !== id.state.fresh || note.id === id.note.space) {
         continue;
       }
@@ -189,7 +192,7 @@ class Player extends Component {
         note.id === id.note.bigdon ||
         note.id === id.note.bigka
       ) {
-        this.props.setState(index, id.state.good);
+        this.props.setState(i, id.state.good);
       }
 
       if (note.id === id.note.ka || note.id === id.note.bigka) {
@@ -200,110 +203,6 @@ class Player extends Component {
 
       break;
     }
-  }
-
-  renderShots() {
-    let shots = [];
-    for (let i = this.shots.length - 1; i >= 0; i--) {
-      this.shots[i].move(
-        this.props.player.width / 100,
-        this.props.player.height / 10
-      );
-      shots.push(
-        <NoteCircle
-          pane="player"
-          x={this.shots[i].x}
-          y={this.shots[i].y}
-          id={this.shots[i].id}
-        />
-      );
-      if (this.shots[i].limit < 0) {
-        this.shots.splice(i, 1);
-      }
-    }
-    return shots;
-  }
-
-  renderNotes() {
-    if (!this.props.config) {
-      return;
-    }
-    if (!this.props.config.values.bpm) {
-      return;
-    }
-
-    const secondsPerNote = this.calcSecondsPerNote();
-    const initialNoteX = this.calcInitialNoteX(secondsPerNote); // x position of initial note
-    const noteIndexesInCanvas = this.calcNoteIndexesInCanvas(initialNoteX);
-    const slicedNotes = this.props.notes.slice(
-      noteIndexesInCanvas[0],
-      noteIndexesInCanvas[noteIndexesInCanvas.length - 1]
-    );
-    const reversedSlicedNotes = slicedNotes.reverse();
-
-    // sample code sound (not good)
-    if (this.props.isAutoMode) {
-      this.autoMode(secondsPerNote);
-    }
-
-    return reversedSlicedNotes.map((note, reversedIndex) => {
-      if (note.state !== id.state.fresh || note.id === id.note.space) {
-        return null;
-      }
-
-      const index = reversedSlicedNotes.length - 1 - reversedIndex;
-      const x =
-        initialNoteX +
-        (noteIndexesInCanvas[0] + index) * size.player.space.width;
-      const y = (this.props.player.height - 1) / 2;
-      const previousNoteId =
-        index > 0 ? reversedSlicedNotes[reversedIndex + 1].id : id.note.space;
-      const nextNoteId =
-        index < reversedSlicedNotes.length - 1
-          ? reversedSlicedNotes[reversedIndex - 1].id
-          : id.note.space;
-      const isBarStart =
-        (noteIndexesInCanvas[0] + index) % number.score.column === 0;
-
-      if (
-        note.id === id.note.renda ||
-        note.id === id.note.bigrenda ||
-        note.id === id.note.balloon
-      ) {
-        if (previousNoteId === note.id) {
-          if (nextNoteId === note.id) {
-            return (
-              <NoteExtension
-                spaceWidth={size.player.space.width}
-                pane="player"
-                barStart={isBarStart}
-                x={x}
-                y={y}
-                id={note.id}
-              />
-            );
-          }
-          return (
-            <NoteEnd
-              pane="player"
-              barStart={isBarStart}
-              x={x}
-              y={y}
-              id={note.id}
-            />
-          );
-        }
-      }
-      return (
-        <NoteCircle
-          pane="player"
-          barStart={isBarStart}
-          x={x}
-          y={y}
-          id={note.id}
-        />
-      );
-    });
   }
 
   render() {
