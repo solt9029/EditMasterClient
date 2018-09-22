@@ -9,7 +9,7 @@ class EditorCaretCanvas extends Component {
   constructor(props) {
     super(props);
     this.mouseBarIndex = 0;
-    this.mouseColumnIndex = 0;
+    this.mouseDivisionIndex = 0;
     this.canvasRef = React.createRef();
     this.canvas = null;
     this.mouseMove = this.mouseMove.bind(this);
@@ -33,18 +33,18 @@ class EditorCaretCanvas extends Component {
     const actualBarWidth = barWidth * (1 - percentage.editor.barStartLine); // left side of initial beat line is not available
     const barStartLineX =
       position.editor.bar.x + barWidth * percentage.editor.barStartLine;
-    let mouseColumnIndex = Math.round(
+    let mouseDivisionIndex = Math.round(
       (mouseX - barStartLineX) /
         ((barWidth * (1 - percentage.editor.barStartLine)) /
           this.props.palette.values.division)
     );
-    if (mouseColumnIndex < 0) {
-      mouseColumnIndex = 0;
+    if (mouseDivisionIndex < 0) {
+      mouseDivisionIndex = 0;
     }
-    if (mouseColumnIndex >= this.props.palette.values.division) {
-      mouseColumnIndex = this.props.palette.values.division - 1;
+    if (mouseDivisionIndex >= this.props.palette.values.division) {
+      mouseDivisionIndex = this.props.palette.values.division - 1;
     }
-    this.mouseColumnIndex = mouseColumnIndex;
+    this.mouseDivisionIndex = mouseDivisionIndex;
     this.mouseBarIndex = Math.floor(mouseY / size.editor.bar.outside.height);
 
     // canvas drawing
@@ -55,7 +55,7 @@ class EditorCaretCanvas extends Component {
     const x =
       barStartLineX +
       actualBarWidth *
-        (this.mouseColumnIndex / this.props.palette.values.division) -
+        (this.mouseDivisionIndex / this.props.palette.values.division) -
       size.editor.caret.width / 2;
     const y =
       this.mouseBarIndex * size.editor.bar.outside.height +
