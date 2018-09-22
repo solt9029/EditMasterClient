@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { size, id, position, number, sound, second } from '../../constants';
+import { size, id, position, sound, second } from '../../constants';
 import { setState } from '../../actions/editor';
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
@@ -98,7 +98,9 @@ class Player extends Component {
 
   componentDidUpdate() {
     this.updateCanvas();
-    this.autoMode();
+    if (this.props.isAutoMode) {
+      this.autoMode();
+    }
   }
 
   calcNoteIndexRangeInSecondRange(secondRange) {
