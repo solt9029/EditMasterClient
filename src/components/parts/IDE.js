@@ -27,26 +27,15 @@ class IDE extends Component {
     this.setPanes = debounce(() => {
       this.props.setPanes(this.references);
     }, 100).bind(this);
-    this.loop = this.loop.bind(this);
-    this.frameId = null;
-  }
-
-  loop() {
-    if (this.props.ytPlayer && !this.props.isChangingSlider) {
-      this.props.setCurrentTime(this.props.ytPlayer.getCurrentTime());
-    }
-    this.frameId = window.requestAnimationFrame(this.loop);
   }
 
   componentDidMount() {
     this.props.setPanes(this.references);
     window.addEventListener('resize', this.setPanes, false);
-    this.frameId = window.requestAnimationFrame(this.loop);
   }
 
   componentWillUnmount() {
     window.removeEventListener('resize', this.setPanes, false);
-    window.cancelAnimationFrame(this.frameId);
   }
 
   render() {

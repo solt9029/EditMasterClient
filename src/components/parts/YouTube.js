@@ -1,10 +1,27 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ReactYouTube from 'react-youtube';
-import { setYtPlayer } from '../../actions/player';
+import { setYtPlayer, setCurrentTime } from '../../actions/player';
 import { resetState } from '../../actions/editor';
 
 class YouTube extends Component {
+  constructor(props) {
+    super(props);
+    this.frameId = null;
+    this.loop = this.loop.bind(this);
+  }
+
+  loop() {
+    if (this.props.ytPlayer && !this.props.isChangingSlider) {
+      this.props.setCurrentTime(this.props.ytPlayer.getCurrentTime());
+    }
+    this.frameId = window.requestAnimationFrame(this.loop);
+  }
+
+  componentWillUnmount() {
+    window.cancelAnimationFrame(this.frameId);
+  }
+
   render() {
     return (
       <ReactYouTube
@@ -17,11 +34,17 @@ class YouTube extends Component {
         }}
         videoId={this.props.config && this.props.config.values.videoId}
         onReady={event => {
+          console.log(event);
           this.props.setYtPlayer(event.target);
           event.target.playVideo();
         }}
-        onStateChange={() => {
-          this.props.resetState();
+        onStateChange={event => {
+          if (event.data === 1) {
+            this.props.resetState();
+            this.frameId = window.requestAnimationFrame(this.loop);
+          } else {
+            window.cancelAnimationFrame(this.frameId);
+          }
         }}
       />
     );
@@ -30,7 +53,8 @@ class YouTube extends Component {
 
 const mapStateToProps = state => ({
   config: state.form.config,
-  youtubePane: state.pane.youtube,
+  isChangingSlider: state.player.isChangingSlider,
+  ytPlayer: state.player.ytPlayer,
 });
 const mapDispatchToProps = dispatch => ({
   setYtPlayer(ytPlayer) {
@@ -38,6 +62,9 @@ const mapDispatchToProps = dispatch => ({
   },
   resetState() {
     dispatch(resetState());
+  },
+  setCurrentTime(currentTime) {
+    dispatch(setCurrentTime(currentTime));
   },
 });
 export default connect(
