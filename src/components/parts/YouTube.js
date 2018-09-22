@@ -38,8 +38,8 @@ class YouTube extends Component {
           event.target.playVideo();
         }}
         onStateChange={event => {
+          this.props.resetState();
           if (event.data === 1) {
-            this.props.resetState();
             this.frameId = window.requestAnimationFrame(this.loop);
           } else {
             window.cancelAnimationFrame(this.frameId);
