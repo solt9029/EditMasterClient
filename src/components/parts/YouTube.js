@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ReactYouTube from 'react-youtube';
-import { setYtPlayer, setCurrentTime } from '../../actions/player';
+import {
+  setYtPlayer,
+  setCurrentTime,
+  setChangingSlider,
+} from '../../actions/player';
 import { resetState } from '../../actions/editor';
 
 class YouTube extends Component {
@@ -40,6 +44,7 @@ class YouTube extends Component {
         onStateChange={event => {
           this.props.resetState();
           if (event.data === 1) {
+            this.props.setChangingSlider(false);
             this.frameId = window.requestAnimationFrame(this.loop);
           } else {
             window.cancelAnimationFrame(this.frameId);
@@ -64,6 +69,9 @@ const mapDispatchToProps = dispatch => ({
   },
   setCurrentTime(currentTime) {
     dispatch(setCurrentTime(currentTime));
+  },
+  setChangingSlider(isChangingSlider) {
+    dispatch(setChangingSlider(isChangingSlider));
   },
 });
 export default connect(
