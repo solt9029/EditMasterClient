@@ -4,13 +4,22 @@ import { connect } from 'react-redux';
 import NoteCircle from './NoteCircle';
 import JudgeCircle from './JudgeCircle';
 import NoteExtension from './NoteExtension';
-import { size, id, position, number, sound, second } from '../../constants';
+import {
+  size,
+  id,
+  position,
+  number,
+  sound,
+  second,
+  color,
+} from '../../constants';
 import NoteEnd from './NoteEnd';
 import { setState } from '../../actions/editor';
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
 import { setCurrentTime, setChangingSlider } from '../../actions/player';
 import Shot from '../../Shot';
+import Canvas from '../../Canvas';
 
 const divInlineStyle = {
   outline: 'none',
@@ -29,6 +38,26 @@ class Player extends Component {
   constructor(props) {
     super(props);
     this.shots = [];
+    this.canvasRef = React.createRef();
+    this.canvas = null;
+  }
+
+  componentDidMount() {
+    const ctx = this.canvasRef.current.getContext('2d');
+    this.canvas = new Canvas(ctx);
+    this.updateCanvas();
+  }
+
+  updateCanvas() {
+    this.canvas.clear(
+      this.props.player.width - 1,
+      this.props.player.height - 1
+    );
+    this.canvas.drawNote(this.props.currentTime * 10, 10, 'player', id.note.ka);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.updateCanvas();
   }
 
   calcSecondsPerNote() {
@@ -246,19 +275,12 @@ class Player extends Component {
         tabIndex="0"
         onKeyDown={e => console.log(e.key)}
       >
-        <Stage
+        <canvas
+          ref={this.canvasRef}
+          style={{ display: 'block' }}
           width={this.props.player.width - 1}
           height={this.props.player.height - 1}
-        >
-          <Layer>
-            <JudgeCircle
-              x={position.player.judge.x}
-              y={(this.props.player.height - 1) / 2}
-            />
-            {this.renderNotes()}
-            {this.renderShots()}
-          </Layer>
-        </Stage>
+        />
         <Slider
           style={sliderInlineStyle}
           min={0}
