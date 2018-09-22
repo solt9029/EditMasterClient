@@ -45,7 +45,6 @@ class Player extends Component {
   componentDidMount() {
     const ctx = this.canvasRef.current.getContext('2d');
     this.canvas = new Canvas(ctx);
-
     this.updateCanvas();
   }
 
@@ -93,7 +92,7 @@ class Player extends Component {
     }
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentDidUpdate() {
     this.updateCanvas();
   }
 
