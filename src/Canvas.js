@@ -73,6 +73,30 @@ export default class Canvas {
             spaceWidth + 2,
             size[pane][noteSize].outside * 2
           );
+
+          this.ctx.strokeStyle = color.black;
+          this.ctx.beginPath();
+          this.ctx.moveTo(
+            x - spaceWidth / 2 - 1,
+            y - size[pane][noteSize].outside
+          );
+          this.ctx.lineTo(
+            x + spaceWidth / 2 + 1,
+            y - size[pane][noteSize].outside
+          );
+          this.ctx.stroke();
+
+          this.ctx.beginPath();
+          this.ctx.moveTo(
+            x - spaceWidth / 2 - 1,
+            y + size[pane][noteSize].outside
+          );
+          this.ctx.lineTo(
+            x + spaceWidth / 2 + 1,
+            y + size[pane][noteSize].outside
+          );
+          this.ctx.stroke();
+
           return;
         }
 

@@ -51,7 +51,15 @@ class Editor extends Component {
           ? this.props.notes[i + 1].id
           : id.note.space;
 
-      this.canvas.drawNote(x, y, 'player', note.id, previousNoteId, nextNoteId);
+      this.canvas.drawNote(
+        x,
+        y,
+        'editor',
+        note.id,
+        previousNoteId,
+        nextNoteId,
+        spaceWidth
+      );
     }
   }
 
