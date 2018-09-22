@@ -5,8 +5,10 @@ import {
   setYtPlayer,
   setCurrentTime,
   setChangingSlider,
+  setYtPlayerState,
 } from '../../actions/player';
 import { resetState } from '../../actions/editor';
+import { id } from '../../constants';
 
 class YouTube extends Component {
   constructor(props) {
@@ -43,7 +45,8 @@ class YouTube extends Component {
         }}
         onStateChange={event => {
           this.props.resetState();
-          if (event.data === 1) {
+          this.props.setYtPlayerState(event.data);
+          if (event.data === id.youtube.playing) {
             this.props.setChangingSlider(false);
             this.frameId = window.requestAnimationFrame(this.loop);
           } else {
@@ -72,6 +75,9 @@ const mapDispatchToProps = dispatch => ({
   },
   setChangingSlider(isChangingSlider) {
     dispatch(setChangingSlider(isChangingSlider));
+  },
+  setYtPlayerState(ytPlayerState) {
+    dispatch(setYtPlayerState(ytPlayerState));
   },
 });
 export default connect(

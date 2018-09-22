@@ -73,6 +73,14 @@ export const id = {
     ok: 2,
     bad: 3,
   },
+  youtube: {
+    unstarted: -1,
+    ended: 0,
+    playing: 1,
+    paused: 2,
+    buffering: 3,
+    cued: 5,
+  },
 };
 
 export const position = {

@@ -7,6 +7,13 @@ export const setYtPlayer = ytPlayer => ({
   },
 });
 
+export const setYtPlayerState = ytPlayerState => ({
+  type: 'SET_YTPLAYER_STATE',
+  payload: {
+    ytPlayerState,
+  },
+});
+
 export const setCurrentTime = currentTime => ({
   type: 'SET_CURRENT_TIME',
   payload: {

@@ -1,5 +1,8 @@
+import { id } from '../constants';
+
 const initialState = {
   ytPlayer: null,
+  ytPlayerState: id.youtube.unstarted,
   currentTime: 0,
   isAutoMode: true,
   isChangingSlider: false,
@@ -32,6 +35,11 @@ export default (state = initialState, action) => {
       return {
         ...state,
         secondsPerNote: action.payload.secondsPerNote,
+      };
+    case 'SET_YTPLAYER_STATE':
+      return {
+        ...state,
+        ytPlayerState: action.payload.ytPlayerState,
       };
     default:
       return state;

@@ -37,7 +37,10 @@ class Player extends Component {
 
   componentDidUpdate() {
     this.updateCanvas();
-    if (this.props.isAutoMode) {
+    if (
+      this.props.isAutoMode &&
+      this.props.ytPlayerState === id.youtube.playing
+    ) {
       this.autoMode();
     }
   }
@@ -242,6 +245,7 @@ const mapStateToProps = state => ({
   ytPlayer: state.player.ytPlayer,
   isChangingSlider: state.player.isChangingSlider,
   secondsPerNote: state.player.secondsPerNote,
+  ytPlayerState: state.player.ytPlayerState,
 });
 const mapDispatchToProps = dispatch => ({
   setState(index, state) {
