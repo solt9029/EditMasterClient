@@ -64,26 +64,33 @@ class Player extends Component {
 
     const secondsPerNote = this.calcSecondsPerNote();
     const initialNoteX = this.calcInitialNoteX(secondsPerNote); // x position of initial note
-    const noteIndexesInCanvas = this.calcNoteIndexesInCanvas(initialNoteX);
+    const noteIndexRangeInCanvas = this.calcNoteIndexRangeInCanvas(
+      initialNoteX
+    );
+    if (!noteIndexRangeInCanvas) {
+      return;
+    }
 
-    for (let i = noteIndexesInCanvas.length - 1; i >= 0; i--) {
-      const index = noteIndexesInCanvas[i];
-      const note = this.props.notes[index];
+    for (
+      let i = noteIndexRangeInCanvas[1];
+      i >= noteIndexRangeInCanvas[0];
+      i--
+    ) {
+      const note = this.props.notes[i];
+
       if (note.state !== id.state.fresh || note.id === id.note.space) {
         continue;
       }
-      const x = initialNoteX + index * size.player.space.width;
+      const x = initialNoteX + i * size.player.space.width;
       const y = (this.props.player.height - 1) / 2;
-      const previousNoteId =
-        index > 0 ? this.props.notes[index - 1].id : id.note.space;
+      const previousNoteId = i > 0 ? this.props.notes[i - 1].id : id.note.space;
       const nextNoteId =
-        index < this.props.notes.length - 1
-          ? this.props.notes[index + 1].id
+        i < this.props.notes.length - 1
+          ? this.props.notes[i + 1].id
           : id.note.space;
 
-      this.canvas.drawNote(x, y, 'player', id.note.don);
+      this.canvas.drawNote(x, y, 'player', note.id, previousNoteId, nextNoteId);
     }
-    this.canvas.drawNote(this.props.currentTime * 10, 10, 'player', id.note.ka);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -114,7 +121,7 @@ class Player extends Component {
     return indexes;
   }
 
-  calcNoteIndexesInCanvas(initialNoteX) {
+  calcNoteIndexRangeInCanvas(initialNoteX) {
     // Math.floor(-initialNoteX / size.player.space.width) is the number of notes that already passed from canvas
     let initialNoteIndex =
       Math.floor(-initialNoteX / size.player.space.width) - 3;
@@ -126,19 +133,21 @@ class Player extends Component {
 
     let finalNoteIndex = initialNoteIndex + notesNumber + 6;
 
-    // to fix bug drawing
     if (initialNoteIndex < 0) {
       initialNoteIndex = 0;
     }
-    if (finalNoteIndex < 0) {
-      finalNoteIndex = 0;
+    if (initialNoteIndex >= this.props.notes.length) {
+      return null;
     }
 
-    let indexes = [];
-    for (let i = initialNoteIndex; i <= finalNoteIndex; i++) {
-      indexes.push(i);
+    if (finalNoteIndex < 0) {
+      return null;
     }
-    return indexes;
+    if (finalNoteIndex >= this.props.notes.length) {
+      finalNoteIndex = this.props.notes.length - 1;
+    }
+
+    return [initialNoteIndex, finalNoteIndex];
   }
 
   calcInitialNoteX(secondsPerNote) {

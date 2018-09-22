@@ -9,7 +9,11 @@ export default class Canvas {
     this.ctx.clearRect(0, 0, width, height);
   }
 
-  drawNote(x, y, pane, noteId) {
+  drawNote(x, y, pane, noteId, previousNoteId, nextNoteId, spaceWidth) {
+    if (pane === 'player') {
+      spaceWidth = size.player.space.width;
+    }
+
     let noteSize = 'normal';
     let noteColor = color.red;
 
@@ -35,6 +39,36 @@ export default class Canvas {
         break;
     }
 
+    if (
+      noteId === id.note.renda ||
+      noteId === id.note.bigrenda ||
+      noteId === id.note.balloon
+    ) {
+      if (noteId === previousNoteId) {
+        if (noteId === nextNoteId) {
+          // extension
+          this.ctx.fillStyle = noteColor;
+          this.ctx.fillRect(
+            x - spaceWidth / 2 - 1,
+            y - size[pane][noteSize].outside,
+            spaceWidth + 2,
+            size[pane][noteSize].outside * 2
+          );
+          return;
+        }
+
+        // end
+        this.ctx.beginPath();
+        this.ctx.fillStyle = noteColor;
+        this.ctx.strokeStyle = color.black;
+        this.ctx.arc(x, y, size[pane][noteSize].outside, 0, Math.PI * 2);
+        this.ctx.fill();
+        this.ctx.stroke();
+        return;
+      }
+    }
+
+    // start
     this.ctx.beginPath();
     this.ctx.fillStyle = color.white;
     this.ctx.strokeStyle = color.black;
@@ -46,5 +80,7 @@ export default class Canvas {
     this.ctx.fillStyle = noteColor;
     this.ctx.arc(x, y, size[pane][noteSize].inside, 0, Math.PI * 2);
     this.ctx.fill();
+
+    return;
   }
 }
