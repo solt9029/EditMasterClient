@@ -98,7 +98,7 @@ export const position = {
 
 export const number = {
   score: {
-    column: 160,
+    column: 96,
   },
   beat: 4,
 };

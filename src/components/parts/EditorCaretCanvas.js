@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { position, percentage, size } from '../../constants';
+import { position, percentage, size, number } from '../../constants';
 import Canvas from '../../Canvas';
+import { setNoteIds } from '../../actions/editor';
 
 const canvasInlineStyle = { position: 'absolute', top: '0', left: '0' };
 
@@ -13,11 +14,31 @@ class EditorCaretCanvas extends Component {
     this.canvasRef = React.createRef();
     this.canvas = null;
     this.mouseMove = this.mouseMove.bind(this);
+    this.setNoteIds = this.setNoteIds.bind(this);
   }
 
   componentDidMount() {
     const ctx = this.canvasRef.current.getContext('2d');
     this.canvas = new Canvas(ctx);
+  }
+
+  shouldComponentUpdate(nextProps) {
+    return (
+      this.props.palette !== nextProps.palette ||
+      this.props.editorPane !== nextProps.editorPane
+    );
+  }
+
+  setNoteIds() {
+    if (!this.props.palette) {
+      return;
+    }
+
+    const notesPerDivision =
+      number.score.column / this.props.palette.values.division;
+    const mouseColumnIndex = this.mouseDivisionIndex * notesPerDivision;
+    const index = this.mouseBarIndex * number.score.column + mouseColumnIndex;
+    this.props.setNoteIds(index, 1, this.props.palette.values.note);
   }
 
   mouseMove(event) {
@@ -50,7 +71,8 @@ class EditorCaretCanvas extends Component {
     // canvas drawing
     this.canvas.clear(
       this.props.editorPane.width - 1,
-      this.props.editorPane.height - 1
+      Math.ceil(this.props.noteIds.length / number.score.column) *
+        size.editor.bar.outside.height
     );
     const x =
       barStartLineX +
@@ -68,10 +90,14 @@ class EditorCaretCanvas extends Component {
     return (
       <canvas
         onMouseMove={this.mouseMove}
+        onClick={this.setNoteIds}
         ref={this.canvasRef}
         style={canvasInlineStyle}
         width={this.props.editorPane.width - 1}
-        height={this.props.editorPane.height - 1}
+        height={
+          Math.ceil(this.props.noteIds.length / number.score.column) *
+          size.editor.bar.outside.height
+        }
       />
     );
   }
@@ -80,8 +106,14 @@ class EditorCaretCanvas extends Component {
 const mapStateToProps = state => ({
   editorPane: state.pane.editor,
   palette: state.form.palette,
+  noteIds: state.editor.noteIds,
+});
+const mapDispatchToProps = dispatch => ({
+  setNoteIds(index, num, noteId) {
+    dispatch(setNoteIds(index, num, noteId));
+  },
 });
 export default connect(
   mapStateToProps,
-  null
+  mapDispatchToProps
 )(EditorCaretCanvas);

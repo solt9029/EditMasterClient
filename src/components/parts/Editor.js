@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { number, size, position, percentage, id } from '../../constants';
 import { throttle } from 'lodash';
-import { setMousePosition } from '../../actions/editor';
 import Canvas from '../../Canvas';
 import EditorCaretCanvas from './EditorCaretCanvas';
 
@@ -42,7 +41,7 @@ class Editor extends Component {
     }
 
     // bars
-    const barNum = this.props.noteIds.length / number.score.column;
+    const barNum = Math.ceil(this.props.noteIds.length / number.score.column);
     const barWidth =
       this.props.editorPane.width - 1 - position.editor.bar.x * 2;
     for (let i = 0; i < barNum; i++) {
@@ -108,7 +107,10 @@ class Editor extends Component {
           ref={this.canvasRef}
           style={canvasInlineStyle}
           width={this.props.editorPane.width - 1}
-          height={this.props.editorPane.height - 1}
+          height={
+            Math.ceil(this.props.noteIds.length / number.score.column) *
+            size.editor.bar.outside.height
+          }
         />
         <EditorCaretCanvas />
       </div>
@@ -122,12 +124,7 @@ const mapStateToProps = state => ({
   mousePosition: state.editor.mousePosition,
   palette: state.form.palette,
 });
-const mapDispatchToProps = dispatch => ({
-  setMousePosition(x, y) {
-    dispatch(setMousePosition(x, y));
-  },
-});
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  null
 )(Editor);

@@ -1,7 +1,7 @@
 import { id } from '../constants';
 
 let noteStates = [];
-for (let i = 0; i < 3200; i++) {
+for (let i = 0; i < 96 * 5; i++) {
   noteStates.push(id.state.fresh);
 }
 
