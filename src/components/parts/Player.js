@@ -209,6 +209,19 @@ class Player extends Component {
       return;
     }
 
+    // judgeEffects
+    for (let i = this.judgeEffects.length - 1; i >= 0; i--) {
+      this.judgeEffects[i].move(this.props.player.height / 50);
+      this.canvas.drawJudgeEffect(
+        this.judgeEffects[i].judgeMarkY,
+        this.judgeEffects[i].judgeTextY,
+        this.judgeEffects[i].stateId
+      );
+      if (this.judgeEffects[i].limit < 0) {
+        this.judgeEffects.splice(i, 1);
+      }
+    }
+
     // bar start lines
     const initialBarStartLineIndex =
       canvasRange[0] - (canvasRange[0] % number.score.column);
@@ -255,19 +268,6 @@ class Player extends Component {
       );
       if (this.shots[i].limit < 0) {
         this.shots.splice(i, 1);
-      }
-    }
-
-    // judgeEffects
-    for (let i = this.judgeEffects.length - 1; i >= 0; i--) {
-      this.judgeEffects[i].move(this.props.player.height / 50);
-      this.canvas.drawJudgeEffect(
-        this.judgeEffects[i].judgeMarkY,
-        this.judgeEffects[i].judgeTextY,
-        this.judgeEffects[i].stateId
-      );
-      if (this.judgeEffects[i].limit < 0) {
-        this.judgeEffects.splice(i, 1);
       }
     }
   }
