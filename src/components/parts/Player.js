@@ -15,6 +15,7 @@ import 'rc-slider/assets/index.css';
 import { setCurrentTime, setChangingSlider } from '../../actions/player';
 import Shot from '../../Shot';
 import Canvas from '../../Canvas';
+import JudgeEffect from '../../JudgeEffect';
 
 const divInlineStyle = {
   outline: 'none',
@@ -33,6 +34,7 @@ class Player extends Component {
   constructor(props) {
     super(props);
     this.shots = [];
+    this.judgeEffects = [];
     this.canvasRef = React.createRef();
     this.canvas = null;
     this.playMode = this.playMode.bind(this);
@@ -119,6 +121,9 @@ class Player extends Component {
       }
 
       this.shots.push(new Shot((this.props.player.height - 1) / 2, noteId));
+      this.judgeEffects.push(
+        new JudgeEffect((this.props.player.height - 1) / 2, id.state.good)
+      );
 
       if (id.note.hasState(noteId)) {
         this.props.setState(i, id.state.good);
@@ -168,21 +173,19 @@ class Player extends Component {
         continue;
       }
 
-      this.shots.push(
-        new Shot(
-          position.player.judge.x,
-          (this.props.player.height - 1) / 2,
-          noteId
-        )
-      );
+      this.shots.push(new Shot((this.props.player.height - 1) / 2, noteId));
+
       if (id.note.hasState(noteId)) {
+        let stateId = id.state.bad;
         if (i >= goodRange[0] && i <= goodRange[1]) {
-          this.props.setState(i, id.state.good);
+          stateId = id.state.good;
         } else if (i >= okRange[0] && i <= okRange[1]) {
-          this.props.setState(i, id.state.ok);
-        } else {
-          this.props.setState(i, id.state.bad);
+          stateId = id.state.ok;
         }
+        this.props.setState(i, stateId);
+        this.judgeEffects.push(
+          new JudgeEffect((this.props.player.height - 1) / 2, stateId)
+        );
       }
       break;
     }
@@ -252,6 +255,19 @@ class Player extends Component {
       );
       if (this.shots[i].limit < 0) {
         this.shots.splice(i, 1);
+      }
+    }
+
+    // judgeEffects
+    for (let i = this.judgeEffects.length - 1; i >= 0; i--) {
+      this.judgeEffects[i].move(this.props.player.height / 50);
+      this.canvas.drawJudgeEffect(
+        this.judgeEffects[i].judgeMarkY,
+        this.judgeEffects[i].judgeTextY,
+        this.judgeEffects[i].stateId
+      );
+      if (this.judgeEffects[i].limit < 0) {
+        this.judgeEffects.splice(i, 1);
       }
     }
   }

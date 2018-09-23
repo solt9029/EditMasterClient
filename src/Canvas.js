@@ -56,6 +56,53 @@ export default class Canvas {
     return;
   }
 
+  drawJudgeEffect(markY, textY, stateId) {
+    // mark
+    this.ctx.beginPath();
+    this.ctx.strokeStyle = color.yellow;
+    this.ctx.lineWidth = 3;
+    this.ctx.arc(
+      position.player.judge.x,
+      markY,
+      size.player.normal.outside,
+      0,
+      Math.PI * 2
+    );
+    this.ctx.stroke();
+    this.ctx.lineWidth = 1;
+
+    // text
+    this.ctx.font = `${size.player.judgeText}px HG行書体, bold`;
+    let text = '良';
+    let textColor = color.red;
+    switch (stateId) {
+      case id.state.ok:
+        text = '可';
+        textColor = color.white;
+        break;
+      case id.state.bad:
+        text = '不可';
+        textColor = color.blue;
+        break;
+      default:
+        break;
+    }
+    this.ctx.fillStyle = textColor;
+    this.ctx.fillText(
+      text,
+      position.player.judge.x - (text.length * size.player.judgeText) / 2,
+      textY
+    );
+    this.ctx.strokeStyle = color.black;
+    this.ctx.strokeText(
+      text,
+      position.player.judge.x - (text.length * size.player.judgeText) / 2,
+      textY
+    );
+
+    return;
+  }
+
   drawBar(x, y, width) {
     const insideY =
       y + (size.editor.bar.outside.height - size.editor.bar.inside.height) / 2;

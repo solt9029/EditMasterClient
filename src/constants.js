@@ -30,6 +30,7 @@ export const size = {
     barStartLine: {
       width: 2,
     },
+    judgeText: 36,
   },
   editor: {
     normal: {
