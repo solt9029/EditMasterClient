@@ -10,6 +10,16 @@ export default class Canvas {
     return;
   }
 
+  drawBarStartLine(x, height) {
+    this.ctx.fillStyle = color.gray;
+    this.ctx.fillRect(
+      x - size.player.barStartLine.width / 2,
+      0,
+      size.player.barStartLine.width,
+      height
+    );
+  }
+
   drawCurrentTime(x, y) {
     this.ctx.fillStyle = color.purple;
     this.ctx.fillRect(

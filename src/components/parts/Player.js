@@ -1,6 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { size, id, position, sound, second, key } from '../../constants';
+import {
+  size,
+  id,
+  position,
+  sound,
+  second,
+  key,
+  number,
+} from '../../constants';
 import { setState } from '../../actions/player';
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
@@ -216,11 +224,16 @@ class Player extends Component {
     ) {
       const noteId = this.props.noteIds[i];
       const noteState = this.props.noteStates[i];
+      const x = initialNoteX + i * size.player.space.width;
+
+      if (i % number.score.column === 0) {
+        this.canvas.drawBarStartLine(x, this.props.player.height - 1);
+      }
 
       if (noteState !== id.state.fresh || noteId === id.note.space) {
         continue;
       }
-      const x = initialNoteX + i * size.player.space.width;
+
       const y = (this.props.player.height - 1) / 2;
       const previousNoteId = i > 0 ? this.props.noteIds[i - 1] : id.note.space;
       const nextNoteId =
