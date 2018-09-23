@@ -27,6 +27,7 @@ class Player extends Component {
     this.shots = [];
     this.canvasRef = React.createRef();
     this.canvas = null;
+    this.playMode = this.playMode.bind(this);
   }
 
   componentDidMount() {
@@ -96,13 +97,13 @@ class Player extends Component {
   }
 
   autoMode() {
-    const noteIndexRangeInGoodJudgeRange = this.calcNoteIndexRangeInSecondRange(
+    const noteIndexRangeInAutoJudgeRange = this.calcNoteIndexRangeInSecondRange(
       second.range.auto
     );
 
     for (
-      let i = noteIndexRangeInGoodJudgeRange[0];
-      i <= noteIndexRangeInGoodJudgeRange[1];
+      let i = noteIndexRangeInAutoJudgeRange[0];
+      i <= noteIndexRangeInAutoJudgeRange[1];
       i++
     ) {
       if (i < 0 || i >= this.props.noteIds.length) {
@@ -136,6 +137,86 @@ class Player extends Component {
         sound.ka.trigger();
       } else {
         sound.don.trigger();
+      }
+
+      break;
+    }
+  }
+
+  playMode(key) {
+    if (key === 'f' || key === 'j') {
+      sound.don.trigger();
+    } else if (key === 'd' || key === 'k') {
+      sound.ka.trigger();
+    }
+
+    const badRange = this.calcNoteIndexRangeInSecondRange(second.range.bad);
+    const okRange = this.calcNoteIndexRangeInSecondRange(second.range.ok);
+    const goodRange = this.calcNoteIndexRangeInSecondRange(second.range.good);
+
+    for (let i = badRange[0]; i <= badRange[1]; i++) {
+      if (i < 0 || i >= this.props.noteIds.length) {
+        continue;
+      }
+
+      const noteId = this.props.noteIds[i];
+      const noteState = this.props.noteStates[i];
+      if (noteState !== id.state.fresh || noteId === id.note.space) {
+        continue;
+      }
+
+      let hit = false;
+
+      // don
+      if (key === 'f' || key === 'j') {
+        if (
+          noteId === id.note.don ||
+          noteId === id.note.bigdon ||
+          noteId === id.note.renda ||
+          noteId === id.note.bigrenda ||
+          noteId === id.note.balloon
+        ) {
+          hit = true;
+
+          if (noteId === id.note.don || noteId === id.note.bigdon) {
+            if (i >= goodRange[0] && i <= goodRange[1]) {
+              this.props.setState(i, id.state.good);
+            } else if (i >= okRange[0] && i <= okRange[1]) {
+              this.props.setState(i, id.state.ok);
+            } else {
+              this.props.setState(i, id.state.bad);
+            }
+          }
+        }
+      } else if (key === 'd' || key === 'k') {
+        if (
+          noteId === id.note.ka ||
+          noteId === id.note.bigka ||
+          noteId === id.note.renda ||
+          noteId === id.note.bigrenda
+        ) {
+          hit = true;
+
+          if (noteId === id.note.ka || noteId === id.note.bigka) {
+            if (i >= goodRange[0] && i <= goodRange[1]) {
+              this.props.setState(i, id.state.good);
+            } else if (i >= okRange[0] && i <= okRange[1]) {
+              this.props.setState(i, id.state.ok);
+            } else {
+              this.props.setState(i, id.state.bad);
+            }
+          }
+        }
+      }
+
+      if (hit) {
+        this.shots.push(
+          new Shot(
+            position.player.judge.x,
+            (this.props.player.height - 1) / 2,
+            noteId
+          )
+        );
       }
 
       break;
@@ -209,7 +290,11 @@ class Player extends Component {
       <div
         style={divInlineStyle}
         tabIndex="0"
-        onKeyDown={e => console.log(e.key)}
+        onKeyDown={event => {
+          if (!this.props.isAutoMode) {
+            this.playMode(event.nativeEvent.key);
+          }
+        }}
       >
         <canvas
           ref={this.canvasRef}
