@@ -198,9 +198,6 @@ class Player extends Component {
     if (!this.props.config) {
       return;
     }
-    // if (!this.props.secondsPerNote) {
-    //   return;
-    // }
 
     this.canvas.clear(
       this.props.player.width - 1,
@@ -210,25 +207,28 @@ class Player extends Component {
     this.canvas.drawJudgeMark((this.props.player.height - 1) / 2);
 
     const initialNoteX = this.calcInitialNoteX(); // x position of initial note
-    const noteIndexRangeInCanvas = this.calcNoteIndexRangeInCanvas(
-      initialNoteX
-    );
-    if (!noteIndexRangeInCanvas) {
+    const canvasRange = this.calcNoteIndexRangeInCanvas(initialNoteX);
+    if (!canvasRange) {
       return;
     }
 
+    // bar start lines
+    const initialBarStartLineIndex =
+      canvasRange[0] - (canvasRange[0] % number.score.column);
     for (
-      let i = noteIndexRangeInCanvas[1];
-      i >= noteIndexRangeInCanvas[0];
-      i--
+      let i = initialBarStartLineIndex;
+      i <= canvasRange[1];
+      i += number.score.column
     ) {
+      const x = initialNoteX + i * size.player.space.width;
+      this.canvas.drawBarStartLine(x, this.props.player.height - 1);
+    }
+
+    // notes
+    for (let i = canvasRange[1]; i >= canvasRange[0]; i--) {
       const noteId = this.props.noteIds[i];
       const noteState = this.props.noteStates[i];
       const x = initialNoteX + i * size.player.space.width;
-
-      if (i % number.score.column === 0) {
-        this.canvas.drawBarStartLine(x, this.props.player.height - 1);
-      }
 
       if (noteState !== id.state.fresh || noteId === id.note.space) {
         continue;
@@ -244,6 +244,7 @@ class Player extends Component {
       this.canvas.drawNote(x, y, 'player', noteId, previousNoteId, nextNoteId);
     }
 
+    // shots
     for (let i = this.shots.length - 1; i >= 0; i--) {
       this.shots[i].move(
         this.props.player.width / 100,
