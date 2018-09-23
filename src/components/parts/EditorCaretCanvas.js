@@ -108,8 +108,7 @@ class EditorCaretCanvas extends Component {
       size.editor.caret.width / 2;
     const y =
       this.mouseBarIndex * size.editor.bar.outside.height +
-      (size.editor.bar.outside.height - size.editor.bar.inside.height) / 2 -
-      2;
+      (size.editor.bar.outside.height - size.editor.bar.inside.height) / 2;
     this.canvas.drawCaret(x, y);
   }
 

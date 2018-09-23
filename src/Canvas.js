@@ -10,6 +10,17 @@ export default class Canvas {
     return;
   }
 
+  drawCurrentTime(x, y) {
+    this.ctx.fillStyle = color.purple;
+    this.ctx.fillRect(
+      x - size.editor.currentTime.width / 2,
+      y - 2,
+      size.editor.currentTime.width,
+      size.editor.bar.inside.height + 4
+    );
+    return;
+  }
+
   drawCaret(x, y) {
     this.ctx.fillStyle = color.yellow;
     this.ctx.fillRect(

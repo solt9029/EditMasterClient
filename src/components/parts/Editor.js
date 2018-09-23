@@ -4,6 +4,7 @@ import { number, size, position, percentage, id } from '../../constants';
 import { throttle } from 'lodash';
 import Canvas from '../../Canvas';
 import EditorCaretCanvas from './EditorCaretCanvas';
+import EditorCurrentTimeCanvas from './EditorCurrentTimeCanvas';
 
 const canvasInlineStyle = { position: 'absolute', top: '0', left: '0' };
 
@@ -118,6 +119,7 @@ class Editor extends Component {
             size.editor.bar.outside.height
           }
         />
+        <EditorCurrentTimeCanvas />
         <EditorCaretCanvas />
       </div>
     );

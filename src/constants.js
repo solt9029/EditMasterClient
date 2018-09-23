@@ -5,6 +5,7 @@ export const color = {
   white: '#fff',
   black: '#000',
   gray: '#bbb',
+  purple: '#800080',
 };
 
 export const percentage = {
@@ -52,6 +53,9 @@ export const size = {
     },
     caret: {
       width: 2,
+    },
+    currentTime: {
+      width: 4,
     },
   },
 };
