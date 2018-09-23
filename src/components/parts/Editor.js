@@ -40,6 +40,12 @@ class Editor extends Component {
       return;
     }
 
+    this.canvas.clear(
+      this.props.editorPane.width - 1,
+      Math.ceil(this.props.noteIds.length / number.score.column) *
+        size.editor.bar.outside.height
+    );
+
     // bars
     const barNum = Math.ceil(this.props.noteIds.length / number.score.column);
     const barWidth =

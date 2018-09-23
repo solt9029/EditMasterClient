@@ -1,10 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { position, percentage, size, number } from '../../constants';
+import { position, percentage, size, number, id } from '../../constants';
 import Canvas from '../../Canvas';
 import { setNoteIds } from '../../actions/editor';
+import { addStateBar } from '../../actions/player';
+import { addIdBar } from '../../actions/editor';
 
-const canvasInlineStyle = { position: 'absolute', top: '0', left: '0' };
+const canvasInlineStyle = {
+  position: 'absolute',
+  top: '0',
+  left: '0',
+  outline: 'none',
+};
 
 class EditorCaretCanvas extends Component {
   constructor(props) {
@@ -30,16 +37,35 @@ class EditorCaretCanvas extends Component {
     );
   }
 
-  setNoteIds() {
+  setNoteIds(event) {
     if (!this.props.palette) {
       return;
     }
 
-    const notesPerDivision =
-      number.score.column / this.props.palette.values.division;
+    let { division, note } = this.props.palette.values;
+    // if the event is key event, the note which is going to be put should be key value!
+    if (event.nativeEvent.key) {
+      note = +event.nativeEvent.key;
+    }
+
+    const notesPerDivision = number.score.column / division;
     const mouseColumnIndex = this.mouseDivisionIndex * notesPerDivision;
     const index = this.mouseBarIndex * number.score.column + mouseColumnIndex;
-    this.props.setNoteIds(index, 1, this.props.palette.values.note);
+    let num = 1;
+    if (
+      note === id.note.renda ||
+      note === id.note.bigrenda ||
+      note === id.note.balloon ||
+      note === id.note.space
+    ) {
+      num = notesPerDivision;
+    }
+    this.props.setNoteIds(index, num, note);
+
+    // add one bar if the user puts a note on the last bar
+    if (index >= this.props.noteIds.length - number.score.column) {
+      this.props.addBar();
+    }
   }
 
   mouseMove(event) {
@@ -90,6 +116,8 @@ class EditorCaretCanvas extends Component {
   render() {
     return (
       <canvas
+        tabIndex="0"
+        onKeyDown={this.setNoteIds}
         onMouseMove={this.mouseMove}
         onClick={this.setNoteIds}
         ref={this.canvasRef}
@@ -112,6 +140,10 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   setNoteIds(index, num, noteId) {
     dispatch(setNoteIds(index, num, noteId));
+  },
+  addBar() {
+    dispatch(addStateBar());
+    dispatch(addIdBar());
   },
 });
 export default connect(

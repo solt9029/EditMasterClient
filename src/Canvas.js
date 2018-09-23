@@ -102,33 +102,21 @@ export default class Canvas {
           // extension
           this.ctx.fillStyle = noteColor;
           this.ctx.fillRect(
-            x - spaceWidth / 2 - 1,
+            x - spaceWidth - 1,
             y - size[pane][noteSize].outside,
-            spaceWidth + 2,
+            spaceWidth * 2 + 2,
             size[pane][noteSize].outside * 2
           );
 
           this.ctx.strokeStyle = color.black;
           this.ctx.beginPath();
-          this.ctx.moveTo(
-            x - spaceWidth / 2 - 1,
-            y - size[pane][noteSize].outside
-          );
-          this.ctx.lineTo(
-            x + spaceWidth / 2 + 1,
-            y - size[pane][noteSize].outside
-          );
+          this.ctx.moveTo(x - spaceWidth - 1, y - size[pane][noteSize].outside);
+          this.ctx.lineTo(x + spaceWidth + 1, y - size[pane][noteSize].outside);
           this.ctx.stroke();
 
           this.ctx.beginPath();
-          this.ctx.moveTo(
-            x - spaceWidth / 2 - 1,
-            y + size[pane][noteSize].outside
-          );
-          this.ctx.lineTo(
-            x + spaceWidth / 2 + 1,
-            y + size[pane][noteSize].outside
-          );
+          this.ctx.moveTo(x - spaceWidth - 1, y + size[pane][noteSize].outside);
+          this.ctx.lineTo(x + spaceWidth + 1, y + size[pane][noteSize].outside);
           this.ctx.stroke();
 
           return;

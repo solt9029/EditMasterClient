@@ -84,16 +84,6 @@ const noteFields = [
 const divisionFields = [16, 24, 32, 48];
 
 class Palette extends Component {
-  constructor(props) {
-    super(props);
-    this.addBar = this.addBar.bind(this);
-  }
-
-  addBar() {
-    this.props.addIdBar();
-    this.props.addStateBar();
-  }
-
   render() {
     return (
       <StyledDiv>
@@ -143,7 +133,13 @@ class Palette extends Component {
             })}
           </Row>
         </StyledContainer>
-        <LineButton block color="success" onClick={this.addBar}>
+        <LineButton
+          block
+          color="success"
+          onClick={() => {
+            this.props.addBar();
+          }}
+        >
           行を追加
         </LineButton>
         <LineButton block color="danger">
@@ -161,10 +157,8 @@ const mapDispatchToProps = dispatch => ({
   toggleMode() {
     dispatch(toggleMode());
   },
-  addStateBar() {
+  addBar() {
     dispatch(addStateBar());
-  },
-  addIdBar() {
     dispatch(addIdBar());
   },
 });
