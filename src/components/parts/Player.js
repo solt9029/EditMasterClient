@@ -118,13 +118,7 @@ class Player extends Component {
         continue;
       }
 
-      this.shots.push(
-        new Shot(
-          position.player.judge.x,
-          (this.props.player.height - 1) / 2,
-          noteId
-        )
-      );
+      this.shots.push(new Shot((this.props.player.height - 1) / 2, noteId));
 
       if (id.note.hasState(noteId)) {
         this.props.setState(i, id.state.good);
