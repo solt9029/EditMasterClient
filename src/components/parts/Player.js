@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { size, id, position, sound, second } from '../../constants';
+import { size, id, position, sound, second, key } from '../../constants';
 import { setState } from '../../actions/player';
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
@@ -97,15 +97,9 @@ class Player extends Component {
   }
 
   autoMode() {
-    const noteIndexRangeInAutoJudgeRange = this.calcNoteIndexRangeInSecondRange(
-      second.range.auto
-    );
+    const autoRange = this.calcNoteIndexRangeInSecondRange(second.range.auto);
 
-    for (
-      let i = noteIndexRangeInAutoJudgeRange[0];
-      i <= noteIndexRangeInAutoJudgeRange[1];
-      i++
-    ) {
+    for (let i = autoRange[0]; i <= autoRange[1]; i++) {
       if (i < 0 || i >= this.props.noteIds.length) {
         continue;
       }
@@ -124,29 +118,25 @@ class Player extends Component {
         )
       );
 
-      if (
-        noteId === id.note.don ||
-        noteId === id.note.ka ||
-        noteId === id.note.bigdon ||
-        noteId === id.note.bigka
-      ) {
+      if (id.note.hasState(noteId)) {
         this.props.setState(i, id.state.good);
       }
 
-      if (noteId === id.note.ka || noteId === id.note.bigka) {
-        sound.ka.trigger();
-      } else {
+      if (id.note.isDon(noteId)) {
         sound.don.trigger();
+      } else {
+        sound.ka.trigger();
       }
 
       break;
     }
   }
 
-  playMode(key) {
-    if (key === 'f' || key === 'j') {
+  playMode(event) {
+    if (key.isDon(event.nativeEvent.key)) {
       sound.don.trigger();
-    } else if (key === 'd' || key === 'k') {
+    }
+    if (key.isKa(event.nativeEvent.key)) {
       sound.ka.trigger();
     }
 
@@ -166,59 +156,32 @@ class Player extends Component {
       }
 
       let hit = false;
-
-      // don
-      if (key === 'f' || key === 'j') {
-        if (
-          noteId === id.note.don ||
-          noteId === id.note.bigdon ||
-          noteId === id.note.renda ||
-          noteId === id.note.bigrenda ||
-          noteId === id.note.balloon
-        ) {
-          hit = true;
-
-          if (noteId === id.note.don || noteId === id.note.bigdon) {
-            if (i >= goodRange[0] && i <= goodRange[1]) {
-              this.props.setState(i, id.state.good);
-            } else if (i >= okRange[0] && i <= okRange[1]) {
-              this.props.setState(i, id.state.ok);
-            } else {
-              this.props.setState(i, id.state.bad);
-            }
-          }
-        }
-      } else if (key === 'd' || key === 'k') {
-        if (
-          noteId === id.note.ka ||
-          noteId === id.note.bigka ||
-          noteId === id.note.renda ||
-          noteId === id.note.bigrenda
-        ) {
-          hit = true;
-
-          if (noteId === id.note.ka || noteId === id.note.bigka) {
-            if (i >= goodRange[0] && i <= goodRange[1]) {
-              this.props.setState(i, id.state.good);
-            } else if (i >= okRange[0] && i <= okRange[1]) {
-              this.props.setState(i, id.state.ok);
-            } else {
-              this.props.setState(i, id.state.bad);
-            }
-          }
-        }
+      if (key.isDon(event.nativeEvent.key) && id.note.isDon(noteId)) {
+        hit = true;
+      }
+      if (key.isKa(event.nativeEvent.key) && id.note.isKa(noteId)) {
+        hit = true;
+      }
+      if (!hit) {
+        continue;
       }
 
-      if (hit) {
-        this.shots.push(
-          new Shot(
-            position.player.judge.x,
-            (this.props.player.height - 1) / 2,
-            noteId
-          )
-        );
+      this.shots.push(
+        new Shot(
+          position.player.judge.x,
+          (this.props.player.height - 1) / 2,
+          noteId
+        )
+      );
+      if (id.note.hasState(noteId)) {
+        if (i >= goodRange[0] && i <= goodRange[1]) {
+          this.props.setState(i, id.state.good);
+        } else if (i >= okRange[0] && i <= okRange[1]) {
+          this.props.setState(i, id.state.ok);
+        } else {
+          this.props.setState(i, id.state.bad);
+        }
       }
-
       break;
     }
   }
@@ -292,7 +255,7 @@ class Player extends Component {
         tabIndex="0"
         onKeyDown={event => {
           if (!this.props.isAutoMode) {
-            this.playMode(event.nativeEvent.key);
+            this.playMode(event);
           }
         }}
       >

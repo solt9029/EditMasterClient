@@ -56,6 +56,17 @@ export const size = {
   },
 };
 
+export const key = {
+  don: ['f', 'j'],
+  ka: ['d', 'k'],
+  isDon: pushedKey => {
+    return key.don.indexOf(pushedKey) >= 0;
+  },
+  isKa: pushedKey => {
+    return key.ka.indexOf(pushedKey) >= 0;
+  },
+};
+
 export const id = {
   note: {
     space: 0,
@@ -66,6 +77,31 @@ export const id = {
     renda: 5,
     bigrenda: 6,
     balloon: 7,
+    isDon: noteId => {
+      return (
+        noteId === id.note.don ||
+        noteId === id.note.bigdon ||
+        noteId === id.note.renda ||
+        noteId === id.note.bigrenda ||
+        noteId === id.note.balloon
+      );
+    },
+    isKa: noteId => {
+      return (
+        noteId === id.note.ka ||
+        noteId === id.note.bigka ||
+        noteId === id.note.renda ||
+        noteId === id.note.bigrenda
+      );
+    },
+    hasState: noteId => {
+      return (
+        noteId === id.note.don ||
+        noteId === id.note.ka ||
+        noteId === id.note.bigdon ||
+        noteId === id.note.bigka
+      );
+    },
   },
   state: {
     fresh: 0,
