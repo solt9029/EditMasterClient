@@ -119,7 +119,6 @@ class EditorCaretCanvas extends Component {
   render() {
     return (
       <canvas
-        tabIndex="0"
         onMouseMove={this.updateCaret}
         onClick={this.setNoteIds}
         ref={this.canvasRef}

@@ -44,16 +44,16 @@ class Player extends Component {
     const ctx = this.canvasRef.current.getContext('2d');
     this.canvas = new Canvas(ctx);
     this.updateCanvas();
+    window.addEventListener('keydown', this.playMode);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('keydown', this.playMode);
   }
 
   componentDidUpdate() {
     this.updateCanvas();
-    if (
-      this.props.isAutoMode &&
-      this.props.ytPlayerState === id.youtube.playing
-    ) {
-      this.autoMode();
-    }
+    this.autoMode();
   }
 
   calcNoteIndexRangeInSecondRange(secondRange) {
@@ -107,6 +107,13 @@ class Player extends Component {
   }
 
   autoMode() {
+    if (
+      !this.props.isAutoMode ||
+      this.props.ytPlayerState !== id.youtube.playing
+    ) {
+      return;
+    }
+
     const autoRange = this.calcNoteIndexRangeInSecondRange(second.range.auto);
 
     for (let i = autoRange[0]; i <= autoRange[1]; i++) {
@@ -140,10 +147,17 @@ class Player extends Component {
   }
 
   playMode(event) {
-    if (key.isDon(event.nativeEvent.key)) {
+    if (
+      this.props.isAutoMode ||
+      this.props.ytPlayerState !== id.youtube.playing
+    ) {
+      return;
+    }
+
+    if (key.isDon(event.key)) {
       sound.don.trigger();
     }
-    if (key.isKa(event.nativeEvent.key)) {
+    if (key.isKa(event.key)) {
       sound.ka.trigger();
     }
 
@@ -163,10 +177,10 @@ class Player extends Component {
       }
 
       let hit = false;
-      if (key.isDon(event.nativeEvent.key) && id.note.isDon(noteId)) {
+      if (key.isDon(event.key) && id.note.isDon(noteId)) {
         hit = true;
       }
-      if (key.isKa(event.nativeEvent.key) && id.note.isKa(noteId)) {
+      if (key.isKa(event.key) && id.note.isKa(noteId)) {
         hit = true;
       }
       if (!hit) {
@@ -274,15 +288,7 @@ class Player extends Component {
 
   render() {
     return (
-      <div
-        style={divInlineStyle}
-        tabIndex="0"
-        onKeyDown={event => {
-          if (!this.props.isAutoMode) {
-            this.playMode(event);
-          }
-        }}
-      >
+      <div style={divInlineStyle}>
         <canvas
           ref={this.canvasRef}
           style={{ display: 'block' }}
