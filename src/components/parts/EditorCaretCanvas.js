@@ -20,7 +20,7 @@ class EditorCaretCanvas extends Component {
     this.mouseDivisionIndex = 0;
     this.canvasRef = React.createRef();
     this.canvas = null;
-    this.mouseMove = this.mouseMove.bind(this);
+    this.updateCaret = this.updateCaret.bind(this);
     this.setNoteIds = this.setNoteIds.bind(this);
   }
 
@@ -41,6 +41,8 @@ class EditorCaretCanvas extends Component {
     if (!this.props.palette) {
       return;
     }
+
+    this.updateCaret(event);
 
     let { division, note } = this.props.palette.values;
     // if the event is key event, the note which is going to be put should be key value!
@@ -68,7 +70,7 @@ class EditorCaretCanvas extends Component {
     }
   }
 
-  mouseMove(event) {
+  updateCaret(event) {
     if (!this.props.palette) {
       return;
     }
@@ -117,7 +119,7 @@ class EditorCaretCanvas extends Component {
       <canvas
         tabIndex="0"
         onKeyDown={this.setNoteIds}
-        onMouseMove={this.mouseMove}
+        onMouseMove={this.updateCaret}
         onClick={this.setNoteIds}
         ref={this.canvasRef}
         style={canvasInlineStyle}
