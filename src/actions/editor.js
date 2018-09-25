@@ -10,3 +10,7 @@ export const setNoteIds = (index, num, noteId) => ({
 export const addIdBar = () => ({
   type: 'ADD_ID_BAR',
 });
+
+export const removeIdBar = () => ({
+  type: 'REMOVE_ID_BAR',
+});

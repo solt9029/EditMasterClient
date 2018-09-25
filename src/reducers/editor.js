@@ -46,6 +46,19 @@ export default (state = initialState, action) => {
         noteIds,
       };
     }
+    case 'REMOVE_ID_BAR': {
+      if (state.noteIds.length < number.score.column * 2) {
+        return state;
+      }
+      const noteIds = state.noteIds.slice(
+        0,
+        state.noteIds.length - number.score.column
+      );
+      return {
+        ...state,
+        noteIds,
+      };
+    }
 
     default:
       return state;
