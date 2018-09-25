@@ -30,6 +30,10 @@ class EditorCaretCanvas extends Component {
     window.addEventListener('keydown', this.setNoteIds);
   }
 
+  componentWillUnmount() {
+    window.removeEventListener('keydown', this.setNoteIds);
+  }
+
   shouldComponentUpdate(nextProps) {
     return (
       this.props.palette !== nextProps.palette ||
@@ -45,8 +49,8 @@ class EditorCaretCanvas extends Component {
 
     let { division, note } = this.props.palette.values;
     // if the event is key event, the note which is going to be put should be key value!
-    if (event.nativeEvent.key) {
-      note = +event.nativeEvent.key;
+    if (event.key) {
+      note = +event.key;
     }
 
     const notesPerDivision = number.score.column / division;
@@ -112,7 +116,6 @@ class EditorCaretCanvas extends Component {
     return (
       <canvas
         tabIndex="0"
-        onKeyDown={this.setNoteIds}
         onMouseMove={this.updateCaret}
         onClick={this.setNoteIds}
         ref={this.canvasRef}
