@@ -50,7 +50,11 @@ class EditorCaretCanvas extends Component {
     let { division, note } = this.props.palette.values;
     // if the event is key event, the note which is going to be put should be key value!
     if (event.key) {
-      note = +event.key;
+      const keyValue = +event.key;
+      if (!id.note.isNote(keyValue)) {
+        return;
+      }
+      note = keyValue;
     }
 
     const notesPerDivision = number.score.column / division;
