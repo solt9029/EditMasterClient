@@ -107,6 +107,18 @@ export const id = {
         noteId === id.note.bigka
       );
     },
+    isNote: noteId => {
+      return (
+        noteId === id.note.don ||
+        noteId === id.note.ka ||
+        noteId === id.note.bigdon ||
+        noteId === id.note.bigka ||
+        noteId === id.note.renda ||
+        noteId === id.note.bigrenda ||
+        noteId === id.note.balloon ||
+        noteId === id.note.space
+      );
+    },
   },
   state: {
     fresh: 0,
