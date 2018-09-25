@@ -7,8 +7,8 @@ import DivisionRadio from './DivisionRadio';
 import { initialValues } from '../../reducers/form/palette';
 import { id } from '../../constants';
 import { connect } from 'react-redux';
-import { toggleMode, addStateBar } from '../../actions/player';
-import { addIdBar } from '../../actions/editor';
+import { toggleMode, addStateBar, removeStateBar } from '../../actions/player';
+import { addIdBar, removeIdBar } from '../../actions/editor';
 
 const StyledDiv = styled.div`
   padding: 15px;
@@ -142,7 +142,13 @@ class Palette extends Component {
         >
           行を追加
         </LineButton>
-        <LineButton block color="danger">
+        <LineButton
+          block
+          color="danger"
+          onClick={() => {
+            this.props.removeBar();
+          }}
+        >
           行を削除
         </LineButton>
       </StyledDiv>
@@ -160,6 +166,10 @@ const mapDispatchToProps = dispatch => ({
   addBar() {
     dispatch(addStateBar());
     dispatch(addIdBar());
+  },
+  removeBar() {
+    dispatch(removeStateBar());
+    dispatch(removeIdBar());
   },
 });
 Palette = connect(

@@ -75,6 +75,19 @@ export default (state = initialState, action) => {
         noteStates,
       };
     }
+    case 'REMOVE_STATE_BAR': {
+      if (state.noteStates.length < number.score.column * 2) {
+        return state;
+      }
+      const noteStates = state.noteStates.slice(
+        0,
+        state.noteStates.length - number.score.column
+      );
+      return {
+        ...state,
+        noteStates,
+      };
+    }
     default:
       return state;
   }
