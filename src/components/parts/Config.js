@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { Field } from 'redux-form';
 import ValidationField from './ValidationField';
 import { validation } from '../../constants';
-import { initialValues } from '../../reducers/form/config';
+// import { initialValues } from '../../reducers/form/config';
 import { connect } from 'react-redux';
 import urlParse from 'url-parse';
 import { calcSecondsPerNote } from '../../actions/player';
@@ -18,7 +18,7 @@ const StyledDiv = styled.div`
 
 class Config extends Component {
   componentDidMount() {
-    this.props.calcSecondsPerNote(this.props.config.values.bpm);
+    this.props.calcSecondsPerNote(this.props.initialValues.bpm);
   }
 
   render() {
@@ -79,21 +79,21 @@ class Config extends Component {
   }
 }
 
+Config = reduxForm({
+  form: 'config',
+})(Config);
+
 const mapStateToProps = state => ({
   config: state.form.config,
   secondsPerNote: state.player.secondsPerNote,
+  initialValues: state.config,
 });
 const mapDispatchToProps = dispatch => ({
   calcSecondsPerNote(bpm) {
     dispatch(calcSecondsPerNote(bpm));
   },
 });
-Config = connect(
+export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(Config);
-
-export default reduxForm({
-  form: 'config',
-  initialValues,
-})(Config);

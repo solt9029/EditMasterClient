@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import { Field, reduxForm } from 'redux-form';
 import NoteRadio from './NoteRadio';
 import DivisionRadio from './DivisionRadio';
-import { initialValues } from '../../reducers/form/palette';
 import { id } from '../../constants';
 import { connect } from 'react-redux';
 import { toggleMode, addStateBar, removeStateBar } from '../../actions/player';
@@ -156,8 +155,13 @@ class Palette extends Component {
   }
 }
 
+Palette = reduxForm({
+  form: 'palette',
+})(Palette);
+
 const mapStateToProps = state => ({
   isAutoMode: state.player.isAutoMode,
+  initialValues: state.palette,
 });
 const mapDispatchToProps = dispatch => ({
   toggleMode() {
@@ -172,12 +176,7 @@ const mapDispatchToProps = dispatch => ({
     dispatch(removeIdBar());
   },
 });
-Palette = connect(
+export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(Palette);
-
-export default reduxForm({
-  form: 'palette',
-  initialValues,
-})(Palette);
