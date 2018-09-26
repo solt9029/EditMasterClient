@@ -73,6 +73,17 @@ class Config extends Component {
           placeholder="OFFSET（例：1.5）"
         />
         <Field
+          label="倍速"
+          component={ValidationField}
+          validate={[
+            constants.validation.required,
+            constants.validation.number,
+          ]}
+          type="number"
+          name="speed"
+          placeholder="倍速（例：2）"
+        />
+        <Field
           label="コメント"
           component={ValidationField}
           type="text"

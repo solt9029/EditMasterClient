@@ -60,13 +60,16 @@ class Player extends Component {
   }
 
   calcNoteIndexRangeInCanvas(initialNoteX) {
-    // Math.floor(-initialNoteX / constants.size.player.space.width) is the number of notes that already passed from canvas
-    let initialNoteIndex =
-      Math.floor(-initialNoteX / constants.size.player.space.width) - 3;
+    const spaceWidth = this.props.configForm
+      ? this.props.configForm.values.speed * 3
+      : this.props.configInitialValues.speed * 3;
+
+    // Math.floor(-initialNoteX / spaceWidth) is the number of notes that already passed from canvas
+    let initialNoteIndex = Math.floor(-initialNoteX / spaceWidth) - 3;
 
     // the number of notes that canvas can display in it
     const notesNumber = Math.ceil(
-      (this.props.playerPane.width - 1) / constants.size.player.space.width
+      (this.props.playerPane.width - 1) / spaceWidth
     );
 
     let finalNoteIndex = initialNoteIndex + notesNumber + 6;
@@ -89,13 +92,17 @@ class Player extends Component {
   }
 
   calcInitialNoteX() {
+    const spaceWidth = this.props.configForm
+      ? this.props.configForm.values.speed * 3
+      : this.props.configInitialValues.speed * 3;
+
     const offset = this.props.configForm
       ? this.props.configForm.values.offset
       : this.props.configInitialValues.offset;
     const initialNoteX =
       constants.position.player.judge.x +
       ((offset - this.props.currentTime) / this.props.secondsPerNote) *
-        constants.size.player.space.width;
+        spaceWidth;
     return initialNoteX;
   }
 
@@ -216,6 +223,10 @@ class Player extends Component {
   }
 
   updateCanvas() {
+    const spaceWidth = this.props.configForm
+      ? this.props.configForm.values.speed * 3
+      : this.props.configInitialValues.speed * 3;
+
     this.canvas.clear(
       this.props.playerPane.width - 1,
       this.props.playerPane.height - 1
@@ -250,7 +261,7 @@ class Player extends Component {
       i <= canvasRange[1];
       i += constants.number.notesPerBar
     ) {
-      const x = initialNoteX + i * constants.size.player.space.width;
+      const x = initialNoteX + i * spaceWidth;
       this.canvas.drawBarStartLine(x, this.props.playerPane.height - 1);
     }
 
@@ -258,7 +269,7 @@ class Player extends Component {
     for (let i = canvasRange[1]; i >= canvasRange[0]; i--) {
       const noteId = this.props.noteIds[i];
       const noteState = this.props.noteStates[i];
-      const x = initialNoteX + i * constants.size.player.space.width;
+      const x = initialNoteX + i * spaceWidth;
 
       if (
         noteState !== constants.id.state.fresh ||
@@ -275,7 +286,15 @@ class Player extends Component {
           ? this.props.noteIds[i + 1]
           : constants.id.note.space;
 
-      this.canvas.drawNote(x, y, 'player', noteId, previousNoteId, nextNoteId);
+      this.canvas.drawNote(
+        x,
+        y,
+        'player',
+        noteId,
+        spaceWidth,
+        previousNoteId,
+        nextNoteId
+      );
     }
 
     // shots
