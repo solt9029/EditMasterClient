@@ -35,7 +35,7 @@ export const setChangingSlider = isChangingSlider => ({
 export const calcSecondsPerNote = bpm => {
   const barPerMinute = bpm / constants.number.beat;
   const barPerSecond = barPerMinute / 60;
-  const notesPerSecond = barPerSecond * constants.number.score.column;
+  const notesPerSecond = barPerSecond * constants.number.notesPerBar;
   const secondsPerNote = 1 / notesPerSecond;
   return setSecondsPerNote(secondsPerNote);
 };

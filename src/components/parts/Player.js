@@ -248,11 +248,11 @@ class Player extends Component {
 
     // bar start lines
     const initialBarStartLineIndex =
-      canvasRange[0] - (canvasRange[0] % constants.number.score.column);
+      canvasRange[0] - (canvasRange[0] % constants.number.notesPerBar);
     for (
       let i = initialBarStartLineIndex;
       i <= canvasRange[1];
-      i += constants.number.score.column
+      i += constants.number.notesPerBar
     ) {
       const x = initialNoteX + i * constants.size.player.space.width;
       this.canvas.drawBarStartLine(x, this.props.playerPane.height - 1);

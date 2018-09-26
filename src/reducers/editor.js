@@ -38,7 +38,7 @@ export default (state = initialState, action) => {
     }
     case 'ADD_ID_BAR': {
       let noteIds = state.noteIds.concat();
-      for (let i = 0; i < constants.number.score.column; i++) {
+      for (let i = 0; i < constants.number.notesPerBar; i++) {
         noteIds.push(constants.id.note.space);
       }
       return {
@@ -47,12 +47,12 @@ export default (state = initialState, action) => {
       };
     }
     case 'REMOVE_ID_BAR': {
-      if (state.noteIds.length < constants.number.score.column * 2) {
+      if (state.noteIds.length < constants.number.notesPerBar * 2) {
         return state;
       }
       const noteIds = state.noteIds.slice(
         0,
-        state.noteIds.length - constants.number.score.column
+        state.noteIds.length - constants.number.notesPerBar
       );
       return {
         ...state,
