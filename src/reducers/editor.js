@@ -28,8 +28,8 @@ export default (state = initialState, action) => {
   switch (action.type) {
     case 'SET_NOTE_IDS': {
       let noteIds = state.noteIds.concat();
-      for (let n = 0; n < action.payload.num; n++) {
-        noteIds[action.payload.index + n] = action.payload.noteId;
+      for (let i = 0; i < action.payload.noteIds.length; i++) {
+        noteIds[action.payload.index + i] = action.payload.noteIds[i];
       }
       return {
         ...state,
