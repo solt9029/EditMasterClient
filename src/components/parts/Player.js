@@ -9,10 +9,6 @@ import Shot from '../../Shot';
 import Canvas from '../../Canvas';
 import JudgeEffect from '../../JudgeEffect';
 
-const divInlineStyle = {
-  outline: 'none',
-};
-
 const sliderInlineStyle = {
   width: '95%',
   position: 'absolute',
@@ -302,7 +298,7 @@ class Player extends Component {
 
   render() {
     return (
-      <div style={divInlineStyle}>
+      <div>
         <canvas
           ref={this.canvasRef}
           style={{ display: 'block' }}
