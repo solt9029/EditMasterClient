@@ -294,6 +294,13 @@ class Player extends Component {
           style={{ display: 'block' }}
           width={this.props.player.width - 1}
           height={this.props.player.height - 1}
+          onClick={() => {
+            if (this.props.ytPlayerState === id.youtube.playing) {
+              this.props.ytPlayer.pauseVideo();
+            } else if (this.props.ytPlayerState === id.youtube.paused) {
+              this.props.ytPlayer.playVideo();
+            }
+          }}
         />
         <Slider
           style={sliderInlineStyle}
