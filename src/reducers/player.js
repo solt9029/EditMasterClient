@@ -67,7 +67,7 @@ export default (state = initialState, action) => {
     }
     case 'ADD_STATE_BAR': {
       let noteStates = state.noteStates.concat();
-      for (let i = 0; i < constants.number.score.column; i++) {
+      for (let i = 0; i < constants.number.notesPerBar; i++) {
         noteStates.push(constants.id.note.space);
       }
       return {
@@ -76,12 +76,12 @@ export default (state = initialState, action) => {
       };
     }
     case 'REMOVE_STATE_BAR': {
-      if (state.noteStates.length < constants.number.score.column * 2) {
+      if (state.noteStates.length < constants.number.notesPerBar * 2) {
         return state;
       }
       const noteStates = state.noteStates.slice(
         0,
-        state.noteStates.length - constants.number.score.column
+        state.noteStates.length - constants.number.notesPerBar
       );
       return {
         ...state,

@@ -27,13 +27,13 @@ class Editor extends Component {
   updateCanvas() {
     this.canvas.clear(
       this.props.editorPane.width - 1,
-      Math.ceil(this.props.noteIds.length / constants.number.score.column) *
+      Math.ceil(this.props.noteIds.length / constants.number.notesPerBar) *
         constants.size.editor.bar.outside.height
     );
 
     // bars
     const barNum = Math.ceil(
-      this.props.noteIds.length / constants.number.score.column
+      this.props.noteIds.length / constants.number.notesPerBar
     );
     const barWidth =
       this.props.editorPane.width - 1 - constants.position.editor.bar.x * 2;
@@ -48,7 +48,7 @@ class Editor extends Component {
     // notes
     const actualBarWidth =
       barWidth * (1 - constants.percentage.editor.barStartLine); // left side of initial beat line is not available
-    const spaceWidth = actualBarWidth / constants.number.score.column;
+    const spaceWidth = actualBarWidth / constants.number.notesPerBar;
     const barStartLineX =
       constants.position.editor.bar.x +
       barWidth * constants.percentage.editor.barStartLine;
@@ -58,8 +58,8 @@ class Editor extends Component {
       if (noteId === constants.id.note.space) {
         continue;
       }
-      const c = i % constants.number.score.column;
-      const l = Math.floor(i / constants.number.score.column);
+      const c = i % constants.number.notesPerBar;
+      const l = Math.floor(i / constants.number.notesPerBar);
       const x = barStartLineX + spaceWidth * c;
       const y = constants.size.editor.bar.outside.height * (l + 0.5);
       const previousNoteId =
@@ -90,7 +90,7 @@ class Editor extends Component {
           width={this.props.editorPane.width - 1}
           height={
             Math.ceil(
-              this.props.noteIds.length / constants.number.score.column
+              this.props.noteIds.length / constants.number.notesPerBar
             ) * constants.size.editor.bar.outside.height
           }
         />

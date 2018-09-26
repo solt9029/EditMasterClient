@@ -147,9 +147,7 @@ const constants = {
     },
   },
   number: {
-    score: {
-      column: 96,
-    },
+    notesPerBar: 96,
     beat: 4,
   },
   second: {

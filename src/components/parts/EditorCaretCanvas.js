@@ -55,23 +55,23 @@ class EditorCaretCanvas extends Component {
     switch (event.key) {
       case constants.key.copy:
         this.clipboard = this.props.noteIds.slice(
-          this.mouseBarIndex * constants.number.score.column,
-          (this.mouseBarIndex + 1) * constants.number.score.column
+          this.mouseBarIndex * constants.number.notesPerBar,
+          (this.mouseBarIndex + 1) * constants.number.notesPerBar
         );
         return;
       case constants.key.paste:
         if (!this.clipboard) {
           return;
         }
-        if (this.clipboard.length !== constants.number.score.column) {
+        if (this.clipboard.length !== constants.number.notesPerBar) {
           return;
         }
         this.props.setNoteIds(
-          this.mouseBarIndex * constants.number.score.column,
+          this.mouseBarIndex * constants.number.notesPerBar,
           this.clipboard
         );
         if (
-          (this.mouseBarIndex + 1) * constants.number.score.column >=
+          (this.mouseBarIndex + 1) * constants.number.notesPerBar >=
           this.props.noteIds.length
         ) {
           this.props.addBar();
@@ -96,10 +96,10 @@ class EditorCaretCanvas extends Component {
       note = keyValue;
     }
 
-    const notesPerDivision = constants.number.score.column / division;
-    const mouseColumnIndex = this.mouseDivisionIndex * notesPerDivision;
+    const notesPerDivision = constants.number.notesPerBar / division;
+    const mouseNotesPerBarIndex = this.mouseDivisionIndex * notesPerDivision;
     const index =
-      this.mouseBarIndex * constants.number.score.column + mouseColumnIndex;
+      this.mouseBarIndex * constants.number.notesPerBar + mouseNotesPerBarIndex;
     let noteIds = [];
     if (!constants.id.note.hasState(note)) {
       for (let i = 0; i < notesPerDivision; i++) {
@@ -111,7 +111,7 @@ class EditorCaretCanvas extends Component {
     this.props.setNoteIds(index, noteIds);
 
     // add one bar if the user puts a note on the last bar
-    if (index >= this.props.noteIds.length - constants.number.score.column) {
+    if (index >= this.props.noteIds.length - constants.number.notesPerBar) {
       this.props.addBar();
     }
   }
@@ -149,7 +149,7 @@ class EditorCaretCanvas extends Component {
     // canvas drawing
     this.canvas.clear(
       this.props.editorPane.width - 1,
-      Math.ceil(this.props.noteIds.length / constants.number.score.column) *
+      Math.ceil(this.props.noteIds.length / constants.number.notesPerBar) *
         constants.size.editor.bar.outside.height
     );
     const x =
@@ -173,7 +173,7 @@ class EditorCaretCanvas extends Component {
         style={canvasInlineStyle}
         width={this.props.editorPane.width - 1}
         height={
-          Math.ceil(this.props.noteIds.length / constants.number.score.column) *
+          Math.ceil(this.props.noteIds.length / constants.number.notesPerBar) *
           constants.size.editor.bar.outside.height
         }
       />

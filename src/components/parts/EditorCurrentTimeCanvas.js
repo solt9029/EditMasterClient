@@ -39,7 +39,7 @@ class EditorCurrentTimeCanvas extends Component {
 
     this.canvas.clear(
       this.props.editorPane.width - 1,
-      Math.ceil(this.props.noteIds.length / constants.number.score.column) *
+      Math.ceil(this.props.noteIds.length / constants.number.notesPerBar) *
         constants.size.editor.bar.outside.height
     );
 
@@ -47,14 +47,14 @@ class EditorCurrentTimeCanvas extends Component {
       this.props.editorPane.width - 1 - constants.position.editor.bar.x * 2;
     const actualBarWidth =
       barWidth * (1 - constants.percentage.editor.barStartLine); // left side of initial beat line is not available
-    const spaceWidth = actualBarWidth / constants.number.score.column;
+    const spaceWidth = actualBarWidth / constants.number.notesPerBar;
 
     const currentNoteIndexFloat =
       (this.props.currentTime - offset) / this.props.secondsPerNote;
-    const currentColumnIndexFloat =
-      currentNoteIndexFloat % constants.number.score.column;
+    const currentNotesPerBarIndexFloat =
+      currentNoteIndexFloat % constants.number.notesPerBar;
     const currentBarIndex = Math.floor(
-      currentNoteIndexFloat / constants.number.score.column
+      currentNoteIndexFloat / constants.number.notesPerBar
     );
 
     const y =
@@ -62,7 +62,7 @@ class EditorCurrentTimeCanvas extends Component {
       (constants.size.editor.bar.outside.height -
         constants.size.editor.bar.inside.height) /
         2;
-    const x = currentColumnIndexFloat * spaceWidth;
+    const x = currentNotesPerBarIndexFloat * spaceWidth;
     this.canvas.drawCurrentTime(x, y);
   }
 
@@ -73,7 +73,7 @@ class EditorCurrentTimeCanvas extends Component {
         style={canvasInlineStyle}
         width={this.props.editorPane.width - 1}
         height={
-          Math.ceil(this.props.noteIds.length / constants.number.score.column) *
+          Math.ceil(this.props.noteIds.length / constants.number.notesPerBar) *
           constants.size.editor.bar.outside.height
         }
       />
