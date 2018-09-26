@@ -142,9 +142,9 @@ export default class Canvas {
     y,
     pane,
     noteId,
+    spaceWidth = 0,
     previousNoteId = constants.id.note.space,
-    nextNoteId = constants.id.note.space,
-    spaceWidth = constants.size.player.space.width
+    nextNoteId = constants.id.note.space
   ) {
     let noteSize = 'normal';
     let noteColor = constants.color.red;

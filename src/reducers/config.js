@@ -4,6 +4,7 @@ const initialState = {
   bpm: 150,
   offset: 12.08,
   comment: '創作の達人で創作譜面をしました！',
+  speed: 1,
 };
 
 export default (state = initialState, action) => {

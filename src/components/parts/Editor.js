@@ -74,9 +74,9 @@ class Editor extends Component {
         y,
         'editor',
         noteId,
+        spaceWidth,
         previousNoteId,
-        nextNoteId,
-        spaceWidth
+        nextNoteId
       );
     }
   }
