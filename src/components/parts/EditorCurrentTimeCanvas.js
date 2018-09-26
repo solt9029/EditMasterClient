@@ -3,12 +3,7 @@ import { connect } from 'react-redux';
 import { size, number, position, percentage } from '../../constants';
 import Canvas from '../../Canvas';
 
-const canvasInlineStyle = {
-  position: 'absolute',
-  top: '0',
-  left: '0',
-  outline: 'none',
-};
+const canvasInlineStyle = { position: 'absolute', top: '0', left: '0' };
 
 class EditorCurrentTimeCanvas extends Component {
   constructor(props) {
@@ -28,7 +23,8 @@ class EditorCurrentTimeCanvas extends Component {
       this.props.noteIds.length !== nextProps.noteIds.length ||
       this.props.currentTime !== nextProps.currentTime ||
       this.props.secondsPerNote !== nextProps.secondsPerNote ||
-      this.props.config !== nextProps.config
+      this.props.configForm !== nextProps.configForm ||
+      this.props.configInitialValues !== nextProps.configInitialValues
     );
   }
 
@@ -37,9 +33,9 @@ class EditorCurrentTimeCanvas extends Component {
   }
 
   updateCanvas() {
-    if (!this.props.config) {
-      return;
-    }
+    const offset = this.props.configForm
+      ? this.props.configForm.values.offset
+      : this.props.configInitialValues.offset;
 
     this.canvas.clear(
       this.props.editorPane.width - 1,
@@ -53,8 +49,7 @@ class EditorCurrentTimeCanvas extends Component {
     const spaceWidth = actualBarWidth / number.score.column;
 
     const currentNoteIndexFloat =
-      (this.props.currentTime - this.props.config.values.offset) /
-      this.props.secondsPerNote;
+      (this.props.currentTime - offset) / this.props.secondsPerNote;
     const currentColumnIndexFloat = currentNoteIndexFloat % number.score.column;
     const currentBarIndex = Math.floor(
       currentNoteIndexFloat / number.score.column
@@ -87,7 +82,8 @@ const mapStateToProps = state => ({
   noteIds: state.editor.noteIds,
   currentTime: state.player.currentTime,
   secondsPerNote: state.player.secondsPerNote,
-  config: state.form.config,
+  configForm: state.form.config,
+  configInitialValues: state.config,
 });
 export default connect(
   mapStateToProps,
