@@ -23,9 +23,6 @@ const constants = {
         outside: 21,
         inside: 17,
       },
-      space: {
-        width: 3,
-      },
       barStartLine: {
         width: 2,
       },
