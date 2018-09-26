@@ -57,12 +57,15 @@ class Player extends Component {
   }
 
   calcNoteIndexRangeInSecondRange(secondRange) {
+    const offset = this.props.configForm
+      ? this.props.configForm.values.offset
+      : this.props.configInitialValues.offset;
     const initialNoteIndex = Math.ceil(
-      (this.props.currentTime - secondRange - this.props.config.values.offset) /
+      (this.props.currentTime - secondRange - offset) /
         this.props.secondsPerNote
     );
     const finalNoteIndex = Math.floor(
-      (this.props.currentTime + secondRange - this.props.config.values.offset) /
+      (this.props.currentTime + secondRange - offset) /
         this.props.secondsPerNote
     );
     return [initialNoteIndex, finalNoteIndex];
@@ -98,10 +101,12 @@ class Player extends Component {
   }
 
   calcInitialNoteX() {
+    const offset = this.props.configForm
+      ? this.props.configForm.values.offset
+      : this.props.configInitialValues.offset;
     const initialNoteX =
       position.player.judge.x +
-      ((this.props.config.values.offset - this.props.currentTime) /
-        this.props.secondsPerNote) *
+      ((offset - this.props.currentTime) / this.props.secondsPerNote) *
         size.player.space.width;
     return initialNoteX;
   }
@@ -206,10 +211,6 @@ class Player extends Component {
   }
 
   updateCanvas() {
-    if (!this.props.config) {
-      return;
-    }
-
     this.canvas.clear(
       this.props.player.width - 1,
       this.props.player.height - 1
@@ -328,7 +329,8 @@ const mapStateToProps = state => ({
   noteIds: state.editor.noteIds,
   noteStates: state.player.noteStates,
   currentTime: state.player.currentTime,
-  config: state.form.config,
+  configForm: state.form.config,
+  configInitialValues: state.config,
   isAutoMode: state.player.isAutoMode,
   ytPlayer: state.player.ytPlayer,
   isChangingSlider: state.player.isChangingSlider,
