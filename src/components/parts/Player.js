@@ -78,7 +78,7 @@ class Player extends Component {
 
     // the number of notes that canvas can display in it
     const notesNumber = Math.ceil(
-      (this.props.player.width - 1) / size.player.space.width
+      (this.props.playerPane.width - 1) / size.player.space.width
     );
 
     let finalNoteIndex = initialNoteIndex + notesNumber + 6;
@@ -132,9 +132,9 @@ class Player extends Component {
         continue;
       }
 
-      this.shots.push(new Shot((this.props.player.height - 1) / 2, noteId));
+      this.shots.push(new Shot((this.props.playerPane.height - 1) / 2, noteId));
       this.judgeEffects.push(
-        new JudgeEffect((this.props.player.height - 1) / 2, id.state.good)
+        new JudgeEffect((this.props.playerPane.height - 1) / 2, id.state.good)
       );
 
       if (id.note.hasState(noteId)) {
@@ -192,7 +192,7 @@ class Player extends Component {
         continue;
       }
 
-      this.shots.push(new Shot((this.props.player.height - 1) / 2, noteId));
+      this.shots.push(new Shot((this.props.playerPane.height - 1) / 2, noteId));
 
       if (id.note.hasState(noteId)) {
         let stateId = id.state.bad;
@@ -203,7 +203,7 @@ class Player extends Component {
         }
         this.props.setState(i, stateId);
         this.judgeEffects.push(
-          new JudgeEffect((this.props.player.height - 1) / 2, stateId)
+          new JudgeEffect((this.props.playerPane.height - 1) / 2, stateId)
         );
       }
       break;
@@ -212,11 +212,11 @@ class Player extends Component {
 
   updateCanvas() {
     this.canvas.clear(
-      this.props.player.width - 1,
-      this.props.player.height - 1
+      this.props.playerPane.width - 1,
+      this.props.playerPane.height - 1
     );
 
-    this.canvas.drawJudgeMark((this.props.player.height - 1) / 2);
+    this.canvas.drawJudgeMark((this.props.playerPane.height - 1) / 2);
 
     const initialNoteX = this.calcInitialNoteX(); // x position of initial note
     const canvasRange = this.calcNoteIndexRangeInCanvas(initialNoteX);
@@ -226,7 +226,7 @@ class Player extends Component {
 
     // judgeEffects
     for (let i = this.judgeEffects.length - 1; i >= 0; i--) {
-      this.judgeEffects[i].move(this.props.player.height / 50);
+      this.judgeEffects[i].move(this.props.playerPane.height / 50);
       this.canvas.drawJudgeEffect(
         this.judgeEffects[i].judgeMarkY,
         this.judgeEffects[i].judgeTextY,
@@ -246,7 +246,7 @@ class Player extends Component {
       i += number.score.column
     ) {
       const x = initialNoteX + i * size.player.space.width;
-      this.canvas.drawBarStartLine(x, this.props.player.height - 1);
+      this.canvas.drawBarStartLine(x, this.props.playerPane.height - 1);
     }
 
     // notes
@@ -259,7 +259,7 @@ class Player extends Component {
         continue;
       }
 
-      const y = (this.props.player.height - 1) / 2;
+      const y = (this.props.playerPane.height - 1) / 2;
       const previousNoteId = i > 0 ? this.props.noteIds[i - 1] : id.note.space;
       const nextNoteId =
         i < this.props.noteIds.length - 1
@@ -272,8 +272,8 @@ class Player extends Component {
     // shots
     for (let i = this.shots.length - 1; i >= 0; i--) {
       this.shots[i].move(
-        this.props.player.width / 100,
-        this.props.player.height / 10
+        this.props.playerPane.width / 100,
+        this.props.playerPane.height / 10
       );
       this.canvas.drawNote(
         this.shots[i].x,
@@ -293,8 +293,8 @@ class Player extends Component {
         <canvas
           ref={this.canvasRef}
           style={{ display: 'block' }}
-          width={this.props.player.width - 1}
-          height={this.props.player.height - 1}
+          width={this.props.playerPane.width - 1}
+          height={this.props.playerPane.height - 1}
           onClick={() => {
             if (this.props.ytPlayerState === id.youtube.playing) {
               this.props.ytPlayer.pauseVideo();
@@ -325,7 +325,7 @@ class Player extends Component {
 }
 
 const mapStateToProps = state => ({
-  player: state.pane.player,
+  playerPane: state.pane.player,
   noteIds: state.editor.noteIds,
   noteStates: state.player.noteStates,
   currentTime: state.player.currentTime,
