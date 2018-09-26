@@ -39,9 +39,10 @@ class EditorCaretCanvas extends Component {
 
   shouldComponentUpdate(nextProps) {
     return (
-      this.props.palette !== nextProps.palette ||
+      this.props.paletteForm !== nextProps.paletteForm ||
       this.props.editorPane !== nextProps.editorPane ||
-      this.props.noteIds.length !== nextProps.noteIds.length
+      this.props.noteIds.length !== nextProps.noteIds.length ||
+      this.props.paletteInitialValues !== nextProps.paletteInitialValues
     );
   }
 
@@ -82,11 +83,10 @@ class EditorCaretCanvas extends Component {
   }
 
   setNoteIds(event) {
-    if (!this.props.palette) {
-      return;
-    }
+    let { division, note } = this.props.paletteForm
+      ? this.props.paletteForm.values
+      : this.props.paletteInitialValues;
 
-    let { division, note } = this.props.palette.values;
     // if the event is key event, the note which is going to be put should be key value!
     if (event.key) {
       const keyValue = +event.key;
@@ -116,9 +116,9 @@ class EditorCaretCanvas extends Component {
   }
 
   updateCaret(event) {
-    if (!this.props.palette) {
-      return;
-    }
+    const division = this.props.paletteForm
+      ? this.props.paletteForm.values.division
+      : this.props.paletteInitialValues.division;
 
     // calculation
     const mouseX = event.nativeEvent.offsetX;
@@ -130,14 +130,13 @@ class EditorCaretCanvas extends Component {
       position.editor.bar.x + barWidth * percentage.editor.barStartLine;
     let mouseDivisionIndex = Math.round(
       (mouseX - barStartLineX) /
-        ((barWidth * (1 - percentage.editor.barStartLine)) /
-          this.props.palette.values.division)
+        ((barWidth * (1 - percentage.editor.barStartLine)) / division)
     );
     if (mouseDivisionIndex < 0) {
       mouseDivisionIndex = 0;
     }
-    if (mouseDivisionIndex >= this.props.palette.values.division) {
-      mouseDivisionIndex = this.props.palette.values.division - 1;
+    if (mouseDivisionIndex >= division) {
+      mouseDivisionIndex = division - 1;
     }
     this.mouseDivisionIndex = mouseDivisionIndex;
     this.mouseBarIndex = Math.floor(mouseY / size.editor.bar.outside.height);
@@ -150,8 +149,7 @@ class EditorCaretCanvas extends Component {
     );
     const x =
       barStartLineX +
-      actualBarWidth *
-        (this.mouseDivisionIndex / this.props.palette.values.division) -
+      actualBarWidth * (this.mouseDivisionIndex / division) -
       size.editor.caret.width / 2;
     const y =
       this.mouseBarIndex * size.editor.bar.outside.height +
@@ -178,7 +176,8 @@ class EditorCaretCanvas extends Component {
 
 const mapStateToProps = state => ({
   editorPane: state.pane.editor,
-  palette: state.form.palette,
+  paletteForm: state.form.palette,
+  paletteInitialValues: state.palette,
   noteIds: state.editor.noteIds,
 });
 const mapDispatchToProps = dispatch => ({
