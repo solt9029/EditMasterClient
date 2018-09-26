@@ -1,13 +1,13 @@
-import { id, number } from '../constants';
+import constants from '../constants';
 
 let noteStates = [];
 for (let i = 0; i < 96 * 15; i++) {
-  noteStates.push(id.state.fresh);
+  noteStates.push(constants.id.state.fresh);
 }
 
 const initialState = {
   ytPlayer: null,
-  ytPlayerState: id.youtube.unstarted,
+  ytPlayerState: constants.id.youtube.unstarted,
   currentTime: 0,
   isAutoMode: true,
   isChangingSlider: false,
@@ -58,7 +58,7 @@ export default (state = initialState, action) => {
     case 'RESET_STATE': {
       let noteStates = state.noteStates.concat();
       for (let i = 0; i < noteStates.length; i++) {
-        noteStates[i] = id.state.fresh;
+        noteStates[i] = constants.id.state.fresh;
       }
       return {
         ...state,
@@ -67,8 +67,8 @@ export default (state = initialState, action) => {
     }
     case 'ADD_STATE_BAR': {
       let noteStates = state.noteStates.concat();
-      for (let i = 0; i < number.score.column; i++) {
-        noteStates.push(id.note.space);
+      for (let i = 0; i < constants.number.score.column; i++) {
+        noteStates.push(constants.id.note.space);
       }
       return {
         ...state,
@@ -76,12 +76,12 @@ export default (state = initialState, action) => {
       };
     }
     case 'REMOVE_STATE_BAR': {
-      if (state.noteStates.length < number.score.column * 2) {
+      if (state.noteStates.length < constants.number.score.column * 2) {
         return state;
       }
       const noteStates = state.noteStates.slice(
         0,
-        state.noteStates.length - number.score.column
+        state.noteStates.length - constants.number.score.column
       );
       return {
         ...state,

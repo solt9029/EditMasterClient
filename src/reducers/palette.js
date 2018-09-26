@@ -1,7 +1,7 @@
-import { id } from '../constants';
+import constants from '../constants';
 
 const initialState = {
-  note: id.note.don,
+  note: constants.id.note.don,
   division: 16,
 };
 

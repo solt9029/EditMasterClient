@@ -3,7 +3,7 @@ import { reduxForm } from 'redux-form';
 import styled from 'styled-components';
 import { Field } from 'redux-form';
 import ValidationField from './ValidationField';
-import { validation } from '../../constants';
+import constants from '../../constants';
 import { connect } from 'react-redux';
 import urlParse from 'url-parse';
 import { calcSecondsPerNote } from '../../actions/player';
@@ -26,7 +26,7 @@ class Config extends Component {
         <Field
           label="ユーザ名"
           component={ValidationField}
-          validate={validation.required}
+          validate={constants.validation.required}
           type="text"
           name="username"
           placeholder="ユーザ名（例：通りすがりの創作の達人）"
@@ -34,7 +34,7 @@ class Config extends Component {
         <Field
           label="YouTube動画ID"
           component={ValidationField}
-          validate={validation.required}
+          validate={constants.validation.required}
           type="text"
           name="videoId"
           placeholder="YouTube動画ID（例：PqJNc9KVIZE）"
@@ -50,7 +50,10 @@ class Config extends Component {
         <Field
           label="BPM"
           component={ValidationField}
-          validate={[validation.required, validation.number]}
+          validate={[
+            constants.validation.required,
+            constants.validation.number,
+          ]}
           type="number"
           name="bpm"
           placeholder="BPM（例：200）"
@@ -61,7 +64,10 @@ class Config extends Component {
         <Field
           label="OFFSET：曲の始まる時間（秒）"
           component={ValidationField}
-          validate={[validation.required, validation.number]}
+          validate={[
+            constants.validation.required,
+            constants.validation.number,
+          ]}
           type="number"
           name="offset"
           placeholder="OFFSET（例：1.5）"

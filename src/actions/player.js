@@ -1,4 +1,4 @@
-import { number } from '../constants';
+import constants from '../constants';
 
 export const setYtPlayer = ytPlayer => ({
   type: 'SET_YTPLAYER',
@@ -33,9 +33,9 @@ export const setChangingSlider = isChangingSlider => ({
 });
 
 export const calcSecondsPerNote = bpm => {
-  const barPerMinute = bpm / number.beat;
+  const barPerMinute = bpm / constants.number.beat;
   const barPerSecond = barPerMinute / 60;
-  const notesPerSecond = barPerSecond * number.score.column;
+  const notesPerSecond = barPerSecond * constants.number.score.column;
   const secondsPerNote = 1 / notesPerSecond;
   return setSecondsPerNote(secondsPerNote);
 };
