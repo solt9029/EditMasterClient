@@ -1,9 +1,8 @@
-export const setNoteIds = (index, num, noteId) => ({
+export const setNoteIds = (index, noteIds) => ({
   type: 'SET_NOTE_IDS',
   payload: {
     index,
-    num,
-    noteId,
+    noteIds,
   },
 });
 

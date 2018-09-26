@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { position, percentage, size, number, id } from '../../constants';
+import { position, percentage, size, number, id, key } from '../../constants';
 import Canvas from '../../Canvas';
 import { setNoteIds } from '../../actions/editor';
 import { addStateBar } from '../../actions/player';
@@ -18,20 +18,23 @@ class EditorCaretCanvas extends Component {
     super(props);
     this.mouseBarIndex = 0;
     this.mouseDivisionIndex = 0;
+    this.clipboard = null;
     this.canvasRef = React.createRef();
     this.canvas = null;
     this.updateCaret = this.updateCaret.bind(this);
     this.setNoteIds = this.setNoteIds.bind(this);
+    this.copyPaste = this.copyPaste.bind(this);
+    this.keyDown = this.keyDown.bind(this);
   }
 
   componentDidMount() {
     const ctx = this.canvasRef.current.getContext('2d');
     this.canvas = new Canvas(ctx);
-    window.addEventListener('keydown', this.setNoteIds);
+    window.addEventListener('keydown', this.keyDown);
   }
 
   componentWillUnmount() {
-    window.removeEventListener('keydown', this.setNoteIds);
+    window.removeEventListener('keydown', this.keyDown);
   }
 
   shouldComponentUpdate(nextProps) {
@@ -40,6 +43,42 @@ class EditorCaretCanvas extends Component {
       this.props.editorPane !== nextProps.editorPane ||
       this.props.noteIds.length !== nextProps.noteIds.length
     );
+  }
+
+  keyDown(event) {
+    this.setNoteIds(event);
+    this.copyPaste(event);
+  }
+
+  copyPaste(event) {
+    switch (event.key) {
+      case key.copy:
+        this.clipboard = this.props.noteIds.slice(
+          this.mouseBarIndex * number.score.column,
+          (this.mouseBarIndex + 1) * number.score.column
+        );
+        return;
+      case key.paste:
+        if (!this.clipboard) {
+          return;
+        }
+        if (this.clipboard.length !== number.score.column) {
+          return;
+        }
+        this.props.setNoteIds(
+          this.mouseBarIndex * number.score.column,
+          this.clipboard
+        );
+        if (
+          (this.mouseBarIndex + 1) * number.score.column >=
+          this.props.noteIds.length
+        ) {
+          this.props.addBar();
+        }
+        return;
+      default:
+        return;
+    }
   }
 
   setNoteIds(event) {
@@ -60,11 +99,15 @@ class EditorCaretCanvas extends Component {
     const notesPerDivision = number.score.column / division;
     const mouseColumnIndex = this.mouseDivisionIndex * notesPerDivision;
     const index = this.mouseBarIndex * number.score.column + mouseColumnIndex;
-    let num = 1;
+    let noteIds = [];
     if (!id.note.hasState(note)) {
-      num = notesPerDivision;
+      for (let i = 0; i < notesPerDivision; i++) {
+        noteIds.push(note);
+      }
+    } else {
+      noteIds.push(note);
     }
-    this.props.setNoteIds(index, num, note);
+    this.props.setNoteIds(index, noteIds);
 
     // add one bar if the user puts a note on the last bar
     if (index >= this.props.noteIds.length - number.score.column) {

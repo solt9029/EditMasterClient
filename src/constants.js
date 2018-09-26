@@ -62,6 +62,8 @@ export const size = {
 };
 
 export const key = {
+  copy: 'c',
+  paste: 'v',
   don: ['f', 'j'],
   ka: ['d', 'k'],
   isDon: pushedKey => {
