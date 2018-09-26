@@ -61,8 +61,10 @@ class Player extends Component {
 
   calcNoteIndexRangeInCanvas(initialNoteX) {
     const spaceWidth = this.props.configForm
-      ? this.props.configForm.values.speed * 3
-      : this.props.configInitialValues.speed * 3;
+      ? this.props.configForm.values.speed *
+        constants.percentage.player.speedToSpaceWidth
+      : this.props.configInitialValues.speed *
+        constants.percentage.player.speedToSpaceWidth;
 
     // Math.floor(-initialNoteX / spaceWidth) is the number of notes that already passed from canvas
     let initialNoteIndex = Math.floor(-initialNoteX / spaceWidth) - 3;
@@ -93,8 +95,10 @@ class Player extends Component {
 
   calcInitialNoteX() {
     const spaceWidth = this.props.configForm
-      ? this.props.configForm.values.speed * 3
-      : this.props.configInitialValues.speed * 3;
+      ? this.props.configForm.values.speed *
+        constants.percentage.player.speedToSpaceWidth
+      : this.props.configInitialValues.speed *
+        constants.percentage.player.speedToSpaceWidth;
 
     const offset = this.props.configForm
       ? this.props.configForm.values.offset
@@ -224,8 +228,10 @@ class Player extends Component {
 
   updateCanvas() {
     const spaceWidth = this.props.configForm
-      ? this.props.configForm.values.speed * 3
-      : this.props.configInitialValues.speed * 3;
+      ? this.props.configForm.values.speed *
+        constants.percentage.player.speedToSpaceWidth
+      : this.props.configInitialValues.speed *
+        constants.percentage.player.speedToSpaceWidth;
 
     this.canvas.clear(
       this.props.playerPane.width - 1,

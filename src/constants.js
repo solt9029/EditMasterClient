@@ -9,6 +9,9 @@ const constants = {
     purple: '#800080',
   },
   percentage: {
+    player: {
+      speedToSpaceWidth: 3,
+    },
     editor: {
       barStartLine: 0.02,
     },
