@@ -13,6 +13,7 @@
 git clone git@github.com:solt9029/EditMasterClient.git
 cd EditMasterClient
 yarn install
+cp config.js.example config.js
 ```
 
 
