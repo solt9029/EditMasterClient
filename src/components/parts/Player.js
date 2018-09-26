@@ -1,14 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {
-  size,
-  id,
-  position,
-  sound,
-  second,
-  key,
-  number,
-} from '../../constants';
+import constants from '../../constants';
 import { setState } from '../../actions/player';
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
@@ -72,13 +64,13 @@ class Player extends Component {
   }
 
   calcNoteIndexRangeInCanvas(initialNoteX) {
-    // Math.floor(-initialNoteX / size.player.space.width) is the number of notes that already passed from canvas
+    // Math.floor(-initialNoteX / constants.size.player.space.width) is the number of notes that already passed from canvas
     let initialNoteIndex =
-      Math.floor(-initialNoteX / size.player.space.width) - 3;
+      Math.floor(-initialNoteX / constants.size.player.space.width) - 3;
 
     // the number of notes that canvas can display in it
     const notesNumber = Math.ceil(
-      (this.props.playerPane.width - 1) / size.player.space.width
+      (this.props.playerPane.width - 1) / constants.size.player.space.width
     );
 
     let finalNoteIndex = initialNoteIndex + notesNumber + 6;
@@ -105,21 +97,23 @@ class Player extends Component {
       ? this.props.configForm.values.offset
       : this.props.configInitialValues.offset;
     const initialNoteX =
-      position.player.judge.x +
+      constants.position.player.judge.x +
       ((offset - this.props.currentTime) / this.props.secondsPerNote) *
-        size.player.space.width;
+        constants.size.player.space.width;
     return initialNoteX;
   }
 
   autoMode() {
     if (
       !this.props.isAutoMode ||
-      this.props.ytPlayerState !== id.youtube.playing
+      this.props.ytPlayerState !== constants.id.youtube.playing
     ) {
       return;
     }
 
-    const autoRange = this.calcNoteIndexRangeInSecondRange(second.range.auto);
+    const autoRange = this.calcNoteIndexRangeInSecondRange(
+      constants.second.range.auto
+    );
 
     for (let i = autoRange[0]; i <= autoRange[1]; i++) {
       if (i < 0 || i >= this.props.noteIds.length) {
@@ -128,23 +122,29 @@ class Player extends Component {
 
       const noteId = this.props.noteIds[i];
       const noteState = this.props.noteStates[i];
-      if (noteState !== id.state.fresh || noteId === id.note.space) {
+      if (
+        noteState !== constants.id.state.fresh ||
+        noteId === constants.id.note.space
+      ) {
         continue;
       }
 
       this.shots.push(new Shot((this.props.playerPane.height - 1) / 2, noteId));
       this.judgeEffects.push(
-        new JudgeEffect((this.props.playerPane.height - 1) / 2, id.state.good)
+        new JudgeEffect(
+          (this.props.playerPane.height - 1) / 2,
+          constants.id.state.good
+        )
       );
 
-      if (id.note.hasState(noteId)) {
-        this.props.setState(i, id.state.good);
+      if (constants.id.note.hasState(noteId)) {
+        this.props.setState(i, constants.id.state.good);
       }
 
-      if (id.note.isDon(noteId)) {
-        sound.don.trigger();
+      if (constants.id.note.isDon(noteId)) {
+        constants.sound.don.trigger();
       } else {
-        sound.ka.trigger();
+        constants.sound.ka.trigger();
       }
 
       break;
@@ -154,21 +154,27 @@ class Player extends Component {
   playMode(event) {
     if (
       this.props.isAutoMode ||
-      this.props.ytPlayerState !== id.youtube.playing
+      this.props.ytPlayerState !== constants.id.youtube.playing
     ) {
       return;
     }
 
-    if (key.isDon(event.key)) {
-      sound.don.trigger();
+    if (constants.key.isDon(event.key)) {
+      constants.sound.don.trigger();
     }
-    if (key.isKa(event.key)) {
-      sound.ka.trigger();
+    if (constants.key.isKa(event.key)) {
+      constants.sound.ka.trigger();
     }
 
-    const badRange = this.calcNoteIndexRangeInSecondRange(second.range.bad);
-    const okRange = this.calcNoteIndexRangeInSecondRange(second.range.ok);
-    const goodRange = this.calcNoteIndexRangeInSecondRange(second.range.good);
+    const badRange = this.calcNoteIndexRangeInSecondRange(
+      constants.second.range.bad
+    );
+    const okRange = this.calcNoteIndexRangeInSecondRange(
+      constants.second.range.ok
+    );
+    const goodRange = this.calcNoteIndexRangeInSecondRange(
+      constants.second.range.good
+    );
 
     for (let i = badRange[0]; i <= badRange[1]; i++) {
       if (i < 0 || i >= this.props.noteIds.length) {
@@ -177,15 +183,18 @@ class Player extends Component {
 
       const noteId = this.props.noteIds[i];
       const noteState = this.props.noteStates[i];
-      if (noteState !== id.state.fresh || noteId === id.note.space) {
+      if (
+        noteState !== constants.id.state.fresh ||
+        noteId === constants.id.note.space
+      ) {
         continue;
       }
 
       let hit = false;
-      if (key.isDon(event.key) && id.note.isDon(noteId)) {
+      if (constants.key.isDon(event.key) && constants.id.note.isDon(noteId)) {
         hit = true;
       }
-      if (key.isKa(event.key) && id.note.isKa(noteId)) {
+      if (constants.key.isKa(event.key) && constants.id.note.isKa(noteId)) {
         hit = true;
       }
       if (!hit) {
@@ -194,12 +203,12 @@ class Player extends Component {
 
       this.shots.push(new Shot((this.props.playerPane.height - 1) / 2, noteId));
 
-      if (id.note.hasState(noteId)) {
-        let stateId = id.state.bad;
+      if (constants.id.note.hasState(noteId)) {
+        let stateId = constants.id.state.bad;
         if (i >= goodRange[0] && i <= goodRange[1]) {
-          stateId = id.state.good;
+          stateId = constants.id.state.good;
         } else if (i >= okRange[0] && i <= okRange[1]) {
-          stateId = id.state.ok;
+          stateId = constants.id.state.ok;
         }
         this.props.setState(i, stateId);
         this.judgeEffects.push(
@@ -239,13 +248,13 @@ class Player extends Component {
 
     // bar start lines
     const initialBarStartLineIndex =
-      canvasRange[0] - (canvasRange[0] % number.score.column);
+      canvasRange[0] - (canvasRange[0] % constants.number.score.column);
     for (
       let i = initialBarStartLineIndex;
       i <= canvasRange[1];
-      i += number.score.column
+      i += constants.number.score.column
     ) {
-      const x = initialNoteX + i * size.player.space.width;
+      const x = initialNoteX + i * constants.size.player.space.width;
       this.canvas.drawBarStartLine(x, this.props.playerPane.height - 1);
     }
 
@@ -253,18 +262,22 @@ class Player extends Component {
     for (let i = canvasRange[1]; i >= canvasRange[0]; i--) {
       const noteId = this.props.noteIds[i];
       const noteState = this.props.noteStates[i];
-      const x = initialNoteX + i * size.player.space.width;
+      const x = initialNoteX + i * constants.size.player.space.width;
 
-      if (noteState !== id.state.fresh || noteId === id.note.space) {
+      if (
+        noteState !== constants.id.state.fresh ||
+        noteId === constants.id.note.space
+      ) {
         continue;
       }
 
       const y = (this.props.playerPane.height - 1) / 2;
-      const previousNoteId = i > 0 ? this.props.noteIds[i - 1] : id.note.space;
+      const previousNoteId =
+        i > 0 ? this.props.noteIds[i - 1] : constants.id.note.space;
       const nextNoteId =
         i < this.props.noteIds.length - 1
           ? this.props.noteIds[i + 1]
-          : id.note.space;
+          : constants.id.note.space;
 
       this.canvas.drawNote(x, y, 'player', noteId, previousNoteId, nextNoteId);
     }
@@ -296,9 +309,11 @@ class Player extends Component {
           width={this.props.playerPane.width - 1}
           height={this.props.playerPane.height - 1}
           onClick={() => {
-            if (this.props.ytPlayerState === id.youtube.playing) {
+            if (this.props.ytPlayerState === constants.id.youtube.playing) {
               this.props.ytPlayer.pauseVideo();
-            } else if (this.props.ytPlayerState === id.youtube.paused) {
+            } else if (
+              this.props.ytPlayerState === constants.id.youtube.paused
+            ) {
               this.props.ytPlayer.playVideo();
             }
           }}

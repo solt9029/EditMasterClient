@@ -8,7 +8,7 @@ import {
   setYtPlayerState,
   resetState,
 } from '../../actions/player';
-import { id } from '../../constants';
+import constants from '../../constants';
 
 class YouTube extends Component {
   constructor(props) {
@@ -50,7 +50,7 @@ class YouTube extends Component {
         onStateChange={event => {
           this.props.resetState();
           this.props.setYtPlayerState(event.data);
-          if (event.data === id.youtube.playing) {
+          if (event.data === constants.id.youtube.playing) {
             this.props.setChangingSlider(false);
             this.frameId = window.requestAnimationFrame(this.loop);
           } else {

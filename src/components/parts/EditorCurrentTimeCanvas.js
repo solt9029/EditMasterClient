@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { size, number, position, percentage } from '../../constants';
+import constants from '../../constants';
 import Canvas from '../../Canvas';
 
 const canvasInlineStyle = { position: 'absolute', top: '0', left: '0' };
@@ -39,25 +39,29 @@ class EditorCurrentTimeCanvas extends Component {
 
     this.canvas.clear(
       this.props.editorPane.width - 1,
-      Math.ceil(this.props.noteIds.length / number.score.column) *
-        size.editor.bar.outside.height
+      Math.ceil(this.props.noteIds.length / constants.number.score.column) *
+        constants.size.editor.bar.outside.height
     );
 
     const barWidth =
-      this.props.editorPane.width - 1 - position.editor.bar.x * 2;
-    const actualBarWidth = barWidth * (1 - percentage.editor.barStartLine); // left side of initial beat line is not available
-    const spaceWidth = actualBarWidth / number.score.column;
+      this.props.editorPane.width - 1 - constants.position.editor.bar.x * 2;
+    const actualBarWidth =
+      barWidth * (1 - constants.percentage.editor.barStartLine); // left side of initial beat line is not available
+    const spaceWidth = actualBarWidth / constants.number.score.column;
 
     const currentNoteIndexFloat =
       (this.props.currentTime - offset) / this.props.secondsPerNote;
-    const currentColumnIndexFloat = currentNoteIndexFloat % number.score.column;
+    const currentColumnIndexFloat =
+      currentNoteIndexFloat % constants.number.score.column;
     const currentBarIndex = Math.floor(
-      currentNoteIndexFloat / number.score.column
+      currentNoteIndexFloat / constants.number.score.column
     );
 
     const y =
-      currentBarIndex * size.editor.bar.outside.height +
-      (size.editor.bar.outside.height - size.editor.bar.inside.height) / 2;
+      currentBarIndex * constants.size.editor.bar.outside.height +
+      (constants.size.editor.bar.outside.height -
+        constants.size.editor.bar.inside.height) /
+        2;
     const x = currentColumnIndexFloat * spaceWidth;
     this.canvas.drawCurrentTime(x, y);
   }
@@ -69,8 +73,8 @@ class EditorCurrentTimeCanvas extends Component {
         style={canvasInlineStyle}
         width={this.props.editorPane.width - 1}
         height={
-          Math.ceil(this.props.noteIds.length / number.score.column) *
-          size.editor.bar.outside.height
+          Math.ceil(this.props.noteIds.length / constants.number.score.column) *
+          constants.size.editor.bar.outside.height
         }
       />
     );
