@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import { Field } from 'redux-form';
 import ValidationField from './ValidationField';
 import { validation } from '../../constants';
-// import { initialValues } from '../../reducers/form/config';
 import { connect } from 'react-redux';
 import urlParse from 'url-parse';
 import { calcSecondsPerNote } from '../../actions/player';
@@ -84,7 +83,6 @@ Config = reduxForm({
 })(Config);
 
 const mapStateToProps = state => ({
-  config: state.form.config,
   secondsPerNote: state.player.secondsPerNote,
   initialValues: state.config,
 });
