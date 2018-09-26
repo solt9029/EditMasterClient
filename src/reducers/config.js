@@ -9,6 +9,11 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
+    case 'SET_CONFIG':
+      return {
+        ...state,
+        ...action.payload.config,
+      };
     default:
       return state;
   }
