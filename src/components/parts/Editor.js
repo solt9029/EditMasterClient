@@ -11,9 +11,6 @@ const canvasInlineStyle = { position: 'absolute', top: '0', left: '0' };
 class Editor extends Component {
   constructor(props) {
     super(props);
-    this.setMousePosition = throttle(event => {
-      this.props.setMousePosition(event.evt.offsetX, event.evt.offsetY);
-    }, 100).bind(this);
     this.canvasRef = React.createRef();
     this.canvas = null;
   }
@@ -24,23 +21,11 @@ class Editor extends Component {
     this.updateCanvas();
   }
 
-  shouldComponentUpdate(nextProps) {
-    return (
-      this.props.palette !== nextProps.palette ||
-      this.props.editorPane !== nextProps.editorPane ||
-      this.props.noteIds !== nextProps.noteIds
-    );
-  }
-
   componentDidUpdate() {
     this.updateCanvas();
   }
 
   updateCanvas() {
-    if (!this.props.palette) {
-      return;
-    }
-
     this.canvas.clear(
       this.props.editorPane.width - 1,
       Math.ceil(this.props.noteIds.length / number.score.column) *
@@ -92,21 +77,6 @@ class Editor extends Component {
     }
   }
 
-  calcMouseNoteIndex(barWidth, barStartLineX) {
-    let mouseNoteIndex = Math.round(
-      (this.props.mousePosition.x - barStartLineX) /
-        ((barWidth * (1 - percentage.editor.barStartLine)) /
-          this.props.palette.values.division)
-    );
-    if (mouseNoteIndex < 0) {
-      mouseNoteIndex = 0;
-    }
-    if (mouseNoteIndex >= this.props.palette.values.division) {
-      mouseNoteIndex = this.props.palette.values.division - 1;
-    }
-    return mouseNoteIndex;
-  }
-
   render() {
     return (
       <div>
@@ -129,8 +99,6 @@ class Editor extends Component {
 const mapStateToProps = state => ({
   editorPane: state.pane.editor,
   noteIds: state.editor.noteIds,
-  mousePosition: state.editor.mousePosition,
-  palette: state.form.palette,
 });
 export default connect(
   mapStateToProps,
