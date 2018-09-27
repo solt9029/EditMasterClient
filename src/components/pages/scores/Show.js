@@ -22,6 +22,12 @@ class Show extends Component {
 
   async componentDidMount() {
     try {
+      // reset
+      const initialNoteIds = Array(constants.number.notesPerBar);
+      initialNoteIds.fill(constants.id.note.space);
+      this.props.replaceNoteIds(initialNoteIds);
+      this.props.replaceStates(initialNoteIds);
+
       const result = await axios.get(
         `http://${config.api.host}:${config.api.port}/scores/${
           this.props.match.params.id
