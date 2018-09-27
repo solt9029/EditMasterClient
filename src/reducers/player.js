@@ -55,6 +55,12 @@ export default (state = initialState, action) => {
         noteStates,
       };
     }
+    case 'REPLACE_STATES': {
+      return {
+        ...state,
+        noteStates: action.payload.states,
+      };
+    }
     case 'RESET_STATE': {
       let noteStates = state.noteStates.concat();
       for (let i = 0; i < noteStates.length; i++) {

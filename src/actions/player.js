@@ -55,6 +55,13 @@ export const setState = (index, state) => ({
   },
 });
 
+export const replaceStates = states => ({
+  type: 'REPLACE_STATES',
+  payload: {
+    states,
+  },
+});
+
 export const resetState = () => ({
   type: 'RESET_STATE',
 });

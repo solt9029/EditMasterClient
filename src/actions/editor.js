@@ -6,6 +6,13 @@ export const setNoteIds = (index, noteIds) => ({
   },
 });
 
+export const replaceNoteIds = noteIds => ({
+  type: 'REPLACE_NOTE_IDS',
+  payload: {
+    noteIds,
+  },
+});
+
 export const addIdBar = () => ({
   type: 'ADD_ID_BAR',
 });

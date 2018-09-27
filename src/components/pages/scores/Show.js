@@ -7,8 +7,10 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { setConfig } from '../../../actions/config';
 import { change } from 'redux-form';
-import { calcSecondsPerNote } from '../../../actions/player';
+import { calcSecondsPerNote, replaceStates } from '../../../actions/player';
+import { replaceNoteIds } from '../../../actions/editor';
 import NotFound from '../NotFound';
+import constants from '../../../constants';
 
 class Show extends Component {
   constructor(props) {
@@ -26,25 +28,29 @@ class Show extends Component {
         }`
       );
       const score = result.data;
-      const { bpm, username, offset, comment, speed } = score;
-      const videoId = score.video_id;
+
+      const noteIds = JSON.parse(score.note_ids);
+      this.props.replaceNoteIds(noteIds);
+      let states = Array(noteIds.length);
+      states.fill(constants.id.note.space);
+      this.props.replaceStates(states);
 
       if (this.props.configForm) {
-        this.props.change('username', username);
-        this.props.change('videoId', videoId);
-        this.props.change('offset', offset);
-        this.props.change('comment', comment);
-        this.props.change('speed', speed);
-        this.props.change('bpm', bpm);
-        this.props.calcSecondsPerNote(bpm);
+        this.props.change('username', score.username);
+        this.props.change('videoId', score.video_id);
+        this.props.change('offset', score.offset);
+        this.props.change('comment', score.comment);
+        this.props.change('speed', score.speed);
+        this.props.change('bpm', score.bpm);
+        this.props.calcSecondsPerNote(score.bpm);
       } else {
         this.props.setConfigInitialValues({
-          bpm,
-          username,
-          offset,
-          comment,
-          speed,
-          videoId,
+          bpm: score.bpm,
+          username: score.username,
+          offset: score.offset,
+          comment: score.comment,
+          speed: score.speed,
+          videoId: score.video_id,
         });
       }
     } catch (error) {
@@ -82,6 +88,12 @@ const mapDispatchToProps = dispatch => ({
   },
   calcSecondsPerNote(bpm) {
     dispatch(calcSecondsPerNote(bpm));
+  },
+  replaceNoteIds(noteIds) {
+    dispatch(replaceNoteIds(noteIds));
+  },
+  replaceStates(states) {
+    dispatch(replaceStates(states));
   },
 });
 export default withRouter(
