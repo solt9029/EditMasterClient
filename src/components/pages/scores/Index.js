@@ -1,11 +1,12 @@
 import React from 'react';
 import Navbar from '../../parts/Navbar';
 import Footer from '../../parts/Footer';
+import Scores from '../../parts/Scores';
 
 const Index = () => (
   <div>
     <Navbar />
-    <div>Scores Index Page!</div>
+    <Scores />
     <Footer />
   </div>
 );
