@@ -1,17 +1,23 @@
-import React, { Component } from 'react';
-import axios from 'axios';
+import React, { Component, Fragment } from 'react';
+import { connect } from 'react-redux';
 
-export default class ScoreCardList extends Component {
-  constructor(props) {
-    super(props);
-  }
-
-  async componentDidMount() {
-    const result = await axios.get('http://localhost:8051/scores');
-    console.log(result);
-  }
-
+class ScoreCardList extends Component {
   render() {
-    return <div />;
+    return (
+      <Fragment>
+        {this.props.data.map((score, i) => {
+          return <div key={i}>{score.speed} </div>;
+        })}
+      </Fragment>
+    );
   }
 }
+
+const mapStateToProps = state => ({
+  data: state.score.data,
+});
+const mapDispatchToProps = dispatch => ({});
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ScoreCardList);
