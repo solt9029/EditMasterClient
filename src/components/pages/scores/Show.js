@@ -58,7 +58,7 @@ class Show extends Component {
   render() {
     let component = (
       <div>
-        <Navbar active="scoresNew" />
+        <Navbar />
         <IDE />
       </div>
     );

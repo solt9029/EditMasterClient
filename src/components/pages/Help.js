@@ -15,7 +15,7 @@ const StyledCard = styled(Card)`
 
 const Help = () => (
   <div>
-    <Navbar active="help" />
+    <Navbar />
     <StyledContainer>
       <StyledCard>
         <CardHeader>どうやって再生するの？</CardHeader>

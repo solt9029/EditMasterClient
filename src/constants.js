@@ -183,6 +183,15 @@ const constants = {
     number: value =>
       value && isNaN(Number(value)) ? '数字で入力してください' : undefined,
   },
+  route: {
+    index: '/',
+    help: '/help',
+    scores: {
+      index: '/scores',
+      new: '/scores/new',
+      show: '/scores/:id',
+    },
+  },
 };
 
 export default constants;

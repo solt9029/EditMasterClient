@@ -4,7 +4,7 @@ import Footer from '../../parts/Footer';
 
 const Index = () => (
   <div>
-    <Navbar active="scoresIndex" form />
+    <Navbar />
     <div>Scores Index Page!</div>
     <Footer />
   </div>

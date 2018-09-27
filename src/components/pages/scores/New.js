@@ -4,7 +4,7 @@ import Footer from '../../parts/Footer';
 
 const New = () => (
   <div>
-    <Navbar active="scoresNew" />
+    <Navbar />
     <div>Scores New Page!</div>
     <Footer />
   </div>
