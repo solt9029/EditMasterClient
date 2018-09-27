@@ -89,16 +89,50 @@ class IDE extends Component {
   }
 }
 
-// redux-form doesn't create state (state.form.config is undefined until Config component is mounted)
-// this shouldn't specify like 'videoId: state.form.config.values.videoId' since state.form.config is already undefined
 const mapStateToProps = state => ({
   config: state.form.config,
   ytPlayer: state.player.ytPlayer,
   isChangingSlider: state.player.isChangingSlider,
 });
 const mapDispatchToProps = dispatch => ({
-  setPanes(panes) {
-    dispatch(setPanes(panes));
+  setPanes(references) {
+    if (
+      !references.player.current ||
+      !references.config.current ||
+      !references.editor.current ||
+      !references.palette.current ||
+      !references.youtube.current
+    ) {
+      return;
+    }
+
+    dispatch(
+      setPanes({
+        player: {
+          width: references.player.current.offsetWidth,
+          height: references.player.current.offsetHeight,
+        },
+        config: {
+          width: references.config.current.offsetWidth,
+          height:
+            references.palette.current.offsetHeight -
+            references.youtube.current.offsetHeight -
+            4,
+        },
+        editor: {
+          width: references.editor.current.offsetWidth,
+          height: references.editor.current.offsetHeight,
+        },
+        palette: {
+          width: references.palette.current.offsetWidth,
+          height: references.palette.current.offsetHeight,
+        },
+        youtube: {
+          width: references.youtube.current.offsetWidth,
+          height: references.youtube.current.offsetHeight,
+        },
+      })
+    );
   },
   setCurrentTime(currentTime) {
     dispatch(setCurrentTime(currentTime));
