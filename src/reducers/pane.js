@@ -26,7 +26,7 @@ export default (state = initialState, action) => {
     case 'SET_PANES':
       return {
         ...state,
-        ...action.payload,
+        ...action.payload.panes,
       };
     default:
       return state;
