@@ -88,7 +88,7 @@ class Palette extends Component {
       <StyledDiv>
         <ModeButton
           block
-          color={this.props.isAutoMode ? 'info' : 'warning'}
+          color={this.props.isAutoMode ? 'danger' : 'primary'}
           onClick={() => {
             this.props.toggleMode();
           }}
