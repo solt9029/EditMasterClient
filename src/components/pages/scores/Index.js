@@ -1,12 +1,12 @@
 import React from 'react';
 import Navbar from '../../parts/Navbar';
 import Footer from '../../parts/Footer';
-import Scores from '../../parts/Scores';
+import ScoreCardList from '../../parts/ScoreCardList';
 
 const Index = () => (
   <div>
     <Navbar />
-    <Scores />
+    <ScoreCardList />
     <Footer />
   </div>
 );
