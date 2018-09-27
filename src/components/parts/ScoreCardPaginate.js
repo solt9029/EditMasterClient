@@ -8,11 +8,11 @@ class ScoreCardPaginate extends Component {
     return (
       <ReactPaginate
         class="pagination"
-        previousLabel={'前へ'}
-        nextLabel={'次へ'}
+        previousLabel={'前'}
+        nextLabel={'次'}
         pageCount={this.props.lastPage}
-        marginPagesDisplayed={2}
-        pageRangeDisplayed={5}
+        marginPagesDisplayed={1}
+        pageRangeDisplayed={3}
         onPageChange={data => {
           this.props.fetchData(data.selected + 1);
         }}
