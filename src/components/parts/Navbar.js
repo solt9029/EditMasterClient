@@ -53,8 +53,9 @@ class Navbar extends Component {
 
   render() {
     const target =
-      this.props.match.path === constants.route.scores.show ||
-      this.props.match.path === constants.route.scores.new
+      (this.props.match.path === constants.route.scores.show ||
+        this.props.match.path === constants.route.scores.new) &&
+      !this.props.notFound
         ? '_blank'
         : '';
 
@@ -70,8 +71,9 @@ class Navbar extends Component {
             <Nav className="mr-auto" navbar>
               <NavItem
                 active={
-                  this.props.match.path === constants.route.scores.show ||
-                  this.props.match.path === constants.route.scores.new
+                  (this.props.match.path === constants.route.scores.show ||
+                    this.props.match.path === constants.route.scores.new) &&
+                  !this.props.notFound
                 }
               >
                 <StyledNavLink
