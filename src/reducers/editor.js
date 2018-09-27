@@ -46,6 +46,12 @@ export default (state = initialState, action) => {
         noteIds,
       };
     }
+    case 'RESET_NOTE_IDS': {
+      return {
+        ...state,
+        noteIds: [],
+      };
+    }
     case 'REMOVE_ID_BAR': {
       if (state.noteIds.length < constants.number.notesPerBar * 2) {
         return state;

@@ -94,6 +94,11 @@ export default (state = initialState, action) => {
         noteStates,
       };
     }
+    case 'RESET_STATES':
+      return {
+        ...state,
+        noteStates: [],
+      };
     default:
       return state;
   }
