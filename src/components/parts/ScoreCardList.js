@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
-export default class Scores extends Component {
+export default class ScoreCardList extends Component {
   constructor(props) {
     super(props);
   }
