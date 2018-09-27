@@ -20,8 +20,12 @@ const noteIds = [
 ];
 /* eslint-enable */
 
-const initialState = {
+export const defaultState = {
   noteIds,
+};
+
+const initialState = {
+  noteIds: [],
 };
 
 export default (state = initialState, action) => {
