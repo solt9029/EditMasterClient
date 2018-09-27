@@ -8,17 +8,30 @@ import NotFound from './pages/NotFound';
 import { Switch, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import constants from '../constants';
 
 class App extends Component {
   render() {
     return (
       <div>
         <Switch>
-          <Route exact path="/" component={Index} />
-          <Route exact path="/scores" component={ScoresIndex} />
-          <Route exact path="/scores/new" component={ScoresNew} />
-          <Route exact path="/scores/:id" component={ScoresShow} />
-          <Route exact path="/help" component={Help} />
+          <Route exact path={constants.route.index} component={Index} />
+          <Route
+            exact
+            path={constants.route.scores.index}
+            component={ScoresIndex}
+          />
+          <Route
+            exact
+            path={constants.route.scores.new}
+            component={ScoresNew}
+          />
+          <Route
+            exact
+            path={constants.route.scores.show}
+            component={ScoresShow}
+          />
+          <Route exact path={constants.route.help} component={Help} />
           <Route component={NotFound} />
         </Switch>
       </div>

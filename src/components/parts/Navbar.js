@@ -14,6 +14,8 @@ import {
 } from 'reactstrap';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import withRouter from 'react-router-dom/withRouter';
+import constants from '../../constants';
 
 const Logo = styled(NavbarBrand)`
   background: url('/images/icon.png') no-repeat left center;
@@ -34,7 +36,7 @@ const StyledNavLink = styled(NavLink)`
   font-size: 1em;
 `;
 
-export default class Navbar extends Component {
+class Navbar extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -50,53 +52,58 @@ export default class Navbar extends Component {
   }
 
   render() {
+    const target =
+      this.props.match.path === constants.route.scores.show ||
+      this.props.match.path === constants.route.scores.new
+        ? '_blank'
+        : '';
+
     return (
       <StyledNavbar className="py-0" color="light" light expand="md">
         <Container>
-          <Logo
-            tag={Link}
-            to="/"
-            target={this.props.targetBlank ? '_blank' : ''}
-          />
-          <NavbarBrand
-            tag={Link}
-            to="/"
-            target={this.props.targetBlank ? '_blank' : ''}
-          >
+          <Logo tag={Link} to={constants.route.index} target={target} />
+          <NavbarBrand tag={Link} to={constants.route.index} target={target}>
             <StyledSpan>創作の達人</StyledSpan>
           </NavbarBrand>
           <NavbarToggler onClick={this.toggle} className="my-2" />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="mr-auto" navbar>
-              <NavItem active={this.props.active === 'scoresNew'}>
+              <NavItem
+                active={
+                  this.props.match.path === constants.route.scores.show ||
+                  this.props.match.path === constants.route.scores.new
+                }
+              >
                 <StyledNavLink
                   tag={Link}
-                  to="/scores/new"
-                  target={this.props.targetBlank ? '_blank' : ''}
+                  to={constants.route.scores.new}
+                  target={target}
                 >
                   創作
                 </StyledNavLink>
               </NavItem>
-              <NavItem active={this.props.active === 'scoresIndex'}>
+              <NavItem
+                active={this.props.match.path === constants.route.scores.index}
+              >
                 <StyledNavLink
                   tag={Link}
-                  to="/scores"
-                  target={this.props.targetBlank ? '_blank' : ''}
+                  to={constants.route.scores.index}
+                  target={target}
                 >
                   作品一覧
                 </StyledNavLink>
               </NavItem>
-              <NavItem active={this.props.active === 'help'}>
+              <NavItem active={this.props.match.path === constants.route.help}>
                 <StyledNavLink
                   tag={Link}
-                  to="/help"
-                  target={this.props.targetBlank ? '_blank' : ''}
+                  to={constants.route.help}
+                  target={target}
                 >
                   ヘルプ
                 </StyledNavLink>
               </NavItem>
             </Nav>
-            {this.props.form && (
+            {this.props.match.path === constants.route.scores.index && (
               <Form inline onSubmit={e => e.preventDefault()}>
                 <Input type="search" className="mr-sm-2" placeholder="検索" />
                 <Button
@@ -115,3 +122,5 @@ export default class Navbar extends Component {
     );
   }
 }
+
+export default withRouter(Navbar);
