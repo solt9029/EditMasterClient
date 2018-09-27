@@ -59,7 +59,12 @@ export default (state = initialState, action) => {
         noteIds,
       };
     }
-
+    case 'REPLACE_NOTE_IDS': {
+      return {
+        ...state,
+        noteIds: action.payload.noteIds,
+      };
+    }
     default:
       return state;
   }
