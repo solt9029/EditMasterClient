@@ -13,6 +13,10 @@ export const replaceNoteIds = noteIds => ({
   },
 });
 
+export const resetNoteIds = noteIds => ({
+  type: 'RESET_NOTE_IDS',
+});
+
 export const addIdBar = () => ({
   type: 'ADD_ID_BAR',
 });
