@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Navbar from '../../parts/Navbar';
 import Footer from '../../parts/Footer';
 import IDE from '../../parts/IDE';
-import { defaultState as editorDefaultState } from '../../../reducers/editor';
+import { defaultNotes } from '../../../reducers/editor';
 import { defaultConfig } from '../../../reducers/config';
 import { connect } from 'react-redux';
 import { setConfig } from '../../../actions/config';
@@ -12,9 +12,8 @@ import constants from '../../../constants';
 
 class New extends Component {
   componentDidMount() {
-    this.props.replaceNotes(editorDefaultState.notes);
-    let states = Array(editorDefaultState.notes.length);
-    states.fill(constants.id.note.space);
+    this.props.replaceNotes(defaultNotes);
+    let states = Array(defaultNotes.length).fill(constants.id.note.space);
     this.props.replaceStates(states);
 
     this.props.setConfig(defaultConfig);
