@@ -4,6 +4,9 @@ import { defaultConfig } from '../reducers/config';
 import constants from '../constants';
 import { replaceNotes } from './editor';
 import { replaceStates } from './player';
+import axios from 'axios';
+import config from '../config';
+import { notFound } from './show';
 
 export const setDefaultScore = () => {
   return dispatch => {
@@ -12,6 +15,35 @@ export const setDefaultScore = () => {
     dispatch(replaceStates(states));
 
     dispatch(setConfig(defaultConfig));
+  };
+};
+
+export const fetchScore = id => {
+  return async dispatch => {
+    try {
+      const result = await axios.get(
+        `http://${config.api.host}:${config.api.port}/scores/${id}`
+      );
+      const score = result.data;
+
+      const notes = JSON.parse(score.notes);
+      dispatch(replaceNotes(notes));
+      let states = Array(notes.length).fill(constants.id.note.space);
+      dispatch(replaceStates(states));
+
+      dispatch(
+        setConfig({
+          username: score.username,
+          videoId: score.video_id,
+          offset: score.offset,
+          comment: score.comment,
+          speed: score.speed,
+          bpm: score.bpm,
+        })
+      );
+    } catch (error) {
+      dispatch(notFound());
+    }
   };
 };
 
