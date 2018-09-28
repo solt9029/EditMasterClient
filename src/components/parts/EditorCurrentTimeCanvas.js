@@ -20,7 +20,7 @@ class EditorCurrentTimeCanvas extends Component {
   shouldComponentUpdate(nextProps) {
     return (
       this.props.editorPane !== nextProps.editorPane ||
-      this.props.noteIds.length !== nextProps.noteIds.length ||
+      this.props.notes.length !== nextProps.notes.length ||
       this.props.currentTime !== nextProps.currentTime ||
       this.props.secondsPerNote !== nextProps.secondsPerNote ||
       this.props.offset !== nextProps.offset
@@ -34,7 +34,7 @@ class EditorCurrentTimeCanvas extends Component {
   updateCanvas() {
     this.canvas.clear(
       this.props.editorPane.width - 1,
-      Math.ceil(this.props.noteIds.length / constants.number.notesPerBar) *
+      Math.ceil(this.props.notes.length / constants.number.notesPerBar) *
         constants.size.editor.bar.outside.height
     );
 
@@ -68,7 +68,7 @@ class EditorCurrentTimeCanvas extends Component {
         style={canvasInlineStyle}
         width={this.props.editorPane.width - 1}
         height={
-          Math.ceil(this.props.noteIds.length / constants.number.notesPerBar) *
+          Math.ceil(this.props.notes.length / constants.number.notesPerBar) *
           constants.size.editor.bar.outside.height
         }
       />
@@ -78,7 +78,7 @@ class EditorCurrentTimeCanvas extends Component {
 
 const mapStateToProps = state => ({
   editorPane: state.pane.editor,
-  noteIds: state.editor.noteIds,
+  notes: state.editor.notes,
   currentTime: state.player.currentTime,
   secondsPerNote: state.player.secondsPerNote,
   offset: state.config.offset.value,

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import constants from '../../constants';
 import Canvas from '../../Canvas';
-import { setNoteIds } from '../../actions/editor';
+import { setNotes } from '../../actions/editor';
 import { addStateBar } from '../../actions/player';
 import { addIdBar } from '../../actions/editor';
 
@@ -22,7 +22,7 @@ class EditorCaretCanvas extends Component {
     this.canvasRef = React.createRef();
     this.canvas = null;
     this.updateCaret = this.updateCaret.bind(this);
-    this.setNoteIds = this.setNoteIds.bind(this);
+    this.setNotes = this.setNotes.bind(this);
     this.copyPaste = this.copyPaste.bind(this);
     this.keyDown = this.keyDown.bind(this);
   }
@@ -40,20 +40,20 @@ class EditorCaretCanvas extends Component {
   shouldComponentUpdate(nextProps) {
     return (
       this.props.editorPane !== nextProps.editorPane ||
-      this.props.noteIds.length !== nextProps.noteIds.length ||
+      this.props.notes.length !== nextProps.notes.length ||
       this.props.palette !== nextProps.palette
     );
   }
 
   keyDown(event) {
-    this.setNoteIds(event);
+    this.setNotes(event);
     this.copyPaste(event);
   }
 
   copyPaste(event) {
     switch (event.key) {
       case constants.key.copy:
-        this.clipboard = this.props.noteIds.slice(
+        this.clipboard = this.props.notes.slice(
           this.mouseBarIndex * constants.number.notesPerBar,
           (this.mouseBarIndex + 1) * constants.number.notesPerBar
         );
@@ -65,13 +65,13 @@ class EditorCaretCanvas extends Component {
         if (this.clipboard.length !== constants.number.notesPerBar) {
           return;
         }
-        this.props.setNoteIds(
+        this.props.setNotes(
           this.mouseBarIndex * constants.number.notesPerBar,
           this.clipboard
         );
         if (
           (this.mouseBarIndex + 1) * constants.number.notesPerBar >=
-          this.props.noteIds.length
+          this.props.notes.length
         ) {
           this.props.addBar();
         }
@@ -81,7 +81,7 @@ class EditorCaretCanvas extends Component {
     }
   }
 
-  setNoteIds(event) {
+  setNotes(event) {
     let { division, note } = this.props.palette;
 
     // if the event is key event, the note which is going to be put should be key value!
@@ -97,18 +97,18 @@ class EditorCaretCanvas extends Component {
     const mouseNotesPerBarIndex = this.mouseDivisionIndex * notesPerDivision;
     const index =
       this.mouseBarIndex * constants.number.notesPerBar + mouseNotesPerBarIndex;
-    let noteIds = [];
+    let notes = [];
     if (!constants.id.note.hasState(note)) {
       for (let i = 0; i < notesPerDivision; i++) {
-        noteIds.push(note);
+        notes.push(note);
       }
     } else {
-      noteIds.push(note);
+      notes.push(note);
     }
-    this.props.setNoteIds(index, noteIds);
+    this.props.setNotes(index, notes);
 
     // add one bar if the user puts a note on the last bar
-    if (index >= this.props.noteIds.length - constants.number.notesPerBar) {
+    if (index >= this.props.notes.length - constants.number.notesPerBar) {
       this.props.addBar();
     }
   }
@@ -144,7 +144,7 @@ class EditorCaretCanvas extends Component {
     // canvas drawing
     this.canvas.clear(
       this.props.editorPane.width - 1,
-      Math.ceil(this.props.noteIds.length / constants.number.notesPerBar) *
+      Math.ceil(this.props.notes.length / constants.number.notesPerBar) *
         constants.size.editor.bar.outside.height
     );
     const x =
@@ -163,12 +163,12 @@ class EditorCaretCanvas extends Component {
     return (
       <canvas
         onMouseMove={this.updateCaret}
-        onClick={this.setNoteIds}
+        onClick={this.setNotes}
         ref={this.canvasRef}
         style={canvasInlineStyle}
         width={this.props.editorPane.width - 1}
         height={
-          Math.ceil(this.props.noteIds.length / constants.number.notesPerBar) *
+          Math.ceil(this.props.notes.length / constants.number.notesPerBar) *
           constants.size.editor.bar.outside.height
         }
       />
@@ -179,11 +179,11 @@ class EditorCaretCanvas extends Component {
 const mapStateToProps = state => ({
   editorPane: state.pane.editor,
   palette: state.palette,
-  noteIds: state.editor.noteIds,
+  notes: state.editor.notes,
 });
 const mapDispatchToProps = dispatch => ({
-  setNoteIds(index, num, noteId) {
-    dispatch(setNoteIds(index, num, noteId));
+  setNotes(index, num, note) {
+    dispatch(setNotes(index, num, note));
   },
   addBar() {
     dispatch(addStateBar());

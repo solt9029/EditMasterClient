@@ -81,41 +81,41 @@ const constants = {
       renda: 5,
       bigrenda: 6,
       balloon: 7,
-      isDon: noteId => {
+      isDon: note => {
         return (
-          noteId === constants.id.note.don ||
-          noteId === constants.id.note.bigdon ||
-          noteId === constants.id.note.renda ||
-          noteId === constants.id.note.bigrenda ||
-          noteId === constants.id.note.balloon
+          note === constants.id.note.don ||
+          note === constants.id.note.bigdon ||
+          note === constants.id.note.renda ||
+          note === constants.id.note.bigrenda ||
+          note === constants.id.note.balloon
         );
       },
-      isKa: noteId => {
+      isKa: note => {
         return (
-          noteId === constants.id.note.ka ||
-          noteId === constants.id.note.bigka ||
-          noteId === constants.id.note.renda ||
-          noteId === constants.id.note.bigrenda
+          note === constants.id.note.ka ||
+          note === constants.id.note.bigka ||
+          note === constants.id.note.renda ||
+          note === constants.id.note.bigrenda
         );
       },
-      hasState: noteId => {
+      hasState: note => {
         return (
-          noteId === constants.id.note.don ||
-          noteId === constants.id.note.ka ||
-          noteId === constants.id.note.bigdon ||
-          noteId === constants.id.note.bigka
+          note === constants.id.note.don ||
+          note === constants.id.note.ka ||
+          note === constants.id.note.bigdon ||
+          note === constants.id.note.bigka
         );
       },
-      isNote: noteId => {
+      isNote: note => {
         return (
-          noteId === constants.id.note.don ||
-          noteId === constants.id.note.ka ||
-          noteId === constants.id.note.bigdon ||
-          noteId === constants.id.note.bigka ||
-          noteId === constants.id.note.renda ||
-          noteId === constants.id.note.bigrenda ||
-          noteId === constants.id.note.balloon ||
-          noteId === constants.id.note.space
+          note === constants.id.note.don ||
+          note === constants.id.note.ka ||
+          note === constants.id.note.bigdon ||
+          note === constants.id.note.bigka ||
+          note === constants.id.note.renda ||
+          note === constants.id.note.bigrenda ||
+          note === constants.id.note.balloon ||
+          note === constants.id.note.space
         );
       },
     },

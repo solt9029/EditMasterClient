@@ -77,15 +77,15 @@ class Player extends Component {
     if (initialNoteIndex < 0) {
       initialNoteIndex = 0;
     }
-    if (initialNoteIndex >= this.props.noteIds.length) {
+    if (initialNoteIndex >= this.props.notes.length) {
       return null;
     }
 
     if (finalNoteIndex < 0) {
       return null;
     }
-    if (finalNoteIndex >= this.props.noteIds.length) {
-      finalNoteIndex = this.props.noteIds.length - 1;
+    if (finalNoteIndex >= this.props.notes.length) {
+      finalNoteIndex = this.props.notes.length - 1;
     }
 
     return [initialNoteIndex, finalNoteIndex];
@@ -117,20 +117,20 @@ class Player extends Component {
     );
 
     for (let i = autoRange[0]; i <= autoRange[1]; i++) {
-      if (i < 0 || i >= this.props.noteIds.length) {
+      if (i < 0 || i >= this.props.notes.length) {
         continue;
       }
 
-      const noteId = this.props.noteIds[i];
+      const note = this.props.notes[i];
       const noteState = this.props.states[i];
       if (
         noteState !== constants.id.state.fresh ||
-        noteId === constants.id.note.space
+        note === constants.id.note.space
       ) {
         continue;
       }
 
-      this.shots.push(new Shot((this.props.playerPane.height - 1) / 2, noteId));
+      this.shots.push(new Shot((this.props.playerPane.height - 1) / 2, note));
       this.judgeEffects.push(
         new JudgeEffect(
           (this.props.playerPane.height - 1) / 2,
@@ -138,11 +138,11 @@ class Player extends Component {
         )
       );
 
-      if (constants.id.note.hasState(noteId)) {
+      if (constants.id.note.hasState(note)) {
         this.props.setState(i, constants.id.state.good);
       }
 
-      if (constants.id.note.isDon(noteId)) {
+      if (constants.id.note.isDon(note)) {
         constants.sound.don.trigger();
       } else {
         constants.sound.ka.trigger();
@@ -178,33 +178,33 @@ class Player extends Component {
     );
 
     for (let i = badRange[0]; i <= badRange[1]; i++) {
-      if (i < 0 || i >= this.props.noteIds.length) {
+      if (i < 0 || i >= this.props.notes.length) {
         continue;
       }
 
-      const noteId = this.props.noteIds[i];
+      const note = this.props.notes[i];
       const noteState = this.props.states[i];
       if (
         noteState !== constants.id.state.fresh ||
-        noteId === constants.id.note.space
+        note === constants.id.note.space
       ) {
         continue;
       }
 
       let hit = false;
-      if (constants.key.isDon(event.key) && constants.id.note.isDon(noteId)) {
+      if (constants.key.isDon(event.key) && constants.id.note.isDon(note)) {
         hit = true;
       }
-      if (constants.key.isKa(event.key) && constants.id.note.isKa(noteId)) {
+      if (constants.key.isKa(event.key) && constants.id.note.isKa(note)) {
         hit = true;
       }
       if (!hit) {
         continue;
       }
 
-      this.shots.push(new Shot((this.props.playerPane.height - 1) / 2, noteId));
+      this.shots.push(new Shot((this.props.playerPane.height - 1) / 2, note));
 
-      if (constants.id.note.hasState(noteId)) {
+      if (constants.id.note.hasState(note)) {
         let stateId = constants.id.state.bad;
         if (i >= goodRange[0] && i <= goodRange[1]) {
           stateId = constants.id.state.good;
@@ -265,33 +265,33 @@ class Player extends Component {
 
     // notes
     for (let i = canvasRange[1]; i >= canvasRange[0]; i--) {
-      const noteId = this.props.noteIds[i];
+      const note = this.props.notes[i];
       const noteState = this.props.states[i];
       const x = initialNoteX + i * spaceWidth;
 
       if (
         noteState !== constants.id.state.fresh ||
-        noteId === constants.id.note.space
+        note === constants.id.note.space
       ) {
         continue;
       }
 
       const y = (this.props.playerPane.height - 1) / 2;
-      const previousNoteId =
-        i > 0 ? this.props.noteIds[i - 1] : constants.id.note.space;
-      const nextNoteId =
-        i < this.props.noteIds.length - 1
-          ? this.props.noteIds[i + 1]
+      const previousNote =
+        i > 0 ? this.props.notes[i - 1] : constants.id.note.space;
+      const nextNote =
+        i < this.props.notes.length - 1
+          ? this.props.notes[i + 1]
           : constants.id.note.space;
 
       this.canvas.drawNote(
         x,
         y,
         'player',
-        noteId,
+        note,
         spaceWidth,
-        previousNoteId,
-        nextNoteId
+        previousNote,
+        nextNote
       );
     }
 
@@ -354,7 +354,7 @@ class Player extends Component {
 
 const mapStateToProps = state => ({
   playerPane: state.pane.player,
-  noteIds: state.editor.noteIds,
+  notes: state.editor.notes,
   states: state.player.states,
   currentTime: state.player.currentTime,
   config: state.config,

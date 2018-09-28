@@ -148,7 +148,6 @@ class Palette extends Component {
 
 const mapStateToProps = state => ({
   isAutoMode: state.player.isAutoMode,
-  initialValues: state.palette,
 });
 const mapDispatchToProps = dispatch => ({
   toggleMode() {
