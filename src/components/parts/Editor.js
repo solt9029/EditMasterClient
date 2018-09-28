@@ -4,7 +4,6 @@ import constants from '../../constants';
 import Canvas from '../../Canvas';
 import EditorCaretCanvas from './EditorCaretCanvas';
 import EditorCurrentTimeCanvas from './EditorCurrentTimeCanvas';
-import { resetStates } from '../../actions/player';
 import { resetNoteIds } from '../../actions/editor';
 
 const canvasInlineStyle = { position: 'absolute', top: '0', left: '0' };
@@ -27,7 +26,7 @@ class Editor extends Component {
   }
 
   componentWillUnmount() {
-    this.props.reset();
+    this.props.resetNoteIds();
   }
 
   updateCanvas() {
@@ -112,9 +111,8 @@ const mapStateToProps = state => ({
   noteIds: state.editor.noteIds,
 });
 const mapDispatchToProps = dispatch => ({
-  reset() {
+  resetNoteIds() {
     dispatch(resetNoteIds());
-    dispatch(resetStates());
   },
 });
 export default connect(
