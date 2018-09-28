@@ -4,6 +4,10 @@ import { Modal, ModalHeader, ModalBody, ModalFooter, Button } from 'reactstrap';
 import { openErrorModal, closeErrorModal } from '../../actions/errorModal';
 
 class ErrorModal extends Component {
+  componentWillUnmount() {
+    this.props.closeErrorModal();
+  }
+
   render() {
     let errors = [];
     for (let field in this.props.errorModal.errors) {

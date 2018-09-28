@@ -5,14 +5,10 @@ import IDE from '../../parts/IDE';
 import { connect } from 'react-redux';
 import { setDefaultScore } from '../../../actions/config';
 import ErrorModal from '../../parts/ErrorModal';
-import { closeErrorModal } from '../../../actions/errorModal';
 
 class New extends Component {
   componentDidMount() {
     this.props.setDefaultScore();
-  }
-  componentWillUnmount() {
-    this.props.closeErrorModal();
   }
   render() {
     return (
@@ -30,9 +26,6 @@ const mapStateToProps = state => ({});
 const mapDispatchToProps = dispatch => ({
   setDefaultScore() {
     dispatch(setDefaultScore());
-  },
-  closeErrorModal() {
-    dispatch(closeErrorModal());
   },
 });
 export default connect(

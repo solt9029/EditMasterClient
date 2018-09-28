@@ -7,7 +7,6 @@ import { fetchScore } from '../../../actions/config';
 import NotFound from '../NotFound';
 import { resetNotFound } from '../../../actions/show';
 import ErrorModal from '../../parts/ErrorModal';
-import { closeErrorModal } from '../../../actions/errorModal';
 
 class Show extends Component {
   componentDidMount() {
@@ -16,7 +15,6 @@ class Show extends Component {
 
   componentWillUnmount() {
     this.props.resetNotFound();
-    this.props.closeErrorModal();
   }
 
   render() {
@@ -44,9 +42,6 @@ const mapDispatchToProps = dispatch => ({
   },
   resetNotFound() {
     dispatch(resetNotFound());
-  },
-  closeErrorModal() {
-    dispatch(closeErrorModal());
   },
 });
 export default withRouter(
