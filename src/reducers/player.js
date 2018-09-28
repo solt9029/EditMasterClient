@@ -1,10 +1,5 @@
 import constants from '../constants';
 
-let states = [];
-for (let i = 0; i < 96 * 15; i++) {
-  states.push(constants.id.state.fresh);
-}
-
 const initialState = {
   ytPlayer: null,
   ytPlayerState: constants.id.youtube.unstarted,
@@ -12,7 +7,7 @@ const initialState = {
   isAutoMode: true,
   isChangingSlider: false,
   secondsPerNote: 1,
-  states,
+  states: [],
 };
 
 export default (state = initialState, action) => {

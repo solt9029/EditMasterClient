@@ -31,8 +31,7 @@ class Show extends Component {
 
       const notes = JSON.parse(score.notes);
       this.props.replaceNotes(notes);
-      let states = Array(notes.length);
-      states.fill(constants.id.note.space);
+      let states = Array(notes.length).fill(constants.id.note.space);
       this.props.replaceStates(states);
 
       this.props.setConfig({
