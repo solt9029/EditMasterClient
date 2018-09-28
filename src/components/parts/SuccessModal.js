@@ -5,6 +5,7 @@ import {
   openSuccessModal,
   closeSuccessModal,
 } from '../../actions/successModal';
+import { Link } from 'react-router-dom';
 
 class SuccessModal extends Component {
   componentWillUnmount() {
@@ -25,8 +26,17 @@ class SuccessModal extends Component {
         </ModalBody>
         <ModalFooter>
           <Button color="primary">ツイート</Button>
-          <Button color="warning">作品一覧</Button>
-          <Button color="success">続けて編集</Button>
+          <Button color="warning" tag={Link} to="/scores" target="_blank">
+            作品一覧
+          </Button>
+          <Button
+            color="success"
+            onClick={() => {
+              this.props.closeSuccessModal();
+            }}
+          >
+            続けて編集
+          </Button>
         </ModalFooter>
       </Modal>
     );
