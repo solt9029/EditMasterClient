@@ -11,6 +11,10 @@ export const setConfig = config => {
   };
 };
 
+export const resetConfig = () => ({
+  type: 'RESET_CONFIG',
+});
+
 export const setUsername = (value, touched = true) => {
   let errors = [];
   if (value === '') {
