@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import Navbar from '../../parts/Navbar';
-import Footer from '../../parts/Footer';
 import IDE from '../../parts/IDE';
 import { connect } from 'react-redux';
 import { setDefaultScore } from '../../../actions/config';
 import ErrorModal from '../../parts/ErrorModal';
+import SuccessModal from '../../parts/SuccessModal';
 
 class New extends Component {
   componentDidMount() {
@@ -15,8 +15,8 @@ class New extends Component {
       <div>
         <Navbar />
         <IDE />
-        <Footer />
         <ErrorModal />
+        <SuccessModal />
       </div>
     );
   }

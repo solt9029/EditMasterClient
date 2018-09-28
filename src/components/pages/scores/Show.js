@@ -7,6 +7,7 @@ import { fetchScore } from '../../../actions/config';
 import NotFound from '../NotFound';
 import { resetNotFound } from '../../../actions/show';
 import ErrorModal from '../../parts/ErrorModal';
+import SuccessModal from '../../parts/SuccessModal';
 
 class Show extends Component {
   componentDidMount() {
@@ -23,6 +24,7 @@ class Show extends Component {
         <Navbar />
         <IDE />
         <ErrorModal />
+        <SuccessModal />
       </div>
     );
     if (this.props.notFound) {

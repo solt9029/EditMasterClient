@@ -20,6 +20,7 @@ import axios from 'axios';
 import config from '../../config';
 import { connect } from 'react-redux';
 import { openErrorModal } from '../../actions/errorModal';
+import { openSuccessModal } from '../../actions/successModal';
 
 const Logo = styled(NavbarBrand)`
   background: url('/images/icon.png') no-repeat left center;
@@ -72,6 +73,7 @@ class Navbar extends Component {
         `http://${config.api.host}:${config.api.port}/scores/create`,
         data
       );
+      this.props.openSuccessModal();
     } catch (error) {
       this.props.openErrorModal(error.response.data.errors);
       console.log(error.response.data.errors);
@@ -170,6 +172,9 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   openErrorModal(errors) {
     dispatch(openErrorModal(errors));
+  },
+  openSuccessModal() {
+    dispatch(openSuccessModal());
   },
 });
 export default withRouter(
