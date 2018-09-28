@@ -5,3 +5,4 @@ export { default as config } from './config';
 export { default as palette } from './palette';
 export { default as score } from './score';
 export { default as show } from './show';
+export { default as errorModal } from './errorModal';
