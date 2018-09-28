@@ -11,3 +11,7 @@ export const setPaletteDivision = division => ({
     division: +division,
   },
 });
+
+export const resetPalette = () => ({
+  type: 'RESET_PALETTE',
+});

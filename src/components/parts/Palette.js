@@ -7,7 +7,7 @@ import constants from '../../constants';
 import { connect } from 'react-redux';
 import { toggleMode, addStateBar, removeStateBar } from '../../actions/player';
 import { addIdBar, removeIdBar } from '../../actions/editor';
-import { setPaletteNote } from '../../actions/palette';
+import { setPaletteNote, resetPalette } from '../../actions/palette';
 
 const StyledDiv = styled.div`
   padding: 15px;
@@ -83,6 +83,9 @@ const noteFields = [
 const divisionFields = [16, 24, 32, 48];
 
 class Palette extends Component {
+  componentWillUnmount() {
+    this.props.resetPalette();
+  }
   render() {
     return (
       <StyledDiv>
@@ -161,6 +164,9 @@ const mapDispatchToProps = dispatch => ({
   },
   setPaletteNote() {
     dispatch(setPaletteNote());
+  },
+  resetPalette() {
+    dispatch(resetPalette());
   },
 });
 export default connect(

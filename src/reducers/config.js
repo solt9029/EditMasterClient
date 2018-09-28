@@ -42,6 +42,8 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
+    case 'RESET_CONFIG':
+      return initialState;
     case 'SET_USERNAME':
       return {
         ...state,
