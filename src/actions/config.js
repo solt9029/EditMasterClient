@@ -1,4 +1,19 @@
 import { calcSecondsPerNote } from './player';
+import { defaultNotes } from '../reducers/editor';
+import { defaultConfig } from '../reducers/config';
+import constants from '../constants';
+import { replaceNotes } from './editor';
+import { replaceStates } from './player';
+
+export const setDefaultScore = () => {
+  return dispatch => {
+    dispatch(replaceNotes(defaultNotes));
+    let states = Array(defaultNotes.length).fill(constants.id.note.space);
+    dispatch(replaceStates(states));
+
+    dispatch(setConfig(defaultConfig));
+  };
+};
 
 export const setConfig = config => {
   return dispatch => {
