@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Button, Col } from 'reactstrap';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
+import { setPaletteNote } from '../../actions/palette';
 
 const StyledButton = styled(Button)`
   min-width: 75px;
@@ -23,20 +24,18 @@ class NoteRadio extends Component {
     }
 
     return (
-      <Col
-        xs={colSize}
-        className="btn-group-toggle"
-        style={{ padding: '3px' }} // styled-components doesn't apply this style: used inline style
-      >
+      <Col xs={colSize} className="btn-group-toggle" style={{ padding: '3px' }}>
         <StyledButton
           block
-          tag="label"
           color={this.props.color}
-          active={this.props.note === this.props.input.value}
+          active={this.props.note === this.props.value}
+          onClick={() => {
+            this.props.setPaletteNote(this.props.value);
+          }}
         >
           <div>{this.props.label}</div>
           <StyledImg src={this.props.img} alt={this.props.img} />
-          <input {...this.props.input} type={this.props.type} />
+          <input value={this.props.value} type="radio" />
         </StyledButton>
       </Col>
     );
@@ -44,10 +43,15 @@ class NoteRadio extends Component {
 }
 
 const mapStateToProps = state => ({
-  note: state.form.palette.values.note,
+  note: state.palette.note,
   paletteWidth: state.pane.palette.width,
+});
+const mapDispatchToProps = dispatch => ({
+  setPaletteNote(note) {
+    dispatch(setPaletteNote(note));
+  },
 });
 export default connect(
   mapStateToProps,
-  null
+  mapDispatchToProps
 )(NoteRadio);

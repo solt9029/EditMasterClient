@@ -39,10 +39,9 @@ class EditorCaretCanvas extends Component {
 
   shouldComponentUpdate(nextProps) {
     return (
-      this.props.paletteForm !== nextProps.paletteForm ||
       this.props.editorPane !== nextProps.editorPane ||
       this.props.noteIds.length !== nextProps.noteIds.length ||
-      this.props.paletteInitialValues !== nextProps.paletteInitialValues
+      this.props.palette !== nextProps.palette
     );
   }
 
@@ -83,9 +82,7 @@ class EditorCaretCanvas extends Component {
   }
 
   setNoteIds(event) {
-    let { division, note } = this.props.paletteForm
-      ? this.props.paletteForm.values
-      : this.props.paletteInitialValues;
+    let { division, note } = this.props.palette;
 
     // if the event is key event, the note which is going to be put should be key value!
     if (event.key) {
@@ -117,9 +114,7 @@ class EditorCaretCanvas extends Component {
   }
 
   updateCaret(event) {
-    const division = this.props.paletteForm
-      ? this.props.paletteForm.values.division
-      : this.props.paletteInitialValues.division;
+    const division = this.props.palette.division;
 
     // calculation
     const mouseX = event.nativeEvent.offsetX;
@@ -183,8 +178,7 @@ class EditorCaretCanvas extends Component {
 
 const mapStateToProps = state => ({
   editorPane: state.pane.editor,
-  paletteForm: state.form.palette,
-  paletteInitialValues: state.palette,
+  palette: state.palette,
   noteIds: state.editor.noteIds,
 });
 const mapDispatchToProps = dispatch => ({

@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { Row, Container, Button } from 'reactstrap';
 import styled from 'styled-components';
-import { Field, reduxForm } from 'redux-form';
 import NoteRadio from './NoteRadio';
 import DivisionRadio from './DivisionRadio';
 import constants from '../../constants';
 import { connect } from 'react-redux';
 import { toggleMode, addStateBar, removeStateBar } from '../../actions/player';
 import { addIdBar, removeIdBar } from '../../actions/editor';
+import { setPaletteNote } from '../../actions/palette';
 
 const StyledDiv = styled.div`
   padding: 15px;
@@ -100,16 +100,13 @@ class Palette extends Component {
           <Row>
             {noteFields.map((field, i) => {
               return (
-                <Field
+                <NoteRadio
+                  key={i}
                   img={field.img}
                   color={field.color}
-                  key={i}
                   label={field.label}
                   name="note"
-                  component={NoteRadio}
-                  type="radio"
                   value={field.value}
-                  normalize={value => +value}
                 />
               );
             })}
@@ -119,16 +116,7 @@ class Palette extends Component {
         <StyledContainer>
           <Row>
             {divisionFields.map((value, i) => {
-              return (
-                <Field
-                  key={i}
-                  name="division"
-                  component={DivisionRadio}
-                  type="radio"
-                  value={value}
-                  normalize={value => +value}
-                />
-              );
+              return <DivisionRadio key={i} name="division" value={value} />;
             })}
           </Row>
         </StyledContainer>
@@ -155,10 +143,6 @@ class Palette extends Component {
   }
 }
 
-Palette = reduxForm({
-  form: 'palette',
-})(Palette);
-
 const mapStateToProps = state => ({
   isAutoMode: state.player.isAutoMode,
   initialValues: state.palette,
@@ -174,6 +158,9 @@ const mapDispatchToProps = dispatch => ({
   removeBar() {
     dispatch(removeStateBar());
     dispatch(removeIdBar());
+  },
+  setPaletteNote() {
+    dispatch(setPaletteNote());
   },
 });
 export default connect(
