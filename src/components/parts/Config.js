@@ -1,12 +1,16 @@
 import React, { Component } from 'react';
-import { reduxForm } from 'redux-form';
 import styled from 'styled-components';
-import { Field } from 'redux-form';
-import ValidationField from './ValidationField';
-import constants from '../../constants';
 import { connect } from 'react-redux';
-import urlParse from 'url-parse';
 import { calcSecondsPerNote } from '../../actions/player';
+import { FormFeedback, Input, Label, FormGroup } from 'reactstrap';
+import {
+  setUsername,
+  setVideoId,
+  setBpmAndCalcSecondsPerNote,
+  setOffset,
+  setSpeed,
+  setComment,
+} from '../../actions/config';
 
 const StyledDiv = styled.div`
   padding: 15px;
@@ -16,96 +20,151 @@ const StyledDiv = styled.div`
 `;
 
 class Config extends Component {
-  componentDidMount() {
-    this.props.calcSecondsPerNote(this.props.initialValues.bpm);
-  }
-
   render() {
     return (
       <StyledDiv>
-        <Field
-          label="ユーザ名"
-          component={ValidationField}
-          validate={constants.validation.required}
-          type="text"
-          name="username"
-          placeholder="ユーザ名（例：通りすがりの創作の達人）"
-        />
-        <Field
-          label="YouTube動画ID"
-          component={ValidationField}
-          validate={constants.validation.required}
-          type="text"
-          name="videoId"
-          placeholder="YouTube動画ID（例：PqJNc9KVIZE）"
-          normalize={value => {
-            // format url to videoId
-            const url = urlParse(value, true);
-            if (url.query.v) {
-              value = url.query.v;
+        <FormGroup>
+          <Label>ユーザ名</Label>
+          <Input
+            type="text"
+            placeholder="ユーザ名（例：通りすがりの創作の達人）"
+            name="username"
+            invalid={
+              this.props.username.touched &&
+              this.props.username.errors.length > 0
             }
-            return value;
-          }}
-        />
-        <Field
-          label="BPM"
-          component={ValidationField}
-          validate={[
-            constants.validation.required,
-            constants.validation.number,
-          ]}
-          type="number"
-          name="bpm"
-          placeholder="BPM（例：200）"
-          onChange={event => {
-            this.props.calcSecondsPerNote(event.target.value);
-          }}
-        />
-        <Field
-          label="OFFSET：曲の始まる時間（秒）"
-          component={ValidationField}
-          validate={[
-            constants.validation.required,
-            constants.validation.number,
-          ]}
-          type="number"
-          name="offset"
-          placeholder="OFFSET（例：1.5）"
-        />
-        <Field
-          label="倍速"
-          component={ValidationField}
-          validate={[
-            constants.validation.required,
-            constants.validation.number,
-          ]}
-          type="number"
-          name="speed"
-          placeholder="倍速（例：2）"
-        />
-        <Field
-          label="コメント"
-          component={ValidationField}
-          type="text"
-          name="comment"
-          placeholder="コメント（例：創作の達人で創作譜面をしました！）"
-        />
+            value={this.props.username.value}
+            onChange={event => {
+              this.props.setUsername(event.target.value);
+            }}
+          />
+          {this.props.username.errors.map((error, i) => {
+            return <FormFeedback key={i}>{error}</FormFeedback>;
+          })}
+        </FormGroup>
+        <FormGroup>
+          <Label>YouTube動画ID</Label>
+          <Input
+            type="text"
+            placeholder="YouTube動画ID（例：PqJNc9KVIZE）"
+            name="videoId"
+            invalid={
+              this.props.videoId.touched && this.props.videoId.errors.length > 0
+            }
+            value={this.props.videoId.value}
+            onChange={event => {
+              this.props.setVideoId(event.target.value);
+            }}
+          />
+          {this.props.videoId.errors.map((error, i) => {
+            return <FormFeedback key={i}>{error}</FormFeedback>;
+          })}
+        </FormGroup>
+        <FormGroup>
+          <Label>BPM</Label>
+          <Input
+            type="number"
+            placeholder="BPM（例：200）"
+            name="bpm"
+            invalid={this.props.bpm.touched && this.props.bpm.errors.length > 0}
+            value={this.props.bpm.value}
+            onChange={event => {
+              this.props.setBpmAndCalcSecondsPerNote(event.target.value);
+            }}
+          />
+          {this.props.bpm.errors.map((error, i) => {
+            return <FormFeedback key={i}>{error}</FormFeedback>;
+          })}
+        </FormGroup>
+        <FormGroup>
+          <Label>OFFSET：曲の始まる時間（秒）</Label>
+          <Input
+            type="number"
+            placeholder="OFFSET（例：1.5）"
+            name="offset"
+            invalid={
+              this.props.offset.touched && this.props.offset.errors.length > 0
+            }
+            value={this.props.offset.value}
+            onChange={event => {
+              this.props.setOffset(event.target.value);
+            }}
+          />
+          {this.props.offset.errors.map((error, i) => {
+            return <FormFeedback key={i}>{error}</FormFeedback>;
+          })}
+        </FormGroup>
+        <FormGroup>
+          <Label>倍速</Label>
+          <Input
+            type="number"
+            placeholder="倍速（例：2）"
+            name="speed"
+            invalid={
+              this.props.speed.touched && this.props.speed.errors.length > 0
+            }
+            value={this.props.speed.value}
+            onChange={event => {
+              this.props.setSpeed(event.target.value);
+            }}
+          />
+          {this.props.speed.errors.map((error, i) => {
+            return <FormFeedback key={i}>{error}</FormFeedback>;
+          })}
+        </FormGroup>
+        <FormGroup>
+          <Label>コメント</Label>
+          <Input
+            type="text"
+            placeholder="コメント（例：創作の達人で創作譜面をしました！）"
+            name="comment"
+            invalid={
+              this.props.comment.touched && this.props.comment.errors.length > 0
+            }
+            value={this.props.comment.value}
+            onChange={event => {
+              this.props.setComment(event.target.value);
+            }}
+          />
+          {this.props.comment.errors.map((error, i) => {
+            return <FormFeedback key={i}>{error}</FormFeedback>;
+          })}
+        </FormGroup>
       </StyledDiv>
     );
   }
 }
 
-Config = reduxForm({
-  form: 'config',
-})(Config);
-
 const mapStateToProps = state => ({
   secondsPerNote: state.player.secondsPerNote,
-  initialValues: state.config,
+  username: state.config.username,
+  videoId: state.config.videoId,
+  bpm: state.config.bpm,
+  offset: state.config.offset,
+  speed: state.config.speed,
+  comment: state.config.comment,
 });
 const mapDispatchToProps = dispatch => ({
   calcSecondsPerNote(bpm) {
     dispatch(calcSecondsPerNote(bpm));
+  },
+  setUsername(value) {
+    dispatch(setUsername(value));
+  },
+  setVideoId(value) {
+    dispatch(setVideoId(value));
+  },
+  setBpmAndCalcSecondsPerNote(value) {
+    dispatch(setBpmAndCalcSecondsPerNote(value));
+  },
+  setOffset(value) {
+    dispatch(setOffset(value));
+  },
+  setSpeed(value) {
+    dispatch(setSpeed(value));
+  },
+  setComment(value) {
+    dispatch(setComment(value));
   },
 });
 export default connect(

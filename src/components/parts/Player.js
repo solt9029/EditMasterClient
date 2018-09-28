@@ -45,9 +45,7 @@ class Player extends Component {
   }
 
   calcNoteIndexRangeInSecondRange(secondRange) {
-    const offset = this.props.configForm
-      ? this.props.configForm.values.offset
-      : this.props.configInitialValues.offset;
+    const offset = this.props.config.offset.value;
     const initialNoteIndex = Math.ceil(
       (this.props.currentTime - secondRange - offset) /
         this.props.secondsPerNote
@@ -60,11 +58,9 @@ class Player extends Component {
   }
 
   calcNoteIndexRangeInCanvas(initialNoteX) {
-    const spaceWidth = this.props.configForm
-      ? this.props.configForm.values.speed *
-        constants.percentage.player.speedToSpaceWidth
-      : this.props.configInitialValues.speed *
-        constants.percentage.player.speedToSpaceWidth;
+    const spaceWidth =
+      this.props.config.speed.value *
+      constants.percentage.player.speedToSpaceWidth;
 
     // Math.floor(-initialNoteX / spaceWidth) is the number of notes that already passed from canvas
     let initialNoteIndex = Math.floor(-initialNoteX / spaceWidth) - 3;
@@ -94,15 +90,11 @@ class Player extends Component {
   }
 
   calcInitialNoteX() {
-    const spaceWidth = this.props.configForm
-      ? this.props.configForm.values.speed *
-        constants.percentage.player.speedToSpaceWidth
-      : this.props.configInitialValues.speed *
-        constants.percentage.player.speedToSpaceWidth;
+    const spaceWidth =
+      this.props.config.speed.value *
+      constants.percentage.player.speedToSpaceWidth;
 
-    const offset = this.props.configForm
-      ? this.props.configForm.values.offset
-      : this.props.configInitialValues.offset;
+    const offset = this.props.config.offset.value;
     const initialNoteX =
       constants.position.player.judge.x +
       ((offset - this.props.currentTime) / this.props.secondsPerNote) *
@@ -227,11 +219,9 @@ class Player extends Component {
   }
 
   updateCanvas() {
-    const spaceWidth = this.props.configForm
-      ? this.props.configForm.values.speed *
-        constants.percentage.player.speedToSpaceWidth
-      : this.props.configInitialValues.speed *
-        constants.percentage.player.speedToSpaceWidth;
+    const spaceWidth =
+      this.props.config.speed.value *
+      constants.percentage.player.speedToSpaceWidth;
 
     this.canvas.clear(
       this.props.playerPane.width - 1,
@@ -365,8 +355,7 @@ const mapStateToProps = state => ({
   noteIds: state.editor.noteIds,
   noteStates: state.player.noteStates,
   currentTime: state.player.currentTime,
-  configForm: state.form.config,
-  configInitialValues: state.config,
+  config: state.config,
   isAutoMode: state.player.isAutoMode,
   ytPlayer: state.player.ytPlayer,
   isChangingSlider: state.player.isChangingSlider,

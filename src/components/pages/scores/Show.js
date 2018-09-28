@@ -35,14 +35,14 @@ class Show extends Component {
       states.fill(constants.id.note.space);
       this.props.replaceStates(states);
 
-      // need check of configForm???
-      this.props.change('username', score.username);
-      this.props.change('videoId', score.video_id);
-      this.props.change('offset', score.offset);
-      this.props.change('comment', score.comment);
-      this.props.change('speed', score.speed);
-      this.props.change('bpm', score.bpm);
-      this.props.calcSecondsPerNote(score.bpm);
+      this.props.setConfig({
+        username: score.username,
+        videoId: score.video_id,
+        offset: score.offset,
+        comment: score.comment,
+        speed: score.speed,
+        bpm: score.bpm,
+      });
     } catch (error) {
       let errors = this.state.errors.concat(error);
       this.setState({
@@ -70,7 +70,7 @@ const mapStateToProps = state => ({
   configForm: state.form.config,
 });
 const mapDispatchToProps = dispatch => ({
-  setConfigInitialValues(config) {
+  setConfig(config) {
     dispatch(setConfig(config));
   },
   change(field, value) {

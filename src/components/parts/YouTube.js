@@ -38,11 +38,7 @@ class YouTube extends Component {
             autoplay: 1,
           },
         }}
-        videoId={
-          this.props.configForm
-            ? this.props.configForm.values.videoId
-            : this.props.configInitialValues.videoId
-        }
+        videoId={this.props.config.videoId.value}
         onReady={event => {
           this.props.setYtPlayer(event.target);
           event.target.playVideo();
@@ -63,8 +59,7 @@ class YouTube extends Component {
 }
 
 const mapStateToProps = state => ({
-  configForm: state.form.config,
-  configInitialValues: state.config,
+  config: state.config,
   isChangingSlider: state.player.isChangingSlider,
   ytPlayer: state.player.ytPlayer,
 });
