@@ -1,7 +1,7 @@
 import constants from '../constants';
 
 /* eslint-disable */
-const noteIds = [
+const notes = [
   1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
   1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
   1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -21,58 +21,58 @@ const noteIds = [
 /* eslint-enable */
 
 export const defaultState = {
-  noteIds,
+  notes,
 };
 
 const initialState = {
-  noteIds: [],
+  notes: [],
 };
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case 'SET_NOTE_IDS': {
-      let noteIds = state.noteIds.concat();
-      for (let i = 0; i < action.payload.noteIds.length; i++) {
-        noteIds[action.payload.index + i] = action.payload.noteIds[i];
+    case 'SET_NOTES': {
+      let notes = state.notes.concat();
+      for (let i = 0; i < action.payload.notes.length; i++) {
+        notes[action.payload.index + i] = action.payload.notes[i];
       }
       return {
         ...state,
-        noteIds,
+        notes,
       };
     }
-    case 'ADD_ID_BAR': {
-      let noteIds = state.noteIds.concat();
+    case 'ADD_NOTE_BAR': {
+      let notes = state.notes.concat();
       for (let i = 0; i < constants.number.notesPerBar; i++) {
-        noteIds.push(constants.id.note.space);
+        notes.push(constants.id.note.space);
       }
       return {
         ...state,
-        noteIds,
+        notes,
       };
     }
-    case 'RESET_NOTE_IDS': {
+    case 'RESET_NOTES': {
       return {
         ...state,
-        noteIds: [],
+        notes: [],
       };
     }
-    case 'REMOVE_ID_BAR': {
-      if (state.noteIds.length < constants.number.notesPerBar * 2) {
+    case 'REMOVE_NOTE_BAR': {
+      if (state.notes.length < constants.number.notesPerBar * 2) {
         return state;
       }
-      const noteIds = state.noteIds.slice(
+      const notes = state.notes.slice(
         0,
-        state.noteIds.length - constants.number.notesPerBar
+        state.notes.length - constants.number.notesPerBar
       );
       return {
         ...state,
-        noteIds,
+        notes,
       };
     }
-    case 'REPLACE_NOTE_IDS': {
+    case 'REPLACE_NOTES': {
       return {
         ...state,
-        noteIds: action.payload.noteIds,
+        notes: action.payload.notes,
       };
     }
     default:

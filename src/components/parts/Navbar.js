@@ -63,7 +63,7 @@ class Navbar extends Component {
       offset: this.props.config.offset.value,
       speed: this.props.config.speed.value,
       comment: this.props.config.comment.value,
-      noteIds: this.props.noteIds,
+      notes: this.props.notes,
     };
 
     try {
@@ -162,7 +162,7 @@ class Navbar extends Component {
 }
 
 const mapStateToProps = state => ({
-  noteIds: state.editor.noteIds,
+  notes: state.editor.notes,
   config: state.config,
 });
 const mapDispatchToProps = dispatch => ({

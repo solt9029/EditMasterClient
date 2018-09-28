@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 import { setConfig } from '../../../actions/config';
 import { change } from 'redux-form';
 import { calcSecondsPerNote, replaceStates } from '../../../actions/player';
-import { replaceNoteIds } from '../../../actions/editor';
+import { replaceNotes } from '../../../actions/editor';
 import NotFound from '../NotFound';
 import constants from '../../../constants';
 
@@ -29,9 +29,9 @@ class Show extends Component {
       );
       const score = result.data;
 
-      const noteIds = JSON.parse(score.note_ids);
-      this.props.replaceNoteIds(noteIds);
-      let states = Array(noteIds.length);
+      const notes = JSON.parse(score.notes);
+      this.props.replaceNotes(notes);
+      let states = Array(notes.length);
       states.fill(constants.id.note.space);
       this.props.replaceStates(states);
 
@@ -79,8 +79,8 @@ const mapDispatchToProps = dispatch => ({
   calcSecondsPerNote(bpm) {
     dispatch(calcSecondsPerNote(bpm));
   },
-  replaceNoteIds(noteIds) {
-    dispatch(replaceNoteIds(noteIds));
+  replaceNotes(notes) {
+    dispatch(replaceNotes(notes));
   },
   replaceStates(states) {
     dispatch(replaceStates(states));

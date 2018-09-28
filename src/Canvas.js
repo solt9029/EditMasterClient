@@ -141,15 +141,15 @@ export default class Canvas {
     x,
     y,
     pane,
-    noteId,
+    note,
     spaceWidth = 0,
-    previousNoteId = constants.id.note.space,
-    nextNoteId = constants.id.note.space
+    previousNote = constants.id.note.space,
+    nextNote = constants.id.note.space
   ) {
     let noteSize = 'normal';
     let noteColor = constants.color.red;
 
-    switch (noteId) {
+    switch (note) {
       case constants.id.note.ka:
         noteColor = constants.color.blue;
         break;
@@ -172,12 +172,12 @@ export default class Canvas {
     }
 
     if (
-      noteId === constants.id.note.renda ||
-      noteId === constants.id.note.bigrenda ||
-      noteId === constants.id.note.balloon
+      note === constants.id.note.renda ||
+      note === constants.id.note.bigrenda ||
+      note === constants.id.note.balloon
     ) {
-      if (noteId === previousNoteId) {
-        if (noteId === nextNoteId) {
+      if (note === previousNote) {
+        if (note === nextNote) {
           // extension
           this.ctx.fillStyle = noteColor;
           this.ctx.fillRect(

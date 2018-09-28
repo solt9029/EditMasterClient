@@ -7,13 +7,13 @@ import { defaultConfig } from '../../../reducers/config';
 import { connect } from 'react-redux';
 import { setConfig } from '../../../actions/config';
 import { replaceStates } from '../../../actions/player';
-import { replaceNoteIds } from '../../../actions/editor';
+import { replaceNotes } from '../../../actions/editor';
 import constants from '../../../constants';
 
 class New extends Component {
   componentDidMount() {
-    this.props.replaceNoteIds(editorDefaultState.noteIds);
-    let states = Array(editorDefaultState.noteIds.length);
+    this.props.replaceNotes(editorDefaultState.notes);
+    let states = Array(editorDefaultState.notes.length);
     states.fill(constants.id.note.space);
     this.props.replaceStates(states);
 
@@ -34,8 +34,8 @@ const mapStateToProps = state => ({
   configForm: state.form.config,
 });
 const mapDispatchToProps = dispatch => ({
-  replaceNoteIds(noteIds) {
-    dispatch(replaceNoteIds(noteIds));
+  replaceNotes(notes) {
+    dispatch(replaceNotes(notes));
   },
   replaceStates(states) {
     dispatch(replaceStates(states));

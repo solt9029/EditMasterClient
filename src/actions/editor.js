@@ -1,26 +1,26 @@
-export const setNoteIds = (index, noteIds) => ({
-  type: 'SET_NOTE_IDS',
+export const setNotes = (index, notes) => ({
+  type: 'SET_NOTES',
   payload: {
     index,
-    noteIds,
+    notes,
   },
 });
 
-export const replaceNoteIds = noteIds => ({
-  type: 'REPLACE_NOTE_IDS',
+export const replaceNotes = notes => ({
+  type: 'REPLACE_NOTES',
   payload: {
-    noteIds,
+    notes,
   },
 });
 
-export const resetNoteIds = noteIds => ({
-  type: 'RESET_NOTE_IDS',
+export const resetNotes = notes => ({
+  type: 'RESET_NOTES',
 });
 
 export const addIdBar = () => ({
-  type: 'ADD_ID_BAR',
+  type: 'ADD_NOTE_BAR',
 });
 
 export const removeIdBar = () => ({
-  type: 'REMOVE_ID_BAR',
+  type: 'REMOVE_NOTE_BAR',
 });
