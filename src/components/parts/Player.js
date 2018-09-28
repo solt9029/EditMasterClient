@@ -122,7 +122,7 @@ class Player extends Component {
       }
 
       const noteId = this.props.noteIds[i];
-      const noteState = this.props.noteStates[i];
+      const noteState = this.props.states[i];
       if (
         noteState !== constants.id.state.fresh ||
         noteId === constants.id.note.space
@@ -183,7 +183,7 @@ class Player extends Component {
       }
 
       const noteId = this.props.noteIds[i];
-      const noteState = this.props.noteStates[i];
+      const noteState = this.props.states[i];
       if (
         noteState !== constants.id.state.fresh ||
         noteId === constants.id.note.space
@@ -266,7 +266,7 @@ class Player extends Component {
     // notes
     for (let i = canvasRange[1]; i >= canvasRange[0]; i--) {
       const noteId = this.props.noteIds[i];
-      const noteState = this.props.noteStates[i];
+      const noteState = this.props.states[i];
       const x = initialNoteX + i * spaceWidth;
 
       if (
@@ -355,7 +355,7 @@ class Player extends Component {
 const mapStateToProps = state => ({
   playerPane: state.pane.player,
   noteIds: state.editor.noteIds,
-  noteStates: state.player.noteStates,
+  states: state.player.states,
   currentTime: state.player.currentTime,
   config: state.config,
   isAutoMode: state.player.isAutoMode,

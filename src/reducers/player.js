@@ -1,8 +1,8 @@
 import constants from '../constants';
 
-let noteStates = [];
+let states = [];
 for (let i = 0; i < 96 * 15; i++) {
-  noteStates.push(constants.id.state.fresh);
+  states.push(constants.id.state.fresh);
 }
 
 const initialState = {
@@ -12,7 +12,7 @@ const initialState = {
   isAutoMode: true,
   isChangingSlider: false,
   secondsPerNote: 1,
-  noteStates,
+  states,
 };
 
 export default (state = initialState, action) => {
@@ -48,56 +48,56 @@ export default (state = initialState, action) => {
         ytPlayerState: action.payload.ytPlayerState,
       };
     case 'SET_STATE': {
-      let noteStates = state.noteStates.concat();
-      noteStates[action.payload.index] = action.payload.state;
+      let states = state.states.concat();
+      states[action.payload.index] = action.payload.state;
       return {
         ...state,
-        noteStates,
+        states,
       };
     }
     case 'REPLACE_STATES': {
       return {
         ...state,
-        noteStates: action.payload.states,
+        states: action.payload.states,
       };
     }
     case 'RESET_STATE': {
-      let noteStates = state.noteStates.concat();
-      for (let i = 0; i < noteStates.length; i++) {
-        noteStates[i] = constants.id.state.fresh;
+      let states = state.states.concat();
+      for (let i = 0; i < states.length; i++) {
+        states[i] = constants.id.state.fresh;
       }
       return {
         ...state,
-        noteStates,
+        states,
       };
     }
     case 'ADD_STATE_BAR': {
-      let noteStates = state.noteStates.concat();
+      let states = state.states.concat();
       for (let i = 0; i < constants.number.notesPerBar; i++) {
-        noteStates.push(constants.id.note.space);
+        states.push(constants.id.note.space);
       }
       return {
         ...state,
-        noteStates,
+        states,
       };
     }
     case 'REMOVE_STATE_BAR': {
-      if (state.noteStates.length < constants.number.notesPerBar * 2) {
+      if (state.states.length < constants.number.notesPerBar * 2) {
         return state;
       }
-      const noteStates = state.noteStates.slice(
+      const states = state.states.slice(
         0,
-        state.noteStates.length - constants.number.notesPerBar
+        state.states.length - constants.number.notesPerBar
       );
       return {
         ...state,
-        noteStates,
+        states,
       };
     }
     case 'RESET_STATES':
       return {
         ...state,
-        noteStates: [],
+        states: [],
       };
     default:
       return state;
