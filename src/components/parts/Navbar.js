@@ -55,20 +55,14 @@ class Navbar extends Component {
     });
   }
 
-  // this method should be available after config form is mounted
-  // this doesn't need to be used before config form is mounted
   async create() {
-    if (!this.props.configForm) {
-      return;
-    }
-
     const data = {
-      bpm: this.props.configForm.values.bpm,
-      videoId: this.props.configForm.values.videoId,
-      username: this.props.configForm.values.username,
-      offset: this.props.configForm.values.offset,
-      speed: this.props.configForm.values.speed,
-      comment: this.props.configForm.values.comment,
+      bpm: this.props.config.bpm.value,
+      videoId: this.props.config.videoId.value,
+      username: this.props.config.username.value,
+      offset: this.props.config.offset.value,
+      speed: this.props.config.speed.value,
+      comment: this.props.config.comment.value,
       noteIds: this.props.noteIds,
     };
 
@@ -168,8 +162,8 @@ class Navbar extends Component {
 }
 
 const mapStateToProps = state => ({
-  configForm: state.form.config,
   noteIds: state.editor.noteIds,
+  config: state.config,
 });
 const mapDispatchToProps = dispatch => ({
   // setState(index, state) {

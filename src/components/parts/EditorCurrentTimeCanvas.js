@@ -23,8 +23,7 @@ class EditorCurrentTimeCanvas extends Component {
       this.props.noteIds.length !== nextProps.noteIds.length ||
       this.props.currentTime !== nextProps.currentTime ||
       this.props.secondsPerNote !== nextProps.secondsPerNote ||
-      this.props.configForm !== nextProps.configForm ||
-      this.props.configInitialValues !== nextProps.configInitialValues
+      this.props.offset !== nextProps.offset
     );
   }
 
@@ -33,10 +32,6 @@ class EditorCurrentTimeCanvas extends Component {
   }
 
   updateCanvas() {
-    const offset = this.props.configForm
-      ? this.props.configForm.values.offset
-      : this.props.configInitialValues.offset;
-
     this.canvas.clear(
       this.props.editorPane.width - 1,
       Math.ceil(this.props.noteIds.length / constants.number.notesPerBar) *
@@ -50,7 +45,7 @@ class EditorCurrentTimeCanvas extends Component {
     const spaceWidth = actualBarWidth / constants.number.notesPerBar;
 
     const currentNoteIndexFloat =
-      (this.props.currentTime - offset) / this.props.secondsPerNote;
+      (this.props.currentTime - this.props.offset) / this.props.secondsPerNote;
     const currentNotesPerBarIndexFloat =
       currentNoteIndexFloat % constants.number.notesPerBar;
     const currentBarIndex = Math.floor(
@@ -86,8 +81,7 @@ const mapStateToProps = state => ({
   noteIds: state.editor.noteIds,
   currentTime: state.player.currentTime,
   secondsPerNote: state.player.secondsPerNote,
-  configForm: state.form.config,
-  configInitialValues: state.config,
+  offset: state.config.offset.value,
 });
 export default connect(
   mapStateToProps,
