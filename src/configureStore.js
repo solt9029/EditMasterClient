@@ -4,14 +4,12 @@ import * as reducers from './reducers';
 import thunk from 'redux-thunk';
 import logger from 'redux-logger';
 import history from './history';
-import { reducer as formReducer } from 'redux-form';
 
 export default function configureStore() {
   return createStore(
     combineReducers({
       ...reducers,
       router: routerReducer,
-      form: formReducer,
     }),
     applyMiddleware(logger, thunk, routerMiddleware(history))
   );
