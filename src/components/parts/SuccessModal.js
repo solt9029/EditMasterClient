@@ -6,7 +6,6 @@ import {
   closeSuccessModal,
 } from '../../actions/successModal';
 import { Link } from 'react-router-dom';
-import withRouter from 'react-router-dom/withRouter';
 
 class SuccessModal extends Component {
   constructor(props) {
@@ -71,9 +70,7 @@ const mapDispatchToProps = dispatch => ({
     dispatch(closeSuccessModal());
   },
 });
-export default withRouter(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(SuccessModal)
-);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SuccessModal);
