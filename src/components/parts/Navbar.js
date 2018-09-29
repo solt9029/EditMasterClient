@@ -21,6 +21,10 @@ import config from '../../config';
 import { connect } from 'react-redux';
 import { openErrorModal } from '../../actions/errorModal';
 import { openSuccessModal } from '../../actions/successModal';
+import { setKeyword } from '../../actions/navbar';
+import history from '../../history';
+import qs from 'qs';
+import { setPage } from '../../actions/scoreCardPaginate';
 
 const Logo = styled(NavbarBrand)`
   background: url('/images/icon.png') no-repeat left center;
@@ -147,12 +151,36 @@ class Navbar extends Component {
               )}
             {this.props.match.path === constants.route.scores.index && (
               <Form inline onSubmit={e => e.preventDefault()}>
-                <Input type="search" className="mr-sm-2" placeholder="検索" />
+                <Input
+                  type="search"
+                  className="mr-sm-2"
+                  placeholder="検索"
+                  value={this.props.keyword}
+                  onChange={event => {
+                    this.props.setKeyword(event.target.value);
+                  }}
+                />
                 <Button
                   outline
                   color="success"
                   className="my-2 my-sm-2"
                   type="submit"
+                  onClick={() => {
+                    this.props.setPage(1);
+                    const query = qs.parse(this.props.location.search, {
+                      ignoreQueryPrefix: true,
+                    });
+                    const search = qs.stringify(
+                      {
+                        page: 1,
+                        keyword: this.props.keyword,
+                      },
+                      { addQueryPrefix: true }
+                    );
+                    history.push({
+                      search,
+                    });
+                  }}
                 >
                   検索
                 </Button>
@@ -168,6 +196,7 @@ class Navbar extends Component {
 const mapStateToProps = state => ({
   notes: state.editor.notes,
   config: state.config,
+  keyword: state.navbar.keyword,
 });
 const mapDispatchToProps = dispatch => ({
   openErrorModal(errors) {
@@ -175,6 +204,12 @@ const mapDispatchToProps = dispatch => ({
   },
   openSuccessModal(id) {
     dispatch(openSuccessModal(id));
+  },
+  setKeyword(keyword) {
+    dispatch(setKeyword(keyword));
+  },
+  setPage(page) {
+    dispatch(setPage(page));
   },
 });
 export default withRouter(

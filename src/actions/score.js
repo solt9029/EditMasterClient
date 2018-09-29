@@ -1,5 +1,7 @@
 import axios from 'axios';
 import config from '../config';
+import history from '../history';
+import qs from 'qs';
 
 export const fetchData = (page, keyword) => {
   return async dispatch => {
