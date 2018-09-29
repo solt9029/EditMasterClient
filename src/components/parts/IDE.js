@@ -90,7 +90,6 @@ class IDE extends Component {
 }
 
 const mapStateToProps = state => ({
-  config: state.form.config,
   ytPlayer: state.player.ytPlayer,
   isChangingSlider: state.player.isChangingSlider,
 });
