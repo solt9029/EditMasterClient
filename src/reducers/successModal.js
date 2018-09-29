@@ -1,5 +1,6 @@
 const initialState = {
   isOpen: false,
+  id: 0,
 };
 
 export default (state = initialState, action) => {
@@ -8,6 +9,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         isOpen: true,
+        id: action.payload.id,
       };
     case 'CLOSE_SUCCESS_MODAL':
       return initialState;

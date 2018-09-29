@@ -69,11 +69,11 @@ class Navbar extends Component {
     };
 
     try {
-      await axios.post(
+      const result = await axios.post(
         `http://${config.api.host}:${config.api.port}/scores/create`,
         data
       );
-      this.props.openSuccessModal();
+      this.props.openSuccessModal(result.data.id);
     } catch (error) {
       this.props.openErrorModal(error.response.data.errors);
       console.log(error.response.data.errors);
@@ -173,8 +173,8 @@ const mapDispatchToProps = dispatch => ({
   openErrorModal(errors) {
     dispatch(openErrorModal(errors));
   },
-  openSuccessModal() {
-    dispatch(openSuccessModal());
+  openSuccessModal(id) {
+    dispatch(openSuccessModal(id));
   },
 });
 export default withRouter(
