@@ -1,10 +1,12 @@
 import axios from 'axios';
 import config from '../config';
 
-export const fetchData = page => {
+export const fetchData = (page, keyword) => {
   return async dispatch => {
     const result = await axios.get(
-      `http://${config.api.host}:${config.api.port}/scores?page=${page}`
+      `http://${config.api.host}:${
+        config.api.port
+      }/scores?page=${page}&keyword=${keyword}`
     );
     dispatch(setData(result.data));
   };
