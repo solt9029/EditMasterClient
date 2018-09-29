@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ReactPaginate from 'react-paginate';
-import { fetchData } from '../../actions/score';
+import qs from 'qs';
+import history from '../../history';
+import { withRouter } from 'react-router-dom';
+import { setPage } from '../../actions/scoreCardPaginate';
 
 class ScoreCardPaginate extends Component {
   render() {
@@ -10,11 +13,26 @@ class ScoreCardPaginate extends Component {
         class="pagination"
         previousLabel={'前'}
         nextLabel={'次'}
+        forcePage={this.props.page - 1}
         pageCount={this.props.lastPage}
         marginPagesDisplayed={1}
         pageRangeDisplayed={3}
         onPageChange={data => {
-          this.props.fetchData(data.selected + 1);
+          this.props.setPage(data.selected + 1);
+          const query = qs.parse(this.props.location.search, {
+            ignoreQueryPrefix: true,
+          });
+          const keyword = query.keyword ? query.keyword : '';
+          const search = qs.stringify(
+            {
+              page: data.selected + 1,
+              keyword,
+            },
+            { addQueryPrefix: true }
+          );
+          history.push({
+            search,
+          });
         }}
         activeClassName="active"
         breakClassName="page-item"
@@ -39,13 +57,16 @@ const mapStateToProps = state => ({
   perPage: state.score.perPage,
   total: state.score.total,
   to: state.score.to,
+  page: state.scoreCardPaginate.page,
 });
 const mapDispatchToProps = dispatch => ({
-  fetchData(page) {
-    dispatch(fetchData(page));
+  setPage(page) {
+    dispatch(setPage(page));
   },
 });
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ScoreCardPaginate);
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(ScoreCardPaginate)
+);
