@@ -22,7 +22,7 @@ class ErrorModal extends Component {
         toggle={this.props.closeErrorModal}
       >
         <ModalHeader toggle={this.props.closeErrorModal}>
-          保存エラー
+          保存中にエラーが発生しました
         </ModalHeader>
         <ModalBody>{errors}</ModalBody>
         <ModalFooter>
