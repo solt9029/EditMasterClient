@@ -167,9 +167,6 @@ class Navbar extends Component {
                   type="submit"
                   onClick={() => {
                     this.props.setPage(1);
-                    const query = qs.parse(this.props.location.search, {
-                      ignoreQueryPrefix: true,
-                    });
                     const search = qs.stringify(
                       {
                         page: 1,
