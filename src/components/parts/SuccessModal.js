@@ -6,10 +6,25 @@ import {
   closeSuccessModal,
 } from '../../actions/successModal';
 import { Link } from 'react-router-dom';
+import withRouter from 'react-router-dom/withRouter';
 
 class SuccessModal extends Component {
+  constructor(props) {
+    super(props);
+    this.openTweetWindow = this.openTweetWindow.bind(this);
+  }
   componentWillUnmount() {
     this.props.closeSuccessModal();
+  }
+
+  openTweetWindow() {
+    const text = '創作譜面をしました！';
+    const url = `http://${window.location.host}/scores/${
+      this.props.successModal.id
+    }`;
+    const hashtags = '創作の達人';
+    let newWindow = window.open('', 'child', 'width=600, height=300');
+    newWindow.location.href = `https://twitter.com/share?text=${text}&hashtags=${hashtags}&url=${url}&count=none&lang=ja`;
   }
 
   render() {
@@ -25,7 +40,9 @@ class SuccessModal extends Component {
           <img alt="modal" width="100%" src="/images/modal.png" />
         </ModalBody>
         <ModalFooter>
-          <Button color="primary">ツイート</Button>
+          <Button color="primary" onClick={this.openTweetWindow}>
+            ツイート
+          </Button>
           <Button color="warning" tag={Link} to="/scores" target="_blank">
             作品一覧
           </Button>
@@ -54,7 +71,9 @@ const mapDispatchToProps = dispatch => ({
     dispatch(closeSuccessModal());
   },
 });
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(SuccessModal);
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(SuccessModal)
+);

@@ -1,5 +1,8 @@
-export const openSuccessModal = () => ({
+export const openSuccessModal = id => ({
   type: 'OPEN_SUCCESS_MODAL',
+  payload: {
+    id,
+  },
 });
 
 export const closeSuccessModal = () => ({
