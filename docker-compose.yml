@@ -1,0 +1,9 @@
+version: '2'
+
+services:
+  react:
+    build: .
+    ports:
+      - "8053:80"
+    volumes:
+      - .:/react
