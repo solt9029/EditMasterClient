@@ -33,11 +33,9 @@ class Player extends Component {
     const ctx = this.canvasRef.current.getContext('2d');
     this.canvas = new Canvas(ctx);
     this.updateCanvas();
-    window.addEventListener('keydown', this.playMode);
   }
 
   componentWillUnmount() {
-    window.removeEventListener('keydown', this.playMode);
     this.props.resetStates();
   }
 
@@ -160,10 +158,10 @@ class Player extends Component {
       return;
     }
 
-    if (constants.key.isDon(event.key)) {
+    if (constants.key.isDon(event.nativeEvent.key)) {
       constants.sound.don.trigger();
     }
-    if (constants.key.isKa(event.key)) {
+    if (constants.key.isKa(event.nativeEvent.key)) {
       constants.sound.ka.trigger();
     }
 
@@ -192,10 +190,16 @@ class Player extends Component {
       }
 
       let hit = false;
-      if (constants.key.isDon(event.key) && constants.id.note.isDon(note)) {
+      if (
+        constants.key.isDon(event.nativeEvent.key) &&
+        constants.id.note.isDon(note)
+      ) {
         hit = true;
       }
-      if (constants.key.isKa(event.key) && constants.id.note.isKa(note)) {
+      if (
+        constants.key.isKa(event.nativeEvent.key) &&
+        constants.id.note.isKa(note)
+      ) {
         hit = true;
       }
       if (!hit) {
@@ -317,19 +321,12 @@ class Player extends Component {
     return (
       <div>
         <canvas
+          tabIndex={0}
+          onKeyDown={this.playMode}
           ref={this.canvasRef}
           style={{ display: 'block' }}
           width={this.props.playerPane.width - 1}
           height={this.props.playerPane.height - 1}
-          onClick={() => {
-            if (this.props.ytPlayerState === constants.id.youtube.playing) {
-              this.props.ytPlayer.pauseVideo();
-            } else if (
-              this.props.ytPlayerState === constants.id.youtube.paused
-            ) {
-              this.props.ytPlayer.playVideo();
-            }
-          }}
         />
         <Slider
           style={sliderInlineStyle}

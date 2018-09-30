@@ -30,11 +30,6 @@ class EditorCaretCanvas extends Component {
   componentDidMount() {
     const ctx = this.canvasRef.current.getContext('2d');
     this.canvas = new Canvas(ctx);
-    window.addEventListener('keydown', this.keyDown);
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener('keydown', this.keyDown);
   }
 
   shouldComponentUpdate(nextProps) {
@@ -51,7 +46,7 @@ class EditorCaretCanvas extends Component {
   }
 
   copyPaste(event) {
-    switch (event.key) {
+    switch (event.nativeEvent.key) {
       case constants.key.copy:
         this.clipboard = this.props.notes.slice(
           this.mouseBarIndex * constants.number.notesPerBar,
@@ -85,8 +80,8 @@ class EditorCaretCanvas extends Component {
     let { division, note } = this.props.palette;
 
     // if the event is key event, the note which is going to be put should be key value!
-    if (event.key) {
-      const keyValue = +event.key;
+    if (event.nativeEvent.key) {
+      const keyValue = +event.nativeEvent.key;
       if (!constants.id.note.isNote(keyValue)) {
         return;
       }
@@ -162,7 +157,9 @@ class EditorCaretCanvas extends Component {
   render() {
     return (
       <canvas
+        tabIndex={0}
         onMouseMove={this.updateCaret}
+        onKeyDown={this.keyDown}
         onClick={this.setNotes}
         ref={this.canvasRef}
         style={canvasInlineStyle}
