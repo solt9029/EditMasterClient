@@ -65,7 +65,10 @@ export const resetConfig = () => ({
 export const setUsername = (value, touched = true) => {
   let errors = [];
   if (value === '') {
-    errors.push('必須項目です');
+    errors.push('必須です');
+  }
+  if (value.length > 20) {
+    errors.push('20文字以下の文字列を指定してください');
   }
   return {
     type: 'SET_USERNAME',
@@ -80,7 +83,7 @@ export const setUsername = (value, touched = true) => {
 export const setVideoId = (value, touched = true) => {
   let errors = [];
   if (value === '') {
-    errors.push('必須項目です');
+    errors.push('必須です');
   }
   return {
     type: 'SET_VIDEO_ID',
@@ -102,7 +105,10 @@ export const setBpmAndCalcSecondsPerNote = (value, touched = true) => {
 const setBpm = (value, touched = true) => {
   let errors = [];
   if (value === '') {
-    errors.push('必須項目です');
+    errors.push('必須です');
+  }
+  if (isNaN(value)) {
+    errors.push('数値を指定してください');
   }
   return {
     type: 'SET_BPM',
@@ -117,7 +123,10 @@ const setBpm = (value, touched = true) => {
 export const setOffset = (value, touched = true) => {
   let errors = [];
   if (value === '') {
-    errors.push('必須項目です');
+    errors.push('必須です');
+  }
+  if (isNaN(value)) {
+    errors.push('数値を指定してください');
   }
   return {
     type: 'SET_OFFSET',
@@ -132,7 +141,10 @@ export const setOffset = (value, touched = true) => {
 export const setSpeed = (value, touched = true) => {
   let errors = [];
   if (value === '') {
-    errors.push('必須項目です');
+    errors.push('必須です');
+  }
+  if (isNaN(value)) {
+    errors.push('数値を指定してください');
   }
   return {
     type: 'SET_SPEED',
@@ -146,8 +158,8 @@ export const setSpeed = (value, touched = true) => {
 
 export const setComment = (value, touched = true) => {
   let errors = [];
-  if (value === '') {
-    errors.push('必須項目です');
+  if (value.length > 140) {
+    errors.push('140文字以下の文字列を指定してください');
   }
   return {
     type: 'SET_COMMENT',
