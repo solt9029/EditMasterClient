@@ -6,8 +6,7 @@ import { connect } from 'react-redux';
 import { fetchScore } from '../../../actions/config';
 import NotFound from '../NotFound';
 import { resetNotFound } from '../../../actions/show';
-import ErrorModal from '../../parts/ErrorModal';
-import SuccessModal from '../../parts/SuccessModal';
+import Modal from '../../parts/Modal';
 
 class Show extends Component {
   componentDidMount() {
@@ -23,8 +22,7 @@ class Show extends Component {
       <div>
         <Navbar />
         <IDE />
-        <ErrorModal />
-        <SuccessModal />
+        <Modal />
       </div>
     );
     if (this.props.notFound) {
