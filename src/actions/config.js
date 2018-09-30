@@ -7,6 +7,7 @@ import { replaceStates } from './player';
 import axios from 'axios';
 import config from '../config';
 import { notFound } from './show';
+import urlParse from 'url-parse';
 
 export const setDefaultScore = () => {
   return dispatch => {
@@ -81,6 +82,12 @@ export const setUsername = (value, touched = true) => {
 };
 
 export const setVideoId = (value, touched = true) => {
+  // format url to videoId
+  const url = urlParse(value, true);
+  if (url.query.v) {
+    value = url.query.v;
+  }
+
   let errors = [];
   if (value === '') {
     errors.push('必須です');
