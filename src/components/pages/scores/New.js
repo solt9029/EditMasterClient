@@ -3,8 +3,7 @@ import Navbar from '../../parts/Navbar';
 import IDE from '../../parts/IDE';
 import { connect } from 'react-redux';
 import { setDefaultScore } from '../../../actions/config';
-import ErrorModal from '../../parts/ErrorModal';
-import SuccessModal from '../../parts/SuccessModal';
+import Modal from '../../parts/Modal';
 
 class New extends Component {
   componentDidMount() {
@@ -15,8 +14,7 @@ class New extends Component {
       <div>
         <Navbar />
         <IDE />
-        <ErrorModal />
-        <SuccessModal />
+        <Modal />
       </div>
     );
   }
