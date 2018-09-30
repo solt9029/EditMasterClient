@@ -81,13 +81,36 @@ export const setUsername = (value, touched = true) => {
   };
 };
 
-export const setVideoId = (value, touched = true) => {
-  // format url to videoId
-  const url = urlParse(value, true);
-  if (url.query.v) {
-    value = url.query.v;
-  }
+export const setVideoIdAndFetchSongle = (value, touched = true) => {
+  return async dispatch => {
+    // format url to videoId
+    const url = urlParse(value, true);
+    if (url.query.v) {
+      value = url.query.v;
+    }
 
+    dispatch(setVideoId(value, touched));
+
+    // songle
+    const result = await axios.get(
+      `http://widget.songle.jp/api/v1/song/beat.json?url=www.youtube.com/watch?v=${value}`
+    );
+    if (!result.data.beats) {
+      return;
+    }
+
+    const offset = (result.data.beats[0].start - 60) / 1000; // 60 is empirically determined
+    dispatch(setOffset(offset, false));
+    let bpmSum = 0;
+    for (let i = 30; i < result.data.beats.length - 30; i++) {
+      bpmSum += result.data.beats[i].bpm;
+    }
+    const bpm = bpmSum / (result.data.beats.length - 60);
+    dispatch(setBpmAndCalcSecondsPerNote(bpm, false));
+  };
+};
+
+export const setVideoId = (value, touched = true) => {
   let errors = [];
   if (value === '') {
     errors.push('必須です');
