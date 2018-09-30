@@ -63,7 +63,7 @@ export default class Jumbotron extends Component {
             <img src="/images/3.png" width="100%" alt="play" />
             <CommentBox>
               <CommentText>プレイモードで遊ぼう。</CommentText>
-              <CommentText>太鼓さん次郎への変換も。</CommentText>
+              <CommentText>太鼓さん次郎も必要なし。</CommentText>
             </CommentBox>
           </StyledCol>
           <StyledCol xs={12} sm={6} md={3}>
