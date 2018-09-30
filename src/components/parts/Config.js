@@ -5,7 +5,7 @@ import { calcSecondsPerNote } from '../../actions/player';
 import { FormFeedback, Input, Label, FormGroup } from 'reactstrap';
 import {
   setUsername,
-  setVideoId,
+  setVideoIdAndFetchSongle,
   setBpmAndCalcSecondsPerNote,
   setOffset,
   setSpeed,
@@ -57,7 +57,7 @@ class Config extends Component {
             }
             value={this.props.videoId.value}
             onChange={event => {
-              this.props.setVideoId(event.target.value);
+              this.props.setVideoIdAndFetchSongle(event.target.value);
             }}
           />
           {this.props.videoId.errors.map((error, i) => {
@@ -155,8 +155,8 @@ const mapDispatchToProps = dispatch => ({
   setUsername(value) {
     dispatch(setUsername(value));
   },
-  setVideoId(value) {
-    dispatch(setVideoId(value));
+  setVideoIdAndFetchSongle(value) {
+    dispatch(setVideoIdAndFetchSongle(value));
   },
   setBpmAndCalcSecondsPerNote(value) {
     dispatch(setBpmAndCalcSecondsPerNote(value));
