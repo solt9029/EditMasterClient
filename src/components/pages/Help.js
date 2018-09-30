@@ -36,10 +36,24 @@ const Help = () => (
         <CardBlock>
           <CardText>
             ●
-            YouTubeの動画IDとBPMとOFFSETがフォームに入力されていることを確認してください。
+            YouTube動画IDとBPMとOFFSETがフォームに入力されていることを確認してください。
           </CardText>
           <CardText>
-            ● YouTubeの動画を再生すると、それに合わせて譜面が再生されます。
+            ● YouTube動画を再生すると、それに合わせて譜面が再生されます。
+          </CardText>
+        </CardBlock>
+      </StyledCard>
+
+      <StyledCard>
+        <CardHeader>YouTube動画IDって何？</CardHeader>
+        <CardBlock>
+          <CardText>
+            ●
+            YouTube動画URLが「https://www.youtube.com/watch?v=jhOVibLEDhA」だとすると、「jhOVibLEDhA」がYouTube動画IDです。
+          </CardText>
+          <CardText>
+            ●
+            分からない場合には、YouTube動画IDを入力するフォームにそのままYouTube動画URLを貼り付けてください。自動的にフォーマットされます。
           </CardText>
         </CardBlock>
       </StyledCard>
