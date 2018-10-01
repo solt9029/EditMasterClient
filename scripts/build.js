@@ -103,9 +103,16 @@ function build(previousFileSizes) {
   console.log('Creating an optimized production build...');
 
   // Copy files to build directory.
-  const copyFiles = ['Dockerfile', 'docker-compose.yml'];
+  const copyFiles = [
+    'Dockerfile',
+    'docker-compose.yml',
+    'server.js',
+    'package.json',
+    'package-lock.json',
+    '.gitignore',
+  ];
   copyFiles.forEach(copyFile => {
-    fs.copyFile(copyFile, `./build/${copyFile}`, err => {
+    fs.copyFile(`./docker/${copyFile}`, `./build/${copyFile}`, err => {
       if (err) {
         console.log(err);
         return;
