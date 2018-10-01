@@ -81,7 +81,6 @@ class Navbar extends Component {
       this.props.successCreate(result.data.id);
     } catch (error) {
       this.props.failCreate(error.response.data.errors);
-      console.log(error.response.data.errors);
     }
   }
 
