@@ -7,3 +7,4 @@ services:
       - "8053:80"
     volumes:
       - .:/react
+      - /react/node_modules
