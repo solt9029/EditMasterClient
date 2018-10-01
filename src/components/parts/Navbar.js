@@ -63,7 +63,7 @@ class Navbar extends Component {
   async create() {
     const data = {
       bpm: this.props.config.bpm.value,
-      videoId: this.props.config.videoId.value,
+      video_id: this.props.config.videoId.value,
       username: this.props.config.username.value,
       offset: this.props.config.offset.value,
       speed: this.props.config.speed.value,
