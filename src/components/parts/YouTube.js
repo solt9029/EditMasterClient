@@ -36,6 +36,7 @@ class YouTube extends Component {
           width: '100%',
           playerVars: {
             autoplay: 1,
+            playsinline: 1,
           },
         }}
         videoId={this.props.config.videoId.value}
