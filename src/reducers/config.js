@@ -1,8 +1,8 @@
 export const defaultConfig = {
   username: '通りすがりの創作の達人',
-  videoId: 'PqJNc9KVIZE',
-  bpm: 150,
-  offset: 12.08,
+  videoId: 'jhOVibLEDhA',
+  bpm: 158,
+  offset: 0.75,
   comment: '創作の達人で創作譜面をしました！',
   speed: 1,
 };
