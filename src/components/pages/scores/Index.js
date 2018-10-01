@@ -23,11 +23,9 @@ class Index extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log('receive');
     if (this.props.location.search === nextProps.location.search) {
       return;
     }
-    console.log('nokoru');
     const query = qs.parse(nextProps.location.search, {
       ignoreQueryPrefix: true,
     });
