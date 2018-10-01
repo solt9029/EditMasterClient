@@ -85,18 +85,11 @@ class Navbar extends Component {
   }
 
   render() {
-    const target =
-      (this.props.match.path === constants.route.scores.show ||
-        this.props.match.path === constants.route.scores.new) &&
-      !this.props.notFound
-        ? '_blank'
-        : '';
-
     return (
       <StyledNavbar className="py-0" color="light" light expand="md">
         <Container>
-          <Logo tag={Link} to={constants.route.index} target={target} />
-          <NavbarBrand tag={Link} to={constants.route.index} target={target}>
+          <Logo tag={Link} to={constants.route.index} />
+          <NavbarBrand tag={Link} to={constants.route.index}>
             <StyledSpan>創作の達人</StyledSpan>
           </NavbarBrand>
           <NavbarToggler onClick={this.toggle} className="my-2" />
@@ -109,31 +102,19 @@ class Navbar extends Component {
                   !this.props.notFound
                 }
               >
-                <StyledNavLink
-                  tag={Link}
-                  to={constants.route.scores.new}
-                  target={target}
-                >
+                <StyledNavLink tag={Link} to={constants.route.scores.new}>
                   創作
                 </StyledNavLink>
               </NavItem>
               <NavItem
                 active={this.props.match.path === constants.route.scores.index}
               >
-                <StyledNavLink
-                  tag={Link}
-                  to={constants.route.scores.index}
-                  target={target}
-                >
+                <StyledNavLink tag={Link} to={constants.route.scores.index}>
                   作品一覧
                 </StyledNavLink>
               </NavItem>
               <NavItem active={this.props.match.path === constants.route.help}>
-                <StyledNavLink
-                  tag={Link}
-                  to={constants.route.help}
-                  target={target}
-                >
+                <StyledNavLink tag={Link} to={constants.route.help}>
                   ヘルプ
                 </StyledNavLink>
               </NavItem>

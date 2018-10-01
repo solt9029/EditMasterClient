@@ -50,7 +50,7 @@ class Modal extends Component {
           <Button color="primary" onClick={this.openTweetWindow}>
             ツイート
           </Button>
-          <Button color="warning" tag={Link} to="/scores" target="_blank">
+          <Button color="warning" tag={Link} to="/scores">
             作品一覧
           </Button>
           <Button
