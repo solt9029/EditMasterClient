@@ -99,7 +99,7 @@ export const setVideoIdAndFetchSongle = (value, touched = true) => {
       return;
     }
 
-    const offset = (result.data.beats[0].start - 60) / 1000; // 60 is empirically determined
+    const offset = result.data.beats[0].start / 1000;
     dispatch(setOffset(offset, false));
     let bpmSum = 0;
     for (let i = 30; i < result.data.beats.length - 30; i++) {
