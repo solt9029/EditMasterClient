@@ -160,14 +160,14 @@ const constants = {
   },
   sound: {
     don: {
-      audio: new Audio('/files/don.wav'),
+      audio: new Audio('/files/don.ogg'),
       trigger: () => {
         constants.sound.don.audio.currentTime = 0;
         constants.sound.don.audio.play();
       },
     },
     ka: {
-      audio: new Audio('/files/ka.wav'),
+      audio: new Audio('/files/ka.ogg'),
       trigger: () => {
         constants.sound.ka.audio.currentTime = 0;
         constants.sound.ka.audio.play();
