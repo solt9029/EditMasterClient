@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, CardHeader, CardBlock, CardText, Container } from 'reactstrap';
+import { Card, CardHeader, CardBody, CardText, Container } from 'reactstrap';
 import styled from 'styled-components';
 
 const StyledContainer = styled(Container)`
@@ -17,7 +17,7 @@ const News = () => (
       <CardHeader>
         更新情報：創作の達人を大幅にアップデートしました（2018/09/30）
       </CardHeader>
-      <CardBlock>
+      <CardBody>
         <CardText>
           創作画面にYouTube動画が表示されるようになりました。プレイモードが追加されました。倍速設定ができるようになりました。また、創作譜面を検索できるようになりました。その他にも細かなデザイン修正などが行われています。是非お楽しみください。また、システムの不具合やバグなどを見つけた場合には、
           <a
@@ -29,7 +29,7 @@ const News = () => (
           </a>
           までご連絡ください。
         </CardText>
-      </CardBlock>
+      </CardBody>
     </StyledCard>
   </StyledContainer>
 );
