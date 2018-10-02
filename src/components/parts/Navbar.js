@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import {
   Collapse,
   Navbar as ReactstrapNavbar,
@@ -24,6 +24,7 @@ import { setKeyword } from '../../actions/navbar';
 import history from '../../history';
 import qs from 'qs';
 import { setPage } from '../../actions/scoreCardPaginate';
+import { saveAs } from 'file-saver';
 
 const Logo = styled(NavbarBrand)`
   background: url('/images/icon.png') no-repeat left center;
@@ -52,12 +53,46 @@ class Navbar extends Component {
     };
     this.toggle = this.toggle.bind(this);
     this.create = this.create.bind(this);
+    this.export = this.export.bind(this);
   }
 
   toggle() {
     this.setState({
       isOpen: !this.state.isOpen,
     });
+  }
+
+  // this should be refactored!
+  export() {
+    let line = [];
+    const jiroOffset = -(parseFloat(this.props.config.offset.value) + 0.15);
+    line[0] = 'TITLE:' + this.props.config.videoId.value;
+    line[1] = 'BPM:' + this.props.config.bpm.value;
+    line[2] = 'WAVE:music.ogg';
+    line[3] = 'OFFSET:' + jiroOffset;
+    line[4] = 'COURSE:oni';
+    line[5] = 'LEVEL:8';
+    line[6] = '#START';
+    for (
+      let l = 0;
+      l < this.props.notes.length / constants.number.notesPerBar;
+      l++
+    ) {
+      line[7 + l] = '';
+      for (let c = 0; c < constants.number.notesPerBar; c++) {
+        line[7 + l] += this.props.notes[l * constants.number.notesPerBar + c];
+      }
+      line[7 + l] += ',';
+    }
+    line[7 + this.props.notes.length / constants.number.notesPerBar] = '#END';
+
+    let content = '';
+    for (let i = 0; i < line.length; i++) {
+      content += line[i];
+      content += '\n';
+    }
+    const blob = new Blob([content], { type: 'tja/plain' });
+    saveAs(blob, this.props.config.videoId.value + '.tja');
   }
 
   async create() {
@@ -122,13 +157,23 @@ class Navbar extends Component {
             {(this.props.match.path === constants.route.scores.new ||
               this.props.match.path === constants.route.scores.show) &&
               !this.props.notFound && (
-                <Button
-                  color="success"
-                  className="my-2 my-sm-2"
-                  onClick={this.create}
-                >
-                  保存
-                </Button>
+                <Fragment>
+                  <Button
+                    color="info"
+                    className="my-2 my-sm-2"
+                    onClick={this.export}
+                  >
+                    太鼓さん次郎エクスポート
+                  </Button>
+                  <Button
+                    color="success"
+                    className="my-2 my-sm-2"
+                    onClick={this.create}
+                    style={{ marginLeft: '10px' }}
+                  >
+                    保存
+                  </Button>
+                </Fragment>
               )}
             {this.props.match.path === constants.route.scores.index && (
               <Form inline onSubmit={e => e.preventDefault()}>
