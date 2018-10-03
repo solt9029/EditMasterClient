@@ -164,29 +164,29 @@ const metas = {
     </head>
     </html>
     `,
-    show: async id => {
-      const result = await axios.get(
-        `http://${config.api.host}:${config.api.port}/scores/${id}`
-      );
-      const score = result.data;
-
-      return `
-      <html>
-      <head>
-      <meta name="twitter:card" content="summary">
-      <meta name="twitter:title" content="${
-        score.username
-      }さんの創作譜面 #創作の達人">
-      <meta name="twitter:description" content="${score.comment}">
-      <meta name="twitter:image" content="http://i.ytimg.com/vi/${
-        score.video_id
-      }/mqdefault.jpg">
-      <meta name="twitter:url" content="http://editmaster.solt9029.com/scores/${id}">
-      <meta name="twitter:site" content="@solt9029">
-      <meta name="twitter:creator" content="@solt9029">
-      </head>
-      </html>
-      `;
+    show: id => {
+      axios
+        .get(`http://${config.api.host}:${config.api.port}/scores/${id}`)
+        .then(result => {
+          const score = result.data;
+          return `
+        <html>
+        <head>
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:title" content="${
+          score.username
+        }さんの創作譜面 #創作の達人">
+        <meta name="twitter:description" content="${score.comment}">
+        <meta name="twitter:image" content="http://i.ytimg.com/vi/${
+          score.video_id
+        }/mqdefault.jpg">
+        <meta name="twitter:url" content="http://editmaster.solt9029.com/scores/${id}">
+        <meta name="twitter:site" content="@solt9029">
+        <meta name="twitter:creator" content="@solt9029">
+        </head>
+        </html>
+        `;
+        });
     },
   },
 };
