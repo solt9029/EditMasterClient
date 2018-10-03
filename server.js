@@ -30,7 +30,7 @@ app.get('/Scores/edit', (req, res) => {
 app.get('/', (req, res) => {
   if (req.headers['user-agent'].startsWith('Twitterbot')) {
     res.writeHead(200, { 'Content-Type': 'text/html' });
-    res.end(metas.index);
+    res.end(metas.help);
   }
   res.sendFile(path.join(__dirname, 'index.html'));
 });
