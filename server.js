@@ -4,7 +4,9 @@ const request = require('request');
 const app = express();
 
 // static
-app.use(express.static(__dirname));
+app.use(express.static(path.join(__dirname, 'files')));
+app.use(express.static(path.join(__dirname, 'images')));
+app.use(express.static(path.join(__dirname, 'static')));
 
 // redirect
 app.get('/Scores/index', (req, res) => {
@@ -30,7 +32,7 @@ app.get('/Scores/edit', (req, res) => {
 app.get('/', (req, res) => {
   if (req.headers['user-agent'].startsWith('Twitterbot')) {
     res.writeHead(200, { 'Content-Type': 'text/html' });
-    res.end(metas.help);
+    res.end(metas.index);
   }
   res.sendFile(path.join(__dirname, 'index.html'));
 });
