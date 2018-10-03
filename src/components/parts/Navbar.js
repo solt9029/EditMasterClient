@@ -65,7 +65,7 @@ class Navbar extends Component {
   // this should be refactored!
   export() {
     let line = [];
-    const jiroOffset = -(parseFloat(this.props.config.offset.value) + 0.15);
+    const jiroOffset = -(parseFloat(this.props.config.offset.value) + 0.08);
     line[0] = 'TITLE:' + this.props.config.videoId.value;
     line[1] = 'BPM:' + this.props.config.bpm.value;
     line[2] = 'WAVE:music.ogg';
