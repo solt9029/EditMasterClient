@@ -56,48 +56,48 @@ app.get('/Scores/edit', (req, res) => {
 
 // serve
 app.get('/', (req, res) => {
-  if (req.headers['user-agent'].startsWith('Twitterbot')) {
-    res.writeHead(200, { 'Content-Type': 'text/html' });
-    res.end(metas.index);
-    return;
-  }
+  // if (req.headers['user-agent'].startsWith('Twitterbot')) {
+  //   res.writeHead(200, { 'Content-Type': 'text/html' });
+  //   res.end(metas.index);
+  //   return;
+  // }
   res.sendFile(path.join(__dirname, 'index.html'));
 });
 
 app.get('/help', (req, res) => {
-  if (req.headers['user-agent'].startsWith('Twitterbot')) {
-    res.writeHead(200, { 'Content-Type': 'text/html' });
-    res.end(metas.help);
-    return;
-  }
+  // if (req.headers['user-agent'].startsWith('Twitterbot')) {
+  //   res.writeHead(200, { 'Content-Type': 'text/html' });
+  //   res.end(metas.help);
+  //   return;
+  // }
   res.sendFile(path.join(__dirname, 'index.html'));
 });
 
 app.get('/scores', (req, res) => {
-  if (req.headers['user-agent'].startsWith('Twitterbot')) {
-    res.writeHead(200, { 'Content-Type': 'text/html' });
-    res.end(metas.scores.index);
-    return;
-  }
+  // if (req.headers['user-agent'].startsWith('Twitterbot')) {
+  //   res.writeHead(200, { 'Content-Type': 'text/html' });
+  //   res.end(metas.scores.index);
+  //   return;
+  // }
   res.sendFile(path.join(__dirname, 'index.html'));
 });
 
 app.get('/scores/new', (req, res) => {
-  if (req.headers['user-agent'].startsWith('Twitterbot')) {
-    res.writeHead(200, { 'Content-Type': 'text/html' });
-    res.end(metas.scores.index);
-    return;
-  }
+  // if (req.headers['user-agent'].startsWith('Twitterbot')) {
+  //   res.writeHead(200, { 'Content-Type': 'text/html' });
+  //   res.end(metas.scores.index);
+  //   return;
+  // }
   res.sendFile(path.join(__dirname, 'index.html'));
 });
 
 app.get('/scores/:id', (req, res) => {
-  if (req.headers['user-agent'].startsWith('Twitterbot')) {
-    res.writeHead(200, { 'Content-Type': 'text/html' });
-    const meta = metas.scores.show(req.params.id);
-    res.end(meta);
-    return;
-  }
+  // if (req.headers['user-agent'].startsWith('Twitterbot')) {
+  //   res.writeHead(200, { 'Content-Type': 'text/html' });
+  //   const meta = metas.scores.show(req.params.id);
+  //   res.end(meta);
+  //   return;
+  // }
   res.sendFile(path.join(__dirname, 'index.html'));
 });
 
