@@ -3,8 +3,10 @@ const path = require('path');
 const request = require('request');
 const app = express();
 
+// static
 app.use(express.static(__dirname));
 
+// redirect
 app.get('/Scores/index', (req, res) => {
   res.redirect('/');
 });
@@ -22,6 +24,39 @@ app.get('/Scores/edit', (req, res) => {
     res.redirect(`/scores/${req.query.id}`);
   }
   res.redirect('/scores/new');
+});
+
+// serve
+app.get('/', (req, res) => {
+  if (req.headers['user-agent'].startsWith('Twitterbot')) {
+    res.writeHead(200, { 'Content-Type': 'text/html' });
+    res.end(metas.index);
+  }
+  res.sendFile(path.join(__dirname, 'index.html'));
+});
+
+app.get('/help', (req, res) => {
+  if (req.headers['user-agent'].startsWith('Twitterbot')) {
+    res.writeHead(200, { 'Content-Type': 'text/html' });
+    res.end(metas.help);
+  }
+  res.sendFile(path.join(__dirname, 'index.html'));
+});
+
+app.get('/scores', (req, res) => {
+  if (req.headers['user-agent'].startsWith('Twitterbot')) {
+    res.writeHead(200, { 'Content-Type': 'text/html' });
+    res.end(metas.scores.index);
+  }
+  res.sendFile(path.join(__dirname, 'index.html'));
+});
+
+app.get('/scores/new', (req, res) => {
+  if (req.headers['user-agent'].startsWith('Twitterbot')) {
+    res.writeHead(200, { 'Content-Type': 'text/html' });
+    res.end(metas.scores.new);
+  }
+  res.sendFile(path.join(__dirname, 'index.html'));
 });
 
 app.get('/scores/:id', (req, res) => {
@@ -43,6 +78,7 @@ app.get('/scores/:id', (req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'));
 });
 
+// all
 app.get('*', (req, res) => res.sendFile(path.join(__dirname, 'index.html')));
 
 app.listen(80);
