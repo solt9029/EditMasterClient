@@ -34,7 +34,8 @@ app.get('/scores/:id', (req, res) => {
         }`,
       },
       (error, response, body) => {
-        res.end(metas.scores.show(body));
+        const score = JSON.parse(body);
+        res.end(metas.scores.show(score));
       }
     );
     return;
