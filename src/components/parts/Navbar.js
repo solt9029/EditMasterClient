@@ -160,16 +160,15 @@ class Navbar extends Component {
                 <Fragment>
                   <Button
                     color="info"
-                    className="my-2 my-sm-2"
+                    className="my-2 mr-sm-2"
                     onClick={this.export}
                   >
                     太鼓さん次郎エクスポート
                   </Button>
                   <Button
                     color="success"
-                    className="my-2 my-sm-2"
+                    className="my-2 mr-sm-2"
                     onClick={this.create}
-                    style={{ marginLeft: '10px' }}
                   >
                     保存
                   </Button>
@@ -179,7 +178,7 @@ class Navbar extends Component {
               <Form inline onSubmit={e => e.preventDefault()}>
                 <Input
                   type="search"
-                  className="mr-sm-2"
+                  className="my-2 mr-sm-2"
                   placeholder="検索"
                   value={this.props.keyword}
                   onChange={event => {
