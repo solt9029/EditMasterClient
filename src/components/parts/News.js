@@ -15,6 +15,16 @@ const News = () => (
   <StyledContainer>
     <StyledCard>
       <CardHeader>
+        更新情報：太鼓さん次郎エクスポートを追加しました（2018/10/03）
+      </CardHeader>
+      <CardBody>
+        <CardText>
+          太鼓さん次郎エクスポートを追加しました。現在、連打・大連打・風船のエクスポート処理が不完全なので、今後修正していく予定です。
+        </CardText>
+      </CardBody>
+    </StyledCard>
+    <StyledCard>
+      <CardHeader>
         更新情報：創作の達人を大幅にアップデートしました（2018/09/30）
       </CardHeader>
       <CardBody>
