@@ -13,7 +13,7 @@ app.get('/Scores/index', (req, res) => {
   //   res.end(metas.index);
   //   return;
   // }
-  res.redirect(301, '/');
+  res.redirect('/');
 });
 
 app.get('/Scores/help', (req, res) => {
@@ -22,7 +22,7 @@ app.get('/Scores/help', (req, res) => {
   //   res.end(metas.help);
   //   return;
   // }
-  res.redirect(301, '/help');
+  res.redirect('/help');
 });
 
 app.get('/Scores/view', (req, res) => {
@@ -31,7 +31,7 @@ app.get('/Scores/view', (req, res) => {
   //   res.end(metas.scores.index);
   //   return;
   // }
-  res.redirect(301, '/scores');
+  res.redirect('/scores');
 });
 
 app.get('/Scores/edit', (req, res) => {
@@ -42,7 +42,7 @@ app.get('/Scores/edit', (req, res) => {
     //   res.end(meta);
     //   return;
     // }
-    res.redirect(301, `/scores/${req.query.id}`);
+    res.redirect(`/scores/${req.query.id}`);
     return;
   }
 
@@ -51,7 +51,7 @@ app.get('/Scores/edit', (req, res) => {
   //   res.end(metas.scores.new);
   //   return;
   // }
-  res.redirect(301, '/scores/new');
+  res.redirect('/scores/new');
 });
 
 // serve
