@@ -4,9 +4,7 @@ const request = require('request');
 const app = express();
 
 // static
-app.use(express.static(path.join(__dirname, 'files')));
-app.use(express.static(path.join(__dirname, 'images')));
-app.use(express.static(path.join(__dirname, 'static')));
+app.use(express.static(__dirname));
 
 // redirect
 app.get('/Scores/index', (req, res) => {
