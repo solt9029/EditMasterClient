@@ -3,9 +3,6 @@ const path = require('path');
 const request = require('request');
 const app = express();
 
-// static
-app.use(express.static(__dirname));
-
 // redirect
 app.get('/Scores/index', (req, res) => {
   res.redirect('/');
@@ -77,6 +74,9 @@ app.get('/scores/:id', (req, res) => {
   }
   res.sendFile(path.join(__dirname, 'index.html'));
 });
+
+// static
+app.use(express.static(__dirname));
 
 // all
 app.get('*', (req, res) => res.sendFile(path.join(__dirname, 'index.html')));
