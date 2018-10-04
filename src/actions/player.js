@@ -42,6 +42,6 @@ export const freshStates = () => ({
   type: 'FRESH_STATES',
 });
 
-export const resetStates = () => ({
-  type: 'RESET_STATES',
+export const reset = () => ({
+  type: 'PLAYER/RESET',
 });

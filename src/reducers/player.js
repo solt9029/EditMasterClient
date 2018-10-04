@@ -86,11 +86,8 @@ export default (state = initialState, action) => {
         states,
       };
     }
-    case 'RESET_STATES':
-      return {
-        ...state,
-        states: [],
-      };
+    case 'PLAYER/RESET':
+      return initialState;
     default:
       return state;
   }
