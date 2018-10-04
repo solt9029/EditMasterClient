@@ -2,7 +2,7 @@ import { calcSecondsPerNote } from './player';
 import { defaultNotes } from '../reducers/editor';
 import { defaultConfig } from '../reducers/config';
 import constants from '../constants';
-import { replaceNotes } from './editor';
+import { setNotes } from './editor';
 import { replaceStates } from './player';
 import axios from 'axios';
 import config from '../config';
@@ -11,7 +11,7 @@ import urlParse from 'url-parse';
 
 export const setDefaultScore = () => {
   return dispatch => {
-    dispatch(replaceNotes(defaultNotes));
+    dispatch(setNotes(defaultNotes));
     let states = Array(defaultNotes.length).fill(constants.id.note.space);
     dispatch(replaceStates(states));
 
@@ -28,7 +28,7 @@ export const fetchScore = id => {
       const score = result.data;
 
       const notes = JSON.parse(score.notes);
-      dispatch(replaceNotes(notes));
+      dispatch(setNotes(notes));
       let states = Array(notes.length).fill(constants.id.note.space);
       dispatch(replaceStates(states));
 

@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import constants from '../../constants';
 import Canvas from '../../Canvas';
-import { setNotes } from '../../actions/editor';
+import { changeNotes } from '../../actions/editor';
 import { addStateBar } from '../../actions/player';
-import { addIdBar } from '../../actions/editor';
+import { addBar } from '../../actions/editor';
 
 const canvasInlineStyle = {
   position: 'absolute',
@@ -22,7 +22,7 @@ class EditorCaretCanvas extends Component {
     this.canvasRef = React.createRef();
     this.canvas = null;
     this.updateCaret = this.updateCaret.bind(this);
-    this.setNotes = this.setNotes.bind(this);
+    this.changeNotes = this.changeNotes.bind(this);
     this.copyPaste = this.copyPaste.bind(this);
     this.keyDown = this.keyDown.bind(this);
   }
@@ -41,7 +41,7 @@ class EditorCaretCanvas extends Component {
   }
 
   keyDown(event) {
-    this.setNotes(event);
+    this.changeNotes(event);
     this.copyPaste(event);
   }
 
@@ -60,7 +60,7 @@ class EditorCaretCanvas extends Component {
         if (this.clipboard.length !== constants.number.notesPerBar) {
           return;
         }
-        this.props.setNotes(
+        this.props.changeNotes(
           this.mouseBarIndex * constants.number.notesPerBar,
           this.clipboard
         );
@@ -76,7 +76,7 @@ class EditorCaretCanvas extends Component {
     }
   }
 
-  setNotes(event) {
+  changeNotes(event) {
     let { division, note } = this.props.palette;
 
     // if the event is key event, the note which is going to be put should be key value!
@@ -100,7 +100,7 @@ class EditorCaretCanvas extends Component {
     } else {
       notes.push(note);
     }
-    this.props.setNotes(index, notes);
+    this.props.changeNotes(index, notes);
 
     // add one bar if the user puts a note on the last bar
     if (index >= this.props.notes.length - constants.number.notesPerBar) {
@@ -160,7 +160,7 @@ class EditorCaretCanvas extends Component {
         tabIndex={0}
         onMouseMove={this.updateCaret}
         onKeyDown={this.keyDown}
-        onClick={this.setNotes}
+        onClick={this.changeNotes}
         ref={this.canvasRef}
         style={canvasInlineStyle}
         width={this.props.editorPane.width - 1}
@@ -179,12 +179,12 @@ const mapStateToProps = state => ({
   notes: state.editor.notes,
 });
 const mapDispatchToProps = dispatch => ({
-  setNotes(index, num, note) {
-    dispatch(setNotes(index, num, note));
+  changeNotes(index, num, note) {
+    dispatch(changeNotes(index, num, note));
   },
   addBar() {
     dispatch(addStateBar());
-    dispatch(addIdBar());
+    dispatch(addBar());
   },
 });
 export default connect(
