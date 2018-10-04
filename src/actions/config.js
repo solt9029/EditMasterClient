@@ -1,4 +1,3 @@
-import { calcSecondsPerNote } from './player';
 import { defaultNotes } from '../reducers/editor';
 import { defaultConfig } from '../reducers/config';
 import { setNotes } from './editor';
@@ -46,7 +45,7 @@ export const setConfig = config => {
   return dispatch => {
     dispatch(setUsername(config.username, false));
     dispatch(setVideoId(config.videoId, false));
-    dispatch(setBpmAndCalcSecondsPerNote(config.bpm, false));
+    dispatch(setBpm(config.bpm, false));
     dispatch(setOffset(config.offset, false));
     dispatch(setSpeed(config.speed, false));
     dispatch(setComment(config.comment, false));
@@ -100,7 +99,7 @@ export const setVideoIdAndFetchSongle = (value, touched = true) => {
       bpmSum += result.data.beats[i].bpm;
     }
     const bpm = bpmSum / (result.data.beats.length - 60);
-    dispatch(setBpmAndCalcSecondsPerNote(bpm, false));
+    dispatch(setBpm(bpm, false));
   };
 };
 
@@ -119,14 +118,7 @@ export const setVideoId = (value, touched = true) => {
   };
 };
 
-export const setBpmAndCalcSecondsPerNote = (value, touched = true) => {
-  return dispatch => {
-    dispatch(calcSecondsPerNote(value));
-    dispatch(setBpm(value, touched));
-  };
-};
-
-const setBpm = (value, touched = true) => {
+export const setBpm = (value, touched = true) => {
   let errors = [];
   if (value === '') {
     errors.push('必須です');
