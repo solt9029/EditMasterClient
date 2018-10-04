@@ -23,7 +23,6 @@ import { successCreate, failCreate, startCreate } from '../../actions/modal';
 import { setKeyword } from '../../actions/navbar';
 import history from '../../history';
 import qs from 'qs';
-import { setPage } from '../../actions/scoreCardPaginate';
 import { saveAs } from 'file-saver';
 
 const Logo = styled(NavbarBrand)`
@@ -191,7 +190,6 @@ class Navbar extends Component {
                   className="my-2 my-sm-2"
                   type="submit"
                   onClick={() => {
-                    this.props.setPage(1);
                     const search = qs.stringify(
                       {
                         page: 1,
@@ -232,9 +230,6 @@ const mapDispatchToProps = dispatch => ({
   },
   setKeyword(keyword) {
     dispatch(setKeyword(keyword));
-  },
-  setPage(page) {
-    dispatch(setPage(page));
   },
 });
 export default withRouter(

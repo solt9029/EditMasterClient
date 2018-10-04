@@ -4,7 +4,6 @@ import ReactPaginate from 'react-paginate';
 import qs from 'qs';
 import history from '../../history';
 import { withRouter } from 'react-router-dom';
-import { setPage } from '../../actions/scoreCardPaginate';
 
 class ScoreCardPaginate extends Component {
   render() {
@@ -13,12 +12,11 @@ class ScoreCardPaginate extends Component {
         class="pagination"
         previousLabel={'前'}
         nextLabel={'次'}
-        forcePage={this.props.page - 1}
+        forcePage={this.props.currentPage - 1}
         pageCount={this.props.lastPage}
         marginPagesDisplayed={1}
         pageRangeDisplayed={3}
         onPageChange={data => {
-          this.props.setPage(data.selected + 1);
           const query = qs.parse(this.props.location.search, {
             ignoreQueryPrefix: true,
           });
@@ -57,13 +55,8 @@ const mapStateToProps = state => ({
   perPage: state.score.perPage,
   total: state.score.total,
   to: state.score.to,
-  page: state.scoreCardPaginate.page,
 });
-const mapDispatchToProps = dispatch => ({
-  setPage(page) {
-    dispatch(setPage(page));
-  },
-});
+const mapDispatchToProps = dispatch => ({});
 export default withRouter(
   connect(
     mapStateToProps,
