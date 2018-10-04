@@ -32,8 +32,8 @@ export const fetchScore = id => {
   };
 };
 
-export const resetConfig = () => ({
-  type: 'RESET_CONFIG',
+export const reset = () => ({
+  type: 'CONFIG/RESET',
 });
 
 export const setUsername = (value, touched = true) => {

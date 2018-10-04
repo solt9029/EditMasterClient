@@ -77,7 +77,7 @@ export default (state = initialState, action) => {
           errors: [],
         },
       };
-    case 'RESET_CONFIG':
+    case 'CONFIG/RESET':
       return initialState;
     case 'SET_USERNAME':
       return {

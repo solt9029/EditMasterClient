@@ -9,7 +9,7 @@ import {
   setOffset,
   setSpeed,
   setComment,
-  resetConfig,
+  reset,
 } from '../../actions/config';
 
 const StyledDiv = styled.div`
@@ -21,7 +21,7 @@ const StyledDiv = styled.div`
 
 class Config extends Component {
   componentWillUnmount() {
-    this.props.resetConfig();
+    this.props.reset();
   }
   render() {
     return (
@@ -162,8 +162,8 @@ const mapDispatchToProps = dispatch => ({
   setComment(value) {
     dispatch(setComment(value));
   },
-  resetConfig() {
-    dispatch(resetConfig());
+  reset() {
+    dispatch(reset());
   },
   setBpm(value) {
     dispatch(setBpm(value));
