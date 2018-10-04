@@ -16,14 +16,8 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import withRouter from 'react-router-dom/withRouter';
 import constants from '../../constants';
-import axios from 'axios';
-import config from '../../config';
 import { connect } from 'react-redux';
-import {
-  finishCreateSuccess,
-  finishCreateError,
-  startCreate,
-} from '../../actions/modal';
+import { create } from '../../actions/modal';
 import { setKeyword } from '../../actions/navbar';
 import history from '../../history';
 import qs from 'qs';
@@ -55,7 +49,6 @@ class Navbar extends Component {
       isOpen: false,
     };
     this.toggle = this.toggle.bind(this);
-    this.create = this.create.bind(this);
     this.export = this.export.bind(this);
   }
 
@@ -96,30 +89,6 @@ class Navbar extends Component {
     }
     const blob = new Blob([content], { type: 'tja/plain' });
     saveAs(blob, this.props.config.videoId.value + '.tja');
-  }
-
-  async create() {
-    const data = {
-      bpm: this.props.config.bpm.value,
-      video_id: this.props.config.videoId.value,
-      username: this.props.config.username.value,
-      offset: this.props.config.offset.value,
-      speed: this.props.config.speed.value,
-      comment: this.props.config.comment.value,
-      notes: this.props.notes,
-    };
-
-    this.props.startCreate();
-
-    try {
-      const result = await axios.post(
-        `http://${config.api.host}:${config.api.port}/scores/create`,
-        data
-      );
-      this.props.finishCreateSuccess(result.data.id);
-    } catch (error) {
-      this.props.finishCreateError(error.response.data.errors);
-    }
   }
 
   render() {
@@ -171,7 +140,7 @@ class Navbar extends Component {
                   <Button
                     color="success"
                     className="my-2 mr-sm-2"
-                    onClick={this.create}
+                    onClick={this.props.create}
                   >
                     保存
                   </Button>
@@ -223,14 +192,8 @@ const mapStateToProps = state => ({
   keyword: state.navbar.keyword,
 });
 const mapDispatchToProps = dispatch => ({
-  finishCreateSuccess(id) {
-    dispatch(finishCreateSuccess(id));
-  },
-  finishCreateError(errors) {
-    dispatch(finishCreateError(errors));
-  },
-  startCreate() {
-    dispatch(startCreate());
+  create() {
+    dispatch(create());
   },
   setKeyword(keyword) {
     dispatch(setKeyword(keyword));
