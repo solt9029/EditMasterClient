@@ -4,8 +4,13 @@ import ReactPaginate from 'react-paginate';
 import qs from 'qs';
 import history from '../../history';
 import { withRouter } from 'react-router-dom';
+import { reset } from '../../actions/scoreCardPaginate';
 
 class ScoreCardPaginate extends Component {
+  componentWillUnmount() {
+    this.props.reset();
+  }
+
   render() {
     return (
       <ReactPaginate
@@ -56,7 +61,11 @@ const mapStateToProps = state => ({
   total: state.scoreCardPaginate.total,
   to: state.scoreCardPaginate.to,
 });
-const mapDispatchToProps = dispatch => ({});
+const mapDispatchToProps = dispatch => ({
+  reset() {
+    dispatch(reset());
+  },
+});
 export default withRouter(
   connect(
     mapStateToProps,
