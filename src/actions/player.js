@@ -1,12 +1,12 @@
 export const setChangingSlider = isChangingSlider => ({
-  type: 'SET_CHANGING_SLIDER',
+  type: 'PLAYER/SET_CHANGING_SLIDER',
   payload: {
     isChangingSlider,
   },
 });
 
 export const setState = (index, state) => ({
-  type: 'SET_STATE',
+  type: 'PLAYER/SET_STATE',
   payload: {
     index,
     state,
@@ -14,7 +14,7 @@ export const setState = (index, state) => ({
 });
 
 export const freshStates = () => ({
-  type: 'FRESH_STATES',
+  type: 'PLAYER/FRESH_STATES',
 });
 
 export const reset = () => ({
