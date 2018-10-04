@@ -6,7 +6,7 @@ import Player from './Player';
 import Editor from './Editor';
 import Palette from './Palette';
 import { setPanes } from '../../actions/ide';
-import { setCurrentTime } from '../../actions/player';
+import { setCurrentTime } from '../../actions/youtube';
 import YouTube from './YouTube';
 import { debounce } from 'lodash';
 
@@ -88,7 +88,7 @@ class IDE extends Component {
 }
 
 const mapStateToProps = state => ({
-  ytPlayer: state.player.ytPlayer,
+  ytPlayer: state.youtube.ytPlayer,
   isChangingSlider: state.player.isChangingSlider,
 });
 const mapDispatchToProps = dispatch => ({

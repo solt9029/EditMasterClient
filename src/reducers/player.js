@@ -1,9 +1,6 @@
 import constants from '../constants';
 
 const initialState = {
-  ytPlayer: null,
-  ytPlayerState: constants.id.youtube.unstarted,
-  currentTime: 0,
   isAutoMode: true,
   isChangingSlider: false,
   states: [],
@@ -11,16 +8,6 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case 'SET_YTPLAYER':
-      return {
-        ...state,
-        ytPlayer: action.payload.ytPlayer,
-      };
-    case 'SET_CURRENT_TIME':
-      return {
-        ...state,
-        currentTime: action.payload.currentTime,
-      };
     case 'TOGGLE_MODE':
       return {
         ...state,
@@ -30,11 +17,6 @@ export default (state = initialState, action) => {
       return {
         ...state,
         isChangingSlider: action.payload.isChangingSlider,
-      };
-    case 'SET_YTPLAYER_STATE':
-      return {
-        ...state,
-        ytPlayerState: action.payload.ytPlayerState,
       };
     case 'SET_STATE': {
       let states = state.states.concat();

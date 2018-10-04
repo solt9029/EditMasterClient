@@ -87,7 +87,7 @@ class EditorCurrentTimeCanvas extends Component {
 const mapStateToProps = state => ({
   editorPane: state.ide.panes.editor,
   notes: state.editor.notes,
-  currentTime: state.player.currentTime,
+  currentTime: state.youtube.currentTime,
   bpm: state.config.bpm.value,
   offset: state.config.offset.value,
 });
