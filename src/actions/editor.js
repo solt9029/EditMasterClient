@@ -13,8 +13,8 @@ export const replaceNotes = notes => ({
   },
 });
 
-export const resetNotes = notes => ({
-  type: 'RESET_NOTES',
+export const resetEditor = () => ({
+  type: 'RESET_EDITOR',
 });
 
 export const addIdBar = () => ({

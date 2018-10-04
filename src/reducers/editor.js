@@ -40,11 +40,8 @@ export default (state = initialState, action) => {
         notes,
       };
     }
-    case 'RESET_NOTES': {
-      return {
-        ...state,
-        notes: [],
-      };
+    case 'RESET_EDITOR': {
+      return initialState;
     }
     case 'REMOVE_NOTE_BAR': {
       if (state.notes.length < constants.number.notesPerBar * 2) {
