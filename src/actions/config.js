@@ -31,12 +31,13 @@ export const fetchScore = id => {
           username: score.username,
           videoId: score.video_id,
           offset: score.offset,
-          comment: score.comment,
+          comment: score.comment ? score.comment : '',
           speed: score.speed,
           bpm: score.bpm,
         })
       );
     } catch (error) {
+      console.log(error);
       dispatch(notFound());
     }
   };
