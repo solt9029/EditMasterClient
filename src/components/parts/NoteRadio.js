@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Button, Col } from 'reactstrap';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
-import { setPaletteNote } from '../../actions/palette';
+import { setNote } from '../../actions/palette';
 
 const StyledButton = styled(Button)`
   min-width: 75px;
@@ -30,7 +30,7 @@ class NoteRadio extends Component {
           color={this.props.color}
           active={this.props.note === this.props.value}
           onClick={() => {
-            this.props.setPaletteNote(this.props.value);
+            this.props.setNote(this.props.value);
           }}
         >
           <div>{this.props.label}</div>
@@ -47,8 +47,8 @@ const mapStateToProps = state => ({
   paletteWidth: state.ide.panes.palette.width,
 });
 const mapDispatchToProps = dispatch => ({
-  setPaletteNote(note) {
-    dispatch(setPaletteNote(note));
+  setNote(note) {
+    dispatch(setNote(note));
   },
 });
 export default connect(
