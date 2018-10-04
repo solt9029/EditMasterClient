@@ -350,7 +350,7 @@ class Player extends Component {
 }
 
 const mapStateToProps = state => ({
-  playerPane: state.ide.player,
+  playerPane: state.ide.panes.player,
   notes: state.editor.notes,
   states: state.player.states,
   currentTime: state.player.currentTime,

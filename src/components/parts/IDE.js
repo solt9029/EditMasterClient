@@ -5,7 +5,7 @@ import Config from './Config';
 import Player from './Player';
 import Editor from './Editor';
 import Palette from './Palette';
-import { calcPanes } from '../../actions/ide';
+import { setPanes } from '../../actions/ide';
 import { setCurrentTime } from '../../actions/player';
 import YouTube from './YouTube';
 import { debounce } from 'lodash';
@@ -22,18 +22,18 @@ class IDE extends Component {
       editor: React.createRef(),
       palette: React.createRef(),
     };
-    this.calcPanes = debounce(() => {
-      this.props.calcPanes(this.references);
+    this.setPanes = debounce(() => {
+      this.props.setPanes(this.references);
     }, 100).bind(this);
   }
 
   componentDidMount() {
-    this.props.calcPanes(this.references);
-    window.addEventListener('resize', this.calcPanes, false);
+    this.props.setPanes(this.references);
+    window.addEventListener('resize', this.setPanes, false);
   }
 
   componentWillUnmount() {
-    window.removeEventListener('resize', this.calcPanes, false);
+    window.removeEventListener('resize', this.setPanes, false);
   }
 
   render() {
@@ -44,7 +44,7 @@ class IDE extends Component {
           vertical
           percentage
           secondaryInitialSize={20}
-          onSecondaryPaneSizeChange={this.calcPanes}
+          onSecondaryPaneSizeChange={this.setPanes}
         >
           <div style={divInlineStyle} ref={this.references.player}>
             <Player />
@@ -52,14 +52,14 @@ class IDE extends Component {
           <SplitterLayout
             percentage
             secondaryInitialSize={70}
-            onSecondaryPaneSizeChange={this.calcPanes}
+            onSecondaryPaneSizeChange={this.setPanes}
           >
             <SplitterLayout
               percentage
               vertical
               primaryIndex={1}
               secondaryInitialSize={20}
-              onSecondaryPaneSizeChange={this.calcPanes}
+              onSecondaryPaneSizeChange={this.setPanes}
             >
               <div style={divInlineStyle}>
                 <YouTube />
@@ -71,7 +71,7 @@ class IDE extends Component {
             <SplitterLayout
               percentage
               secondaryInitialSize={43}
-              onSecondaryPaneSizeChange={this.calcPanes}
+              onSecondaryPaneSizeChange={this.setPanes}
             >
               <div style={divInlineStyle} ref={this.references.editor}>
                 <Editor />
@@ -92,8 +92,8 @@ const mapStateToProps = state => ({
   isChangingSlider: state.player.isChangingSlider,
 });
 const mapDispatchToProps = dispatch => ({
-  calcPanes(references) {
-    dispatch(calcPanes(references));
+  setPanes(references) {
+    dispatch(setPanes(references));
   },
   setCurrentTime(currentTime) {
     dispatch(setCurrentTime(currentTime));
