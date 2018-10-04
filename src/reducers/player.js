@@ -50,10 +50,13 @@ export default (state = initialState, action) => {
         states,
       };
     }
-    case 'REPLACE_STATES': {
+    case 'EDITOR/SET_NOTES': {
+      const states = Array(action.payload.notes.length).fill(
+        constants.id.note.space
+      );
       return {
         ...state,
-        states: action.payload.states,
+        states,
       };
     }
     case 'RESET_STATE': {
