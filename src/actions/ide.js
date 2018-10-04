@@ -1,29 +1,14 @@
 export const setPanes = references => {
-  const { player, editor, palette } = references;
+  let panes = {};
 
-  let playerPane = { width: 0, height: 0 };
-  if (player.current) {
-    const { offsetWidth, offsetHeight } = player.current;
-    playerPane = { width: offsetWidth, height: offsetHeight };
+  for (let key in references) {
+    let pane = { width: 0, height: 0 };
+    if (references[key].current) {
+      const { offsetWidth, offsetHeight } = references[key].current;
+      pane = { width: offsetWidth, height: offsetHeight };
+    }
+    panes[key] = pane;
   }
-
-  let editorPane = { width: 0, height: 0 };
-  if (editor.current) {
-    const { offsetWidth, offsetHeight } = editor.current;
-    editorPane = { width: offsetWidth, height: offsetHeight };
-  }
-
-  let palettePane = { width: 0, height: 0 };
-  if (palette.current) {
-    const { offsetWidth, offsetHeight } = palette.current;
-    palettePane = { width: offsetWidth, height: offsetHeight };
-  }
-
-  const panes = {
-    player: playerPane,
-    editor: editorPane,
-    palette: palettePane,
-  };
 
   return {
     type: 'SET_PANES',
