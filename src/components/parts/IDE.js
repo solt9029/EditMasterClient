@@ -5,7 +5,7 @@ import Config from './Config';
 import Player from './Player';
 import Editor from './Editor';
 import Palette from './Palette';
-import { setPanes } from '../../actions/ide';
+import { calcPanes } from '../../actions/ide';
 import { setCurrentTime } from '../../actions/player';
 import YouTube from './YouTube';
 import { debounce } from 'lodash';
@@ -19,23 +19,21 @@ class IDE extends Component {
     super(props);
     this.references = {
       player: React.createRef(),
-      config: React.createRef(),
       editor: React.createRef(),
       palette: React.createRef(),
-      youtube: React.createRef(),
     };
-    this.setPanes = debounce(() => {
-      this.props.setPanesFromReferences(this.references);
+    this.calcPanes = debounce(() => {
+      this.props.calcPanes(this.references);
     }, 100).bind(this);
   }
 
   componentDidMount() {
-    this.props.setPanesFromReferences(this.references);
-    window.addEventListener('resize', this.setPanes, false);
+    this.props.calcPanes(this.references);
+    window.addEventListener('resize', this.calcPanes, false);
   }
 
   componentWillUnmount() {
-    window.removeEventListener('resize', this.setPanes, false);
+    window.removeEventListener('resize', this.calcPanes, false);
   }
 
   render() {
@@ -46,7 +44,7 @@ class IDE extends Component {
           vertical
           percentage
           secondaryInitialSize={20}
-          onSecondaryPaneSizeChange={this.setPanes}
+          onSecondaryPaneSizeChange={this.calcPanes}
         >
           <div style={divInlineStyle} ref={this.references.player}>
             <Player />
@@ -54,26 +52,26 @@ class IDE extends Component {
           <SplitterLayout
             percentage
             secondaryInitialSize={70}
-            onSecondaryPaneSizeChange={this.setPanes}
+            onSecondaryPaneSizeChange={this.calcPanes}
           >
             <SplitterLayout
               percentage
               vertical
               primaryIndex={1}
               secondaryInitialSize={20}
-              onSecondaryPaneSizeChange={this.setPanes}
+              onSecondaryPaneSizeChange={this.calcPanes}
             >
-              <div style={divInlineStyle} ref={this.references.youtube}>
+              <div style={divInlineStyle}>
                 <YouTube />
               </div>
-              <div style={divInlineStyle} ref={this.references.config}>
+              <div style={divInlineStyle}>
                 <Config />
               </div>
             </SplitterLayout>
             <SplitterLayout
               percentage
               secondaryInitialSize={43}
-              onSecondaryPaneSizeChange={this.setPanes}
+              onSecondaryPaneSizeChange={this.calcPanes}
             >
               <div style={divInlineStyle} ref={this.references.editor}>
                 <Editor />
@@ -94,42 +92,8 @@ const mapStateToProps = state => ({
   isChangingSlider: state.player.isChangingSlider,
 });
 const mapDispatchToProps = dispatch => ({
-  setPanesFromReferences(references) {
-    const { player, config, editor, palette, youtube } = references;
-    if (
-      !player.current ||
-      !config.current ||
-      !editor.current ||
-      !palette.current ||
-      !youtube.current
-    ) {
-      return;
-    }
-
-    const panes = {
-      player: {
-        width: player.current.offsetWidth,
-        height: player.current.offsetHeight,
-      },
-      config: {
-        width: config.current.offsetWidth,
-        height: palette.current.offsetHeight - youtube.current.offsetHeight - 4,
-      },
-      editor: {
-        width: editor.current.offsetWidth,
-        height: editor.current.offsetHeight,
-      },
-      palette: {
-        width: palette.current.offsetWidth,
-        height: palette.current.offsetHeight,
-      },
-      youtube: {
-        width: youtube.current.offsetWidth,
-        height: youtube.current.offsetHeight,
-      },
-    };
-
-    dispatch(setPanes(panes));
+  calcPanes(references) {
+    dispatch(calcPanes(references));
   },
   setCurrentTime(currentTime) {
     dispatch(setCurrentTime(currentTime));
