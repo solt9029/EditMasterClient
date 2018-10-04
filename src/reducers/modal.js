@@ -7,26 +7,26 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case 'START_CREATE':
+    case 'MODAL/START_CREATE':
       return {
         ...state,
         isOpen: true,
         isLoading: true,
       };
-    case 'SUCCESS_CREATE':
+    case 'MODAL/FINISH_CREATE_SUCCESS':
       return {
         ...state,
         isLoading: false,
         id: action.payload.id,
         errors: null,
       };
-    case 'FAIL_CREATE':
+    case 'MODAL/FINISH_CREATE_ERROR':
       return {
         ...state,
         isLoading: false,
         errors: action.payload.errors,
       };
-    case 'CLOSE_MODAL':
+    case 'MODAL/CLOSE':
       return {
         ...state,
         isOpen: false,

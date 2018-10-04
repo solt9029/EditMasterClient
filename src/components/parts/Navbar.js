@@ -19,7 +19,11 @@ import constants from '../../constants';
 import axios from 'axios';
 import config from '../../config';
 import { connect } from 'react-redux';
-import { successCreate, failCreate, startCreate } from '../../actions/modal';
+import {
+  finishCreateSuccess,
+  finishCreateError,
+  startCreate,
+} from '../../actions/modal';
 import { setKeyword } from '../../actions/navbar';
 import history from '../../history';
 import qs from 'qs';
@@ -112,9 +116,9 @@ class Navbar extends Component {
         `http://${config.api.host}:${config.api.port}/scores/create`,
         data
       );
-      this.props.successCreate(result.data.id);
+      this.props.finishCreateSuccess(result.data.id);
     } catch (error) {
-      this.props.failCreate(error.response.data.errors);
+      this.props.finishCreateError(error.response.data.errors);
     }
   }
 
@@ -219,11 +223,11 @@ const mapStateToProps = state => ({
   keyword: state.navbar.keyword,
 });
 const mapDispatchToProps = dispatch => ({
-  successCreate(id) {
-    dispatch(successCreate(id));
+  finishCreateSuccess(id) {
+    dispatch(finishCreateSuccess(id));
   },
-  failCreate(errors) {
-    dispatch(failCreate(errors));
+  finishCreateError(errors) {
+    dispatch(finishCreateError(errors));
   },
   startCreate() {
     dispatch(startCreate());
