@@ -19,6 +19,6 @@ export const setCurrentTime = currentTime => ({
   },
 });
 
-export const reset = {
+export const reset = () => ({
   type: 'YOUTUBE/RESET',
-};
+});
