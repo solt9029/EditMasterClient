@@ -133,14 +133,14 @@ class Navbar extends Component {
                 <Fragment>
                   <Button
                     color="info"
-                    className="my-2 mr-sm-2"
+                    className="my-2 mr-2"
                     onClick={this.export}
                   >
                     太鼓さん次郎エクスポート
                   </Button>
                   <Button
                     color="success"
-                    className="my-2 mr-sm-2"
+                    className="my-2 mr-2"
                     onClick={this.props.create}
                   >
                     保存
