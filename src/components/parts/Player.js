@@ -8,7 +8,7 @@ import { setCurrentTime, setChangingSlider } from '../../actions/player';
 import Shot from '../../Shot';
 import Canvas from '../../Canvas';
 import JudgeEffect from '../../JudgeEffect';
-import { resetStates } from '../../actions/player';
+import { reset } from '../../actions/player';
 
 const sliderInlineStyle = {
   width: '95%',
@@ -36,7 +36,7 @@ class Player extends Component {
   }
 
   componentWillUnmount() {
-    this.props.resetStates();
+    this.props.reset();
   }
 
   componentDidUpdate() {
@@ -375,8 +375,8 @@ const mapDispatchToProps = dispatch => ({
   setChangingSlider(isChangingSlider) {
     dispatch(setChangingSlider(isChangingSlider));
   },
-  resetStates() {
-    dispatch(resetStates());
+  reset() {
+    dispatch(reset());
   },
 });
 export default connect(
