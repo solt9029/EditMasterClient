@@ -24,7 +24,7 @@ class ScoreCardList extends Component {
 }
 
 const mapStateToProps = state => ({
-  data: state.score.data,
+  data: state.scoreCardPaginate.data,
 });
 const mapDispatchToProps = dispatch => ({});
 export default connect(

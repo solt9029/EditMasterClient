@@ -48,13 +48,13 @@ class ScoreCardPaginate extends Component {
 }
 
 const mapStateToProps = state => ({
-  data: state.score.data,
-  currentPage: state.score.currentPage,
-  from: state.score.from,
-  lastPage: state.score.lastPage,
-  perPage: state.score.perPage,
-  total: state.score.total,
-  to: state.score.to,
+  data: state.scoreCardPaginate.data,
+  currentPage: state.scoreCardPaginate.currentPage,
+  from: state.scoreCardPaginate.from,
+  lastPage: state.scoreCardPaginate.lastPage,
+  perPage: state.scoreCardPaginate.perPage,
+  total: state.scoreCardPaginate.total,
+  to: state.scoreCardPaginate.to,
 });
 const mapDispatchToProps = dispatch => ({});
 export default withRouter(
