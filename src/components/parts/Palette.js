@@ -6,7 +6,7 @@ import DivisionRadio from './DivisionRadio';
 import constants from '../../constants';
 import { connect } from 'react-redux';
 import { toggleMode, addStateBar, removeStateBar } from '../../actions/player';
-import { addIdBar, removeIdBar } from '../../actions/editor';
+import { addBar, removeBar } from '../../actions/editor';
 import { reset } from '../../actions/palette';
 
 const StyledDiv = styled.div`
@@ -155,11 +155,11 @@ const mapDispatchToProps = dispatch => ({
   },
   addBar() {
     dispatch(addStateBar());
-    dispatch(addIdBar());
+    dispatch(addBar());
   },
   removeBar() {
     dispatch(removeStateBar());
-    dispatch(removeIdBar());
+    dispatch(removeBar());
   },
   reset() {
     dispatch(reset());

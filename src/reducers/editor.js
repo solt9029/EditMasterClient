@@ -20,7 +20,7 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case 'SET_NOTES': {
+    case 'EDITOR/CHANGE_NOTES': {
       let notes = state.notes.concat();
       for (let i = 0; i < action.payload.notes.length; i++) {
         notes[action.payload.index + i] = action.payload.notes[i];
@@ -30,7 +30,7 @@ export default (state = initialState, action) => {
         notes,
       };
     }
-    case 'ADD_NOTE_BAR': {
+    case 'EDITOR/ADD_BAR': {
       let notes = state.notes.concat();
       for (let i = 0; i < constants.number.notesPerBar; i++) {
         notes.push(constants.id.note.space);
@@ -40,10 +40,10 @@ export default (state = initialState, action) => {
         notes,
       };
     }
-    case 'RESET_EDITOR': {
+    case 'EDITOR/RESET': {
       return initialState;
     }
-    case 'REMOVE_NOTE_BAR': {
+    case 'EDITOR/REMOVE_BAR': {
       if (state.notes.length < constants.number.notesPerBar * 2) {
         return state;
       }
@@ -56,7 +56,7 @@ export default (state = initialState, action) => {
         notes,
       };
     }
-    case 'REPLACE_NOTES': {
+    case 'EDITOR/SET_NOTES': {
       return {
         ...state,
         notes: action.payload.notes,
