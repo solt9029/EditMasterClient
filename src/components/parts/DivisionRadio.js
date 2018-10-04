@@ -38,7 +38,7 @@ class DivisionRadio extends Component {
 
 const mapStateToProps = state => ({
   division: state.palette.division,
-  paletteWidth: state.pane.palette.width,
+  paletteWidth: state.ide.palette.width,
 });
 const mapDispatchToProps = dispatch => ({
   setPaletteDivision(division) {

@@ -106,7 +106,7 @@ class Editor extends Component {
 }
 
 const mapStateToProps = state => ({
-  editorPane: state.pane.editor,
+  editorPane: state.ide.editor,
   notes: state.editor.notes,
 });
 const mapDispatchToProps = dispatch => ({

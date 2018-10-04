@@ -5,7 +5,7 @@ import Config from './Config';
 import Player from './Player';
 import Editor from './Editor';
 import Palette from './Palette';
-import { setPanes } from '../../actions/pane';
+import { setPanes } from '../../actions/ide';
 import { setCurrentTime } from '../../actions/player';
 import YouTube from './YouTube';
 import { debounce } from 'lodash';
@@ -25,12 +25,12 @@ class IDE extends Component {
       youtube: React.createRef(),
     };
     this.setPanes = debounce(() => {
-      this.props.setPanes(this.references);
+      this.props.setPanesFromReferences(this.references);
     }, 100).bind(this);
   }
 
   componentDidMount() {
-    this.props.setPanes(this.references);
+    this.props.setPanesFromReferences(this.references);
     window.addEventListener('resize', this.setPanes, false);
   }
 
@@ -94,44 +94,42 @@ const mapStateToProps = state => ({
   isChangingSlider: state.player.isChangingSlider,
 });
 const mapDispatchToProps = dispatch => ({
-  setPanes(references) {
+  setPanesFromReferences(references) {
+    const { player, config, editor, palette, youtube } = references;
     if (
-      !references.player.current ||
-      !references.config.current ||
-      !references.editor.current ||
-      !references.palette.current ||
-      !references.youtube.current
+      !player.current ||
+      !config.current ||
+      !editor.current ||
+      !palette.current ||
+      !youtube.current
     ) {
       return;
     }
 
-    dispatch(
-      setPanes({
-        player: {
-          width: references.player.current.offsetWidth,
-          height: references.player.current.offsetHeight,
-        },
-        config: {
-          width: references.config.current.offsetWidth,
-          height:
-            references.palette.current.offsetHeight -
-            references.youtube.current.offsetHeight -
-            4,
-        },
-        editor: {
-          width: references.editor.current.offsetWidth,
-          height: references.editor.current.offsetHeight,
-        },
-        palette: {
-          width: references.palette.current.offsetWidth,
-          height: references.palette.current.offsetHeight,
-        },
-        youtube: {
-          width: references.youtube.current.offsetWidth,
-          height: references.youtube.current.offsetHeight,
-        },
-      })
-    );
+    const panes = {
+      player: {
+        width: player.current.offsetWidth,
+        height: player.current.offsetHeight,
+      },
+      config: {
+        width: config.current.offsetWidth,
+        height: palette.current.offsetHeight - youtube.current.offsetHeight - 4,
+      },
+      editor: {
+        width: editor.current.offsetWidth,
+        height: editor.current.offsetHeight,
+      },
+      palette: {
+        width: palette.current.offsetWidth,
+        height: palette.current.offsetHeight,
+      },
+      youtube: {
+        width: youtube.current.offsetWidth,
+        height: youtube.current.offsetHeight,
+      },
+    };
+
+    dispatch(setPanes(panes));
   },
   setCurrentTime(currentTime) {
     dispatch(setCurrentTime(currentTime));
