@@ -3,7 +3,7 @@ import Navbar from '../../parts/Navbar';
 import Footer from '../../parts/Footer';
 import ScoreCardList from '../../parts/ScoreCardList';
 import { connect } from 'react-redux';
-import { fetchData } from '../../../actions/score';
+import { fetchData } from '../../../actions/scoreCardPaginate';
 import ScoreCardPaginate from '../../parts/ScoreCardPaginate';
 import qs from 'qs';
 import { withRouter } from 'react-router-dom';
