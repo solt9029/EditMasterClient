@@ -361,7 +361,7 @@ const mapStateToProps = state => ({
   states: state.player.states,
   currentTime: state.youtube.currentTime,
   config: state.config,
-  isAutoMode: state.player.isAutoMode,
+  isAutoMode: state.palette.isAutoMode,
   ytPlayer: state.youtube.ytPlayer,
   isChangingSlider: state.player.isChangingSlider,
   ytPlayerState: state.youtube.ytPlayerState,

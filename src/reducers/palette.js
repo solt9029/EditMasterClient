@@ -3,6 +3,7 @@ import constants from '../constants';
 const initialState = {
   note: constants.id.note.don,
   division: 16,
+  isAutoMode: true,
 };
 
 export default (state = initialState, action) => {
@@ -18,6 +19,11 @@ export default (state = initialState, action) => {
       return {
         ...state,
         division: action.payload.division,
+      };
+    case 'PALETTE/TOGGLE_MODE':
+      return {
+        ...state,
+        isAutoMode: !state.isAutoMode,
       };
     default:
       return state;
