@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Button, Col } from 'reactstrap';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
-import { setPaletteDivision } from '../../actions/palette';
+import { setDivision } from '../../actions/palette';
 
 const StyledButton = styled(Button)`
   min-width: 75px;
@@ -25,7 +25,7 @@ class DivisionRadio extends Component {
           color="light"
           active={this.props.division === this.props.value}
           onClick={() => {
-            this.props.setPaletteDivision(this.props.value);
+            this.props.setDivision(this.props.value);
           }}
         >
           <div>{this.props.value}</div>
@@ -41,8 +41,8 @@ const mapStateToProps = state => ({
   paletteWidth: state.ide.panes.palette.width,
 });
 const mapDispatchToProps = dispatch => ({
-  setPaletteDivision(division) {
-    dispatch(setPaletteDivision(division));
+  setDivision(division) {
+    dispatch(setDivision(division));
   },
 });
 export default connect(

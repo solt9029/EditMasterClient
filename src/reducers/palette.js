@@ -7,14 +7,14 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case 'RESET_PALETTE':
+    case 'PALETTE/RESET':
       return initialState;
-    case 'SET_PALETTE_NOTE':
+    case 'PALETTE/SET_NOTE':
       return {
         ...state,
         note: action.payload.note,
       };
-    case 'SET_PALETTE_DIVISION':
+    case 'PALETTE/SET_DIVISION':
       return {
         ...state,
         division: action.payload.division,

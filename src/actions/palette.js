@@ -1,17 +1,17 @@
-export const setPaletteNote = note => ({
-  type: 'SET_PALETTE_NOTE',
+export const setNote = note => ({
+  type: 'PALETTE/SET_NOTE',
   payload: {
     note: +note,
   },
 });
 
-export const setPaletteDivision = division => ({
-  type: 'SET_PALETTE_DIVISION',
+export const setDivision = division => ({
+  type: 'PALETTE/SET_DIVISION',
   payload: {
     division: +division,
   },
 });
 
-export const resetPalette = () => ({
-  type: 'RESET_PALETTE',
+export const reset = () => ({
+  type: 'PALETTE/RESET',
 });
