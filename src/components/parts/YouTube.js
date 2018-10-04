@@ -5,6 +5,7 @@ import {
   setYtPlayer,
   setCurrentTime,
   setYtPlayerState,
+  reset,
 } from '../../actions/youtube';
 import { setChangingSlider, freshStates } from '../../actions/player';
 import constants from '../../constants';
@@ -25,6 +26,7 @@ class YouTube extends Component {
 
   componentWillUnmount() {
     window.cancelAnimationFrame(this.frameId);
+    this.props.reset();
   }
 
   render() {
@@ -78,6 +80,9 @@ const mapDispatchToProps = dispatch => ({
   },
   setYtPlayerState(ytPlayerState) {
     dispatch(setYtPlayerState(ytPlayerState));
+  },
+  reset() {
+    dispatch(reset());
   },
 });
 export default connect(
