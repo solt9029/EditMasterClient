@@ -1,5 +1,5 @@
 export const setKeyword = keyword => ({
-  type: 'SET_KEYWORD',
+  type: 'NAVBAR/SET_KEYWORD',
   payload: {
     keyword,
   },

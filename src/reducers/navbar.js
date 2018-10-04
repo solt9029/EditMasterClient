@@ -4,7 +4,7 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case 'SET_KEYWORD':
+    case 'NAVBAR/SET_KEYWORD':
       return {
         ...state,
         keyword: action.payload.keyword,
