@@ -44,15 +44,21 @@ class Player extends Component {
     this.autoMode();
   }
 
+  get secondsPerNote() {
+    const barPerMinute = this.props.config.bpm.value / constants.number.beat;
+    const barPerSecond = barPerMinute / 60;
+    const notesPerSecond = barPerSecond * constants.number.notesPerBar;
+    const secondsPerNote = 1 / notesPerSecond;
+    return secondsPerNote;
+  }
+
   calcNoteIndexRangeInSecondRange(secondRange) {
     const offset = this.props.config.offset.value;
     const initialNoteIndex = Math.ceil(
-      (this.props.currentTime - secondRange - offset) /
-        this.props.secondsPerNote
+      (this.props.currentTime - secondRange - offset) / this.secondsPerNote
     );
     const finalNoteIndex = Math.floor(
-      (this.props.currentTime + secondRange - offset) /
-        this.props.secondsPerNote
+      (this.props.currentTime + secondRange - offset) / this.secondsPerNote
     );
     return [initialNoteIndex, finalNoteIndex];
   }
@@ -97,8 +103,7 @@ class Player extends Component {
     const offset = this.props.config.offset.value;
     const initialNoteX =
       constants.position.player.judge.x +
-      ((offset - this.props.currentTime) / this.props.secondsPerNote) *
-        spaceWidth;
+      ((offset - this.props.currentTime) / this.secondsPerNote) * spaceWidth;
     return initialNoteX;
   }
 
@@ -358,7 +363,6 @@ const mapStateToProps = state => ({
   isAutoMode: state.player.isAutoMode,
   ytPlayer: state.player.ytPlayer,
   isChangingSlider: state.player.isChangingSlider,
-  secondsPerNote: state.player.secondsPerNote,
   ytPlayerState: state.player.ytPlayerState,
 });
 const mapDispatchToProps = dispatch => ({
