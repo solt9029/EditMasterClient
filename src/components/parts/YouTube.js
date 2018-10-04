@@ -6,7 +6,7 @@ import {
   setCurrentTime,
   setChangingSlider,
   setYtPlayerState,
-  resetState,
+  freshStates,
 } from '../../actions/player';
 import constants from '../../constants';
 
@@ -45,7 +45,7 @@ class YouTube extends Component {
           event.target.playVideo();
         }}
         onStateChange={event => {
-          this.props.resetState();
+          this.props.freshStates();
           this.props.setYtPlayerState(event.data);
           if (event.data === constants.id.youtube.playing) {
             this.props.setChangingSlider(false);
@@ -68,8 +68,8 @@ const mapDispatchToProps = dispatch => ({
   setYtPlayer(ytPlayer) {
     dispatch(setYtPlayer(ytPlayer));
   },
-  resetState() {
-    dispatch(resetState());
+  freshStates() {
+    dispatch(freshStates());
   },
   setCurrentTime(currentTime) {
     dispatch(setCurrentTime(currentTime));

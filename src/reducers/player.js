@@ -53,7 +53,7 @@ export default (state = initialState, action) => {
         states,
       };
     }
-    case 'RESET_STATE': {
+    case 'FRESH_STATES': {
       let states = state.states.concat();
       for (let i = 0; i < states.length; i++) {
         states[i] = constants.id.state.fresh;
