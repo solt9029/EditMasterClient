@@ -8,17 +8,12 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case 'TOGGLE_MODE':
-      return {
-        ...state,
-        isAutoMode: !state.isAutoMode,
-      };
-    case 'SET_CHANGING_SLIDER':
+    case 'PLAYER/SET_CHANGING_SLIDER':
       return {
         ...state,
         isChangingSlider: action.payload.isChangingSlider,
       };
-    case 'SET_STATE': {
+    case 'PLAYER/SET_STATE': {
       let states = state.states.concat();
       states[action.payload.index] = action.payload.state;
       return {
@@ -35,7 +30,7 @@ export default (state = initialState, action) => {
         states,
       };
     }
-    case 'FRESH_STATES': {
+    case 'PLAYER/FRESH_STATES': {
       let states = state.states.concat();
       for (let i = 0; i < states.length; i++) {
         states[i] = constants.id.state.fresh;
