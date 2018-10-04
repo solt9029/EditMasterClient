@@ -1,32 +1,5 @@
-import { setNotes } from './editor';
 import axios from 'axios';
-import config from '../config';
-import { notFound } from './show';
 import urlParse from 'url-parse';
-
-export const fetchScore = id => {
-  return async dispatch => {
-    try {
-      const result = await axios.get(
-        `http://${config.api.host}:${config.api.port}/scores/${id}`
-      );
-      const score = result.data;
-
-      const notes = JSON.parse(score.notes);
-      dispatch(setNotes(notes));
-
-      const { username, video_id, bpm, offset, speed, comment } = score;
-      dispatch(setUsername(username, false));
-      dispatch(setVideoId(video_id, false));
-      dispatch(setBpm(bpm, false));
-      dispatch(setOffset(offset, false));
-      dispatch(setSpeed(speed, false));
-      dispatch(setComment(comment ? comment : '', false));
-    } catch (error) {
-      dispatch(notFound());
-    }
-  };
-};
 
 export const reset = () => ({
   type: 'CONFIG/RESET',

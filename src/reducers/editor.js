@@ -26,6 +26,13 @@ export default (state = initialState, action) => {
         notes: defaultNotes,
       };
     }
+    case 'SHOW/FINISH_REQUEST_SUCCESS': {
+      const { notes } = action.payload;
+      return {
+        ...state,
+        notes,
+      };
+    }
     case 'EDITOR/CHANGE_NOTES': {
       let notes = state.notes.concat();
       for (let i = 0; i < action.payload.notes.length; i++) {
