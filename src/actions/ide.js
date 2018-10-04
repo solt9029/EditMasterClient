@@ -11,7 +11,7 @@ export const setPanes = references => {
   }
 
   return {
-    type: 'SET_PANES',
+    type: 'IDE/SET_PANES',
     payload: { panes },
   };
 };

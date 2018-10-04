@@ -17,7 +17,7 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case 'SET_PANES':
+    case 'IDE/SET_PANES':
       return {
         ...state,
         panes: action.payload.panes,
