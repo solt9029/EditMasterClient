@@ -7,4 +7,3 @@ export { default as score } from './score';
 export { default as show } from './show';
 export { default as modal } from './modal';
 export { default as navbar } from './navbar';
-export { default as scoreCardPaginate } from './scoreCardPaginate';

@@ -8,7 +8,6 @@ import ScoreCardPaginate from '../../parts/ScoreCardPaginate';
 import qs from 'qs';
 import { withRouter } from 'react-router-dom';
 import { setKeyword } from '../../../actions/navbar';
-import { setPage } from '../../../actions/scoreCardPaginate';
 
 class Index extends Component {
   componentDidMount() {
@@ -18,7 +17,6 @@ class Index extends Component {
     const page = query.page ? +query.page : 1;
     const keyword = query.keyword ? query.keyword : '';
     this.props.setKeyword(keyword);
-    this.props.setPage(page);
     this.props.fetchData(page, keyword);
   }
 
@@ -53,9 +51,6 @@ const mapDispatchToProps = dispatch => ({
   },
   setKeyword(keyword) {
     dispatch(setKeyword(keyword));
-  },
-  setPage(page) {
-    dispatch(setPage(page));
   },
 });
 export default withRouter(
