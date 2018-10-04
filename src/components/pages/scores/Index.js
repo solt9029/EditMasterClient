@@ -2,41 +2,58 @@ import React, { Component } from 'react';
 import Navbar from '../../parts/Navbar';
 import Footer from '../../parts/Footer';
 import ScoreCardList from '../../parts/ScoreCardList';
+import { Container } from 'reactstrap';
 import { connect } from 'react-redux';
-import { fetchData } from '../../../actions/scoreCardPaginate';
+import { fetch } from '../../../actions/scoreCardPaginate';
 import ScoreCardPaginate from '../../parts/ScoreCardPaginate';
 import qs from 'qs';
 import { withRouter } from 'react-router-dom';
 import { setKeyword } from '../../../actions/navbar';
+import styled from 'styled-components';
+
+const StyledContainer = styled(Container)`
+  margin-top: 30px;
+  margin-bottom: 30px;
+`;
 
 class Index extends Component {
   componentDidMount() {
-    const query = qs.parse(this.props.location.search, {
-      ignoreQueryPrefix: true,
-    });
-    const page = query.page ? +query.page : 1;
-    const keyword = query.keyword ? query.keyword : '';
+    const { page, keyword } = this.getQueries(this.props.location.search);
     this.props.setKeyword(keyword);
-    this.props.fetchData(page, keyword);
+    this.props.fetch(page, keyword);
   }
 
   componentWillReceiveProps(nextProps) {
     if (this.props.location.search === nextProps.location.search) {
       return;
     }
-    const query = qs.parse(nextProps.location.search, {
+    const { page, keyword } = this.getQueries(nextProps.location.search);
+    this.props.fetch(page, keyword);
+  }
+
+  getQueries(search) {
+    const query = qs.parse(search, {
       ignoreQueryPrefix: true,
     });
     const page = query.page ? query.page : 1;
     const keyword = query.keyword ? query.keyword : '';
-    this.props.fetchData(page, keyword);
+    return { page, keyword };
   }
 
   render() {
+    const { isLoading, error } = this.props;
+    let scoreCardList = <ScoreCardList />;
+    if (isLoading) {
+      scoreCardList = <StyledContainer>読み込み中です</StyledContainer>;
+    }
+    if (error) {
+      scoreCardList = <StyledContainer>エラーが発生しました</StyledContainer>;
+    }
+
     return (
       <div>
         <Navbar />
-        <ScoreCardList />
+        {scoreCardList}
         <ScoreCardPaginate />
         <Footer />
       </div>
@@ -44,10 +61,13 @@ class Index extends Component {
   }
 }
 
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({
+  isLoading: state.scoreCardPaginate.isLoading,
+  error: state.scoreCardPaginate.error,
+});
 const mapDispatchToProps = dispatch => ({
-  fetchData(page, keyword) {
-    dispatch(fetchData(page, keyword));
+  fetch(page, keyword) {
+    dispatch(fetch(page, keyword));
   },
   setKeyword(keyword) {
     dispatch(setKeyword(keyword));
