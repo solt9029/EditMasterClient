@@ -37,7 +37,6 @@ export const fetchScore = id => {
         })
       );
     } catch (error) {
-      console.log(error);
       dispatch(notFound());
     }
   };
