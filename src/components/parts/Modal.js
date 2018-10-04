@@ -7,7 +7,7 @@ import {
   ModalFooter,
   Button,
 } from 'reactstrap';
-import { closeModal } from '../../actions/modal';
+import { close } from '../../actions/modal';
 import { Link } from 'react-router-dom';
 
 class Modal extends Component {
@@ -17,7 +17,7 @@ class Modal extends Component {
   }
 
   componentWillUnmount() {
-    this.props.closeModal();
+    this.props.close();
   }
 
   openTweetWindow() {
@@ -40,9 +40,7 @@ class Modal extends Component {
   renderSuccess() {
     return (
       <Fragment>
-        <ModalHeader toggle={this.props.closeModal}>
-          保存が完了しました
-        </ModalHeader>
+        <ModalHeader toggle={this.props.close}>保存が完了しました</ModalHeader>
         <ModalBody>
           <img alt="modal" width="100%" src="/images/modal.png" />
         </ModalBody>
@@ -56,7 +54,7 @@ class Modal extends Component {
           <Button
             color="success"
             onClick={() => {
-              this.props.closeModal();
+              this.props.close();
             }}
           >
             続けて編集
@@ -76,12 +74,12 @@ class Modal extends Component {
 
     return (
       <Fragment>
-        <ModalHeader toggle={this.props.closeModal}>
+        <ModalHeader toggle={this.props.close}>
           保存中にエラーが発生しました
         </ModalHeader>
         <ModalBody>{errors}</ModalBody>
         <ModalFooter>
-          <Button color="danger" onClick={this.props.closeModal}>
+          <Button color="danger" onClick={this.props.close}>
             閉じる
           </Button>
         </ModalFooter>
@@ -104,7 +102,7 @@ class Modal extends Component {
     return (
       <ReactstrapModal
         isOpen={this.props.modal.isOpen}
-        toggle={!this.props.modal.isLoading && this.props.closeModal}
+        toggle={!this.props.modal.isLoading && this.props.close}
       >
         {content}
       </ReactstrapModal>
@@ -116,8 +114,8 @@ const mapStateToProps = state => ({
   modal: state.modal,
 });
 const mapDispatchToProps = dispatch => ({
-  closeModal() {
-    dispatch(closeModal());
+  close() {
+    dispatch(close());
   },
 });
 export default connect(

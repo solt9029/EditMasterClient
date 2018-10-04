@@ -1,21 +1,21 @@
 export const startCreate = () => ({
-  type: 'START_CREATE',
+  type: 'MODAL/START_CREATE',
 });
 
-export const successCreate = id => ({
-  type: 'SUCCESS_CREATE',
+export const finishCreateSuccess = id => ({
+  type: 'MODAL/FINISH_CREATE_SUCCESS',
   payload: {
     id,
   },
 });
 
-export const failCreate = errors => ({
-  type: 'FAIL_CREATE',
+export const finishCreateError = errors => ({
+  type: 'MODAL/FINISH_CREATE_ERROR',
   payload: {
     errors,
   },
 });
 
-export const closeModal = () => ({
-  type: 'CLOSE_MODAL',
+export const close = () => ({
+  type: 'MODAL/CLOSE',
 });
