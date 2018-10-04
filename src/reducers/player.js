@@ -66,7 +66,7 @@ export default (state = initialState, action) => {
         states,
       };
     }
-    case 'ADD_STATE_BAR': {
+    case 'EDITOR/ADD_BAR': {
       let states = state.states.concat();
       for (let i = 0; i < constants.number.notesPerBar; i++) {
         states.push(constants.id.note.space);
@@ -76,7 +76,7 @@ export default (state = initialState, action) => {
         states,
       };
     }
-    case 'REMOVE_STATE_BAR': {
+    case 'EDITOR/REMOVE_BAR': {
       if (state.states.length < constants.number.notesPerBar * 2) {
         return state;
       }

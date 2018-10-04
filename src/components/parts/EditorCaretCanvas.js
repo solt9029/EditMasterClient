@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import constants from '../../constants';
 import Canvas from '../../Canvas';
 import { changeNotes } from '../../actions/editor';
-import { addStateBar } from '../../actions/player';
 import { addBar } from '../../actions/editor';
 
 const canvasInlineStyle = {
@@ -183,7 +182,6 @@ const mapDispatchToProps = dispatch => ({
     dispatch(changeNotes(index, num, note));
   },
   addBar() {
-    dispatch(addStateBar());
     dispatch(addBar());
   },
 });

@@ -5,7 +5,7 @@ import NoteRadio from './NoteRadio';
 import DivisionRadio from './DivisionRadio';
 import constants from '../../constants';
 import { connect } from 'react-redux';
-import { toggleMode, addStateBar, removeStateBar } from '../../actions/player';
+import { toggleMode } from '../../actions/player';
 import { addBar, removeBar } from '../../actions/editor';
 import { reset } from '../../actions/palette';
 
@@ -154,11 +154,9 @@ const mapDispatchToProps = dispatch => ({
     dispatch(toggleMode());
   },
   addBar() {
-    dispatch(addStateBar());
     dispatch(addBar());
   },
   removeBar() {
-    dispatch(removeStateBar());
     dispatch(removeBar());
   },
   reset() {
