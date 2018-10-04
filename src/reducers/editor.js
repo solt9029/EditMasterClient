@@ -20,7 +20,7 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case 'CONFIG/SET_DEFAULT_SCORE': {
+    case 'NEW/SET_DEFAULT_SCORE': {
       return {
         ...state,
         notes: defaultNotes,

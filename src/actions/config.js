@@ -4,10 +4,6 @@ import config from '../config';
 import { notFound } from './show';
 import urlParse from 'url-parse';
 
-export const setDefaultScore = () => ({
-  type: 'CONFIG/SET_DEFAULT_SCORE',
-});
-
 export const fetchScore = id => {
   return async dispatch => {
     try {
