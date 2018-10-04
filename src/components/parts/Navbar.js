@@ -128,7 +128,8 @@ class Navbar extends Component {
             </Nav>
             {(this.props.match.path === constants.route.scores.new ||
               this.props.match.path === constants.route.scores.show) &&
-              !this.props.notFound && (
+              !this.props.error &&
+              !this.props.isLoading && (
                 <Fragment>
                   <Button
                     color="info"
@@ -190,6 +191,8 @@ const mapStateToProps = state => ({
   notes: state.editor.notes,
   config: state.config,
   keyword: state.navbar.keyword,
+  isLoading: state.show.isLoading,
+  error: state.show.error,
 });
 const mapDispatchToProps = dispatch => ({
   create() {

@@ -42,7 +42,7 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case 'NEW/SET_DEFAULT_SCORE':
+    case 'NEW/SET_DEFAULT_SCORE': {
       const { username, videoId, bpm, offset, comment, speed } = defaultConfig;
       return {
         ...state,
@@ -77,6 +77,50 @@ export default (state = initialState, action) => {
           errors: [],
         },
       };
+    }
+    case 'SHOW/FINISH_REQUEST_SUCCESS': {
+      const {
+        username,
+        videoId,
+        bpm,
+        offset,
+        comment,
+        speed,
+      } = action.payload.config;
+      return {
+        ...state,
+        username: {
+          value: username,
+          touched: false,
+          errors: [],
+        },
+        videoId: {
+          value: videoId,
+          touched: false,
+          errors: [],
+        },
+        bpm: {
+          value: bpm,
+          touched: false,
+          errors: [],
+        },
+        offset: {
+          value: offset,
+          touched: false,
+          errors: [],
+        },
+        comment: {
+          value: comment,
+          touched: false,
+          errors: [],
+        },
+        speed: {
+          value: speed,
+          touched: false,
+          errors: [],
+        },
+      };
+    }
     case 'CONFIG/RESET':
       return initialState;
     case 'SET_USERNAME':

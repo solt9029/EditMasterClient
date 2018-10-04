@@ -3,45 +3,61 @@ import Navbar from '../../parts/Navbar';
 import IDE from '../../parts/IDE';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { fetchScore } from '../../../actions/config';
+import { fetch } from '../../../actions/show';
 import NotFound from '../NotFound';
-import { resetNotFound } from '../../../actions/show';
+import { reset } from '../../../actions/show';
 import Modal from '../../parts/Modal';
+import styled from 'styled-components';
+import { Container } from 'reactstrap';
+
+const StyledContainer = styled(Container)`
+  margin-top: 30px;
+  margin-bottom: 30px;
+`;
 
 class Show extends Component {
   componentDidMount() {
-    this.props.fetchScore(this.props.match.params.id);
+    this.props.fetch(this.props.match.params.id);
   }
 
   componentWillUnmount() {
-    this.props.resetNotFound();
+    this.props.reset();
   }
 
   render() {
-    let component = (
+    let show = (
       <div>
         <Navbar />
         <IDE />
         <Modal />
       </div>
     );
-    if (this.props.notFound) {
-      component = <NotFound />;
+    if (this.props.isLoading) {
+      show = (
+        <div>
+          <Navbar />
+          <StyledContainer>読み込み中です</StyledContainer>
+        </div>
+      );
+    }
+    if (this.props.error) {
+      show = <NotFound />;
     }
 
-    return component;
+    return show;
   }
 }
 
 const mapStateToProps = state => ({
-  notFound: state.show.notFound,
+  error: state.show.error,
+  isLoading: state.show.isLoading,
 });
 const mapDispatchToProps = dispatch => ({
-  fetchScore(id) {
-    dispatch(fetchScore(id));
+  fetch(id) {
+    dispatch(fetch(id));
   },
-  resetNotFound() {
-    dispatch(resetNotFound());
+  reset() {
+    dispatch(reset());
   },
 });
 export default withRouter(

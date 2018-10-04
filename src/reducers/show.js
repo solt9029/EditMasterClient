@@ -1,18 +1,27 @@
 const initialState = {
-  notFound: false,
+  error: null,
+  isLoading: false,
 };
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case 'NOT_FOUND':
+    case 'SHOW/START_REQUEST':
       return {
         ...state,
-        notFound: true,
+        isLoading: true,
       };
-    case 'RESET_NOT_FOUND':
+    case 'SHOW/FINISH_REQUEST_ERROR':
+      const { error } = action.payload;
       return {
         ...state,
-        notFound: false,
+        isLoading: false,
+        error,
+      };
+    case 'SHOW/FINISH_REQUEST_SUCCESS':
+      return {
+        ...state,
+        isLoading: false,
+        error: null,
       };
     default:
       return state;
