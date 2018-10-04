@@ -22,13 +22,21 @@ class EditorCurrentTimeCanvas extends Component {
       this.props.editorPane !== nextProps.editorPane ||
       this.props.notes.length !== nextProps.notes.length ||
       this.props.currentTime !== nextProps.currentTime ||
-      this.props.secondsPerNote !== nextProps.secondsPerNote ||
+      this.props.bpm !== nextProps.bpm ||
       this.props.offset !== nextProps.offset
     );
   }
 
   componentDidUpdate() {
     this.updateCanvas();
+  }
+
+  get secondsPerNote() {
+    const barPerMinute = this.props.bpm / constants.number.beat;
+    const barPerSecond = barPerMinute / 60;
+    const notesPerSecond = barPerSecond * constants.number.notesPerBar;
+    const secondsPerNote = 1 / notesPerSecond;
+    return secondsPerNote;
   }
 
   updateCanvas() {
@@ -45,7 +53,7 @@ class EditorCurrentTimeCanvas extends Component {
     const spaceWidth = actualBarWidth / constants.number.notesPerBar;
 
     const currentNoteIndexFloat =
-      (this.props.currentTime - this.props.offset) / this.props.secondsPerNote;
+      (this.props.currentTime - this.props.offset) / this.secondsPerNote;
     const currentNotesPerBarIndexFloat =
       currentNoteIndexFloat % constants.number.notesPerBar;
     const currentBarIndex = Math.floor(
@@ -80,7 +88,7 @@ const mapStateToProps = state => ({
   editorPane: state.ide.panes.editor,
   notes: state.editor.notes,
   currentTime: state.player.currentTime,
-  secondsPerNote: state.player.secondsPerNote,
+  bpm: state.config.bpm.value,
   offset: state.config.offset.value,
 });
 export default connect(

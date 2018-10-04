@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
-import { calcSecondsPerNote } from '../../actions/player';
 import { FormFeedback, Input, Label, FormGroup } from 'reactstrap';
 import {
   setUsername,
   setVideoIdAndFetchSongle,
-  setBpmAndCalcSecondsPerNote,
+  setBpm,
   setOffset,
   setSpeed,
   setComment,
@@ -73,7 +72,7 @@ class Config extends Component {
             invalid={this.props.bpm.touched && this.props.bpm.errors.length > 0}
             value={this.props.bpm.value}
             onChange={event => {
-              this.props.setBpmAndCalcSecondsPerNote(event.target.value);
+              this.props.setBpm(event.target.value);
             }}
           />
           {this.props.bpm.errors.map((error, i) => {
@@ -140,7 +139,6 @@ class Config extends Component {
 }
 
 const mapStateToProps = state => ({
-  secondsPerNote: state.player.secondsPerNote,
   username: state.config.username,
   videoId: state.config.videoId,
   bpm: state.config.bpm,
@@ -149,17 +147,11 @@ const mapStateToProps = state => ({
   comment: state.config.comment,
 });
 const mapDispatchToProps = dispatch => ({
-  calcSecondsPerNote(bpm) {
-    dispatch(calcSecondsPerNote(bpm));
-  },
   setUsername(value) {
     dispatch(setUsername(value));
   },
   setVideoIdAndFetchSongle(value) {
     dispatch(setVideoIdAndFetchSongle(value));
-  },
-  setBpmAndCalcSecondsPerNote(value) {
-    dispatch(setBpmAndCalcSecondsPerNote(value));
   },
   setOffset(value) {
     dispatch(setOffset(value));
@@ -172,6 +164,9 @@ const mapDispatchToProps = dispatch => ({
   },
   resetConfig() {
     dispatch(resetConfig());
+  },
+  setBpm(value) {
+    dispatch(setBpm(value));
   },
 });
 export default connect(

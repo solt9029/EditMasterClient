@@ -6,7 +6,6 @@ const initialState = {
   currentTime: 0,
   isAutoMode: true,
   isChangingSlider: false,
-  secondsPerNote: 1,
   states: [],
 };
 
@@ -31,11 +30,6 @@ export default (state = initialState, action) => {
       return {
         ...state,
         isChangingSlider: action.payload.isChangingSlider,
-      };
-    case 'SET_SECONDS_PER_NOTE':
-      return {
-        ...state,
-        secondsPerNote: action.payload.secondsPerNote,
       };
     case 'SET_YTPLAYER_STATE':
       return {
