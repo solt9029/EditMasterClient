@@ -44,7 +44,7 @@ class NoteRadio extends Component {
 
 const mapStateToProps = state => ({
   note: state.palette.note,
-  paletteWidth: state.pane.palette.width,
+  paletteWidth: state.ide.palette.width,
 });
 const mapDispatchToProps = dispatch => ({
   setPaletteNote(note) {

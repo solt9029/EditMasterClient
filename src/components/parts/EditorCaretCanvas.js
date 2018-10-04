@@ -174,7 +174,7 @@ class EditorCaretCanvas extends Component {
 }
 
 const mapStateToProps = state => ({
-  editorPane: state.pane.editor,
+  editorPane: state.ide.editor,
   palette: state.palette,
   notes: state.editor.notes,
 });
