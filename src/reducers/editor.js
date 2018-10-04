@@ -20,6 +20,12 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
+    case 'CONFIG/SET_DEFAULT_SCORE': {
+      return {
+        ...state,
+        notes: defaultNotes,
+      };
+    }
     case 'EDITOR/CHANGE_NOTES': {
       let notes = state.notes.concat();
       for (let i = 0; i < action.payload.notes.length; i++) {

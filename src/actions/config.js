@@ -1,18 +1,12 @@
-import { defaultNotes } from '../reducers/editor';
-import { defaultConfig } from '../reducers/config';
 import { setNotes } from './editor';
 import axios from 'axios';
 import config from '../config';
 import { notFound } from './show';
 import urlParse from 'url-parse';
 
-export const setDefaultScore = () => {
-  return dispatch => {
-    dispatch(setNotes(defaultNotes));
-
-    dispatch(setConfig(defaultConfig));
-  };
-};
+export const setDefaultScore = () => ({
+  type: 'CONFIG/SET_DEFAULT_SCORE',
+});
 
 export const fetchScore = id => {
   return async dispatch => {
@@ -25,30 +19,16 @@ export const fetchScore = id => {
       const notes = JSON.parse(score.notes);
       dispatch(setNotes(notes));
 
-      dispatch(
-        setConfig({
-          username: score.username,
-          videoId: score.video_id,
-          offset: score.offset,
-          comment: score.comment ? score.comment : '',
-          speed: score.speed,
-          bpm: score.bpm,
-        })
-      );
+      const { username, video_id, bpm, offset, speed, comment } = score;
+      dispatch(setUsername(username, false));
+      dispatch(setVideoId(video_id, false));
+      dispatch(setBpm(bpm, false));
+      dispatch(setOffset(offset, false));
+      dispatch(setSpeed(speed, false));
+      dispatch(setComment(comment ? comment : '', false));
     } catch (error) {
       dispatch(notFound());
     }
-  };
-};
-
-export const setConfig = config => {
-  return dispatch => {
-    dispatch(setUsername(config.username, false));
-    dispatch(setVideoId(config.videoId, false));
-    dispatch(setBpm(config.bpm, false));
-    dispatch(setOffset(config.offset, false));
-    dispatch(setSpeed(config.speed, false));
-    dispatch(setComment(config.comment, false));
   };
 };
 
