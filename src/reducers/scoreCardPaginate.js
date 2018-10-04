@@ -14,7 +14,7 @@ export default (state = initialState, action) => {
   switch (action.type) {
     case 'SCORE_CARD_PAGINATE/START_REQUEST':
       return {
-        ...state,
+        ...initialState,
         isLoading: true,
         error: null,
       };

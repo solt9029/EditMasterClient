@@ -7,7 +7,7 @@ export default (state = initialState, action) => {
   switch (action.type) {
     case 'SHOW/START_REQUEST':
       return {
-        ...state,
+        ...initialState,
         isLoading: true,
       };
     case 'SHOW/FINISH_REQUEST_ERROR':
