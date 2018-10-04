@@ -5,9 +5,8 @@ import NoteRadio from './NoteRadio';
 import DivisionRadio from './DivisionRadio';
 import constants from '../../constants';
 import { connect } from 'react-redux';
-import { toggleMode } from '../../actions/player';
 import { addBar, removeBar } from '../../actions/editor';
-import { reset } from '../../actions/palette';
+import { reset, toggleMode } from '../../actions/palette';
 
 const StyledDiv = styled.div`
   padding: 15px;
@@ -147,7 +146,7 @@ class Palette extends Component {
 }
 
 const mapStateToProps = state => ({
-  isAutoMode: state.player.isAutoMode,
+  isAutoMode: state.palette.isAutoMode,
 });
 const mapDispatchToProps = dispatch => ({
   toggleMode() {
