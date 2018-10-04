@@ -4,7 +4,8 @@ import constants from '../../constants';
 import { setState } from '../../actions/player';
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
-import { setCurrentTime, setChangingSlider } from '../../actions/player';
+import { setChangingSlider } from '../../actions/player';
+import { setCurrentTime } from '../../actions/youtube';
 import Shot from '../../Shot';
 import Canvas from '../../Canvas';
 import JudgeEffect from '../../JudgeEffect';
@@ -358,12 +359,12 @@ const mapStateToProps = state => ({
   playerPane: state.ide.panes.player,
   notes: state.editor.notes,
   states: state.player.states,
-  currentTime: state.player.currentTime,
+  currentTime: state.youtube.currentTime,
   config: state.config,
   isAutoMode: state.player.isAutoMode,
-  ytPlayer: state.player.ytPlayer,
+  ytPlayer: state.youtube.ytPlayer,
   isChangingSlider: state.player.isChangingSlider,
-  ytPlayerState: state.player.ytPlayerState,
+  ytPlayerState: state.youtube.ytPlayerState,
 });
 const mapDispatchToProps = dispatch => ({
   setState(index, state) {

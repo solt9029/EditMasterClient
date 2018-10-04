@@ -4,10 +4,9 @@ import ReactYouTube from 'react-youtube';
 import {
   setYtPlayer,
   setCurrentTime,
-  setChangingSlider,
   setYtPlayerState,
-  freshStates,
-} from '../../actions/player';
+} from '../../actions/youtube';
+import { setChangingSlider, freshStates } from '../../actions/player';
 import constants from '../../constants';
 
 class YouTube extends Component {
@@ -62,7 +61,7 @@ class YouTube extends Component {
 const mapStateToProps = state => ({
   config: state.config,
   isChangingSlider: state.player.isChangingSlider,
-  ytPlayer: state.player.ytPlayer,
+  ytPlayer: state.youtube.ytPlayer,
 });
 const mapDispatchToProps = dispatch => ({
   setYtPlayer(ytPlayer) {

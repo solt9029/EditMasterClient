@@ -7,3 +7,4 @@ export { default as scoreCardPaginate } from './scoreCardPaginate';
 export { default as show } from './show';
 export { default as modal } from './modal';
 export { default as navbar } from './navbar';
+export { default as youtube } from './youtube';
