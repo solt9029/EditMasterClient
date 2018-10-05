@@ -175,13 +175,26 @@ const constants = {
     },
   },
   validation: {
-    required: value => (value ? undefined : '必須項目です'),
-    maxLength: max => value =>
-      value && value.length > max
-        ? `${max}文字以下で入力してください`
-        : undefined,
-    number: value =>
-      value && isNaN(Number(value)) ? '数字で入力してください' : undefined,
+    required: value => {
+      return value === '' ? '必須です' : false;
+    },
+    maxLength: max => value => {
+      return value.length > max
+        ? `${max}文字以下の文字列を指定してください`
+        : false;
+    },
+    number: value => {
+      return isNaN(value) ? '数値を指定してください' : false;
+    },
+    validate: (value, validations) => {
+      let errors = [];
+      validations.forEach(validation => {
+        if (validation(value)) {
+          errors.push(validation(value));
+        }
+      });
+      return errors;
+    },
   },
   route: {
     index: '/',

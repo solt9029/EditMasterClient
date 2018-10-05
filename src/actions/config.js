@@ -1,20 +1,79 @@
 import axios from 'axios';
 import urlParse from 'url-parse';
+import constants from '../constants';
 
 export const reset = () => ({
   type: 'CONFIG/RESET',
 });
 
+const { required, number, validate, maxLength } = constants.validation;
+const maxLength20 = maxLength(20);
+const maxLength140 = maxLength(140);
+
 export const setUsername = (value, touched = true) => {
-  let errors = [];
-  if (value === '') {
-    errors.push('必須です');
-  }
-  if (value.length > 20) {
-    errors.push('20文字以下の文字列を指定してください');
-  }
+  const errors = validate(value, [required, maxLength20]);
   return {
     type: 'SET_USERNAME',
+    payload: {
+      value,
+      errors,
+      touched,
+    },
+  };
+};
+
+export const setVideoId = (value, touched = true) => {
+  const errors = validate(value, [required]);
+  return {
+    type: 'SET_VIDEO_ID',
+    payload: {
+      value,
+      errors,
+      touched,
+    },
+  };
+};
+
+export const setBpm = (value, touched = true) => {
+  const errors = validate(value, [required, number]);
+  return {
+    type: 'SET_BPM',
+    payload: {
+      value,
+      errors,
+      touched,
+    },
+  };
+};
+
+export const setOffset = (value, touched = true) => {
+  const errors = validate(value, [required, number]);
+  return {
+    type: 'SET_OFFSET',
+    payload: {
+      value,
+      errors,
+      touched,
+    },
+  };
+};
+
+export const setSpeed = (value, touched = true) => {
+  const errors = validate(value, [required, number]);
+  return {
+    type: 'SET_SPEED',
+    payload: {
+      value,
+      errors,
+      touched,
+    },
+  };
+};
+
+export const setComment = (value, touched = true) => {
+  const errors = validate(value, [maxLength140]);
+  return {
+    type: 'SET_COMMENT',
     payload: {
       value,
       errors,
@@ -49,89 +108,5 @@ export const setVideoIdAndFetchSongle = (value, touched = true) => {
     }
     const bpm = bpmSum / (result.data.beats.length - 60);
     dispatch(setBpm(bpm, false));
-  };
-};
-
-export const setVideoId = (value, touched = true) => {
-  let errors = [];
-  if (value === '') {
-    errors.push('必須です');
-  }
-  return {
-    type: 'SET_VIDEO_ID',
-    payload: {
-      value,
-      errors,
-      touched,
-    },
-  };
-};
-
-export const setBpm = (value, touched = true) => {
-  let errors = [];
-  if (value === '') {
-    errors.push('必須です');
-  }
-  if (isNaN(value)) {
-    errors.push('数値を指定してください');
-  }
-  return {
-    type: 'SET_BPM',
-    payload: {
-      value,
-      errors,
-      touched,
-    },
-  };
-};
-
-export const setOffset = (value, touched = true) => {
-  let errors = [];
-  if (value === '') {
-    errors.push('必須です');
-  }
-  if (isNaN(value)) {
-    errors.push('数値を指定してください');
-  }
-  return {
-    type: 'SET_OFFSET',
-    payload: {
-      value,
-      errors,
-      touched,
-    },
-  };
-};
-
-export const setSpeed = (value, touched = true) => {
-  let errors = [];
-  if (value === '') {
-    errors.push('必須です');
-  }
-  if (isNaN(value)) {
-    errors.push('数値を指定してください');
-  }
-  return {
-    type: 'SET_SPEED',
-    payload: {
-      value,
-      errors,
-      touched,
-    },
-  };
-};
-
-export const setComment = (value, touched = true) => {
-  let errors = [];
-  if (value.length > 140) {
-    errors.push('140文字以下の文字列を指定してください');
-  }
-  return {
-    type: 'SET_COMMENT',
-    payload: {
-      value,
-      errors,
-      touched,
-    },
   };
 };
