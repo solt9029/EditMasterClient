@@ -123,7 +123,7 @@ export default (state = initialState, action) => {
     }
     case 'CONFIG/RESET':
       return initialState;
-    case 'SET_USERNAME':
+    case 'CONFIG/SET_USERNAME':
       return {
         ...state,
         username: {
@@ -132,7 +132,7 @@ export default (state = initialState, action) => {
           touched: action.payload.touched,
         },
       };
-    case 'SET_VIDEO_ID':
+    case 'CONFIG/SET_VIDEO_ID':
       return {
         ...state,
         videoId: {
@@ -141,7 +141,7 @@ export default (state = initialState, action) => {
           touched: action.payload.touched,
         },
       };
-    case 'SET_BPM':
+    case 'CONFIG/SET_BPM':
       return {
         ...state,
         bpm: {
@@ -150,7 +150,7 @@ export default (state = initialState, action) => {
           touched: action.payload.touched,
         },
       };
-    case 'SET_OFFSET':
+    case 'CONFIG/SET_OFFSET':
       return {
         ...state,
         offset: {
@@ -159,7 +159,7 @@ export default (state = initialState, action) => {
           touched: action.payload.touched,
         },
       };
-    case 'SET_SPEED':
+    case 'CONFIG/SET_SPEED':
       return {
         ...state,
         speed: {
@@ -168,7 +168,7 @@ export default (state = initialState, action) => {
           touched: action.payload.touched,
         },
       };
-    case 'SET_COMMENT':
+    case 'CONFIG/SET_COMMENT':
       return {
         ...state,
         comment: {

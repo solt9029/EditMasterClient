@@ -13,7 +13,7 @@ const maxLength140 = maxLength(140);
 export const setUsername = (value, touched = true) => {
   const errors = validate(value, [required, maxLength20]);
   return {
-    type: 'SET_USERNAME',
+    type: 'CONFIG/SET_USERNAME',
     payload: {
       value,
       errors,
@@ -25,7 +25,7 @@ export const setUsername = (value, touched = true) => {
 export const setVideoId = (value, touched = true) => {
   const errors = validate(value, [required]);
   return {
-    type: 'SET_VIDEO_ID',
+    type: 'CONFIG/SET_VIDEO_ID',
     payload: {
       value,
       errors,
@@ -37,7 +37,7 @@ export const setVideoId = (value, touched = true) => {
 export const setBpm = (value, touched = true) => {
   const errors = validate(value, [required, number]);
   return {
-    type: 'SET_BPM',
+    type: 'CONFIG/SET_BPM',
     payload: {
       value,
       errors,
@@ -49,7 +49,7 @@ export const setBpm = (value, touched = true) => {
 export const setOffset = (value, touched = true) => {
   const errors = validate(value, [required, number]);
   return {
-    type: 'SET_OFFSET',
+    type: 'CONFIG/SET_OFFSET',
     payload: {
       value,
       errors,
@@ -61,7 +61,7 @@ export const setOffset = (value, touched = true) => {
 export const setSpeed = (value, touched = true) => {
   const errors = validate(value, [required, number]);
   return {
-    type: 'SET_SPEED',
+    type: 'CONFIG/SET_SPEED',
     payload: {
       value,
       errors,
@@ -73,7 +73,7 @@ export const setSpeed = (value, touched = true) => {
 export const setComment = (value, touched = true) => {
   const errors = validate(value, [maxLength140]);
   return {
-    type: 'SET_COMMENT',
+    type: 'CONFIG/SET_COMMENT',
     payload: {
       value,
       errors,
