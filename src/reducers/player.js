@@ -17,7 +17,9 @@ export default (state = initialState, action) => {
       };
     }
     case 'SHOW/FINISH_REQUEST_SUCCESS': {
-      const states = Array(defaultNotes.length).fill(constants.id.note.space);
+      const states = Array(action.payload.notes.length).fill(
+        constants.id.note.space
+      );
       return {
         ...state,
         states,
