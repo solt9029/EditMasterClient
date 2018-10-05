@@ -2,7 +2,6 @@ import constants from '../constants';
 import { defaultNotes } from './editor';
 
 const initialState = {
-  isAutoMode: true,
   isChangingSlider: false,
   states: [],
 };
