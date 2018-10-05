@@ -42,18 +42,18 @@ class Index extends Component {
 
   render() {
     const { isLoading, error } = this.props;
-    let scoreCardList = <ScoreCardList />;
+    let component = <ScoreCardList />;
     if (isLoading) {
-      scoreCardList = <StyledContainer>読み込み中です</StyledContainer>;
+      component = <StyledContainer>読み込み中です</StyledContainer>;
     }
     if (error) {
-      scoreCardList = <StyledContainer>エラーが発生しました</StyledContainer>;
+      component = <StyledContainer>エラーが発生しました</StyledContainer>;
     }
 
     return (
       <div>
         <Navbar />
-        {scoreCardList}
+        {component}
         <ScoreCardPaginate />
         <Footer />
       </div>
