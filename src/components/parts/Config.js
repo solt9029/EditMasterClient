@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
+import urlParse from 'url-parse';
 import { FormFeedback, Input, Label, FormGroup } from 'reactstrap';
 import {
   setUsername,
-  setVideoIdAndFetchSongle,
+  setVideoId,
+  fetchSongle,
   setBpm,
   setOffset,
   setSpeed,
@@ -56,7 +58,14 @@ class Config extends Component {
             }
             value={this.props.videoId.value}
             onChange={event => {
-              this.props.setVideoIdAndFetchSongle(event.target.value);
+              const { value } = event.target;
+              let videoId = value;
+              const url = urlParse(value, true);
+              if (url.query.v) {
+                videoId = url.query.v;
+              }
+              this.props.setVideoId(videoId);
+              this.props.fetchSongle(videoId);
             }}
           />
           {this.props.videoId.errors.map((error, i) => {
@@ -150,8 +159,11 @@ const mapDispatchToProps = dispatch => ({
   setUsername(value) {
     dispatch(setUsername(value));
   },
-  setVideoIdAndFetchSongle(value) {
-    dispatch(setVideoIdAndFetchSongle(value));
+  setVideoId(value) {
+    dispatch(setVideoId(value));
+  },
+  fetchSongle(videoId) {
+    dispatch(fetchSongle(videoId));
   },
   setOffset(value) {
     dispatch(setOffset(value));
