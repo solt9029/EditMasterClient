@@ -7,13 +7,6 @@ import { fetch } from '../../../actions/show';
 import NotFound from '../NotFound';
 import { reset } from '../../../actions/show';
 import Modal from '../../parts/Modal';
-import styled from 'styled-components';
-import { Container } from 'reactstrap';
-
-const StyledContainer = styled(Container)`
-  margin-top: 30px;
-  margin-bottom: 30px;
-`;
 
 class Show extends Component {
   componentDidMount() {
@@ -25,26 +18,18 @@ class Show extends Component {
   }
 
   render() {
-    let show = (
+    let component = (
       <div>
         <Navbar />
         <IDE />
         <Modal />
       </div>
     );
-    if (this.props.isLoading) {
-      show = (
-        <div>
-          <Navbar />
-          <StyledContainer>読み込み中です</StyledContainer>
-        </div>
-      );
-    }
     if (this.props.error) {
-      show = <NotFound />;
+      component = <NotFound />;
     }
 
-    return show;
+    return component;
   }
 }
 
