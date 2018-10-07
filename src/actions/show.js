@@ -1,5 +1,5 @@
 import axios from 'axios';
-import systemConfig from '../config';
+import { api } from '../config/';
 
 export const finishRequestError = error => ({
   type: 'SHOW/FINISH_REQUEST_ERROR',
@@ -27,7 +27,7 @@ export const fetch = id => {
     dispatch(startRequest());
     try {
       const result = await axios.get(
-        `http://${systemConfig.api.host}:${systemConfig.api.port}/scores/${id}`
+        `http://${api.host}:${api.port}/scores/${id}`
       );
       const score = result.data;
 

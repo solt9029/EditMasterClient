@@ -1,0 +1,6 @@
+const api = {
+  host: 'editmasterapi.solt9029.com',
+  port: 80,
+};
+
+export default api;
