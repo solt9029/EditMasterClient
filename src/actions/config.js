@@ -1,11 +1,12 @@
 import axios from 'axios';
 import constants from '../constants';
+import * as utils from '../utils';
 
 export const reset = () => ({
   type: 'CONFIG/RESET',
 });
 
-const { required, number, validate, maxLength } = constants.validation;
+const { required, number, validate, maxLength } = utils.validations;
 const maxLength20 = maxLength(20);
 const maxLength140 = maxLength(140);
 

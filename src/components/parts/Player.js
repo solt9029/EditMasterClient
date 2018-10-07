@@ -11,6 +11,8 @@ import Canvas from '../../classes/Canvas';
 import JudgeEffect from '../../classes/JudgeEffect';
 import { reset } from '../../actions/player';
 import Sound from '../../classes/Sound';
+import * as utils from '../../utils';
+import { util } from 'node-forge';
 
 const sliderInlineStyle = {
   width: '95%',
@@ -144,11 +146,11 @@ class Player extends Component {
         )
       );
 
-      if (constants.id.note.hasState(note)) {
+      if (utils.notes.hasState(note)) {
         this.props.setState(i, constants.id.state.good);
       }
 
-      if (constants.id.note.isDon(note)) {
+      if (utils.notes.isDon(note)) {
         this.sound.trigger('don');
       } else {
         this.sound.trigger('ka');
@@ -200,14 +202,11 @@ class Player extends Component {
       let hit = false;
       if (
         constants.key.isDon(event.nativeEvent.key) &&
-        constants.id.note.isDon(note)
+        utils.notes.isDon(note)
       ) {
         hit = true;
       }
-      if (
-        constants.key.isKa(event.nativeEvent.key) &&
-        constants.id.note.isKa(note)
-      ) {
+      if (constants.key.isKa(event.nativeEvent.key) && utils.notes.isKa(note)) {
         hit = true;
       }
       if (!hit) {
@@ -216,7 +215,7 @@ class Player extends Component {
 
       this.shots.push(new Shot((this.props.playerPane.height - 1) / 2, note));
 
-      if (constants.id.note.hasState(note)) {
+      if (utils.notes.hasState(note)) {
         let stateId = constants.id.state.bad;
         if (i >= goodRange[0] && i <= goodRange[1]) {
           stateId = constants.id.state.good;

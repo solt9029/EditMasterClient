@@ -81,43 +81,6 @@ const constants = {
       renda: 5,
       bigrenda: 6,
       balloon: 7,
-      isDon: note => {
-        return (
-          note === constants.id.note.don ||
-          note === constants.id.note.bigdon ||
-          note === constants.id.note.renda ||
-          note === constants.id.note.bigrenda ||
-          note === constants.id.note.balloon
-        );
-      },
-      isKa: note => {
-        return (
-          note === constants.id.note.ka ||
-          note === constants.id.note.bigka ||
-          note === constants.id.note.renda ||
-          note === constants.id.note.bigrenda
-        );
-      },
-      hasState: note => {
-        return (
-          note === constants.id.note.don ||
-          note === constants.id.note.ka ||
-          note === constants.id.note.bigdon ||
-          note === constants.id.note.bigka
-        );
-      },
-      isNote: note => {
-        return (
-          note === constants.id.note.don ||
-          note === constants.id.note.ka ||
-          note === constants.id.note.bigdon ||
-          note === constants.id.note.bigka ||
-          note === constants.id.note.renda ||
-          note === constants.id.note.bigrenda ||
-          note === constants.id.note.balloon ||
-          note === constants.id.note.space
-        );
-      },
     },
     state: {
       fresh: 0,
@@ -156,28 +119,6 @@ const constants = {
       good: 0.034,
       ok: 0.117,
       bad: 0.15,
-    },
-  },
-  validation: {
-    required: value => {
-      return value === '' ? '必須です' : false;
-    },
-    maxLength: max => value => {
-      return value.length > max
-        ? `${max}文字以下の文字列を指定してください`
-        : false;
-    },
-    number: value => {
-      return isNaN(value) ? '数値を指定してください' : false;
-    },
-    validate: (value, validations) => {
-      let errors = [];
-      validations.forEach(validation => {
-        if (validation(value)) {
-          errors.push(validation(value));
-        }
-      });
-      return errors;
     },
   },
   route: {
