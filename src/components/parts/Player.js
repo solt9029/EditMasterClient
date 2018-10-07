@@ -167,10 +167,10 @@ class Player extends Component {
       return;
     }
 
-    if (constants.key.isDon(event.nativeEvent.key)) {
+    if (utils.keys.isDon(event.nativeEvent.key)) {
       this.sound.trigger('don');
     }
-    if (constants.key.isKa(event.nativeEvent.key)) {
+    if (utils.keys.isKa(event.nativeEvent.key)) {
       this.sound.trigger('ka');
     }
 
@@ -199,13 +199,10 @@ class Player extends Component {
       }
 
       let hit = false;
-      if (
-        constants.key.isDon(event.nativeEvent.key) &&
-        utils.notes.isDon(note)
-      ) {
+      if (utils.keys.isDon(event.nativeEvent.key) && utils.notes.isDon(note)) {
         hit = true;
       }
-      if (constants.key.isKa(event.nativeEvent.key) && utils.notes.isKa(note)) {
+      if (utils.keys.isKa(event.nativeEvent.key) && utils.notes.isKa(note)) {
         hit = true;
       }
       if (!hit) {
