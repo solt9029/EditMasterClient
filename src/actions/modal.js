@@ -1,5 +1,5 @@
 import axios from 'axios';
-import config from '../config';
+import * as config from '../config/';
 
 export const startCreate = () => ({
   type: 'MODAL/START_CREATE',

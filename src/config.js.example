@@ -1,8 +1,0 @@
-const config = {
-  api: {
-    host: 'localhost',
-    port: 8051,
-  },
-};
-
-export default config;
