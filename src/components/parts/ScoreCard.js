@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Card, Col, CardImg, CardText, CardBody } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
@@ -33,6 +33,12 @@ const Comment = styled.span`
   color: #555;
 `;
 
+const Icon = styled.img`
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+`;
+
 const cardBodyInlineStyle = {
   paddingTop: '0.7rem',
   paddingBottom: '0.7rem',
@@ -40,38 +46,27 @@ const cardBodyInlineStyle = {
   paddingLeft: '1rem',
 };
 
-export default class ScoreCard extends Component {
-  render() {
-    return (
-      <Col lg={4} md={6} sm={6} xs={12}>
-        <StyledCard tag={Link} to={`/scores/${this.props.score.id}`}>
-          <CardImg
-            top
-            width="100%"
-            src={`http://i.ytimg.com/vi/${
-              this.props.score.video_id
-            }/mqdefault.jpg`}
-            alt="score"
-          />
-          <CardBody style={cardBodyInlineStyle}>
-            <StyledCardText>
-              <img
-                src="/images/icon.png"
-                width="26px"
-                height="26px"
-                style={{
-                  borderRadius: '50%',
-                }}
-                alt="icon"
-              />
-              <Username>{this.props.score.username}</Username>
-            </StyledCardText>
-            <StyledCardText>
-              <Comment>{this.props.score.comment}</Comment>
-            </StyledCardText>
-          </CardBody>
-        </StyledCard>
-      </Col>
-    );
-  }
-}
+const ScoreCard = ({ score }) => {
+  return (
+    <Col lg={4} md={6} sm={6} xs={12}>
+      <StyledCard tag={Link} to={`/scores/${score.id}`}>
+        <CardImg
+          top
+          src={`http://i.ytimg.com/vi/${score.video_id}/mqdefault.jpg`}
+          alt="score"
+        />
+        <CardBody style={cardBodyInlineStyle}>
+          <StyledCardText>
+            <Icon src="/images/icon.png" alt="icon" />
+            <Username>{score.username}</Username>
+          </StyledCardText>
+          <StyledCardText>
+            <Comment>{score.comment}</Comment>
+          </StyledCardText>
+        </CardBody>
+      </StyledCard>
+    </Col>
+  );
+};
+
+export default ScoreCard;
