@@ -12,7 +12,6 @@ import JudgeEffect from '../../classes/JudgeEffect';
 import { reset } from '../../actions/player';
 import Sound from '../../classes/Sound';
 import * as utils from '../../utils';
-import { util } from 'node-forge';
 
 const sliderInlineStyle = {
   width: '95%',
