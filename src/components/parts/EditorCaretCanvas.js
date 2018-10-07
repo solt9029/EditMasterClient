@@ -4,6 +4,7 @@ import constants from '../../constants';
 import Canvas from '../../classes/Canvas';
 import { changeNotes } from '../../actions/editor';
 import { addBar } from '../../actions/editor';
+import * as utils from '../../utils';
 
 const canvasInlineStyle = {
   position: 'absolute',
@@ -81,7 +82,7 @@ class EditorCaretCanvas extends Component {
     // if the event is key event, the note which is going to be put should be key value!
     if (event.nativeEvent.key) {
       const keyValue = +event.nativeEvent.key;
-      if (!constants.id.note.isNote(keyValue)) {
+      if (!utils.notes.isNote(keyValue)) {
         return;
       }
       note = keyValue;
@@ -92,7 +93,7 @@ class EditorCaretCanvas extends Component {
     const index =
       this.mouseBarIndex * constants.number.notesPerBar + mouseNotesPerBarIndex;
     let notes = [];
-    if (!constants.id.note.hasState(note)) {
+    if (!utils.notes.hasState(note)) {
       for (let i = 0; i < notesPerDivision; i++) {
         notes.push(note);
       }
