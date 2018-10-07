@@ -6,9 +6,9 @@ import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
 import { setChangingSlider } from '../../actions/player';
 import { setCurrentTime } from '../../actions/youtube';
-import Shot from '../../Shot';
-import Canvas from '../../Canvas';
-import JudgeEffect from '../../JudgeEffect';
+import Shot from '../../classes/Shot';
+import Canvas from '../../classes/Canvas';
+import JudgeEffect from '../../classes/JudgeEffect';
 import { reset } from '../../actions/player';
 
 const sliderInlineStyle = {
