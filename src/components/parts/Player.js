@@ -10,6 +10,7 @@ import Shot from '../../classes/Shot';
 import Canvas from '../../classes/Canvas';
 import JudgeEffect from '../../classes/JudgeEffect';
 import { reset } from '../../actions/player';
+import Sound from '../../classes/Sound';
 
 const sliderInlineStyle = {
   width: '95%',
@@ -27,6 +28,7 @@ class Player extends Component {
     this.judgeEffects = [];
     this.canvasRef = React.createRef();
     this.canvas = null;
+    this.sound = new Sound();
     this.playMode = this.playMode.bind(this);
   }
 
@@ -147,9 +149,9 @@ class Player extends Component {
       }
 
       if (constants.id.note.isDon(note)) {
-        constants.sound.don.trigger();
+        this.sound.trigger('don');
       } else {
-        constants.sound.ka.trigger();
+        this.sound.trigger('ka');
       }
 
       break;
@@ -165,10 +167,10 @@ class Player extends Component {
     }
 
     if (constants.key.isDon(event.nativeEvent.key)) {
-      constants.sound.don.trigger();
+      this.sound.trigger('don');
     }
     if (constants.key.isKa(event.nativeEvent.key)) {
-      constants.sound.ka.trigger();
+      this.sound.trigger('ka');
     }
 
     const badRange = this.calcNoteIndexRangeInSecondRange(

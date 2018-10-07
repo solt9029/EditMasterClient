@@ -8,6 +8,7 @@ export default class JudgeEffect {
     this.stateId = stateId;
     this.limit = 10;
   }
+
   move(y) {
     this.judgeTextY -= y / this.g;
     this.g += 0.4;
