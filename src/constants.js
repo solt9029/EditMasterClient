@@ -64,12 +64,6 @@ const constants = {
     paste: 'v',
     don: ['f', 'j'],
     ka: ['d', 'k'],
-    isDon: pushedKey => {
-      return constants.key.don.indexOf(pushedKey) >= 0;
-    },
-    isKa: pushedKey => {
-      return constants.key.ka.indexOf(pushedKey) >= 0;
-    },
   },
   id: {
     note: {
