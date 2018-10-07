@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import constants from '../../constants';
-import Canvas from '../../Canvas';
+import Canvas from '../../classes/Canvas';
 import { changeNotes } from '../../actions/editor';
 import { addBar } from '../../actions/editor';
 
