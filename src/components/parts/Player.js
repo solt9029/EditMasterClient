@@ -360,7 +360,6 @@ const mapStateToProps = state => ({
   config: state.config,
   isAutoMode: state.palette.isAutoMode,
   ytPlayer: state.youtube.ytPlayer,
-  isChangingSlider: state.player.isChangingSlider,
   ytPlayerState: state.youtube.ytPlayerState,
 });
 const mapDispatchToProps = dispatch => ({
