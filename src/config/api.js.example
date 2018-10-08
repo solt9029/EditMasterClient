@@ -1,6 +1,6 @@
 const api = {
-  host: 'editmasterapi.solt9029.com',
-  port: 80,
+  HOST: 'editmasterapi.solt9029.com',
+  PORT: 80,
 };
 
 export default api;

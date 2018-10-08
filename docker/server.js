@@ -61,7 +61,7 @@ app.get('/scores/:id', (req, res) => {
     res.writeHead(200, { 'Content-Type': 'text/html' });
     request.get(
       {
-        url: `http://${config.api.host}:${config.api.port}/scores/${
+        url: `http://${config.api.HOST}:${config.api.PORT}/scores/${
           req.params.id
         }`,
       },
@@ -85,8 +85,8 @@ app.listen(80);
 
 const config = {
   api: {
-    host: 'editmasterapi.solt9029.com',
-    port: '80',
+    HOST: 'editmasterapi.solt9029.com',
+    PORT: '80',
   },
 };
 

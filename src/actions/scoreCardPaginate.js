@@ -5,10 +5,9 @@ export const fetch = (page, keyword) => {
   return async dispatch => {
     dispatch(startRequest());
     try {
+      const { HOST, PORT } = config.api;
       const result = await axios.get(
-        `http://${config.api.host}:${
-          config.api.port
-        }/scores?page=${page}&keyword=${keyword}`
+        `http://${HOST}:${PORT}/scores?page=${page}&keyword=${keyword}`
       );
       dispatch(finishRequestSuccess(result.data));
     } catch (error) {

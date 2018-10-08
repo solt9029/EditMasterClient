@@ -24,8 +24,9 @@ export const create = () => {
     };
 
     try {
+      const { HOST, PORT } = config.api;
       const result = await axios.post(
-        `http://${config.api.host}:${config.api.port}/scores/create`,
+        `http://${HOST}:${PORT}/scores/create`,
         data
       );
       dispatch(finishCreateSuccess(result.data.id));
