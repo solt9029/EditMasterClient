@@ -26,9 +26,8 @@ export const fetch = id => {
   return async dispatch => {
     dispatch(startRequest());
     try {
-      const result = await axios.get(
-        `http://${api.host}:${api.port}/scores/${id}`
-      );
+      const { HOST, PORT } = api;
+      const result = await axios.get(`http://${HOST}:${PORT}/scores/${id}`);
       const score = result.data;
 
       const notes = JSON.parse(score.notes);
