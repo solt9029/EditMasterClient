@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Navbar from './Navbar';
+import Navbar from '../containers/Navbar';
 import IDE from '../containers/IDE';
 import NotFoundView from './NotFoundView';
 import Modal from '../containers/Modal';

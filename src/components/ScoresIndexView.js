@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Navbar from './Navbar';
+import Navbar from '../containers/Navbar';
 import Footer from './Footer';
 import ScoreCardList from './ScoreCardList';
 import { Container } from 'reactstrap';

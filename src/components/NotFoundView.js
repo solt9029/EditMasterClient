@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import Navbar from './Navbar';
+import Navbar from '../containers/Navbar';
 import { Container } from 'reactstrap';
 import Footer from './Footer';
 
