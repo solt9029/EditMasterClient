@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
 import { Button, Col } from 'reactstrap';
-import { connect } from 'react-redux';
 import styled from 'styled-components';
-import { setDivision } from '../actions/palette';
 
 const StyledButton = styled(Button)`
   min-width: 75px;
 `;
 
-class DivisionRadio extends Component {
+export default class DivisionRadio extends Component {
   render() {
     // recalculate col size
     let colSize = 3;
@@ -35,17 +33,3 @@ class DivisionRadio extends Component {
     );
   }
 }
-
-const mapStateToProps = state => ({
-  division: state.palette.division,
-  paletteWidth: state.ide.panes.palette.width,
-});
-const mapDispatchToProps = dispatch => ({
-  setDivision(division) {
-    dispatch(setDivision(division));
-  },
-});
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(DivisionRadio);
