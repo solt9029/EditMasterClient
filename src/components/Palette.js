@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Row, Container, Button } from 'reactstrap';
 import styled from 'styled-components';
-import NoteRadio from './NoteRadio';
+import NoteRadio from '../containers/NoteRadio';
 import DivisionRadio from '../containers/DivisionRadio';
 import { ids } from '../constants';
 import { connect } from 'react-redux';
