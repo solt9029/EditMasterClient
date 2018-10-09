@@ -1,15 +1,10 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import { numbers, ids, seconds, positions, percentages } from '../constants';
-import { setState } from '../actions/player';
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
-import { setChangingSlider } from '../actions/player';
-import { setCurrentTime } from '../actions/youtube';
 import Shot from '../classes/Shot';
 import Canvas from '../classes/Canvas';
 import JudgeEffect from '../classes/JudgeEffect';
-import { reset } from '../actions/player';
 import Sound from '../classes/Sound';
 import * as utils from '../utils';
 
@@ -22,7 +17,7 @@ const sliderInlineStyle = {
   margin: 'auto',
 };
 
-class Player extends Component {
+export default class Player extends Component {
   constructor(props) {
     super(props);
     this.shots = [];
@@ -327,32 +322,3 @@ class Player extends Component {
     );
   }
 }
-
-const mapStateToProps = state => ({
-  playerPane: state.ide.panes.player,
-  notes: state.editor.notes,
-  states: state.player.states,
-  currentTime: state.youtube.currentTime,
-  config: state.config,
-  isAutoMode: state.palette.isAutoMode,
-  ytPlayer: state.youtube.ytPlayer,
-  ytPlayerState: state.youtube.ytPlayerState,
-});
-const mapDispatchToProps = dispatch => ({
-  setState(index, state) {
-    dispatch(setState(index, state));
-  },
-  setCurrentTime(currentTime) {
-    dispatch(setCurrentTime(currentTime));
-  },
-  setChangingSlider(isChangingSlider) {
-    dispatch(setChangingSlider(isChangingSlider));
-  },
-  reset() {
-    dispatch(reset());
-  },
-});
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Player);
