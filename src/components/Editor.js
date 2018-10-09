@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import { percentages, sizes, positions, numbers, ids } from '../constants';
 import Canvas from '../classes/Canvas';
 import EditorCaretCanvas from './EditorCaretCanvas';
 import EditorCurrentTimeCanvas from './EditorCurrentTimeCanvas';
-import { reset } from '../actions/editor';
 
 const canvasInlineStyle = { position: 'absolute', top: '0', left: '0' };
 
-class Editor extends Component {
+export default class Editor extends Component {
   constructor(props) {
     super(props);
     this.canvasRef = React.createRef();
@@ -99,17 +97,3 @@ class Editor extends Component {
     );
   }
 }
-
-const mapStateToProps = state => ({
-  editorPane: state.ide.panes.editor,
-  notes: state.editor.notes,
-});
-const mapDispatchToProps = dispatch => ({
-  reset() {
-    dispatch(reset());
-  },
-});
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Editor);
