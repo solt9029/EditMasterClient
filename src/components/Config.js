@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import urlParse from 'url-parse';
+import * as utils from '../utils';
 import { FormFeedback, Input, Label, FormGroup } from 'reactstrap';
 
 const StyledDiv = styled.div`
@@ -48,12 +48,7 @@ export default class Config extends Component {
             }
             value={this.props.videoId.value}
             onChange={event => {
-              const { value } = event.target;
-              let videoId = value;
-              const url = urlParse(value, true);
-              if (url.query.v) {
-                videoId = url.query.v;
-              }
+              const videoId = utils.urls.getVideoId(event.target.value);
               this.props.setVideoId(videoId);
               this.props.fetchSongle(videoId);
             }}
