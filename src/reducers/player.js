@@ -1,4 +1,4 @@
-import { ids, numbers } from '../constants/';
+import { ids, numbers, actionTypes } from '../constants/';
 import { defaultNotes } from './editor';
 
 const initialState = {
@@ -8,26 +8,26 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case 'SCORES_NEW_VIEW/SET_DEFAULT_SCORE': {
+    case actionTypes.SCORES_NEW_VIEW.SET_DEFAULT_SCORE: {
       const states = Array(defaultNotes.length).fill(ids.NOTE.SPACE);
       return {
         ...state,
         states,
       };
     }
-    case 'SCORES_SHOW_VIEW/FINISH_REQUEST_SUCCESS': {
+    case actionTypes.SCORES_SHOW_VIEW.FINISH_REQUEST_SUCCESS: {
       const states = Array(action.payload.notes.length).fill(ids.NOTE.SPACE);
       return {
         ...state,
         states,
       };
     }
-    case 'PLAYER/SET_CHANGING_SLIDER':
+    case actionTypes.PLAYER.SET_CHANGING_SLIDER:
       return {
         ...state,
         isChangingSlider: action.payload.isChangingSlider,
       };
-    case 'PLAYER/SET_STATE': {
+    case actionTypes.PLAYER.SET_STATE: {
       let states = state.states.concat();
       states[action.payload.index] = action.payload.state;
       return {
@@ -35,14 +35,14 @@ export default (state = initialState, action) => {
         states,
       };
     }
-    case 'EDITOR/SET_NOTES': {
+    case actionTypes.EDITOR.SET_NOTES: {
       const states = Array(action.payload.notes.length).fill(ids.NOTE.SPACE);
       return {
         ...state,
         states,
       };
     }
-    case 'PLAYER/FRESH_STATES': {
+    case actionTypes.PLAYER.FRESH_STATES: {
       let states = state.states.concat();
       for (let i = 0; i < states.length; i++) {
         states[i] = ids.STATE.FRESH;
@@ -52,7 +52,7 @@ export default (state = initialState, action) => {
         states,
       };
     }
-    case 'EDITOR/ADD_BAR': {
+    case actionTypes.EDITOR.ADD_BAR: {
       let states = state.states.concat();
       for (let i = 0; i < numbers.NOTES_PER_BAR; i++) {
         states.push(ids.NOTE.SPACE);
@@ -62,7 +62,7 @@ export default (state = initialState, action) => {
         states,
       };
     }
-    case 'EDITOR/REMOVE_BAR': {
+    case actionTypes.EDITOR.REMOVE_BAR: {
       if (state.states.length < numbers.NOTES_PER_BAR * 2) {
         return state;
       }
@@ -75,7 +75,7 @@ export default (state = initialState, action) => {
         states,
       };
     }
-    case 'PLAYER/RESET':
+    case actionTypes.PLAYER.RESET:
       return initialState;
     default:
       return state;

@@ -1,4 +1,4 @@
-import { ids, numbers } from '../constants/';
+import { ids, numbers, actionTypes } from '../constants/';
 
 /* eslint-disable */
 export const defaultNotes = [
@@ -20,20 +20,20 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case 'SCORES_NEW_VIEW/SET_DEFAULT_SCORE': {
+    case actionTypes.SCORES_NEW_VIEW.SET_DEFAULT_SCORE: {
       return {
         ...state,
         notes: defaultNotes,
       };
     }
-    case 'SCORES_SHOW_VIEW/FINISH_REQUEST_SUCCESS': {
+    case actionTypes.SCORES_SHOW_VIEW.FINISH_REQUEST_SUCCESS: {
       const { notes } = action.payload;
       return {
         ...state,
         notes,
       };
     }
-    case 'EDITOR/CHANGE_NOTES': {
+    case actionTypes.EDITOR.CHANGE_NOTES: {
       let notes = state.notes.concat();
       for (let i = 0; i < action.payload.notes.length; i++) {
         notes[action.payload.index + i] = action.payload.notes[i];
@@ -43,7 +43,7 @@ export default (state = initialState, action) => {
         notes,
       };
     }
-    case 'EDITOR/ADD_BAR': {
+    case actionTypes.EDITOR.ADD_BAR: {
       let notes = state.notes.concat();
       for (let i = 0; i < numbers.NOTES_PER_BAR; i++) {
         notes.push(ids.NOTE.SPACE);
@@ -53,10 +53,10 @@ export default (state = initialState, action) => {
         notes,
       };
     }
-    case 'EDITOR/RESET': {
+    case actionTypes.EDITOR.RESET: {
       return initialState;
     }
-    case 'EDITOR/REMOVE_BAR': {
+    case actionTypes.EDITOR.REMOVE_BAR: {
       if (state.notes.length < numbers.NOTES_PER_BAR * 2) {
         return state;
       }
@@ -69,7 +69,7 @@ export default (state = initialState, action) => {
         notes,
       };
     }
-    case 'EDITOR/SET_NOTES': {
+    case actionTypes.EDITOR.SET_NOTES: {
       return {
         ...state,
         notes: action.payload.notes,

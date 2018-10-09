@@ -1,3 +1,5 @@
+import { actionTypes } from '../constants/';
+
 const initialState = {
   panes: {
     player: {
@@ -17,7 +19,7 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case 'IDE/SET_PANES':
+    case actionTypes.IDE.SET_PANES:
       return {
         ...state,
         panes: action.payload.panes,
