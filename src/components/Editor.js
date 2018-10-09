@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { percentages, sizes, positions, numbers, ids } from '../constants';
 import Canvas from '../classes/Canvas';
-import EditorCaretCanvas from './EditorCaretCanvas';
+import EditorCaretCanvas from '../containers/EditorCaretCanvas';
 import EditorCurrentTimeCanvas from './EditorCurrentTimeCanvas';
 
 const canvasInlineStyle = { position: 'absolute', top: '0', left: '0' };

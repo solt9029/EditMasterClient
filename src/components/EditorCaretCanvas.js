@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import { numbers, keys, positions, percentages, sizes } from '../constants';
 import Canvas from '../classes/Canvas';
-import { changeNotes } from '../actions/editor';
-import { addBar } from '../actions/editor';
 import * as utils from '../utils';
 
 const canvasInlineStyle = {
@@ -13,7 +10,7 @@ const canvasInlineStyle = {
   outline: 'none',
 };
 
-class EditorCaretCanvas extends Component {
+export default class EditorCaretCanvas extends Component {
   constructor(props) {
     super(props);
     this.mouseBarIndex = 0;
@@ -166,21 +163,3 @@ class EditorCaretCanvas extends Component {
     );
   }
 }
-
-const mapStateToProps = state => ({
-  editorPane: state.ide.panes.editor,
-  palette: state.palette,
-  notes: state.editor.notes,
-});
-const mapDispatchToProps = dispatch => ({
-  changeNotes(index, num, note) {
-    dispatch(changeNotes(index, num, note));
-  },
-  addBar() {
-    dispatch(addBar());
-  },
-});
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(EditorCaretCanvas);
