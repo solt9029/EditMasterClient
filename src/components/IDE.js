@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import SplitterLayout from './SplitterLayout';
 import Config from '../containers/Config';
-import Player from './Player';
+import Player from '../containers/Player';
 import Editor from '../containers/Editor';
 import Palette from '../containers/Palette';
 import YouTube from './YouTube';
