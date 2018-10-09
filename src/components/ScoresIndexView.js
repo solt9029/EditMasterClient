@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Navbar from '../containers/Navbar';
 import Footer from './Footer';
-import ScoreCardList from './ScoreCardList';
+import ScoreCardList from '../containers/ScoreCardList';
 import { Container } from 'reactstrap';
 import ScoreCardPaginate from './ScoreCardPaginate';
 import qs from 'qs';
