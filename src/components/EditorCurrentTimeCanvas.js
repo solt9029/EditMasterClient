@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import { numbers, sizes, positions, percentages } from '../constants';
 import Canvas from '../classes/Canvas';
 
 const canvasInlineStyle = { position: 'absolute', top: '0', left: '0' };
 
-class EditorCurrentTimeCanvas extends Component {
+export default class EditorCurrentTimeCanvas extends Component {
   constructor(props) {
     super(props);
     this.canvasRef = React.createRef();
@@ -80,15 +79,3 @@ class EditorCurrentTimeCanvas extends Component {
     );
   }
 }
-
-const mapStateToProps = state => ({
-  editorPane: state.ide.panes.editor,
-  notes: state.editor.notes,
-  currentTime: state.youtube.currentTime,
-  bpm: state.config.bpm.value,
-  offset: state.config.offset.value,
-});
-export default connect(
-  mapStateToProps,
-  null
-)(EditorCurrentTimeCanvas);
