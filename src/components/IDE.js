@@ -3,7 +3,7 @@ import SplitterLayout from './SplitterLayout';
 import Config from '../containers/Config';
 import Player from './Player';
 import Editor from '../containers/Editor';
-import Palette from './Palette';
+import Palette from '../containers/Palette';
 import YouTube from './YouTube';
 import { debounce } from 'lodash';
 
