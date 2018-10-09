@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import SplitterLayout from './SplitterLayout';
-import Config from './Config';
+import Config from '../containers/Config';
 import Player from './Player';
 import Editor from './Editor';
 import Palette from './Palette';
