@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { numbers, sizes, positions, percentages } from '../../constants/';
-import Canvas from '../../classes/Canvas';
+import { numbers, sizes, positions, percentages } from '../constants';
+import Canvas from '../classes/Canvas';
 
 const canvasInlineStyle = { position: 'absolute', top: '0', left: '0' };
 

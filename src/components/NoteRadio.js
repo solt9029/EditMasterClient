@@ -2,13 +2,18 @@ import React, { Component } from 'react';
 import { Button, Col } from 'reactstrap';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
-import { setDivision } from '../../actions/palette';
+import { setNote } from '../actions/palette';
 
 const StyledButton = styled(Button)`
   min-width: 75px;
 `;
 
-class DivisionRadio extends Component {
+const StyledImg = styled.img`
+  width: 100%;
+  height: auto;
+`;
+
+class NoteRadio extends Component {
   render() {
     // recalculate col size
     let colSize = 3;
@@ -22,13 +27,14 @@ class DivisionRadio extends Component {
       <Col xs={colSize} className="btn-group-toggle" style={{ padding: '3px' }}>
         <StyledButton
           block
-          color="light"
-          active={this.props.division === this.props.value}
+          color={this.props.color}
+          active={this.props.note === this.props.value}
           onClick={() => {
-            this.props.setDivision(this.props.value);
+            this.props.setNote(this.props.value);
           }}
         >
-          <div>{this.props.value}</div>
+          <div>{this.props.label}</div>
+          <StyledImg src={this.props.img} alt={this.props.img} />
           <input value={this.props.value} type="radio" />
         </StyledButton>
       </Col>
@@ -37,15 +43,15 @@ class DivisionRadio extends Component {
 }
 
 const mapStateToProps = state => ({
-  division: state.palette.division,
+  note: state.palette.note,
   paletteWidth: state.ide.panes.palette.width,
 });
 const mapDispatchToProps = dispatch => ({
-  setDivision(division) {
-    dispatch(setDivision(division));
+  setNote(note) {
+    dispatch(setNote(note));
   },
 });
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(DivisionRadio);
+)(NoteRadio);

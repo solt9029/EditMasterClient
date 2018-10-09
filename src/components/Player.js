@@ -1,23 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {
-  numbers,
-  ids,
-  seconds,
-  positions,
-  percentages,
-} from '../../constants/';
-import { setState } from '../../actions/player';
+import { numbers, ids, seconds, positions, percentages } from '../constants';
+import { setState } from '../actions/player';
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
-import { setChangingSlider } from '../../actions/player';
-import { setCurrentTime } from '../../actions/youtube';
-import Shot from '../../classes/Shot';
-import Canvas from '../../classes/Canvas';
-import JudgeEffect from '../../classes/JudgeEffect';
-import { reset } from '../../actions/player';
-import Sound from '../../classes/Sound';
-import * as utils from '../../utils';
+import { setChangingSlider } from '../actions/player';
+import { setCurrentTime } from '../actions/youtube';
+import Shot from '../classes/Shot';
+import Canvas from '../classes/Canvas';
+import JudgeEffect from '../classes/JudgeEffect';
+import { reset } from '../actions/player';
+import Sound from '../classes/Sound';
+import * as utils from '../utils';
 
 const sliderInlineStyle = {
   width: '95%',

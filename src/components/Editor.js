@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { percentages, sizes, positions, numbers, ids } from '../../constants/';
-import Canvas from '../../classes/Canvas';
+import { percentages, sizes, positions, numbers, ids } from '../constants';
+import Canvas from '../classes/Canvas';
 import EditorCaretCanvas from './EditorCaretCanvas';
 import EditorCurrentTimeCanvas from './EditorCurrentTimeCanvas';
-import { reset } from '../../actions/editor';
+import { reset } from '../actions/editor';
 
 const canvasInlineStyle = { position: 'absolute', top: '0', left: '0' };
 

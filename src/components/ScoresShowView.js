@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import Navbar from './parts/Navbar';
-import IDE from './parts/IDE';
+import Navbar from './Navbar';
+import IDE from './IDE';
 import NotFoundView from './NotFoundView';
-import Modal from './parts/Modal';
+import Modal from './Modal';
 
 export default class ScoresShowView extends Component {
   componentDidMount() {

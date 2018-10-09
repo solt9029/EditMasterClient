@@ -15,11 +15,11 @@ import {
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import withRouter from 'react-router-dom/withRouter';
-import { numbers, routes } from '../../constants/';
+import { numbers, routes } from '../constants';
 import { connect } from 'react-redux';
-import { create } from '../../actions/modal';
-import { setKeyword } from '../../actions/navbar';
-import history from '../../history';
+import { create } from '../actions/modal';
+import { setKeyword } from '../actions/navbar';
+import history from '../history';
 import qs from 'qs';
 import { saveAs } from 'file-saver';
 

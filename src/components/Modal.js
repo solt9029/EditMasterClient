@@ -7,7 +7,7 @@ import {
   ModalFooter,
   Button,
 } from 'reactstrap';
-import { close } from '../../actions/modal';
+import { close } from '../actions/modal';
 import { Link } from 'react-router-dom';
 
 class Modal extends Component {

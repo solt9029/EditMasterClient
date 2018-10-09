@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import Navbar from './parts/Navbar';
+import Navbar from './Navbar';
 import { Container } from 'reactstrap';
-import Footer from './parts/Footer';
+import Footer from './Footer';
 
 const Icon = styled.img`
   width: 25%;
