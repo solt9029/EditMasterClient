@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Navbar from './Navbar';
-import IDE from './IDE';
+import IDE from '../containers/IDE';
 import Modal from './Modal';
 
 export default class ScoresNewView extends Component {
