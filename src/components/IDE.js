@@ -1,12 +1,9 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import SplitterLayout from './SplitterLayout';
 import Config from '../containers/Config';
 import Player from './Player';
 import Editor from '../containers/Editor';
 import Palette from './Palette';
-import { setPanes } from '../actions/ide';
-import { setCurrentTime } from '../actions/youtube';
 import YouTube from './YouTube';
 import { debounce } from 'lodash';
 
@@ -14,7 +11,7 @@ const divInlineStyle = {
   height: '100%',
 };
 
-class IDE extends Component {
+export default class IDE extends Component {
   constructor(props) {
     super(props);
     this.references = {
@@ -86,20 +83,3 @@ class IDE extends Component {
     );
   }
 }
-
-const mapStateToProps = state => ({
-  ytPlayer: state.youtube.ytPlayer,
-  isChangingSlider: state.player.isChangingSlider,
-});
-const mapDispatchToProps = dispatch => ({
-  setPanes(references) {
-    dispatch(setPanes(references));
-  },
-  setCurrentTime(currentTime) {
-    dispatch(setCurrentTime(currentTime));
-  },
-});
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(IDE);
