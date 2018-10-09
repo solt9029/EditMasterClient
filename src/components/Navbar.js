@@ -14,11 +14,7 @@ import {
 } from 'reactstrap';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import withRouter from 'react-router-dom/withRouter';
 import { numbers, routes } from '../constants';
-import { connect } from 'react-redux';
-import { create } from '../actions/modal';
-import { setKeyword } from '../actions/navbar';
 import history from '../history';
 import qs from 'qs';
 import { saveAs } from 'file-saver';
@@ -42,7 +38,7 @@ const StyledNavLink = styled(NavLink)`
   font-size: 1em;
 `;
 
-class Navbar extends Component {
+export default class Navbar extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -180,25 +176,3 @@ class Navbar extends Component {
     );
   }
 }
-
-const mapStateToProps = state => ({
-  notes: state.editor.notes,
-  config: state.config,
-  keyword: state.navbar.keyword,
-  isLoading: state.show.isLoading,
-  error: state.show.error,
-});
-const mapDispatchToProps = dispatch => ({
-  create() {
-    dispatch(create());
-  },
-  setKeyword(keyword) {
-    dispatch(setKeyword(keyword));
-  },
-});
-export default withRouter(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(Navbar)
-);
