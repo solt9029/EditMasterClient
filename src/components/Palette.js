@@ -4,9 +4,6 @@ import styled from 'styled-components';
 import NoteRadio from '../containers/NoteRadio';
 import DivisionRadio from '../containers/DivisionRadio';
 import { ids } from '../constants';
-import { connect } from 'react-redux';
-import { addBar, removeBar } from '../actions/editor';
-import { reset, toggleMode } from '../actions/palette';
 
 const StyledDiv = styled.div`
   padding: 15px;
@@ -81,7 +78,7 @@ const noteFields = [
 
 const divisionFields = [16, 24, 32, 48];
 
-class Palette extends Component {
+export default class Palette extends Component {
   componentWillUnmount() {
     this.props.reset();
   }
@@ -144,25 +141,3 @@ class Palette extends Component {
     );
   }
 }
-
-const mapStateToProps = state => ({
-  isAutoMode: state.palette.isAutoMode,
-});
-const mapDispatchToProps = dispatch => ({
-  toggleMode() {
-    dispatch(toggleMode());
-  },
-  addBar() {
-    dispatch(addBar());
-  },
-  removeBar() {
-    dispatch(removeBar());
-  },
-  reset() {
-    dispatch(reset());
-  },
-});
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Palette);
