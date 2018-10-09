@@ -1,18 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { connect } from 'react-redux';
 import urlParse from 'url-parse';
 import { FormFeedback, Input, Label, FormGroup } from 'reactstrap';
-import {
-  setUsername,
-  setVideoId,
-  fetchSongle,
-  setBpm,
-  setOffset,
-  setSpeed,
-  setComment,
-  reset,
-} from '../actions/config';
 
 const StyledDiv = styled.div`
   padding: 15px;
@@ -21,10 +10,11 @@ const StyledDiv = styled.div`
   font-weight: 500;
 `;
 
-class Config extends Component {
+export default class Config extends Component {
   componentWillUnmount() {
     this.props.reset();
   }
+
   render() {
     return (
       <StyledDiv>
@@ -146,42 +136,3 @@ class Config extends Component {
     );
   }
 }
-
-const mapStateToProps = state => ({
-  username: state.config.username,
-  videoId: state.config.videoId,
-  bpm: state.config.bpm,
-  offset: state.config.offset,
-  speed: state.config.speed,
-  comment: state.config.comment,
-});
-const mapDispatchToProps = dispatch => ({
-  setUsername(value) {
-    dispatch(setUsername(value));
-  },
-  setVideoId(value) {
-    dispatch(setVideoId(value));
-  },
-  fetchSongle(videoId) {
-    dispatch(fetchSongle(videoId));
-  },
-  setOffset(value) {
-    dispatch(setOffset(value));
-  },
-  setSpeed(value) {
-    dispatch(setSpeed(value));
-  },
-  setComment(value) {
-    dispatch(setComment(value));
-  },
-  reset() {
-    dispatch(reset());
-  },
-  setBpm(value) {
-    dispatch(setBpm(value));
-  },
-});
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Config);
