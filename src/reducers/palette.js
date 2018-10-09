@@ -1,4 +1,4 @@
-import { ids } from '../constants/';
+import { ids, actionTypes } from '../constants/';
 
 const initialState = {
   note: ids.NOTE.DON,
@@ -8,19 +8,19 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case 'PALETTE/RESET':
+    case actionTypes.PALETTE.RESET:
       return initialState;
-    case 'PALETTE/SET_NOTE':
+    case actionTypes.PALETTE.SET_NOTE:
       return {
         ...state,
         note: action.payload.note,
       };
-    case 'PALETTE/SET_DIVISION':
+    case actionTypes.PALETTE.SET_DIVISION:
       return {
         ...state,
         division: action.payload.division,
       };
-    case 'PALETTE/TOGGLE_MODE':
+    case actionTypes.PALETTE.TOGGLE_MODE:
       return {
         ...state,
         isAutoMode: !state.isAutoMode,

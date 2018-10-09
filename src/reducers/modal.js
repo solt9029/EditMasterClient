@@ -1,3 +1,5 @@
+import { actionTypes } from '../constants/';
+
 const initialState = {
   isOpen: false,
   isLoading: false,
@@ -7,26 +9,26 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case 'MODAL/START_CREATE':
+    case actionTypes.MODAL.START_CREATE:
       return {
         ...state,
         isOpen: true,
         isLoading: true,
       };
-    case 'MODAL/FINISH_CREATE_SUCCESS':
+    case actionTypes.MODAL.FINISH_CREATE_SUCCESS:
       return {
         ...state,
         isLoading: false,
         id: action.payload.id,
         errors: null,
       };
-    case 'MODAL/FINISH_CREATE_ERROR':
+    case actionTypes.MODAL.FINISH_CREATE_ERROR:
       return {
         ...state,
         isLoading: false,
         errors: action.payload.errors,
       };
-    case 'MODAL/CLOSE':
+    case actionTypes.MODAL.CLOSE:
       return {
         ...state,
         isOpen: false,
