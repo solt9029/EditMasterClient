@@ -1,6 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import constants from '../../constants';
+import {
+  numbers,
+  ids,
+  seconds,
+  positions,
+  percentages,
+} from '../../constants/';
 import { setState } from '../../actions/player';
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
@@ -49,9 +55,9 @@ class Player extends Component {
   }
 
   get secondsPerNote() {
-    const barPerMinute = this.props.config.bpm.value / constants.number.beat;
+    const barPerMinute = this.props.config.bpm.value / numbers.BEAT;
     const barPerSecond = barPerMinute / 60;
-    const notesPerSecond = barPerSecond * constants.number.notesPerBar;
+    const notesPerSecond = barPerSecond * numbers.NOTES_PER_BAR;
     const secondsPerNote = 1 / notesPerSecond;
     return secondsPerNote;
   }
@@ -69,8 +75,7 @@ class Player extends Component {
 
   calcNoteIndexRangeInCanvas(initialNoteX) {
     const spaceWidth =
-      this.props.config.speed.value *
-      constants.percentage.player.speedToSpaceWidth;
+      this.props.config.speed.value * percentages.PLAYER.SPEED_TO_SPACE_WIDTH;
 
     // Math.floor(-initialNoteX / spaceWidth) is the number of notes that already passed from canvas
     let initialNoteIndex = Math.floor(-initialNoteX / spaceWidth) - 3;
@@ -101,12 +106,11 @@ class Player extends Component {
 
   calcInitialNoteX() {
     const spaceWidth =
-      this.props.config.speed.value *
-      constants.percentage.player.speedToSpaceWidth;
+      this.props.config.speed.value * percentages.PLAYER.SPEED_TO_SPACE_WIDTH;
 
     const offset = this.props.config.offset.value;
     const initialNoteX =
-      constants.position.player.judge.x +
+      positions.PLAYER.JUDGE.X +
       ((offset - this.props.currentTime) / this.secondsPerNote) * spaceWidth;
     return initialNoteX;
   }
@@ -114,14 +118,12 @@ class Player extends Component {
   autoMode() {
     if (
       !this.props.isAutoMode ||
-      this.props.ytPlayerState !== constants.id.youtube.playing
+      this.props.ytPlayerState !== ids.YOUTUBE.PLAYING
     ) {
       return;
     }
 
-    const autoRange = this.calcNoteIndexRangeInSecondRange(
-      constants.second.range.auto
-    );
+    const autoRange = this.calcNoteIndexRangeInSecondRange(seconds.RANGE.AUTO);
 
     for (let i = autoRange[0]; i <= autoRange[1]; i++) {
       if (i < 0 || i >= this.props.notes.length) {
@@ -130,23 +132,17 @@ class Player extends Component {
 
       const note = this.props.notes[i];
       const noteState = this.props.states[i];
-      if (
-        noteState !== constants.id.state.fresh ||
-        note === constants.id.note.space
-      ) {
+      if (noteState !== ids.STATE.FRESH || note === ids.NOTE.SPACE) {
         continue;
       }
 
       this.shots.push(new Shot((this.props.playerPane.height - 1) / 2, note));
       this.judgeEffects.push(
-        new JudgeEffect(
-          (this.props.playerPane.height - 1) / 2,
-          constants.id.state.good
-        )
+        new JudgeEffect((this.props.playerPane.height - 1) / 2, ids.STATE.GOOD)
       );
 
       if (utils.notes.hasState(note)) {
-        this.props.setState(i, constants.id.state.good);
+        this.props.setState(i, ids.STATE.GOOD);
       }
 
       if (utils.notes.isDon(note)) {
@@ -162,7 +158,7 @@ class Player extends Component {
   playMode(event) {
     if (
       this.props.isAutoMode ||
-      this.props.ytPlayerState !== constants.id.youtube.playing
+      this.props.ytPlayerState !== ids.YOUTUBE.PLAYING
     ) {
       return;
     }
@@ -174,15 +170,9 @@ class Player extends Component {
       this.sound.trigger('ka');
     }
 
-    const badRange = this.calcNoteIndexRangeInSecondRange(
-      constants.second.range.bad
-    );
-    const okRange = this.calcNoteIndexRangeInSecondRange(
-      constants.second.range.ok
-    );
-    const goodRange = this.calcNoteIndexRangeInSecondRange(
-      constants.second.range.good
-    );
+    const badRange = this.calcNoteIndexRangeInSecondRange(seconds.RANGE.BAD);
+    const okRange = this.calcNoteIndexRangeInSecondRange(seconds.RANGE.OK);
+    const goodRange = this.calcNoteIndexRangeInSecondRange(seconds.RANGE.GOOD);
 
     for (let i = badRange[0]; i <= badRange[1]; i++) {
       if (i < 0 || i >= this.props.notes.length) {
@@ -191,10 +181,7 @@ class Player extends Component {
 
       const note = this.props.notes[i];
       const noteState = this.props.states[i];
-      if (
-        noteState !== constants.id.state.fresh ||
-        note === constants.id.note.space
-      ) {
+      if (noteState !== ids.STATE.FRESH || note === ids.NOTE.SPACE) {
         continue;
       }
 
@@ -212,11 +199,11 @@ class Player extends Component {
       this.shots.push(new Shot((this.props.playerPane.height - 1) / 2, note));
 
       if (utils.notes.hasState(note)) {
-        let stateId = constants.id.state.bad;
+        let stateId = ids.STATE.BAD;
         if (i >= goodRange[0] && i <= goodRange[1]) {
-          stateId = constants.id.state.good;
+          stateId = ids.STATE.GOOD;
         } else if (i >= okRange[0] && i <= okRange[1]) {
-          stateId = constants.id.state.ok;
+          stateId = ids.STATE.OK;
         }
         this.props.setState(i, stateId);
         this.judgeEffects.push(
@@ -229,8 +216,7 @@ class Player extends Component {
 
   updateCanvas() {
     const spaceWidth =
-      this.props.config.speed.value *
-      constants.percentage.player.speedToSpaceWidth;
+      this.props.config.speed.value * percentages.PLAYER.SPEED_TO_SPACE_WIDTH;
 
     this.canvas.clear(
       this.props.playerPane.width - 1,
@@ -260,11 +246,11 @@ class Player extends Component {
 
     // bar start lines
     const initialBarStartLineIndex =
-      canvasRange[0] - (canvasRange[0] % constants.number.notesPerBar);
+      canvasRange[0] - (canvasRange[0] % numbers.NOTES_PER_BAR);
     for (
       let i = initialBarStartLineIndex;
       i <= canvasRange[1];
-      i += constants.number.notesPerBar
+      i += numbers.NOTES_PER_BAR
     ) {
       const x = initialNoteX + i * spaceWidth;
       this.canvas.drawBarStartLine(x, this.props.playerPane.height - 1);
@@ -276,25 +262,21 @@ class Player extends Component {
       const noteState = this.props.states[i];
       const x = initialNoteX + i * spaceWidth;
 
-      if (
-        noteState !== constants.id.state.fresh ||
-        note === constants.id.note.space
-      ) {
+      if (noteState !== ids.STATE.FRESH || note === ids.NOTE.SPACE) {
         continue;
       }
 
       const y = (this.props.playerPane.height - 1) / 2;
-      const previousNote =
-        i > 0 ? this.props.notes[i - 1] : constants.id.note.space;
+      const previousNote = i > 0 ? this.props.notes[i - 1] : ids.NOTE.SPACE;
       const nextNote =
         i < this.props.notes.length - 1
           ? this.props.notes[i + 1]
-          : constants.id.note.space;
+          : ids.NOTE.SPACE;
 
       this.canvas.drawNote(
         x,
         y,
-        'player',
+        'PLAYER',
         note,
         spaceWidth,
         previousNote,
@@ -311,7 +293,7 @@ class Player extends Component {
       this.canvas.drawNote(
         this.shots[i].x,
         this.shots[i].y,
-        'player',
+        'PLAYER',
         this.shots[i].id
       );
       if (this.shots[i].limit < 0) {

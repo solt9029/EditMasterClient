@@ -1,43 +1,43 @@
-import constants from '../constants';
+import { ids } from '../constants/';
 
 export const isDon = note => {
   return (
-    note === constants.id.note.don ||
-    note === constants.id.note.bigdon ||
-    note === constants.id.note.renda ||
-    note === constants.id.note.bigrenda ||
-    note === constants.id.note.balloon
+    note === ids.NOTE.DON ||
+    note === ids.NOTE.BIGDON ||
+    note === ids.NOTE.RENDA ||
+    note === ids.NOTE.BIGRENDA ||
+    note === ids.NOTE.BALLOON
   );
 };
 
 export const isKa = note => {
   return (
-    note === constants.id.note.ka ||
-    note === constants.id.note.bigka ||
-    note === constants.id.note.renda ||
-    note === constants.id.note.bigrenda
+    note === ids.NOTE.KA ||
+    note === ids.NOTE.BIGKA ||
+    note === ids.NOTE.RENDA ||
+    note === ids.NOTE.BIGRENDA
   );
 };
 
 export const hasState = note => {
   return (
-    note === constants.id.note.don ||
-    note === constants.id.note.ka ||
-    note === constants.id.note.bigdon ||
-    note === constants.id.note.bigka
+    note === ids.NOTE.DON ||
+    note === ids.NOTE.KA ||
+    note === ids.NOTE.BIGDON ||
+    note === ids.NOTE.BIGKA
   );
 };
 
 export const isNote = note => {
   return (
-    note === constants.id.note.don ||
-    note === constants.id.note.ka ||
-    note === constants.id.note.bigdon ||
-    note === constants.id.note.bigka ||
-    note === constants.id.note.renda ||
-    note === constants.id.note.bigrenda ||
-    note === constants.id.note.balloon ||
-    note === constants.id.note.space
+    note === ids.NOTE.DON ||
+    note === ids.NOTE.KA ||
+    note === ids.NOTE.BIGDON ||
+    note === ids.NOTE.BIGKA ||
+    note === ids.NOTE.RENDA ||
+    note === ids.NOTE.BIGRENDA ||
+    note === ids.NOTE.BALLOON ||
+    note === ids.NOTE.SPACE
   );
 };
 

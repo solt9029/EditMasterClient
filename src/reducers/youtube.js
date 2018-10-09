@@ -1,8 +1,8 @@
-import constants from '../constants';
+import { ids } from '../constants/';
 
 const initialState = {
   ytPlayer: null,
-  ytPlayerState: constants.id.youtube.unstarted,
+  ytPlayerState: ids.YOUTUBE.UNSTARTED,
   currentTime: 0,
 };
 

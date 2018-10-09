@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import constants from '../../constants';
+import { numbers, sizes, positions, percentages } from '../../constants/';
 import Canvas from '../../classes/Canvas';
 
 const canvasInlineStyle = { position: 'absolute', top: '0', left: '0' };
@@ -32,9 +32,9 @@ class EditorCurrentTimeCanvas extends Component {
   }
 
   get secondsPerNote() {
-    const barPerMinute = this.props.bpm / constants.number.beat;
+    const barPerMinute = this.props.bpm / numbers.BEAT;
     const barPerSecond = barPerMinute / 60;
-    const notesPerSecond = barPerSecond * constants.number.notesPerBar;
+    const notesPerSecond = barPerSecond * numbers.NOTES_PER_BAR;
     const secondsPerNote = 1 / notesPerSecond;
     return secondsPerNote;
   }
@@ -42,29 +42,26 @@ class EditorCurrentTimeCanvas extends Component {
   updateCanvas() {
     this.canvas.clear(
       this.props.editorPane.width - 1,
-      Math.ceil(this.props.notes.length / constants.number.notesPerBar) *
-        constants.size.editor.bar.outside.height
+      Math.ceil(this.props.notes.length / numbers.NOTES_PER_BAR) *
+        sizes.EDITOR.BAR.OUTSIDE.HEIGHT
     );
 
     const barWidth =
-      this.props.editorPane.width - 1 - constants.position.editor.bar.x * 2;
-    const actualBarWidth =
-      barWidth * (1 - constants.percentage.editor.barStartLine); // left side of initial beat line is not available
-    const spaceWidth = actualBarWidth / constants.number.notesPerBar;
+      this.props.editorPane.width - 1 - positions.EDITOR.BAR.X * 2;
+    const actualBarWidth = barWidth * (1 - percentages.EDITOR.BAR_START_LINE); // left side of initial beat line is not available
+    const spaceWidth = actualBarWidth / numbers.NOTES_PER_BAR;
 
     const currentNoteIndexFloat =
       (this.props.currentTime - this.props.offset) / this.secondsPerNote;
     const currentNotesPerBarIndexFloat =
-      currentNoteIndexFloat % constants.number.notesPerBar;
+      currentNoteIndexFloat % numbers.NOTES_PER_BAR;
     const currentBarIndex = Math.floor(
-      currentNoteIndexFloat / constants.number.notesPerBar
+      currentNoteIndexFloat / numbers.NOTES_PER_BAR
     );
 
     const y =
-      currentBarIndex * constants.size.editor.bar.outside.height +
-      (constants.size.editor.bar.outside.height -
-        constants.size.editor.bar.inside.height) /
-        2;
+      currentBarIndex * sizes.EDITOR.BAR.OUTSIDE.HEIGHT +
+      (sizes.EDITOR.BAR.OUTSIDE.HEIGHT - sizes.EDITOR.BAR.INSIDE.HEIGHT) / 2;
     const x = currentNotesPerBarIndexFloat * spaceWidth;
     this.canvas.drawCurrentTime(x, y);
   }
@@ -76,8 +73,8 @@ class EditorCurrentTimeCanvas extends Component {
         style={canvasInlineStyle}
         width={this.props.editorPane.width - 1}
         height={
-          Math.ceil(this.props.notes.length / constants.number.notesPerBar) *
-          constants.size.editor.bar.outside.height
+          Math.ceil(this.props.notes.length / numbers.NOTES_PER_BAR) *
+          sizes.EDITOR.BAR.OUTSIDE.HEIGHT
         }
       />
     );

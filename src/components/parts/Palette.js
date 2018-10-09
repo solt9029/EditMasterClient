@@ -3,7 +3,7 @@ import { Row, Container, Button } from 'reactstrap';
 import styled from 'styled-components';
 import NoteRadio from './NoteRadio';
 import DivisionRadio from './DivisionRadio';
-import constants from '../../constants';
+import { ids } from '../../constants/';
 import { connect } from 'react-redux';
 import { addBar, removeBar } from '../../actions/editor';
 import { reset, toggleMode } from '../../actions/palette';
@@ -31,49 +31,49 @@ const ModeButton = styled(Button)`
 const noteFields = [
   {
     label: 'ドン',
-    value: constants.id.note.don,
+    value: ids.NOTE.DON,
     color: 'danger',
     img: '/images/don.png',
   },
   {
     label: 'カッ',
-    value: constants.id.note.ka,
+    value: ids.NOTE.KA,
     color: 'primary',
     img: '/images/ka.png',
   },
   {
     label: '大ドン',
-    value: constants.id.note.bigdon,
+    value: ids.NOTE.BIGDON,
     color: 'danger',
     img: '/images/bigdon.png',
   },
   {
     label: '大カッ',
-    value: constants.id.note.bigka,
+    value: ids.NOTE.BIGKA,
     color: 'primary',
     img: '/images/bigka.png',
   },
   {
     label: '連打',
-    value: constants.id.note.renda,
+    value: ids.NOTE.RENDA,
     color: 'warning',
     img: '/images/renda.png',
   },
   {
     label: '大連打',
-    value: constants.id.note.bigrenda,
+    value: ids.NOTE.BIGRENDA,
     color: 'warning',
     img: '/images/bigrenda.png',
   },
   {
     label: '風船',
-    value: constants.id.note.balloon,
+    value: ids.NOTE.BALLOON,
     color: 'danger',
     img: '/images/balloon.png',
   },
   {
     label: '空白',
-    value: constants.id.note.space,
+    value: ids.NOTE.SPACE,
     color: 'light',
     img: '/images/space.png',
   },
