@@ -1,17 +1,18 @@
 import axios from 'axios';
 import { api } from '../config';
+import { actionTypes } from '../constants/';
 
 export const finishRequestError = error => ({
-  type: 'SCORES_SHOW_VIEW/FINISH_REQUEST_ERROR',
+  type: actionTypes.SCORES_SHOW_VIEW.FINISH_REQUEST_ERROR,
   payload: { error },
 });
 
 export const startRequest = () => ({
-  type: 'SCORES_SHOW_VIEW/START_REQUEST',
+  type: actionTypes.SCORES_SHOW_VIEW.START_REQUEST,
 });
 
 export const finishRequestSuccess = (notes, config) => ({
-  type: 'SCORES_SHOW_VIEW/FINISH_REQUEST_SUCCESS',
+  type: actionTypes.SCORES_SHOW_VIEW.FINISH_REQUEST_SUCCESS,
   payload: {
     notes,
     config,
@@ -19,7 +20,7 @@ export const finishRequestSuccess = (notes, config) => ({
 });
 
 export const reset = () => ({
-  type: 'SCORES_SHOW_VIEW/RESET',
+  type: actionTypes.SCORES_SHOW_VIEW.RESET,
 });
 
 export const fetch = id => {

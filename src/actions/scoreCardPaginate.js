@@ -1,5 +1,6 @@
 import axios from 'axios';
 import * as config from '../config/';
+import { actionTypes } from '../constants/';
 
 export const fetch = (page, keyword) => {
   return async dispatch => {
@@ -17,19 +18,19 @@ export const fetch = (page, keyword) => {
 };
 
 export const startRequest = () => ({
-  type: 'SCORE_CARD_PAGINATE/START_REQUEST',
+  type: actionTypes.SCORE_CARD_PAGINATE.START_REQUEST,
 });
 
 export const finishRequestSuccess = data => ({
-  type: 'SCORE_CARD_PAGINATE/FINISH_REQUEST_SUCCESS',
+  type: actionTypes.SCORE_CARD_PAGINATE.FINISH_REQUEST_SUCCESS,
   payload: { data },
 });
 
 export const finishRequestError = error => ({
-  type: 'SCORE_CARD_PAGINATE/FINISH_REQUEST_ERROR',
+  type: actionTypes.SCORE_CARD_PAGINATE.FINISH_REQUEST_ERROR,
   payload: { error },
 });
 
 export const reset = () => ({
-  type: 'SCORE_CARD_PAGINATE/RESET',
+  type: actionTypes.SCORE_CARD_PAGINATE.RESET,
 });
