@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import Navbar from '../../parts/Navbar';
-import IDE from '../../parts/IDE';
+import Navbar from './parts/Navbar';
+import IDE from './parts/IDE';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { fetch } from '../../../actions/show';
-import NotFound from '../NotFound';
-import { reset } from '../../../actions/show';
-import Modal from '../../parts/Modal';
+import { fetch } from '../actions/show';
+import NotFoundView from './NotFoundView';
+import { reset } from '../actions/show';
+import Modal from './parts/Modal';
 
 class Show extends Component {
   componentDidMount() {
@@ -26,7 +26,7 @@ class Show extends Component {
       </div>
     );
     if (this.props.error) {
-      component = <NotFound />;
+      component = <NotFoundView />;
     }
 
     return component;

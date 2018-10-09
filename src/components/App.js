@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import Index from './pages/Index';
-import ScoresIndex from './pages/scores/Index';
-import ScoresNew from './pages/scores/New';
-import ScoresShow from './pages/scores/Show';
-import Help from './pages/Help';
-import NotFound from './pages/NotFound';
+import IndexView from './IndexView';
+import ScoresIndexView from './ScoresIndexView';
+import ScoresNewView from './ScoresNewView';
+import ScoresShowView from './ScoresShowView';
+import HelpView from './HelpView';
+import NotFoundView from './NotFoundView';
 import { Switch, Route } from 'react-router-dom';
 import { withRouter } from 'react-router-dom';
 import { routes } from '../constants/';
@@ -14,12 +14,12 @@ class App extends Component {
     return (
       <div>
         <Switch>
-          <Route exact path={routes.INDEX} component={Index} />
-          <Route exact path={routes.SCORES.INDEX} component={ScoresIndex} />
-          <Route exact path={routes.SCORES.NEW} component={ScoresNew} />
-          <Route exact path={routes.SCORES.SHOW} component={ScoresShow} />
-          <Route exact path={routes.HELP} component={Help} />
-          <Route component={NotFound} />
+          <Route exact path={routes.INDEX} component={IndexView} />
+          <Route exact path={routes.SCORES.INDEX} component={ScoresIndexView} />
+          <Route exact path={routes.SCORES.NEW} component={ScoresNewView} />
+          <Route exact path={routes.SCORES.SHOW} component={ScoresShowView} />
+          <Route exact path={routes.HELP} component={HelpView} />
+          <Route component={NotFoundView} />
         </Switch>
       </div>
     );

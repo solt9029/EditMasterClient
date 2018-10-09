@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import Navbar from '../../parts/Navbar';
-import IDE from '../../parts/IDE';
+import Navbar from './parts/Navbar';
+import IDE from './parts/IDE';
 import { connect } from 'react-redux';
-import { setDefaultScore } from '../../../actions/new';
-import Modal from '../../parts/Modal';
+import { setDefaultScore } from '../actions/new';
+import Modal from './parts/Modal';
 
 class New extends Component {
   componentDidMount() {
