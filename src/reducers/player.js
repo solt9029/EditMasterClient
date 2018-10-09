@@ -8,7 +8,7 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case 'NEW/SET_DEFAULT_SCORE': {
+    case 'SCORES_NEW_VIEW/SET_DEFAULT_SCORE': {
       const states = Array(defaultNotes.length).fill(ids.NOTE.SPACE);
       return {
         ...state,

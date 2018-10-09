@@ -42,7 +42,7 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case 'NEW/SET_DEFAULT_SCORE': {
+    case 'SCORES_NEW_VIEW/SET_DEFAULT_SCORE': {
       const { username, videoId, bpm, offset, comment, speed } = defaultConfig;
       return {
         ...state,
