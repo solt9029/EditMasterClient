@@ -1,8 +1,9 @@
 import axios from 'axios';
 import * as config from '../config/';
+import { actionTypes } from '../constants/';
 
 export const startCreate = () => ({
-  type: 'MODAL/START_CREATE',
+  type: actionTypes.MODAL.START_CREATE,
 });
 
 export const create = () => {
@@ -37,19 +38,19 @@ export const create = () => {
 };
 
 export const finishCreateSuccess = id => ({
-  type: 'MODAL/FINISH_CREATE_SUCCESS',
+  type: actionTypes.MODAL.FINISH_CREATE_SUCCESS,
   payload: {
     id,
   },
 });
 
 export const finishCreateError = errors => ({
-  type: 'MODAL/FINISH_CREATE_ERROR',
+  type: actionTypes.MODAL.FINISH_CREATE_ERROR,
   payload: {
     errors,
   },
 });
 
 export const close = () => ({
-  type: 'MODAL/CLOSE',
+  type: actionTypes.MODAL.CLOSE,
 });

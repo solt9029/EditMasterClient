@@ -1,3 +1,5 @@
+import { actionTypes } from '../constants/';
+
 export const setDefaultScore = () => ({
-  type: 'SCORES_NEW_VIEW/SET_DEFAULT_SCORE',
+  type: actionTypes.SCORES_NEW_VIEW.SET_DEFAULT_SCORE,
 });

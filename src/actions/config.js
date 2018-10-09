@@ -1,8 +1,9 @@
 import axios from 'axios';
 import * as utils from '../utils';
+import { actionTypes } from '../constants/';
 
 export const reset = () => ({
-  type: 'CONFIG/RESET',
+  type: actionTypes.CONFIG.RESET,
 });
 
 const { required, number, validate, maxLength } = utils.validations;
@@ -12,7 +13,7 @@ const maxLength140 = maxLength(140);
 export const setUsername = (value, touched = true) => {
   const errors = validate(value, [required, maxLength20]);
   return {
-    type: 'CONFIG/SET_USERNAME',
+    type: actionTypes.CONFIG.SET_USERNAME,
     payload: {
       value,
       errors,
@@ -24,7 +25,7 @@ export const setUsername = (value, touched = true) => {
 export const setVideoId = (value, touched = true) => {
   const errors = validate(value, [required]);
   return {
-    type: 'CONFIG/SET_VIDEO_ID',
+    type: actionTypes.CONFIG.SET_VIDEO_ID,
     payload: {
       value,
       errors,
@@ -36,7 +37,7 @@ export const setVideoId = (value, touched = true) => {
 export const setBpm = (value, touched = true) => {
   const errors = validate(value, [required, number]);
   return {
-    type: 'CONFIG/SET_BPM',
+    type: actionTypes.CONFIG.SET_BPM,
     payload: {
       value,
       errors,
@@ -48,7 +49,7 @@ export const setBpm = (value, touched = true) => {
 export const setOffset = (value, touched = true) => {
   const errors = validate(value, [required, number]);
   return {
-    type: 'CONFIG/SET_OFFSET',
+    type: actionTypes.CONFIG.SET_OFFSET,
     payload: {
       value,
       errors,
@@ -60,7 +61,7 @@ export const setOffset = (value, touched = true) => {
 export const setSpeed = (value, touched = true) => {
   const errors = validate(value, [required, number]);
   return {
-    type: 'CONFIG/SET_SPEED',
+    type: actionTypes.CONFIG.SET_SPEED,
     payload: {
       value,
       errors,
@@ -72,7 +73,7 @@ export const setSpeed = (value, touched = true) => {
 export const setComment = (value, touched = true) => {
   const errors = validate(value, [maxLength140]);
   return {
-    type: 'CONFIG/SET_COMMENT',
+    type: actionTypes.CONFIG.SET_COMMENT,
     payload: {
       value,
       errors,
