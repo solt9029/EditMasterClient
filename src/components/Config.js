@@ -12,7 +12,7 @@ import {
   setSpeed,
   setComment,
   reset,
-} from '../../actions/config';
+} from '../actions/config';
 
 const StyledDiv = styled.div`
   padding: 15px;

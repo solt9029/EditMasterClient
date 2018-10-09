@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import Navbar from './parts/Navbar';
-import Footer from './parts/Footer';
-import ScoreCardList from './parts/ScoreCardList';
+import Navbar from './Navbar';
+import Footer from './Footer';
+import ScoreCardList from './ScoreCardList';
 import { Container } from 'reactstrap';
-import ScoreCardPaginate from './parts/ScoreCardPaginate';
+import ScoreCardPaginate from './ScoreCardPaginate';
 import qs from 'qs';
 import styled from 'styled-components';
 

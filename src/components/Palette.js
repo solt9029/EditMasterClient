@@ -3,10 +3,10 @@ import { Row, Container, Button } from 'reactstrap';
 import styled from 'styled-components';
 import NoteRadio from './NoteRadio';
 import DivisionRadio from './DivisionRadio';
-import { ids } from '../../constants/';
+import { ids } from '../constants';
 import { connect } from 'react-redux';
-import { addBar, removeBar } from '../../actions/editor';
-import { reset, toggleMode } from '../../actions/palette';
+import { addBar, removeBar } from '../actions/editor';
+import { reset, toggleMode } from '../actions/palette';
 
 const StyledDiv = styled.div`
   padding: 15px;

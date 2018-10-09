@@ -1,9 +1,9 @@
 import React from 'react';
-import Navbar from './parts/Navbar';
-import Jumbotron from './parts/Jumbotron';
-import Footer from './parts/Footer';
-import Description from './parts/Description';
-import News from './parts/News';
+import Navbar from './Navbar';
+import Jumbotron from './Jumbotron';
+import Footer from './Footer';
+import Description from './Description';
+import News from './News';
 
 const IndexView = () => (
   <div>

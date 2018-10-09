@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card, CardHeader, CardBody, CardText, Container } from 'reactstrap';
 import styled from 'styled-components';
-import { news } from '../../data';
+import { news } from '../data';
 
 const StyledContainer = styled(Container)`
   margin-top: 100px;

@@ -5,8 +5,8 @@ import Config from './Config';
 import Player from './Player';
 import Editor from './Editor';
 import Palette from './Palette';
-import { setPanes } from '../../actions/ide';
-import { setCurrentTime } from '../../actions/youtube';
+import { setPanes } from '../actions/ide';
+import { setCurrentTime } from '../actions/youtube';
 import YouTube from './YouTube';
 import { debounce } from 'lodash';
 
