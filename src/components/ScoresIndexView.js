@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
-import Navbar from '../../parts/Navbar';
-import Footer from '../../parts/Footer';
-import ScoreCardList from '../../parts/ScoreCardList';
+import Navbar from './parts/Navbar';
+import Footer from './parts/Footer';
+import ScoreCardList from './parts/ScoreCardList';
 import { Container } from 'reactstrap';
 import { connect } from 'react-redux';
-import { fetch } from '../../../actions/scoreCardPaginate';
-import ScoreCardPaginate from '../../parts/ScoreCardPaginate';
+import { fetch } from '../actions/scoreCardPaginate';
+import ScoreCardPaginate from './parts/ScoreCardPaginate';
 import qs from 'qs';
 import { withRouter } from 'react-router-dom';
-import { setKeyword } from '../../../actions/navbar';
+import { setKeyword } from '../actions/navbar';
 import styled from 'styled-components';
 
 const StyledContainer = styled(Container)`

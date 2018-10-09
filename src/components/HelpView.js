@@ -1,6 +1,6 @@
 import React from 'react';
-import Navbar from '../parts/Navbar';
-import Footer from '../parts/Footer';
+import Navbar from './parts/Navbar';
+import Footer from './parts/Footer';
 import { Card, CardHeader, CardBody, CardText, Container } from 'reactstrap';
 import styled from 'styled-components';
 
