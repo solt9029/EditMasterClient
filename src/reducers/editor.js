@@ -1,4 +1,4 @@
-import constants from '../constants';
+import { ids, numbers } from '../constants/';
 
 /* eslint-disable */
 export const defaultNotes = [
@@ -45,8 +45,8 @@ export default (state = initialState, action) => {
     }
     case 'EDITOR/ADD_BAR': {
       let notes = state.notes.concat();
-      for (let i = 0; i < constants.number.notesPerBar; i++) {
-        notes.push(constants.id.note.space);
+      for (let i = 0; i < numbers.NOTES_PER_BAR; i++) {
+        notes.push(ids.NOTE.SPACE);
       }
       return {
         ...state,
@@ -57,12 +57,12 @@ export default (state = initialState, action) => {
       return initialState;
     }
     case 'EDITOR/REMOVE_BAR': {
-      if (state.notes.length < constants.number.notesPerBar * 2) {
+      if (state.notes.length < numbers.NOTES_PER_BAR * 2) {
         return state;
       }
       const notes = state.notes.slice(
         0,
-        state.notes.length - constants.number.notesPerBar
+        state.notes.length - numbers.NOTES_PER_BAR
       );
       return {
         ...state,

@@ -1,4 +1,11 @@
-import constants from '../constants';
+import {
+  colors,
+  sizes,
+  positions,
+  ids,
+  percentages,
+  numbers,
+} from '../constants/';
 
 export default class Canvas {
   constructor(ctx) {
@@ -11,44 +18,44 @@ export default class Canvas {
   }
 
   drawBarStartLine(x, height) {
-    this.ctx.fillStyle = constants.color.gray;
+    this.ctx.fillStyle = colors.GRAY;
     this.ctx.fillRect(
-      x - constants.size.player.barStartLine.width / 2,
+      x - sizes.PLAYER.BAR_START_LINE.WIDTH / 2,
       0,
-      constants.size.player.barStartLine.width,
+      sizes.PLAYER.BAR_START_LINE.WIDTH,
       height
     );
   }
 
   drawCurrentTime(x, y) {
-    this.ctx.fillStyle = constants.color.purple;
+    this.ctx.fillStyle = colors.PURPLE;
     this.ctx.fillRect(
-      x - constants.size.editor.currentTime.width / 2,
+      x - sizes.EDITOR.CURRENT_TIME.WIDTH / 2,
       y - 2,
-      constants.size.editor.currentTime.width,
-      constants.size.editor.bar.inside.height + 4
+      sizes.EDITOR.CURRENT_TIME.WIDTH,
+      sizes.EDITOR.BAR.INSIDE.HEIGHT + 4
     );
     return;
   }
 
   drawCaret(x, y) {
-    this.ctx.fillStyle = constants.color.yellow;
+    this.ctx.fillStyle = colors.YELLOW;
     this.ctx.fillRect(
-      x - constants.size.editor.caret.width / 2,
+      x - sizes.EDITOR.CARET.WIDTH / 2,
       y - 2,
-      constants.size.editor.caret.width,
-      constants.size.editor.bar.inside.height + 4
+      sizes.EDITOR.CARET.WIDTH,
+      sizes.EDITOR.BAR.INSIDE.HEIGHT + 4
     );
     return;
   }
 
   drawJudgeMark(y) {
     this.ctx.beginPath();
-    this.ctx.strokeStyle = constants.color.white;
+    this.ctx.strokeStyle = colors.WHITE;
     this.ctx.arc(
-      constants.position.player.judge.x,
+      positions.PLAYER.JUDGE.X,
       y,
-      constants.size.player.normal.outside,
+      sizes.PLAYER.NORMAL.OUTSIDE,
       0,
       Math.PI * 2
     );
@@ -59,12 +66,12 @@ export default class Canvas {
   drawJudgeEffect(markY, textY, stateId) {
     // mark
     this.ctx.beginPath();
-    this.ctx.strokeStyle = constants.color.yellow;
+    this.ctx.strokeStyle = colors.YELLOW;
     this.ctx.lineWidth = 3;
     this.ctx.arc(
-      constants.position.player.judge.x,
+      positions.PLAYER.JUDGE.X,
       markY,
-      constants.size.player.normal.outside,
+      sizes.PLAYER.NORMAL.OUTSIDE,
       0,
       Math.PI * 2
     );
@@ -72,17 +79,17 @@ export default class Canvas {
     this.ctx.lineWidth = 1;
 
     // text
-    this.ctx.font = `${constants.size.player.judgeText}px HG行書体, bold`;
+    this.ctx.font = `${sizes.PLAYER.JUDGE_TEXT}px HG行書体, bold`;
     let text = '良';
-    let textColor = constants.color.red;
+    let textColor = colors.RED;
     switch (stateId) {
-      case constants.id.state.ok:
+      case ids.STATE.OK:
         text = '可';
-        textColor = constants.color.white;
+        textColor = colors.WHITE;
         break;
-      case constants.id.state.bad:
+      case ids.STATE.BAD:
         text = '不可';
-        textColor = constants.color.blue;
+        textColor = colors.BLUE;
         break;
       default:
         break;
@@ -90,15 +97,13 @@ export default class Canvas {
     this.ctx.fillStyle = textColor;
     this.ctx.fillText(
       text,
-      constants.position.player.judge.x -
-        (text.length * constants.size.player.judgeText) / 2,
+      positions.PLAYER.JUDGE.X - (text.length * sizes.PLAYER.JUDGE_TEXT) / 2,
       textY
     );
-    this.ctx.strokeStyle = constants.color.black;
+    this.ctx.strokeStyle = colors.BLACK;
     this.ctx.strokeText(
       text,
-      constants.position.player.judge.x -
-        (text.length * constants.size.player.judgeText) / 2,
+      positions.PLAYER.JUDGE.X - (text.length * sizes.PLAYER.JUDGE_TEXT) / 2,
       textY
     );
 
@@ -108,31 +113,23 @@ export default class Canvas {
   drawBar(x, y, width) {
     const insideY =
       y +
-      (constants.size.editor.bar.outside.height -
-        constants.size.editor.bar.inside.height) /
-        2;
-    this.ctx.fillStyle = constants.color.gray;
-    this.ctx.fillRect(
-      x,
-      insideY,
-      width,
-      constants.size.editor.bar.inside.height
-    );
+      (sizes.EDITOR.BAR.OUTSIDE.HEIGHT - sizes.EDITOR.BAR.INSIDE.HEIGHT) / 2;
+    this.ctx.fillStyle = colors.GRAY;
+    this.ctx.fillRect(x, insideY, width, sizes.EDITOR.BAR.INSIDE.HEIGHT);
 
-    this.ctx.fillStyle = constants.color.white;
-    for (let i = 0; i < constants.number.beat; i++) {
+    this.ctx.fillStyle = colors.WHITE;
+    for (let i = 0; i < numbers.BEAT; i++) {
       const beatLineX =
         x +
         width *
-          (constants.percentage.editor.barStartLine +
-            ((1 - constants.percentage.editor.barStartLine) * i) /
-              constants.number.beat) -
-        constants.size.editor.beatLine.width / 2;
+          (percentages.EDITOR.BAR_START_LINE +
+            ((1 - percentages.EDITOR.BAR_START_LINE) * i) / numbers.BEAT) -
+        sizes.EDITOR.BEAT_LINE.WIDTH / 2;
       this.ctx.fillRect(
         beatLineX,
         insideY - 1,
-        constants.size.editor.beatLine.width,
-        constants.size.editor.bar.inside.height + 2
+        sizes.EDITOR.BEAT_LINE.WIDTH,
+        sizes.EDITOR.BAR.INSIDE.HEIGHT + 2
       );
     }
   }
@@ -143,38 +140,38 @@ export default class Canvas {
     pane,
     note,
     spaceWidth = 0,
-    previousNote = constants.id.note.space,
-    nextNote = constants.id.note.space
+    previousNote = ids.NOTE.SPACE,
+    nextNote = ids.NOTE.SPACE
   ) {
-    let noteSize = 'normal';
-    let noteColor = constants.color.red;
+    let noteSize = 'NORMAL';
+    let noteColor = colors.RED;
 
     switch (note) {
-      case constants.id.note.ka:
-        noteColor = constants.color.blue;
+      case ids.NOTE.KA:
+        noteColor = colors.BLUE;
         break;
-      case constants.id.note.bigdon:
-        noteSize = 'big';
+      case ids.NOTE.BIGDON:
+        noteSize = 'BIG';
         break;
-      case constants.id.note.bigka:
-        noteSize = 'big';
-        noteColor = constants.color.blue;
+      case ids.NOTE.BIGKA:
+        noteSize = 'BIG';
+        noteColor = colors.BLUE;
         break;
-      case constants.id.note.renda:
-        noteColor = constants.color.yellow;
+      case ids.NOTE.RENDA:
+        noteColor = colors.YELLOW;
         break;
-      case constants.id.note.bigrenda:
-        noteColor = constants.color.yellow;
-        noteSize = 'big';
+      case ids.NOTE.BIGRENDA:
+        noteColor = colors.YELLOW;
+        noteSize = 'BIG';
         break;
       default:
         break;
     }
 
     if (
-      note === constants.id.note.renda ||
-      note === constants.id.note.bigrenda ||
-      note === constants.id.note.balloon
+      note === ids.NOTE.RENDA ||
+      note === ids.NOTE.BIGRENDA ||
+      note === ids.NOTE.BALLOON
     ) {
       if (note === previousNote) {
         if (note === nextNote) {
@@ -182,31 +179,31 @@ export default class Canvas {
           this.ctx.fillStyle = noteColor;
           this.ctx.fillRect(
             x - spaceWidth - 1,
-            y - constants.size[pane][noteSize].outside,
+            y - sizes[pane][noteSize].OUTSIDE,
             spaceWidth * 2 + 2,
-            constants.size[pane][noteSize].outside * 2
+            sizes[pane][noteSize].OUTSIDE * 2
           );
 
-          this.ctx.strokeStyle = constants.color.black;
+          this.ctx.strokeStyle = colors.BLACK;
           this.ctx.beginPath();
           this.ctx.moveTo(
             x - spaceWidth - 1,
-            y - constants.size[pane][noteSize].outside
+            y - sizes[pane][noteSize].OUTSIDE
           );
           this.ctx.lineTo(
             x + spaceWidth + 1,
-            y - constants.size[pane][noteSize].outside
+            y - sizes[pane][noteSize].OUTSIDE
           );
           this.ctx.stroke();
 
           this.ctx.beginPath();
           this.ctx.moveTo(
             x - spaceWidth - 1,
-            y + constants.size[pane][noteSize].outside
+            y + sizes[pane][noteSize].OUTSIDE
           );
           this.ctx.lineTo(
             x + spaceWidth + 1,
-            y + constants.size[pane][noteSize].outside
+            y + sizes[pane][noteSize].OUTSIDE
           );
           this.ctx.stroke();
 
@@ -216,14 +213,8 @@ export default class Canvas {
         // end
         this.ctx.beginPath();
         this.ctx.fillStyle = noteColor;
-        this.ctx.strokeStyle = constants.color.black;
-        this.ctx.arc(
-          x,
-          y,
-          constants.size[pane][noteSize].outside,
-          0,
-          Math.PI * 2
-        );
+        this.ctx.strokeStyle = colors.BLACK;
+        this.ctx.arc(x, y, sizes[pane][noteSize].OUTSIDE, 0, Math.PI * 2);
         this.ctx.fill();
         this.ctx.stroke();
         return;
@@ -232,15 +223,15 @@ export default class Canvas {
 
     // start
     this.ctx.beginPath();
-    this.ctx.fillStyle = constants.color.white;
-    this.ctx.strokeStyle = constants.color.black;
-    this.ctx.arc(x, y, constants.size[pane][noteSize].outside, 0, Math.PI * 2);
+    this.ctx.fillStyle = colors.WHITE;
+    this.ctx.strokeStyle = colors.BLACK;
+    this.ctx.arc(x, y, sizes[pane][noteSize].OUTSIDE, 0, Math.PI * 2);
     this.ctx.fill();
     this.ctx.stroke();
 
     this.ctx.beginPath();
     this.ctx.fillStyle = noteColor;
-    this.ctx.arc(x, y, constants.size[pane][noteSize].inside, 0, Math.PI * 2);
+    this.ctx.arc(x, y, sizes[pane][noteSize].INSIDE, 0, Math.PI * 2);
     this.ctx.fill();
 
     return;

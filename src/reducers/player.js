@@ -1,4 +1,4 @@
-import constants from '../constants';
+import { ids, numbers } from '../constants/';
 import { defaultNotes } from './editor';
 
 const initialState = {
@@ -9,16 +9,14 @@ const initialState = {
 export default (state = initialState, action) => {
   switch (action.type) {
     case 'NEW/SET_DEFAULT_SCORE': {
-      const states = Array(defaultNotes.length).fill(constants.id.note.space);
+      const states = Array(defaultNotes.length).fill(ids.NOTE.SPACE);
       return {
         ...state,
         states,
       };
     }
     case 'SHOW/FINISH_REQUEST_SUCCESS': {
-      const states = Array(action.payload.notes.length).fill(
-        constants.id.note.space
-      );
+      const states = Array(action.payload.notes.length).fill(ids.NOTE.SPACE);
       return {
         ...state,
         states,
@@ -38,9 +36,7 @@ export default (state = initialState, action) => {
       };
     }
     case 'EDITOR/SET_NOTES': {
-      const states = Array(action.payload.notes.length).fill(
-        constants.id.note.space
-      );
+      const states = Array(action.payload.notes.length).fill(ids.NOTE.SPACE);
       return {
         ...state,
         states,
@@ -49,7 +45,7 @@ export default (state = initialState, action) => {
     case 'PLAYER/FRESH_STATES': {
       let states = state.states.concat();
       for (let i = 0; i < states.length; i++) {
-        states[i] = constants.id.state.fresh;
+        states[i] = ids.STATE.FRESH;
       }
       return {
         ...state,
@@ -58,8 +54,8 @@ export default (state = initialState, action) => {
     }
     case 'EDITOR/ADD_BAR': {
       let states = state.states.concat();
-      for (let i = 0; i < constants.number.notesPerBar; i++) {
-        states.push(constants.id.note.space);
+      for (let i = 0; i < numbers.NOTES_PER_BAR; i++) {
+        states.push(ids.NOTE.SPACE);
       }
       return {
         ...state,
@@ -67,12 +63,12 @@ export default (state = initialState, action) => {
       };
     }
     case 'EDITOR/REMOVE_BAR': {
-      if (state.states.length < constants.number.notesPerBar * 2) {
+      if (state.states.length < numbers.NOTES_PER_BAR * 2) {
         return state;
       }
       const states = state.states.slice(
         0,
-        state.states.length - constants.number.notesPerBar
+        state.states.length - numbers.NOTES_PER_BAR
       );
       return {
         ...state,

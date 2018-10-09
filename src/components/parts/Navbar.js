@@ -15,7 +15,7 @@ import {
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import withRouter from 'react-router-dom/withRouter';
-import constants from '../../constants';
+import { numbers, routes } from '../../constants/';
 import { connect } from 'react-redux';
 import { create } from '../../actions/modal';
 import { setKeyword } from '../../actions/navbar';
@@ -69,18 +69,14 @@ class Navbar extends Component {
     line[4] = 'COURSE:oni';
     line[5] = 'LEVEL:8';
     line[6] = '#START';
-    for (
-      let l = 0;
-      l < this.props.notes.length / constants.number.notesPerBar;
-      l++
-    ) {
+    for (let l = 0; l < this.props.notes.length / numbers.NOTES_PER_BAR; l++) {
       line[7 + l] = '';
-      for (let c = 0; c < constants.number.notesPerBar; c++) {
-        line[7 + l] += this.props.notes[l * constants.number.notesPerBar + c];
+      for (let c = 0; c < numbers.NOTES_PER_BAR; c++) {
+        line[7 + l] += this.props.notes[l * numbers.NOTES_PER_BAR + c];
       }
       line[7 + l] += ',';
     }
-    line[7 + this.props.notes.length / constants.number.notesPerBar] = '#END';
+    line[7 + this.props.notes.length / numbers.NOTES_PER_BAR] = '#END';
 
     let content = '';
     for (let i = 0; i < line.length; i++) {
@@ -95,8 +91,8 @@ class Navbar extends Component {
     return (
       <StyledNavbar className="py-0" color="light" light expand="md">
         <Container>
-          <Logo tag={Link} to={constants.route.index} />
-          <NavbarBrand tag={Link} to={constants.route.index}>
+          <Logo tag={Link} to={routes.INDEX} />
+          <NavbarBrand tag={Link} to={routes.INDEX}>
             <StyledSpan>創作の達人</StyledSpan>
           </NavbarBrand>
           <NavbarToggler onClick={this.toggle} className="my-2" />
@@ -104,30 +100,28 @@ class Navbar extends Component {
             <Nav className="mr-auto" navbar>
               <NavItem
                 active={
-                  (this.props.match.path === constants.route.scores.show ||
-                    this.props.match.path === constants.route.scores.new) &&
+                  (this.props.match.path === routes.SCORES.SHOW ||
+                    this.props.match.path === routes.SCORES.NEW) &&
                   !this.props.notFound
                 }
               >
-                <StyledNavLink tag={Link} to={constants.route.scores.new}>
+                <StyledNavLink tag={Link} to={routes.SCORES.NEW}>
                   創作
                 </StyledNavLink>
               </NavItem>
-              <NavItem
-                active={this.props.match.path === constants.route.scores.index}
-              >
-                <StyledNavLink tag={Link} to={constants.route.scores.index}>
+              <NavItem active={this.props.match.path === routes.SCORES.INDEX}>
+                <StyledNavLink tag={Link} to={routes.SCORES.INDEX}>
                   作品一覧
                 </StyledNavLink>
               </NavItem>
-              <NavItem active={this.props.match.path === constants.route.help}>
-                <StyledNavLink tag={Link} to={constants.route.help}>
+              <NavItem active={this.props.match.path === routes.HELP}>
+                <StyledNavLink tag={Link} to={routes.HELP}>
                   ヘルプ
                 </StyledNavLink>
               </NavItem>
             </Nav>
-            {(this.props.match.path === constants.route.scores.new ||
-              this.props.match.path === constants.route.scores.show) &&
+            {(this.props.match.path === routes.SCORES.NEW ||
+              this.props.match.path === routes.SCORES.SHOW) &&
               !this.props.error &&
               !this.props.isLoading && (
                 <Fragment>
@@ -147,7 +141,7 @@ class Navbar extends Component {
                   </Button>
                 </Fragment>
               )}
-            {this.props.match.path === constants.route.scores.index && (
+            {this.props.match.path === routes.SCORES.INDEX && (
               <Form inline onSubmit={e => e.preventDefault()}>
                 <Input
                   type="search"

@@ -1,9 +1,9 @@
 const percentages = {
-  player: {
-    speedToSpaceWidth: 3,
+  PLAYER: {
+    SPEED_TO_SPACE_WIDTH: 3,
   },
-  editor: {
-    barStartLine: 0.02,
+  EDITOR: {
+    BAR_START_LINE: 0.02,
   },
 };
 

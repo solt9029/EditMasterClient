@@ -8,7 +8,7 @@ import {
   reset,
 } from '../../actions/youtube';
 import { setChangingSlider, freshStates } from '../../actions/player';
-import constants from '../../constants';
+import { ids } from '../../constants/';
 
 class YouTube extends Component {
   constructor(props) {
@@ -48,7 +48,7 @@ class YouTube extends Component {
         onStateChange={event => {
           this.props.freshStates();
           this.props.setYtPlayerState(event.data);
-          if (event.data === constants.id.youtube.playing) {
+          if (event.data === ids.YOUTUBE.PLAYING) {
             this.props.setChangingSlider(false);
             this.frameId = window.requestAnimationFrame(this.loop);
           } else {

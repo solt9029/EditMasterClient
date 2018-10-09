@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import constants from '../../constants';
+import { percentages, sizes, positions, numbers, ids } from '../../constants/';
 import Canvas from '../../classes/Canvas';
 import EditorCaretCanvas from './EditorCaretCanvas';
 import EditorCurrentTimeCanvas from './EditorCurrentTimeCanvas';
@@ -32,52 +32,47 @@ class Editor extends Component {
   updateCanvas() {
     this.canvas.clear(
       this.props.editorPane.width - 1,
-      Math.ceil(this.props.notes.length / constants.number.notesPerBar) *
-        constants.size.editor.bar.outside.height
+      Math.ceil(this.props.notes.length / numbers.NOTES_PER_BAR) *
+        sizes.EDITOR.BAR.OUTSIDE.HEIGHT
     );
 
     // bars
-    const barNum = Math.ceil(
-      this.props.notes.length / constants.number.notesPerBar
-    );
+    const barNum = Math.ceil(this.props.notes.length / numbers.NOTES_PER_BAR);
     const barWidth =
-      this.props.editorPane.width - 1 - constants.position.editor.bar.x * 2;
+      this.props.editorPane.width - 1 - positions.EDITOR.BAR.X * 2;
     for (let i = 0; i < barNum; i++) {
       this.canvas.drawBar(
-        constants.position.editor.bar.x,
-        i * constants.size.editor.bar.outside.height,
+        positions.EDITOR.BAR.X,
+        i * sizes.EDITOR.BAR.OUTSIDE.HEIGHT,
         barWidth
       );
     }
 
     // notes
-    const actualBarWidth =
-      barWidth * (1 - constants.percentage.editor.barStartLine); // left side of initial beat line is not available
-    const spaceWidth = actualBarWidth / constants.number.notesPerBar;
+    const actualBarWidth = barWidth * (1 - percentages.EDITOR.BAR_START_LINE); // left side of initial beat line is not available
+    const spaceWidth = actualBarWidth / numbers.NOTES_PER_BAR;
     const barStartLineX =
-      constants.position.editor.bar.x +
-      barWidth * constants.percentage.editor.barStartLine;
+      positions.EDITOR.BAR.X + barWidth * percentages.EDITOR.BAR_START_LINE;
 
     for (let i = this.props.notes.length - 1; i >= 0; i--) {
       const note = this.props.notes[i];
-      if (note === constants.id.note.space) {
+      if (note === ids.NOTE.SPACE) {
         continue;
       }
-      const c = i % constants.number.notesPerBar;
-      const l = Math.floor(i / constants.number.notesPerBar);
+      const c = i % numbers.NOTES_PER_BAR;
+      const l = Math.floor(i / numbers.NOTES_PER_BAR);
       const x = barStartLineX + spaceWidth * c;
-      const y = constants.size.editor.bar.outside.height * (l + 0.5);
-      const previousNote =
-        i > 0 ? this.props.notes[i - 1] : constants.id.note.space;
+      const y = sizes.EDITOR.BAR.OUTSIDE.HEIGHT * (l + 0.5);
+      const previousNote = i > 0 ? this.props.notes[i - 1] : ids.NOTE.SPACE;
       const nextNote =
         i < this.props.notes.length - 1
           ? this.props.notes[i + 1]
-          : constants.id.note.space;
+          : ids.NOTE.SPACE;
 
       this.canvas.drawNote(
         x,
         y,
-        'editor',
+        'EDITOR',
         note,
         spaceWidth,
         previousNote,
@@ -94,8 +89,8 @@ class Editor extends Component {
           style={canvasInlineStyle}
           width={this.props.editorPane.width - 1}
           height={
-            Math.ceil(this.props.notes.length / constants.number.notesPerBar) *
-            constants.size.editor.bar.outside.height
+            Math.ceil(this.props.notes.length / numbers.NOTES_PER_BAR) *
+            sizes.EDITOR.BAR.OUTSIDE.HEIGHT
           }
         />
         <EditorCurrentTimeCanvas />

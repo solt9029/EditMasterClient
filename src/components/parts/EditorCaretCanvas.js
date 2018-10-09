@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import constants from '../../constants';
+import { numbers, keys, positions, percentages, sizes } from '../../constants/';
 import Canvas from '../../classes/Canvas';
 import { changeNotes } from '../../actions/editor';
 import { addBar } from '../../actions/editor';
@@ -47,25 +47,25 @@ class EditorCaretCanvas extends Component {
 
   copyPaste(event) {
     switch (event.nativeEvent.key) {
-      case constants.key.copy:
+      case keys.COPY:
         this.clipboard = this.props.notes.slice(
-          this.mouseBarIndex * constants.number.notesPerBar,
-          (this.mouseBarIndex + 1) * constants.number.notesPerBar
+          this.mouseBarIndex * numbers.NOTES_PER_BAR,
+          (this.mouseBarIndex + 1) * numbers.NOTES_PER_BAR
         );
         return;
-      case constants.key.paste:
+      case keys.PASTE:
         if (!this.clipboard) {
           return;
         }
-        if (this.clipboard.length !== constants.number.notesPerBar) {
+        if (this.clipboard.length !== numbers.NOTES_PER_BAR) {
           return;
         }
         this.props.changeNotes(
-          this.mouseBarIndex * constants.number.notesPerBar,
+          this.mouseBarIndex * numbers.NOTES_PER_BAR,
           this.clipboard
         );
         if (
-          (this.mouseBarIndex + 1) * constants.number.notesPerBar >=
+          (this.mouseBarIndex + 1) * numbers.NOTES_PER_BAR >=
           this.props.notes.length
         ) {
           this.props.addBar();
@@ -88,10 +88,10 @@ class EditorCaretCanvas extends Component {
       note = keyValue;
     }
 
-    const notesPerDivision = constants.number.notesPerBar / division;
+    const notesPerDivision = numbers.NOTES_PER_BAR / division;
     const mouseNotesPerBarIndex = this.mouseDivisionIndex * notesPerDivision;
     const index =
-      this.mouseBarIndex * constants.number.notesPerBar + mouseNotesPerBarIndex;
+      this.mouseBarIndex * numbers.NOTES_PER_BAR + mouseNotesPerBarIndex;
     let notes = [];
     if (!utils.notes.hasState(note)) {
       for (let i = 0; i < notesPerDivision; i++) {
@@ -103,7 +103,7 @@ class EditorCaretCanvas extends Component {
     this.props.changeNotes(index, notes);
 
     // add one bar if the user puts a note on the last bar
-    if (index >= this.props.notes.length - constants.number.notesPerBar) {
+    if (index >= this.props.notes.length - numbers.NOTES_PER_BAR) {
       this.props.addBar();
     }
   }
@@ -115,15 +115,13 @@ class EditorCaretCanvas extends Component {
     const mouseX = event.nativeEvent.offsetX;
     const mouseY = event.nativeEvent.offsetY;
     const barWidth =
-      this.props.editorPane.width - 1 - constants.position.editor.bar.x * 2;
-    const actualBarWidth =
-      barWidth * (1 - constants.percentage.editor.barStartLine); // left side of initial beat line is not available
+      this.props.editorPane.width - 1 - positions.EDITOR.BAR.X * 2;
+    const actualBarWidth = barWidth * (1 - percentages.EDITOR.BAR_START_LINE); // left side of initial beat line is not available
     const barStartLineX =
-      constants.position.editor.bar.x +
-      barWidth * constants.percentage.editor.barStartLine;
+      positions.EDITOR.BAR.X + barWidth * percentages.EDITOR.BAR_START_LINE;
     let mouseDivisionIndex = Math.round(
       (mouseX - barStartLineX) /
-        ((barWidth * (1 - constants.percentage.editor.barStartLine)) / division)
+        ((barWidth * (1 - percentages.EDITOR.BAR_START_LINE)) / division)
     );
     if (mouseDivisionIndex < 0) {
       mouseDivisionIndex = 0;
@@ -132,25 +130,21 @@ class EditorCaretCanvas extends Component {
       mouseDivisionIndex = division - 1;
     }
     this.mouseDivisionIndex = mouseDivisionIndex;
-    this.mouseBarIndex = Math.floor(
-      mouseY / constants.size.editor.bar.outside.height
-    );
+    this.mouseBarIndex = Math.floor(mouseY / sizes.EDITOR.BAR.OUTSIDE.HEIGHT);
 
     // canvas drawing
     this.canvas.clear(
       this.props.editorPane.width - 1,
-      Math.ceil(this.props.notes.length / constants.number.notesPerBar) *
-        constants.size.editor.bar.outside.height
+      Math.ceil(this.props.notes.length / numbers.NOTES_PER_BAR) *
+        sizes.EDITOR.BAR.OUTSIDE.HEIGHT
     );
     const x =
       barStartLineX +
       actualBarWidth * (this.mouseDivisionIndex / division) -
-      constants.size.editor.caret.width / 2;
+      sizes.EDITOR.CARET.WIDTH / 2;
     const y =
-      this.mouseBarIndex * constants.size.editor.bar.outside.height +
-      (constants.size.editor.bar.outside.height -
-        constants.size.editor.bar.inside.height) /
-        2;
+      this.mouseBarIndex * sizes.EDITOR.BAR.OUTSIDE.HEIGHT +
+      (sizes.EDITOR.BAR.OUTSIDE.HEIGHT - sizes.EDITOR.BAR.INSIDE.HEIGHT) / 2;
     this.canvas.drawCaret(x, y);
   }
 
@@ -165,8 +159,8 @@ class EditorCaretCanvas extends Component {
         style={canvasInlineStyle}
         width={this.props.editorPane.width - 1}
         height={
-          Math.ceil(this.props.notes.length / constants.number.notesPerBar) *
-          constants.size.editor.bar.outside.height
+          Math.ceil(this.props.notes.length / numbers.NOTES_PER_BAR) *
+          sizes.EDITOR.BAR.OUTSIDE.HEIGHT
         }
       />
     );

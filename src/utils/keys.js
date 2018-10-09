@@ -1,11 +1,11 @@
-import constants from '../constants';
+import { keys } from '../constants/';
 
 export const isDon = pushedKey => {
-  return constants.key.don.indexOf(pushedKey) >= 0;
+  return keys.DON.indexOf(pushedKey) >= 0;
 };
 
 export const isKa = pushedKey => {
-  return constants.key.ka.indexOf(pushedKey) >= 0;
+  return keys.KA.indexOf(pushedKey) >= 0;
 };
 
 export default {

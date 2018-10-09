@@ -7,30 +7,18 @@ import Help from './pages/Help';
 import NotFound from './pages/NotFound';
 import { Switch, Route } from 'react-router-dom';
 import { withRouter } from 'react-router-dom';
-import constants from '../constants';
+import { routes } from '../constants/';
 
 class App extends Component {
   render() {
     return (
       <div>
         <Switch>
-          <Route exact path={constants.route.index} component={Index} />
-          <Route
-            exact
-            path={constants.route.scores.index}
-            component={ScoresIndex}
-          />
-          <Route
-            exact
-            path={constants.route.scores.new}
-            component={ScoresNew}
-          />
-          <Route
-            exact
-            path={constants.route.scores.show}
-            component={ScoresShow}
-          />
-          <Route exact path={constants.route.help} component={Help} />
+          <Route exact path={routes.INDEX} component={Index} />
+          <Route exact path={routes.SCORES.INDEX} component={ScoresIndex} />
+          <Route exact path={routes.SCORES.NEW} component={ScoresNew} />
+          <Route exact path={routes.SCORES.SHOW} component={ScoresShow} />
+          <Route exact path={routes.HELP} component={Help} />
           <Route component={NotFound} />
         </Switch>
       </div>
