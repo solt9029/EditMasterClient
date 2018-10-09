@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Navbar from './Navbar';
 import IDE from '../containers/IDE';
-import Modal from './Modal';
+import Modal from '../containers/Modal';
 
 export default class ScoresNewView extends Component {
   componentDidMount() {

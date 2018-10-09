@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Navbar from './Navbar';
 import IDE from '../containers/IDE';
 import NotFoundView from './NotFoundView';
-import Modal from './Modal';
+import Modal from '../containers/Modal';
 
 export default class ScoresShowView extends Component {
   componentDidMount() {

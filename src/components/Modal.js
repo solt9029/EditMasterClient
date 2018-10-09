@@ -1,5 +1,4 @@
 import React, { Component, Fragment } from 'react';
-import { connect } from 'react-redux';
 import {
   Modal as ReactstrapModal,
   ModalHeader,
@@ -7,10 +6,9 @@ import {
   ModalFooter,
   Button,
 } from 'reactstrap';
-import { close } from '../actions/modal';
 import { Link } from 'react-router-dom';
 
-class Modal extends Component {
+export default class Modal extends Component {
   constructor(props) {
     super(props);
     this.openTweetWindow = this.openTweetWindow.bind(this);
@@ -109,16 +107,3 @@ class Modal extends Component {
     );
   }
 }
-
-const mapStateToProps = state => ({
-  modal: state.modal,
-});
-const mapDispatchToProps = dispatch => ({
-  close() {
-    dispatch(close());
-  },
-});
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Modal);
