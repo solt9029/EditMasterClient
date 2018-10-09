@@ -5,7 +5,7 @@ import Footer from './parts/Footer';
 import Description from './parts/Description';
 import News from './parts/News';
 
-const Index = () => (
+const IndexView = () => (
   <div>
     <Navbar />
     <Jumbotron />
@@ -15,4 +15,4 @@ const Index = () => (
   </div>
 );
 
-export default Index;
+export default IndexView;

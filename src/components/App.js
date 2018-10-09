@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import IndexView from './IndexView';
-import ScoresIndexView from './ScoresIndexView';
-import ScoresNewView from './ScoresNewView';
-import ScoresShowView from './ScoresShowView';
+import ScoresIndexView from '../containers/ScoresIndexView';
+import ScoresNewView from '../containers/ScoresNewView';
+import ScoresShowView from '../containers/ScoresShowView';
 import HelpView from './HelpView';
 import NotFoundView from './NotFoundView';
 import { Switch, Route } from 'react-router-dom';

@@ -13,7 +13,7 @@ const StyledCard = styled(Card)`
   margin-bottom: 15px;
 `;
 
-const Help = () => (
+const HelpView = () => (
   <div>
     <Navbar />
     <StyledContainer>
@@ -89,4 +89,4 @@ const Help = () => (
   </div>
 );
 
-export default Help;
+export default HelpView;
