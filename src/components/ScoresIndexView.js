@@ -3,12 +3,8 @@ import Navbar from './parts/Navbar';
 import Footer from './parts/Footer';
 import ScoreCardList from './parts/ScoreCardList';
 import { Container } from 'reactstrap';
-import { connect } from 'react-redux';
-import { fetch } from '../actions/scoreCardPaginate';
 import ScoreCardPaginate from './parts/ScoreCardPaginate';
 import qs from 'qs';
-import { withRouter } from 'react-router-dom';
-import { setKeyword } from '../actions/navbar';
 import styled from 'styled-components';
 
 const StyledContainer = styled(Container)`
@@ -16,7 +12,7 @@ const StyledContainer = styled(Container)`
   margin-bottom: 30px;
 `;
 
-class Index extends Component {
+export default class ScoresIndexView extends Component {
   componentDidMount() {
     const { page, keyword } = this.getQueries(this.props.location.search);
     this.props.setKeyword(keyword);
@@ -60,22 +56,3 @@ class Index extends Component {
     );
   }
 }
-
-const mapStateToProps = state => ({
-  isLoading: state.scoreCardPaginate.isLoading,
-  error: state.scoreCardPaginate.error,
-});
-const mapDispatchToProps = dispatch => ({
-  fetch(page, keyword) {
-    dispatch(fetch(page, keyword));
-  },
-  setKeyword(keyword) {
-    dispatch(setKeyword(keyword));
-  },
-});
-export default withRouter(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(Index)
-);

@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import Navbar from './parts/Navbar';
 import IDE from './parts/IDE';
-import { connect } from 'react-redux';
-import { setDefaultScore } from '../actions/new';
 import Modal from './parts/Modal';
 
-class New extends Component {
+export default class ScoresNewView extends Component {
   componentDidMount() {
     this.props.setDefaultScore();
   }
@@ -19,14 +17,3 @@ class New extends Component {
     );
   }
 }
-
-const mapStateToProps = state => ({});
-const mapDispatchToProps = dispatch => ({
-  setDefaultScore() {
-    dispatch(setDefaultScore());
-  },
-});
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(New);

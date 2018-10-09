@@ -19,7 +19,7 @@ const StyledText = styled.p`
   font-size: 1.2em;
 `;
 
-const NotFound = () => (
+const NotFoundView = () => (
   <div>
     <Navbar notFound />
     <StyledContainer>
@@ -30,4 +30,4 @@ const NotFound = () => (
   </div>
 );
 
-export default NotFound;
+export default NotFoundView;
