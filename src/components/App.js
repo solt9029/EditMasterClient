@@ -6,10 +6,9 @@ import ScoresShowView from '../containers/ScoresShowView';
 import HelpView from './HelpView';
 import NotFoundView from './NotFoundView';
 import { Switch, Route } from 'react-router-dom';
-import { withRouter } from 'react-router-dom';
 import { routes } from '../constants/';
 
-class App extends Component {
+export default class App extends Component {
   render() {
     return (
       <div>
@@ -25,5 +24,3 @@ class App extends Component {
     );
   }
 }
-
-export default withRouter(App);
