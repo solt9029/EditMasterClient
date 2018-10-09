@@ -78,7 +78,7 @@ export default (state = initialState, action) => {
         },
       };
     }
-    case 'SHOW/FINISH_REQUEST_SUCCESS': {
+    case 'SCORES_SHOW_VIEW/FINISH_REQUEST_SUCCESS': {
       const {
         username,
         videoId,

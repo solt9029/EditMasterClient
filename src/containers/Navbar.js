@@ -8,8 +8,8 @@ const mapStateToProps = state => ({
   notes: state.editor.notes,
   config: state.config,
   keyword: state.navbar.keyword,
-  isLoading: state.show.isLoading,
-  error: state.show.error,
+  isLoading: state.scoresShowView.isLoading,
+  error: state.scoresShowView.error,
 });
 const mapDispatchToProps = dispatch => ({
   create() {

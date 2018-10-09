@@ -26,7 +26,7 @@ export default (state = initialState, action) => {
         notes: defaultNotes,
       };
     }
-    case 'SHOW/FINISH_REQUEST_SUCCESS': {
+    case 'SCORES_SHOW_VIEW/FINISH_REQUEST_SUCCESS': {
       const { notes } = action.payload;
       return {
         ...state,

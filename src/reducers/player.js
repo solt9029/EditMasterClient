@@ -15,7 +15,7 @@ export default (state = initialState, action) => {
         states,
       };
     }
-    case 'SHOW/FINISH_REQUEST_SUCCESS': {
+    case 'SCORES_SHOW_VIEW/FINISH_REQUEST_SUCCESS': {
       const states = Array(action.payload.notes.length).fill(ids.NOTE.SPACE);
       return {
         ...state,
