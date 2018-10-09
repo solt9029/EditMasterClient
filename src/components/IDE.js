@@ -4,7 +4,7 @@ import Config from '../containers/Config';
 import Player from '../containers/Player';
 import Editor from '../containers/Editor';
 import Palette from '../containers/Palette';
-import YouTube from './YouTube';
+import YouTube from '../containers/YouTube';
 import { debounce } from 'lodash';
 
 const divInlineStyle = {

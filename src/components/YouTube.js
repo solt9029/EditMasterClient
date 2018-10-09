@@ -1,16 +1,8 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import ReactYouTube from 'react-youtube';
-import {
-  setYtPlayer,
-  setCurrentTime,
-  setYtPlayerState,
-  reset,
-} from '../actions/youtube';
-import { setChangingSlider, freshStates } from '../actions/player';
 import { ids } from '../constants';
 
-class YouTube extends Component {
+export default class YouTube extends Component {
   constructor(props) {
     super(props);
     this.frameId = null;
@@ -59,33 +51,3 @@ class YouTube extends Component {
     );
   }
 }
-
-const mapStateToProps = state => ({
-  config: state.config,
-  isChangingSlider: state.player.isChangingSlider,
-  ytPlayer: state.youtube.ytPlayer,
-});
-const mapDispatchToProps = dispatch => ({
-  setYtPlayer(ytPlayer) {
-    dispatch(setYtPlayer(ytPlayer));
-  },
-  freshStates() {
-    dispatch(freshStates());
-  },
-  setCurrentTime(currentTime) {
-    dispatch(setCurrentTime(currentTime));
-  },
-  setChangingSlider(isChangingSlider) {
-    dispatch(setChangingSlider(isChangingSlider));
-  },
-  setYtPlayerState(ytPlayerState) {
-    dispatch(setYtPlayerState(ytPlayerState));
-  },
-  reset() {
-    dispatch(reset());
-  },
-});
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(YouTube);
