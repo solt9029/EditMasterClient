@@ -1,12 +1,12 @@
 import ScoresShowView from '../components/ScoresShowView';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { fetch } from '../actions/show';
-import { reset } from '../actions/show';
+import { fetch } from '../actions/scoresShowView';
+import { reset } from '../actions/scoresShowView';
 
 const mapStateToProps = state => ({
-  error: state.show.error,
-  isLoading: state.show.isLoading,
+  error: state.scoresShowView.error,
+  isLoading: state.scoresShowView.isLoading,
 });
 const mapDispatchToProps = dispatch => ({
   fetch(id) {

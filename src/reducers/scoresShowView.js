@@ -5,19 +5,19 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case 'SHOW/START_REQUEST':
+    case 'SCORES_SHOW_VIEW/START_REQUEST':
       return {
         ...initialState,
         isLoading: true,
       };
-    case 'SHOW/FINISH_REQUEST_ERROR':
+    case 'SCORES_SHOW_VIEW/FINISH_REQUEST_ERROR':
       const { error } = action.payload;
       return {
         ...state,
         isLoading: false,
         error,
       };
-    case 'SHOW/FINISH_REQUEST_SUCCESS':
+    case 'SCORES_SHOW_VIEW/FINISH_REQUEST_SUCCESS':
       return {
         ...state,
         isLoading: false,
