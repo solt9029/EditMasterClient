@@ -2,6 +2,7 @@ import React, { Fragment } from 'react';
 import { ModalHeader, ModalBody, ModalFooter, Button } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import * as utils from '../utils';
+import propTypes from 'prop-types';
 
 const ModalSuccessContent = ({ id, close }) => {
   return (
@@ -31,3 +32,8 @@ const ModalSuccessContent = ({ id, close }) => {
 };
 
 export default ModalSuccessContent;
+
+ModalSuccessContent.propTypes = {
+  id: propTypes.number,
+  close: propTypes.func,
+};
