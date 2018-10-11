@@ -1,11 +1,12 @@
 import React, { Fragment } from 'react';
 import { ModalHeader, ModalBody, ModalFooter, Button } from 'reactstrap';
+import propTypes from 'prop-types';
 
 const ModalErrorContent = ({ errors, close }) => {
   let errorList = [];
   for (let form in errors) {
     for (let i = 0; i < errors[form].length; i++) {
-      errorList.push(<div>● {errors[form][i]}</div>);
+      errorList.push(<div key={i}>● {errors[form][i]}</div>);
     }
   }
 
@@ -23,3 +24,8 @@ const ModalErrorContent = ({ errors, close }) => {
 };
 
 export default ModalErrorContent;
+
+ModalErrorContent.propTypes = {
+  errors: propTypes.object,
+  close: propTypes.func,
+};
