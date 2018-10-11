@@ -11,19 +11,24 @@ export default class Modal extends Component {
   }
 
   render() {
-    const { isLoading, id, errors, isOpen, close } = this.props;
+    const { isLoading, id, errors, isOpen } = this.props.modal;
 
     let component;
     if (isLoading) {
       component = <ModalLoadingContent />;
     } else if (errors === null) {
-      component = <ModalSuccessContent close={close} id={id} />;
+      component = <ModalSuccessContent close={this.props.close} id={id} />;
     } else {
-      component = <ModalErrorContent close={close} errors={errors} />;
+      component = (
+        <ModalErrorContent close={this.props.close} errors={errors} />
+      );
     }
 
     return (
-      <ReactstrapModal isOpen={isOpen} toggle={!isLoading ? close : () => {}}>
+      <ReactstrapModal
+        isOpen={isOpen}
+        toggle={!isLoading ? this.props.close : () => {}}
+      >
         {component}
       </ReactstrapModal>
     );
@@ -31,9 +36,11 @@ export default class Modal extends Component {
 }
 
 Modal.propTypes = {
-  id: propTypes.number,
-  isOpen: propTypes.bool,
-  isLoading: propTypes.bool,
-  errors: propTypes.object,
   close: propTypes.func,
+  modal: propTypes.shape({
+    id: propTypes.number,
+    isOpen: propTypes.bool,
+    isLoading: propTypes.bool,
+    errors: propTypes.object,
+  }),
 };
