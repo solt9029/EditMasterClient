@@ -16,21 +16,7 @@ export default class Config extends Component {
   }
 
   render() {
-    const {
-      username,
-      videoId,
-      bpm,
-      offset,
-      speed,
-      comment,
-      setUsername,
-      setVideoId,
-      setBpm,
-      setOffset,
-      setSpeed,
-      setComment,
-      fetchSongle,
-    } = this.props;
+    const { props } = this;
 
     return (
       <StyledDiv>
@@ -39,9 +25,9 @@ export default class Config extends Component {
           type="text"
           placeholder="ユーザ名（例：通りすがりの創作の達人）"
           name="username"
-          object={username}
+          object={props.username}
           onChange={event => {
-            setUsername(event.target.value);
+            props.setUsername(event.target.value);
           }}
         />
         <Form
@@ -49,11 +35,11 @@ export default class Config extends Component {
           type="text"
           placeholder="YouTube動画ID（例：PqJNc9KVIZE）"
           name="videoId"
-          object={videoId}
+          object={props.videoId}
           onChange={event => {
             const videoId = utils.urls.getVideoId(event.target.value);
-            setVideoId(videoId);
-            fetchSongle(videoId);
+            props.setVideoId(videoId);
+            props.fetchSongle(videoId);
           }}
         />
         <Form
@@ -61,9 +47,9 @@ export default class Config extends Component {
           type="number"
           placeholder="BPM（例：200）"
           name="bpm"
-          object={bpm}
+          object={props.bpm}
           onChange={event => {
-            setBpm(event.target.value);
+            props.setBpm(event.target.value);
           }}
         />
         <Form
@@ -71,9 +57,9 @@ export default class Config extends Component {
           type="number"
           placeholder="OFFSET（例：1.5）"
           name="offset"
-          object={offset}
+          object={props.offset}
           onChange={event => {
-            setOffset(event.target.value);
+            props.setOffset(event.target.value);
           }}
         />
         <Form
@@ -81,9 +67,9 @@ export default class Config extends Component {
           type="number"
           placeholder="倍速（例：2）"
           name="speed"
-          object={speed}
+          object={props.speed}
           onChange={event => {
-            setSpeed(event.target.value);
+            props.setSpeed(event.target.value);
           }}
         />
         <Form
@@ -91,9 +77,9 @@ export default class Config extends Component {
           type="text"
           placeholder="コメント（例：創作の達人で創作譜面をしました！）"
           name="comment"
-          object={comment}
+          object={props.comment}
           onChange={event => {
-            setComment(event.target.value);
+            props.setComment(event.target.value);
           }}
         />
       </StyledDiv>
