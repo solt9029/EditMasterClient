@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ReactPaginate from 'react-paginate';
 import qs from 'qs';
-import history from '../history';
 import { withRouter } from 'react-router-dom';
 import { reset } from '../actions/scoreCardPaginate';
 
@@ -33,7 +32,7 @@ class ScoreCardPaginate extends Component {
             },
             { addQueryPrefix: true }
           );
-          history.push({
+          this.props.history.push({
             search,
           });
         }}
