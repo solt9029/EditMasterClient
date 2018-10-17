@@ -15,7 +15,6 @@ import {
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { numbers, routes } from '../constants';
-import history from '../history';
 import qs from 'qs';
 import { saveAs } from 'file-saver';
 
@@ -161,7 +160,7 @@ export default class Navbar extends Component {
                       },
                       { addQueryPrefix: true }
                     );
-                    history.push({
+                    this.props.history.push({
                       search,
                     });
                   }}
