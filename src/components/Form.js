@@ -1,5 +1,6 @@
 import React from 'react';
 import { FormFeedback, Input, Label, FormGroup } from 'reactstrap';
+import propTypes from 'prop-types';
 
 const Form = props => {
   const { label, type, placeholder, name, object, onChange } = props;
@@ -22,3 +23,16 @@ const Form = props => {
 };
 
 export default Form;
+
+Form.propTypes = {
+  label: propTypes.string,
+  type: propTypes.string,
+  placeholder: propTypes.string,
+  name: propTypes.string,
+  object: propTypes.shape({
+    touched: propTypes.bool,
+    errors: propTypes.arrayOf(propTypes.string),
+    value: propTypes.any,
+  }),
+  onChange: propTypes.func,
+};
