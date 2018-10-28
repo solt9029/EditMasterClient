@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import * as utils from '../utils';
 import Form from './Form';
+import propTypes from 'prop-types';
 
 const StyledDiv = styled.div`
   padding: 15px;
@@ -17,6 +18,7 @@ export default class Config extends Component {
 
   render() {
     const { props } = this;
+    const { config } = props;
 
     return (
       <StyledDiv>
@@ -25,7 +27,7 @@ export default class Config extends Component {
           type="text"
           placeholder="ユーザ名（例：通りすがりの創作の達人）"
           name="username"
-          object={props.username}
+          object={config.username}
           onChange={event => {
             props.setUsername(event.target.value);
           }}
@@ -35,7 +37,7 @@ export default class Config extends Component {
           type="text"
           placeholder="YouTube動画ID（例：PqJNc9KVIZE）"
           name="videoId"
-          object={props.videoId}
+          object={config.videoId}
           onChange={event => {
             const videoId = utils.urls.getVideoId(event.target.value);
             props.setVideoId(videoId);
@@ -47,7 +49,7 @@ export default class Config extends Component {
           type="number"
           placeholder="BPM（例：200）"
           name="bpm"
-          object={props.bpm}
+          object={config.bpm}
           onChange={event => {
             props.setBpm(event.target.value);
           }}
@@ -57,7 +59,7 @@ export default class Config extends Component {
           type="number"
           placeholder="OFFSET（例：1.5）"
           name="offset"
-          object={props.offset}
+          object={config.offset}
           onChange={event => {
             props.setOffset(event.target.value);
           }}
@@ -67,7 +69,7 @@ export default class Config extends Component {
           type="number"
           placeholder="倍速（例：2）"
           name="speed"
-          object={props.speed}
+          object={config.speed}
           onChange={event => {
             props.setSpeed(event.target.value);
           }}
@@ -77,7 +79,7 @@ export default class Config extends Component {
           type="text"
           placeholder="コメント（例：創作の達人で創作譜面をしました！）"
           name="comment"
-          object={props.comment}
+          object={config.comment}
           onChange={event => {
             props.setComment(event.target.value);
           }}
@@ -86,3 +88,22 @@ export default class Config extends Component {
     );
   }
 }
+
+Config.propTypes = {
+  config: propTypes.shape({
+    username: propTypes.object,
+    videoId: propTypes.object,
+    bpm: propTypes.object,
+    offset: propTypes.object,
+    speed: propTypes.object,
+    comment: propTypes.object,
+  }),
+  setUsername: propTypes.func,
+  setVideoId: propTypes.func,
+  setBpm: propTypes.func,
+  setOffset: propTypes.func,
+  setSpeed: propTypes.func,
+  setComment: propTypes.func,
+  reset: propTypes.func,
+  fetchSongle: propTypes.func,
+};

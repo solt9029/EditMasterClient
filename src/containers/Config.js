@@ -12,12 +12,7 @@ import {
 import Config from '../components/Config';
 
 const mapStateToProps = state => ({
-  username: state.config.username,
-  videoId: state.config.videoId,
-  bpm: state.config.bpm,
-  offset: state.config.offset,
-  speed: state.config.speed,
-  comment: state.config.comment,
+  config: state.config,
 });
 const mapDispatchToProps = dispatch => ({
   setUsername(value) {
