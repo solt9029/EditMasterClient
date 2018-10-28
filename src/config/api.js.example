@@ -1,6 +1,15 @@
-const api = {
-  HOST: 'editmasterapi.solt9029.com',
-  PORT: 80,
+// development
+let api = {
+  HOST: 'localhost',
+  PORT: 8051,
 };
+
+// production
+if (process.env.NODE_ENV === 'production') {
+  api = {
+    HOST: 'editmasterapi.solt9029.com',
+    PORT: 80,
+  };
+}
 
 export default api;
