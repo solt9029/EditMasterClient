@@ -8,3 +8,5 @@ services:
     volumes:
       - .:/react
       - /react/node_modules
+    environment:
+      - NODE_ENV=production
