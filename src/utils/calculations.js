@@ -31,8 +31,37 @@ export const initialNoteX = (currentTime, bpm, offset, speed) => {
   return initialNoteX;
 };
 
+export const noteIndexRangeInCanvas = (
+  notesLength,
+  speed,
+  width,
+  initialNoteX
+) => {
+  const spaceWidth = speed * percentages.PLAYER.SPEED_TO_SPACE_WIDTH;
+  let initialNoteIndex = Math.floor(-initialNoteX / spaceWidth) - 3; // Math.floor(-initialNoteX / spaceWidth) is the number of notes that already passed from canvas
+  const notesNumber = Math.ceil((width - 1) / spaceWidth); // the number of notes that canvas can display in it
+  let finalNoteIndex = initialNoteIndex + notesNumber + 6;
+
+  if (initialNoteIndex < 0) {
+    initialNoteIndex = 0;
+  }
+  if (initialNoteIndex >= notesLength) {
+    return null;
+  }
+
+  if (finalNoteIndex < 0) {
+    return null;
+  }
+  if (finalNoteIndex >= notesLength) {
+    finalNoteIndex = notesLength - 1;
+  }
+
+  return [initialNoteIndex, finalNoteIndex];
+};
+
 export default {
   secondsPerNote,
   noteIndexRangeInSecondRange,
   initialNoteX,
+  noteIndexRangeInCanvas,
 };
