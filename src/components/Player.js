@@ -188,7 +188,6 @@ export default class Player extends Component {
       config.speed.value * percentages.PLAYER.SPEED_TO_SPACE_WIDTH;
 
     this.canvas.clear(playerPane.width - 1, playerPane.height - 1);
-
     this.canvas.drawJudgeMark((playerPane.height - 1) / 2);
 
     const initialNoteX = utils.calculations.initialNoteX(
@@ -273,6 +272,14 @@ export default class Player extends Component {
   }
 
   render() {
+    const {
+      playerPane,
+      ytPlayer,
+      currentTime,
+      setChangingSlider,
+      setCurrentTime,
+    } = this.props;
+
     return (
       <div>
         <canvas
@@ -280,23 +287,23 @@ export default class Player extends Component {
           onKeyDown={this.playMode}
           ref={this.canvasRef}
           style={{ display: 'block' }}
-          width={this.props.playerPane.width - 1}
-          height={this.props.playerPane.height - 1}
+          width={playerPane.width - 1}
+          height={playerPane.height - 1}
         />
         <Slider
           style={sliderInlineStyle}
           min={0}
-          max={this.props.ytPlayer ? this.props.ytPlayer.getDuration() : 0}
-          value={this.props.currentTime}
+          max={ytPlayer ? ytPlayer.getDuration() : 0}
+          value={currentTime}
           onChange={value => {
-            this.props.setChangingSlider(true);
-            this.props.setCurrentTime(value);
+            setChangingSlider(true);
+            setCurrentTime(value);
           }}
           onAfterChange={() => {
-            if (this.props.ytPlayer) {
-              this.props.ytPlayer.seekTo(this.props.currentTime);
+            if (ytPlayer) {
+              ytPlayer.seekTo(currentTime);
             }
-            this.props.setChangingSlider(false);
+            setChangingSlider(false);
           }}
         />
       </div>
