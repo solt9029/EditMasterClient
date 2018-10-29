@@ -8,14 +8,13 @@ import {
   NavItem,
   NavLink,
   Container,
-  Button,
 } from 'reactstrap';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { routes } from '../constants';
 import NavbarSearchForm from '../containers/NavbarSearchForm';
 import TjaExportButton from '../containers/TjaExportButton';
-import qs from 'qs';
+import CreateButton from '../containers/CreateButton';
 
 const Logo = styled(NavbarBrand)`
   background: url('/images/icon.png') no-repeat left center;
@@ -50,26 +49,8 @@ export default class Navbar extends Component {
     });
   };
 
-  search = () => {
-    const { keyword, history } = this.props;
-    const search = qs.stringify(
-      {
-        page: 1,
-        keyword,
-      },
-      { addQueryPrefix: true }
-    );
-    history.push({
-      search,
-    });
-  };
-
-  setKeyword = event => {
-    this.props.setKeyword(event.target.value);
-  };
-
   render() {
-    const { match, notFound, error, isLoading, create } = this.props;
+    const { match, notFound, error, isLoading } = this.props;
 
     return (
       <StyledNavbar className="py-0" color="light" light expand="md">
@@ -109,13 +90,7 @@ export default class Navbar extends Component {
               !isLoading && (
                 <Fragment>
                   <TjaExportButton />
-                  <Button
-                    color="success"
-                    className="my-2 mr-2"
-                    onClick={create}
-                  >
-                    保存
-                  </Button>
+                  <CreateButton />
                 </Fragment>
               )}
             {match.path === routes.SCORES.INDEX && <NavbarSearchForm />}
