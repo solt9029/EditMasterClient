@@ -43,17 +43,15 @@ export default class Navbar extends Component {
     this.state = {
       isOpen: false,
     };
-    this.toggle = this.toggle.bind(this);
-    this.exportFile = this.exportFile.bind(this);
   }
 
-  toggle() {
+  toggle = () => {
     this.setState({
       isOpen: !this.state.isOpen,
     });
-  }
+  };
 
-  exportFile() {
+  exportFile = () => {
     const { notes, config } = this.props;
     utils.tja.exportFile(
       notes,
@@ -61,19 +59,28 @@ export default class Navbar extends Component {
       config.bpm.value,
       config.offset.value
     );
-  }
+  };
+
+  search = () => {
+    const { keyword, history } = this.props;
+    const search = qs.stringify(
+      {
+        page: 1,
+        keyword,
+      },
+      { addQueryPrefix: true }
+    );
+    history.push({
+      search,
+    });
+  };
+
+  setKeyword = event => {
+    this.props.setKeyword(event.target.value);
+  };
 
   render() {
-    const {
-      match,
-      notFound,
-      error,
-      isLoading,
-      keyword,
-      setKeyword,
-      history,
-      create,
-    } = this.props;
+    const { match, notFound, error, isLoading, keyword, create } = this.props;
 
     return (
       <StyledNavbar className="py-0" color="light" light expand="md">
@@ -135,27 +142,14 @@ export default class Navbar extends Component {
                   className="my-2 mr-sm-2"
                   placeholder="検索"
                   value={keyword}
-                  onChange={event => {
-                    setKeyword(event.target.value);
-                  }}
+                  onChange={this.setKeyword}
                 />
                 <Button
                   outline
                   color="success"
                   className="my-2 my-sm-2"
                   type="submit"
-                  onClick={() => {
-                    const search = qs.stringify(
-                      {
-                        page: 1,
-                        keyword: keyword,
-                      },
-                      { addQueryPrefix: true }
-                    );
-                    history.push({
-                      search,
-                    });
-                  }}
+                  onClick={this.search}
                 >
                   検索
                 </Button>
