@@ -14,8 +14,8 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { routes } from '../constants';
 import NavbarSearchForm from '../containers/NavbarSearchForm';
+import TjaExportButton from '../containers/TjaExportButton';
 import qs from 'qs';
-import * as utils from '../utils';
 
 const Logo = styled(NavbarBrand)`
   background: url('/images/icon.png') no-repeat left center;
@@ -48,16 +48,6 @@ export default class Navbar extends Component {
     this.setState({
       isOpen: !this.state.isOpen,
     });
-  };
-
-  exportFile = () => {
-    const { notes, config } = this.props;
-    utils.tja.exportFile(
-      notes,
-      config.videoId.value,
-      config.bpm.value,
-      config.offset.value
-    );
   };
 
   search = () => {
@@ -118,13 +108,7 @@ export default class Navbar extends Component {
               !error &&
               !isLoading && (
                 <Fragment>
-                  <Button
-                    color="info"
-                    className="my-2 mr-2"
-                    onClick={this.exportFile}
-                  >
-                    太鼓さん次郎エクスポート
-                  </Button>
+                  <TjaExportButton />
                   <Button
                     color="success"
                     className="my-2 mr-2"
