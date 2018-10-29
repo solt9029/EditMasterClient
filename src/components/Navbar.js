@@ -64,6 +64,17 @@ export default class Navbar extends Component {
   }
 
   render() {
+    const {
+      match,
+      notFound,
+      error,
+      isLoading,
+      keyword,
+      setKeyword,
+      history,
+      create,
+    } = this.props;
+
     return (
       <StyledNavbar className="py-0" color="light" light expand="md">
         <Container>
@@ -76,30 +87,30 @@ export default class Navbar extends Component {
             <Nav className="mr-auto" navbar>
               <NavItem
                 active={
-                  (this.props.match.path === routes.SCORES.SHOW ||
-                    this.props.match.path === routes.SCORES.NEW) &&
-                  !this.props.notFound
+                  (match.path === routes.SCORES.SHOW ||
+                    match.path === routes.SCORES.NEW) &&
+                  !notFound
                 }
               >
                 <StyledNavLink tag={Link} to={routes.SCORES.NEW}>
                   創作
                 </StyledNavLink>
               </NavItem>
-              <NavItem active={this.props.match.path === routes.SCORES.INDEX}>
+              <NavItem active={match.path === routes.SCORES.INDEX}>
                 <StyledNavLink tag={Link} to={routes.SCORES.INDEX}>
                   作品一覧
                 </StyledNavLink>
               </NavItem>
-              <NavItem active={this.props.match.path === routes.HELP}>
+              <NavItem active={match.path === routes.HELP}>
                 <StyledNavLink tag={Link} to={routes.HELP}>
                   ヘルプ
                 </StyledNavLink>
               </NavItem>
             </Nav>
-            {(this.props.match.path === routes.SCORES.NEW ||
-              this.props.match.path === routes.SCORES.SHOW) &&
-              !this.props.error &&
-              !this.props.isLoading && (
+            {(match.path === routes.SCORES.NEW ||
+              match.path === routes.SCORES.SHOW) &&
+              !error &&
+              !isLoading && (
                 <Fragment>
                   <Button
                     color="info"
@@ -111,21 +122,21 @@ export default class Navbar extends Component {
                   <Button
                     color="success"
                     className="my-2 mr-2"
-                    onClick={this.props.create}
+                    onClick={create}
                   >
                     保存
                   </Button>
                 </Fragment>
               )}
-            {this.props.match.path === routes.SCORES.INDEX && (
+            {match.path === routes.SCORES.INDEX && (
               <Form inline onSubmit={e => e.preventDefault()}>
                 <Input
                   type="search"
                   className="my-2 mr-sm-2"
                   placeholder="検索"
-                  value={this.props.keyword}
+                  value={keyword}
                   onChange={event => {
-                    this.props.setKeyword(event.target.value);
+                    setKeyword(event.target.value);
                   }}
                 />
                 <Button
@@ -137,11 +148,11 @@ export default class Navbar extends Component {
                     const search = qs.stringify(
                       {
                         page: 1,
-                        keyword: this.props.keyword,
+                        keyword: keyword,
                       },
                       { addQueryPrefix: true }
                     );
-                    this.props.history.push({
+                    history.push({
                       search,
                     });
                   }}
