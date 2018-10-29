@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { numbers, sizes, positions, percentages } from '../constants';
 import Canvas from '../classes/Canvas';
+import * as utils from '../utils';
 
 const canvasInlineStyle = { position: 'absolute', top: '0', left: '0' };
 
@@ -30,14 +31,6 @@ export default class EditorCurrentTimeCanvas extends Component {
     this.updateCanvas();
   }
 
-  get secondsPerNote() {
-    const barPerMinute = this.props.bpm / numbers.BEAT;
-    const barPerSecond = barPerMinute / 60;
-    const notesPerSecond = barPerSecond * numbers.NOTES_PER_BAR;
-    const secondsPerNote = 1 / notesPerSecond;
-    return secondsPerNote;
-  }
-
   updateCanvas() {
     this.canvas.clear(
       this.props.editorPane.width - 1,
@@ -51,7 +44,8 @@ export default class EditorCurrentTimeCanvas extends Component {
     const spaceWidth = actualBarWidth / numbers.NOTES_PER_BAR;
 
     const currentNoteIndexFloat =
-      (this.props.currentTime - this.props.offset) / this.secondsPerNote;
+      (this.props.currentTime - this.props.offset) /
+      utils.calculations.secondsPerNote(this.props.bpm);
     const currentNotesPerBarIndexFloat =
       currentNoteIndexFloat % numbers.NOTES_PER_BAR;
     const currentBarIndex = Math.floor(
