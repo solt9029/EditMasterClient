@@ -2,6 +2,7 @@ import React from 'react';
 import { Card, Col, CardImg, CardText, CardBody } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import propTypes from 'prop-types';
 
 const StyledCard = styled(Card)`
   margin-top: 15px;
@@ -70,3 +71,12 @@ const ScoreCard = ({ score }) => {
 };
 
 export default ScoreCard;
+
+ScoreCard.propTypes = {
+  score: propTypes.shape({
+    id: propTypes.number,
+    video_id: propTypes.string,
+    username: propTypes.string,
+    comment: propTypes.string,
+  }),
+};
