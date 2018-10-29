@@ -43,37 +43,6 @@ export default class Player extends Component {
     this.autoMode();
   }
 
-  calcNoteIndexRangeInCanvas(initialNoteX) {
-    const spaceWidth =
-      this.props.config.speed.value * percentages.PLAYER.SPEED_TO_SPACE_WIDTH;
-
-    // Math.floor(-initialNoteX / spaceWidth) is the number of notes that already passed from canvas
-    let initialNoteIndex = Math.floor(-initialNoteX / spaceWidth) - 3;
-
-    // the number of notes that canvas can display in it
-    const notesNumber = Math.ceil(
-      (this.props.playerPane.width - 1) / spaceWidth
-    );
-
-    let finalNoteIndex = initialNoteIndex + notesNumber + 6;
-
-    if (initialNoteIndex < 0) {
-      initialNoteIndex = 0;
-    }
-    if (initialNoteIndex >= this.props.notes.length) {
-      return null;
-    }
-
-    if (finalNoteIndex < 0) {
-      return null;
-    }
-    if (finalNoteIndex >= this.props.notes.length) {
-      finalNoteIndex = this.props.notes.length - 1;
-    }
-
-    return [initialNoteIndex, finalNoteIndex];
-  }
-
   autoMode() {
     const {
       isAutoMode,
@@ -228,7 +197,12 @@ export default class Player extends Component {
       config.offset.value,
       config.speed.value
     );
-    const canvasRange = this.calcNoteIndexRangeInCanvas(initialNoteX);
+    const canvasRange = utils.calculations.noteIndexRangeInCanvas(
+      notes.length,
+      config.speed.value,
+      playerPane.width,
+      initialNoteX
+    );
     if (!canvasRange) {
       return;
     }
