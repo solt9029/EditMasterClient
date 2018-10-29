@@ -43,19 +43,6 @@ export default class Player extends Component {
     this.autoMode();
   }
 
-  calcNoteIndexRangeInSecondRange(secondRange) {
-    const offset = this.props.config.offset.value;
-    const initialNoteIndex = Math.ceil(
-      (this.props.currentTime - secondRange - offset) /
-        utils.calculations.secondsPerNote(this.props.config.bpm.value)
-    );
-    const finalNoteIndex = Math.floor(
-      (this.props.currentTime + secondRange - offset) /
-        utils.calculations.secondsPerNote(this.props.config.bpm.value)
-    );
-    return [initialNoteIndex, finalNoteIndex];
-  }
-
   calcNoteIndexRangeInCanvas(initialNoteX) {
     const spaceWidth =
       this.props.config.speed.value * percentages.PLAYER.SPEED_TO_SPACE_WIDTH;
@@ -101,33 +88,47 @@ export default class Player extends Component {
   }
 
   autoMode() {
-    if (
-      !this.props.isAutoMode ||
-      this.props.ytPlayerState !== ids.YOUTUBE.PLAYING
-    ) {
+    const {
+      isAutoMode,
+      ytPlayerState,
+      notes,
+      states,
+      playerPane,
+      currentTime,
+      config,
+      setState,
+    } = this.props;
+
+    if (!isAutoMode || ytPlayerState !== ids.YOUTUBE.PLAYING) {
       return;
     }
 
-    const autoRange = this.calcNoteIndexRangeInSecondRange(seconds.RANGE.AUTO);
+    const autoRange = utils.calculations.noteIndexRangeInSecondRange(
+      seconds.RANGE.AUTO,
+      currentTime,
+      config.bpm.value,
+      config.offset.value
+    );
 
     for (let i = autoRange[0]; i <= autoRange[1]; i++) {
-      if (i < 0 || i >= this.props.notes.length) {
+      if (i < 0 || i >= notes.length) {
         continue;
       }
 
-      const note = this.props.notes[i];
-      const noteState = this.props.states[i];
-      if (noteState !== ids.STATE.FRESH || note === ids.NOTE.SPACE) {
+      const note = notes[i];
+      const state = states[i];
+
+      if (state !== ids.STATE.FRESH || note === ids.NOTE.SPACE) {
         continue;
       }
 
-      this.shots.push(new Shot((this.props.playerPane.height - 1) / 2, note));
+      this.shots.push(new Shot((playerPane.height - 1) / 2, note));
       this.judgeEffects.push(
-        new JudgeEffect((this.props.playerPane.height - 1) / 2, ids.STATE.GOOD)
+        new JudgeEffect((playerPane.height - 1) / 2, ids.STATE.GOOD)
       );
 
       if (utils.notes.hasState(note)) {
-        this.props.setState(i, ids.STATE.GOOD);
+        setState(i, ids.STATE.GOOD);
       }
 
       if (utils.notes.isDon(note)) {
@@ -141,58 +142,83 @@ export default class Player extends Component {
   }
 
   playMode(event) {
-    if (
-      this.props.isAutoMode ||
-      this.props.ytPlayerState !== ids.YOUTUBE.PLAYING
-    ) {
+    const {
+      isAutoMode,
+      ytPlayerState,
+      currentTime,
+      config,
+      notes,
+      states,
+      playerPane,
+      setState,
+    } = this.props;
+
+    if (isAutoMode || ytPlayerState !== ids.YOUTUBE.PLAYING) {
       return;
     }
 
-    if (utils.keys.isDon(event.nativeEvent.key)) {
+    const { key } = event.nativeEvent;
+
+    if (utils.keys.isDon(key)) {
       this.sound.trigger('don');
     }
-    if (utils.keys.isKa(event.nativeEvent.key)) {
+    if (utils.keys.isKa(key)) {
       this.sound.trigger('ka');
     }
 
-    const badRange = this.calcNoteIndexRangeInSecondRange(seconds.RANGE.BAD);
-    const okRange = this.calcNoteIndexRangeInSecondRange(seconds.RANGE.OK);
-    const goodRange = this.calcNoteIndexRangeInSecondRange(seconds.RANGE.GOOD);
+    const badRange = utils.calculations.noteIndexRangeInSecondRange(
+      seconds.RANGE.BAD,
+      currentTime,
+      config.bpm.value,
+      config.offset.value
+    );
+    const okRange = utils.calculations.noteIndexRangeInSecondRange(
+      seconds.RANGE.OK,
+      currentTime,
+      config.bpm.value,
+      config.offset.value
+    );
+    const goodRange = utils.calculations.noteIndexRangeInSecondRange(
+      seconds.RANGE.GOOD,
+      currentTime,
+      config.bpm.value,
+      config.offset.value
+    );
 
     for (let i = badRange[0]; i <= badRange[1]; i++) {
-      if (i < 0 || i >= this.props.notes.length) {
+      if (i < 0 || i >= notes.length) {
         continue;
       }
 
-      const note = this.props.notes[i];
-      const noteState = this.props.states[i];
-      if (noteState !== ids.STATE.FRESH || note === ids.NOTE.SPACE) {
+      const note = notes[i];
+      const state = states[i];
+      if (state !== ids.STATE.FRESH || note === ids.NOTE.SPACE) {
         continue;
       }
 
       let hit = false;
-      if (utils.keys.isDon(event.nativeEvent.key) && utils.notes.isDon(note)) {
+      if (utils.keys.isDon(key) && utils.notes.isDon(note)) {
         hit = true;
       }
-      if (utils.keys.isKa(event.nativeEvent.key) && utils.notes.isKa(note)) {
+      if (utils.keys.isKa(key) && utils.notes.isKa(note)) {
         hit = true;
       }
       if (!hit) {
         continue;
       }
 
-      this.shots.push(new Shot((this.props.playerPane.height - 1) / 2, note));
+      this.shots.push(new Shot((playerPane.height - 1) / 2, note));
 
       if (utils.notes.hasState(note)) {
-        let stateId = ids.STATE.BAD;
+        let newState = ids.STATE.BAD;
         if (i >= goodRange[0] && i <= goodRange[1]) {
-          stateId = ids.STATE.GOOD;
+          newState = ids.STATE.GOOD;
         } else if (i >= okRange[0] && i <= okRange[1]) {
-          stateId = ids.STATE.OK;
+          newState = ids.STATE.OK;
         }
-        this.props.setState(i, stateId);
+        setState(i, newState);
         this.judgeEffects.push(
-          new JudgeEffect((this.props.playerPane.height - 1) / 2, stateId)
+          new JudgeEffect((playerPane.height - 1) / 2, newState)
         );
       }
       break;
