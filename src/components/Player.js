@@ -43,21 +43,15 @@ export default class Player extends Component {
     this.autoMode();
   }
 
-  get secondsPerNote() {
-    const barPerMinute = this.props.config.bpm.value / numbers.BEAT;
-    const barPerSecond = barPerMinute / 60;
-    const notesPerSecond = barPerSecond * numbers.NOTES_PER_BAR;
-    const secondsPerNote = 1 / notesPerSecond;
-    return secondsPerNote;
-  }
-
   calcNoteIndexRangeInSecondRange(secondRange) {
     const offset = this.props.config.offset.value;
     const initialNoteIndex = Math.ceil(
-      (this.props.currentTime - secondRange - offset) / this.secondsPerNote
+      (this.props.currentTime - secondRange - offset) /
+        utils.calculations.secondsPerNote(this.props.config.bpm.value)
     );
     const finalNoteIndex = Math.floor(
-      (this.props.currentTime + secondRange - offset) / this.secondsPerNote
+      (this.props.currentTime + secondRange - offset) /
+        utils.calculations.secondsPerNote(this.props.config.bpm.value)
     );
     return [initialNoteIndex, finalNoteIndex];
   }
@@ -100,7 +94,9 @@ export default class Player extends Component {
     const offset = this.props.config.offset.value;
     const initialNoteX =
       positions.PLAYER.JUDGE.X +
-      ((offset - this.props.currentTime) / this.secondsPerNote) * spaceWidth;
+      ((offset - this.props.currentTime) /
+        utils.calculations.secondsPerNote(this.props.config.bpm.value)) *
+        spaceWidth;
     return initialNoteX;
   }
 
