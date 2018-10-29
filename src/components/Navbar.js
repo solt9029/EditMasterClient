@@ -14,9 +14,9 @@ import {
 } from 'reactstrap';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import { numbers, routes } from '../constants';
+import { routes } from '../constants';
 import qs from 'qs';
-import { saveAs } from 'file-saver';
+import * as utils from '../utils';
 
 const Logo = styled(NavbarBrand)`
   background: url('/images/icon.png') no-repeat left center;
@@ -44,7 +44,7 @@ export default class Navbar extends Component {
       isOpen: false,
     };
     this.toggle = this.toggle.bind(this);
-    this.export = this.export.bind(this);
+    this.exportFile = this.exportFile.bind(this);
   }
 
   toggle() {
@@ -53,33 +53,14 @@ export default class Navbar extends Component {
     });
   }
 
-  // this should be refactored!
-  export() {
-    let line = [];
-    const jiroOffset = -(parseFloat(this.props.config.offset.value) + 0.08);
-    line[0] = 'TITLE:' + this.props.config.videoId.value;
-    line[1] = 'BPM:' + this.props.config.bpm.value;
-    line[2] = 'WAVE:music.ogg';
-    line[3] = 'OFFSET:' + jiroOffset;
-    line[4] = 'COURSE:oni';
-    line[5] = 'LEVEL:8';
-    line[6] = '#START';
-    for (let l = 0; l < this.props.notes.length / numbers.NOTES_PER_BAR; l++) {
-      line[7 + l] = '';
-      for (let c = 0; c < numbers.NOTES_PER_BAR; c++) {
-        line[7 + l] += this.props.notes[l * numbers.NOTES_PER_BAR + c];
-      }
-      line[7 + l] += ',';
-    }
-    line[7 + this.props.notes.length / numbers.NOTES_PER_BAR] = '#END';
-
-    let content = '';
-    for (let i = 0; i < line.length; i++) {
-      content += line[i];
-      content += '\n';
-    }
-    const blob = new Blob([content], { type: 'tja/plain' });
-    saveAs(blob, this.props.config.videoId.value + '.tja');
+  exportFile() {
+    const { notes, config } = this.props;
+    utils.tja.exportFile(
+      notes,
+      config.videoId.value,
+      config.bpm.value,
+      config.offset.value
+    );
   }
 
   render() {
@@ -123,7 +104,7 @@ export default class Navbar extends Component {
                   <Button
                     color="info"
                     className="my-2 mr-2"
-                    onClick={this.export}
+                    onClick={this.exportFile}
                   >
                     太鼓さん次郎エクスポート
                   </Button>
