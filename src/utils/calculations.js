@@ -1,4 +1,4 @@
-import { numbers } from '../constants/';
+import { numbers, percentages, positions } from '../constants/';
 
 export const secondsPerNote = bpm => {
   const barPerMinute = bpm / numbers.BEAT;
@@ -23,7 +23,16 @@ export const noteIndexRangeInSecondRange = (
   return [initialNoteIndex, finalNoteIndex];
 };
 
+export const initialNoteX = (currentTime, bpm, offset, speed) => {
+  const spaceWidth = speed * percentages.PLAYER.SPEED_TO_SPACE_WIDTH;
+  const initialNoteX =
+    positions.PLAYER.JUDGE.X +
+    ((offset - currentTime) / secondsPerNote(bpm)) * spaceWidth;
+  return initialNoteX;
+};
+
 export default {
   secondsPerNote,
   noteIndexRangeInSecondRange,
+  initialNoteX,
 };
