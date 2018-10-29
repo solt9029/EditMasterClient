@@ -8,6 +8,22 @@ export const secondsPerNote = bpm => {
   return secondsPerNote;
 };
 
+export const noteIndexRangeInSecondRange = (
+  secondRange,
+  currentTime,
+  bpm,
+  offset
+) => {
+  const initialNoteIndex = Math.ceil(
+    (currentTime - secondRange - offset) / secondsPerNote(bpm)
+  );
+  const finalNoteIndex = Math.floor(
+    (currentTime + secondRange - offset) / secondsPerNote(bpm)
+  );
+  return [initialNoteIndex, finalNoteIndex];
+};
+
 export default {
   secondsPerNote,
+  noteIndexRangeInSecondRange,
 };
