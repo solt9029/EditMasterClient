@@ -7,14 +7,13 @@ import {
   Nav,
   NavItem,
   NavLink,
-  Form,
-  Input,
   Container,
   Button,
 } from 'reactstrap';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { routes } from '../constants';
+import NavbarSearchForm from '../containers/NavbarSearchForm';
 import qs from 'qs';
 import * as utils from '../utils';
 
@@ -80,7 +79,7 @@ export default class Navbar extends Component {
   };
 
   render() {
-    const { match, notFound, error, isLoading, keyword, create } = this.props;
+    const { match, notFound, error, isLoading, create } = this.props;
 
     return (
       <StyledNavbar className="py-0" color="light" light expand="md">
@@ -135,26 +134,7 @@ export default class Navbar extends Component {
                   </Button>
                 </Fragment>
               )}
-            {match.path === routes.SCORES.INDEX && (
-              <Form inline onSubmit={e => e.preventDefault()}>
-                <Input
-                  type="search"
-                  className="my-2 mr-sm-2"
-                  placeholder="検索"
-                  value={keyword}
-                  onChange={this.setKeyword}
-                />
-                <Button
-                  outline
-                  color="success"
-                  className="my-2 my-sm-2"
-                  type="submit"
-                  onClick={this.search}
-                >
-                  検索
-                </Button>
-              </Form>
-            )}
+            {match.path === routes.SCORES.INDEX && <NavbarSearchForm />}
           </Collapse>
         </Container>
       </StyledNavbar>

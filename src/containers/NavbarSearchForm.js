@@ -1,23 +1,19 @@
 import withRouter from 'react-router-dom/withRouter';
 import { connect } from 'react-redux';
-import { create } from '../actions/modal';
 import { setKeyword } from '../actions/navbar';
-import Navbar from '../components/Navbar';
+import NavbarSearchForm from '../components/NavbarSearchForm';
 
 const mapStateToProps = state => ({
-  notes: state.editor.notes,
-  config: state.config,
-  isLoading: state.scoresShowView.isLoading,
-  error: state.scoresShowView.error,
+  keyword: state.navbar.keyword,
 });
 const mapDispatchToProps = dispatch => ({
-  create() {
-    dispatch(create());
+  setKeyword(keyword) {
+    dispatch(setKeyword(keyword));
   },
 });
 export default withRouter(
   connect(
     mapStateToProps,
     mapDispatchToProps
-  )(Navbar)
+  )(NavbarSearchForm)
 );
