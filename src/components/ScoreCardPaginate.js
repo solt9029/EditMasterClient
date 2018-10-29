@@ -1,27 +1,27 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import ReactPaginate from 'react-paginate';
 import qs from 'qs';
-import { withRouter } from 'react-router-dom';
-import { reset } from '../actions/scoreCardPaginate';
+import propTypes from 'prop-types';
 
-class ScoreCardPaginate extends Component {
+export default class ScoreCardPaginate extends Component {
   componentWillUnmount() {
     this.props.reset();
   }
 
   render() {
+    const { currentPage, lastPage, location, history } = this.props;
+
     return (
       <ReactPaginate
         class="pagination"
-        previousLabel={'前'}
-        nextLabel={'次'}
-        forcePage={this.props.currentPage - 1}
-        pageCount={this.props.lastPage}
+        previousLabel="前"
+        nextLabel="次"
+        forcePage={currentPage - 1}
+        pageCount={lastPage}
         marginPagesDisplayed={1}
         pageRangeDisplayed={3}
         onPageChange={data => {
-          const query = qs.parse(this.props.location.search, {
+          const query = qs.parse(location.search, {
             ignoreQueryPrefix: true,
           });
           const keyword = query.keyword ? query.keyword : '';
@@ -32,7 +32,7 @@ class ScoreCardPaginate extends Component {
             },
             { addQueryPrefix: true }
           );
-          this.props.history.push({
+          history.push({
             search,
           });
         }}
@@ -51,23 +51,8 @@ class ScoreCardPaginate extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  data: state.scoreCardPaginate.data,
-  currentPage: state.scoreCardPaginate.currentPage,
-  from: state.scoreCardPaginate.from,
-  lastPage: state.scoreCardPaginate.lastPage,
-  perPage: state.scoreCardPaginate.perPage,
-  total: state.scoreCardPaginate.total,
-  to: state.scoreCardPaginate.to,
-});
-const mapDispatchToProps = dispatch => ({
-  reset() {
-    dispatch(reset());
-  },
-});
-export default withRouter(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(ScoreCardPaginate)
-);
+ScoreCardPaginate.propTypes = {
+  lastPage: propTypes.number,
+  currentPage: propTypes.number,
+  reset: propTypes.func,
+};

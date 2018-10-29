@@ -3,7 +3,7 @@ import Navbar from '../containers/Navbar';
 import Footer from './Footer';
 import ScoreCardList from '../containers/ScoreCardList';
 import { Container } from 'reactstrap';
-import ScoreCardPaginate from './ScoreCardPaginate';
+import ScoreCardPaginate from '../containers/ScoreCardPaginate';
 import qs from 'qs';
 import styled from 'styled-components';
 
