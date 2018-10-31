@@ -103,23 +103,8 @@ function build(previousFileSizes) {
   console.log('Creating an optimized production build...');
 
   // Copy files to build directory.
-  const copyFiles = [
-    'Dockerfile',
-    'docker-compose.yml',
-    'server.js',
-    'package.json',
-    'package-lock.json',
-    '.gitignore',
-  ];
-  copyFiles.forEach(copyFile => {
-    fs.copyFile(`./docker/${copyFile}`, `./build/${copyFile}`, err => {
-      if (err) {
-        console.log(err);
-        return;
-      }
-      console.log(`${copyFile} copied.`);
-    });
-  });
+  const fsExtra = require('fs-extra');
+  fsExtra.copySync('./docker', './build');
 
   let compiler = webpack(config);
   return new Promise((resolve, reject) => {
