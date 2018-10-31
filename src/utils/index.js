@@ -5,3 +5,4 @@ export { default as urls } from './urls';
 export { default as twitter } from './twitter';
 export { default as calculations } from './calculations';
 export { default as tja } from './tja';
+export { default as clients } from './clients';

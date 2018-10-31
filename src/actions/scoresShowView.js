@@ -1,6 +1,5 @@
-import axios from 'axios';
-import { api } from '../config';
 import { actionTypes } from '../constants/';
+import * as utils from '../utils';
 
 export const finishRequestError = error => ({
   type: actionTypes.SCORES_SHOW_VIEW.FINISH_REQUEST_ERROR,
@@ -27,8 +26,7 @@ export const fetch = id => {
   return async dispatch => {
     dispatch(startRequest());
     try {
-      const { HOST, PORT } = api;
-      const result = await axios.get(`http://${HOST}:${PORT}/scores/${id}`);
+      const result = await utils.clients.getScore(id);
       const score = result.data;
 
       const notes = JSON.parse(score.notes);
