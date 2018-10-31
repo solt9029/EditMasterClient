@@ -31,6 +31,7 @@ app.get('/Scores/edit', (req, res) => {
 app.get('/', (req, res) => {
   if (req.headers['user-agent'].startsWith('Twitterbot')) {
     res.sendFile(path.join(__dirname, 'ogp', 'index.html'));
+    return;
   }
   res.sendFile(path.join(__dirname, 'index.html'));
 });
@@ -38,6 +39,7 @@ app.get('/', (req, res) => {
 app.get('/help', (req, res) => {
   if (req.headers['user-agent'].startsWith('Twitterbot')) {
     res.sendFile(path.join(__dirname, 'ogp', 'help.html'));
+    return;
   }
   res.sendFile(path.join(__dirname, 'index.html'));
 });
@@ -45,6 +47,7 @@ app.get('/help', (req, res) => {
 app.get('/scores', (req, res) => {
   if (req.headers['user-agent'].startsWith('Twitterbot')) {
     res.sendFile(path.join(__dirname, 'ogp', 'scores', 'index.html'));
+    return;
   }
   res.sendFile(path.join(__dirname, 'index.html'));
 });
@@ -52,6 +55,7 @@ app.get('/scores', (req, res) => {
 app.get('/scores/new', (req, res) => {
   if (req.headers['user-agent'].startsWith('Twitterbot')) {
     res.sendFile(path.join(__dirname, 'ogp', 'scores', 'new.html'));
+    return;
   }
   res.sendFile(path.join(__dirname, 'index.html'));
 });
@@ -64,7 +68,7 @@ app.get('/scores/:id', (req, res) => {
       },
       (error, response, body) => {
         const score = JSON.parse(body);
-        res.render('scores/show', { score });
+        res.render('scores/show', { score: score });
       }
     );
     return;
