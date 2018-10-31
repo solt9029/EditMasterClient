@@ -68,6 +68,9 @@ app.get('/scores/:id', (req, res) => {
       },
       (error, response, body) => {
         const score = JSON.parse(body);
+        if (score.comment === null) {
+          score.comment = '';
+        }
         res.render('scores/show', { score: score });
       }
     );
