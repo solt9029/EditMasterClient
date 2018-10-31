@@ -84,7 +84,7 @@ export const setComment = (value, touched = true) => {
 export const fetchSongle = videoId => {
   return async dispatch => {
     try {
-      const result = await utils.clients.getSongle(videoId);
+      const result = await utils.http.getSongle(videoId);
       if (!result.data.beats) {
         return;
       }

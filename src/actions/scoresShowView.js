@@ -26,7 +26,7 @@ export const fetch = id => {
   return async dispatch => {
     dispatch(startRequest());
     try {
-      const result = await utils.clients.getScore(id);
+      const result = await utils.http.getScore(id);
       const score = result.data;
 
       const notes = JSON.parse(score.notes);

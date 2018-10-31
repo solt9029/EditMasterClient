@@ -24,7 +24,7 @@ export const create = () => {
     };
 
     try {
-      const result = await utils.clients.createScore(data);
+      const result = await utils.http.createScore(data);
       dispatch(finishCreateSuccess(result.data.id));
     } catch (error) {
       dispatch(finishCreateError(error.response.data.errors));

@@ -5,7 +5,7 @@ export const fetch = (page, keyword) => {
   return async dispatch => {
     dispatch(startRequest());
     try {
-      const result = await utils.clients.getScores(page, keyword);
+      const result = await utils.http.getScores(page, keyword);
       dispatch(finishRequestSuccess(result.data));
     } catch (error) {
       dispatch(finishRequestError(error));
