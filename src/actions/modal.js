@@ -1,6 +1,5 @@
-import axios from 'axios';
-import * as config from '../config/';
 import { actionTypes } from '../constants/';
+import * as utils from '../utils';
 
 export const startCreate = () => ({
   type: actionTypes.MODAL.START_CREATE,
@@ -25,11 +24,7 @@ export const create = () => {
     };
 
     try {
-      const { HOST, PORT } = config.api;
-      const result = await axios.post(
-        `http://${HOST}:${PORT}/scores/create`,
-        data
-      );
+      const result = await utils.clients.createScore(data);
       dispatch(finishCreateSuccess(result.data.id));
     } catch (error) {
       dispatch(finishCreateError(error.response.data.errors));

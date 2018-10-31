@@ -1,15 +1,11 @@
-import axios from 'axios';
-import * as config from '../config/';
 import { actionTypes } from '../constants/';
+import * as utils from '../utils';
 
 export const fetch = (page, keyword) => {
   return async dispatch => {
     dispatch(startRequest());
     try {
-      const { HOST, PORT } = config.api;
-      const result = await axios.get(
-        `http://${HOST}:${PORT}/scores?page=${page}&keyword=${keyword}`
-      );
+      const result = await utils.clients.getScores(page, keyword);
       dispatch(finishRequestSuccess(result.data));
     } catch (error) {
       dispatch(finishRequestError(error));

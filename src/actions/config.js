@@ -1,4 +1,3 @@
-import axios from 'axios';
 import * as utils from '../utils';
 import { actionTypes } from '../constants/';
 
@@ -85,9 +84,7 @@ export const setComment = (value, touched = true) => {
 export const fetchSongle = videoId => {
   return async dispatch => {
     try {
-      const result = await axios.get(
-        `http://widget.songle.jp/api/v1/song/beat.json?url=www.youtube.com/watch?v=${videoId}`
-      );
+      const result = await utils.clients.getSongle(videoId);
       if (!result.data.beats) {
         return;
       }
