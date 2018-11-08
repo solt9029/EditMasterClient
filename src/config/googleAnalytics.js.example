@@ -1,0 +1,5 @@
+const googleAnalytics = {
+  ID: 'UA-87081438-2',
+};
+
+export default googleAnalytics;
