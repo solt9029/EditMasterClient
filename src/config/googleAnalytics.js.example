@@ -1,5 +1,13 @@
-const googleAnalytics = {
-  ID: 'UA-87081438-2',
+// development
+let googleAnalytics = {
+  ID: 'UA-128426361-2',
 };
+
+// production
+if (process.env.NODE_ENV === 'production') {
+  googleAnalytics = {
+    ID: 'UA-128426361-1',
+  };
+}
 
 export default googleAnalytics;
