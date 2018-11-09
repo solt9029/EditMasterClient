@@ -2,8 +2,7 @@ import React from 'react';
 import { FormFeedback, Input, Label, FormGroup } from 'reactstrap';
 import propTypes from 'prop-types';
 
-const Form = props => {
-  const { label, type, placeholder, name, object, onChange } = props;
+const Form = ({ label, type, placeholder, name, object, onChange }) => {
   return (
     <FormGroup>
       <Label>{label}</Label>
