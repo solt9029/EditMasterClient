@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Container } from 'reactstrap';
 import styled from 'styled-components';
 
@@ -14,12 +14,12 @@ const StyledContainer = styled(Container)`
   margin-top: 50px;
 `;
 
-export default class Footer extends Component {
-  render() {
-    return (
-      <StyledContainer fluid>
-        <small>Copyright © Kenshi Shiode. All Rights Reserved.</small>
-      </StyledContainer>
-    );
-  }
-}
+const Footer = () => {
+  return (
+    <StyledContainer fluid>
+      <small>Copyright © Kenshi Shiode. All Rights Reserved.</small>
+    </StyledContainer>
+  );
+};
+
+export default Footer;
