@@ -3,6 +3,7 @@ import { percentages, sizes, positions, numbers, ids } from '../constants';
 import Canvas from '../classes/Canvas';
 import EditorCaretCanvas from '../containers/EditorCaretCanvas';
 import EditorCurrentTimeCanvas from '../containers/EditorCurrentTimeCanvas';
+import propTypes from 'prop-types';
 
 const canvasInlineStyle = { position: 'absolute', top: '0', left: '0' };
 
@@ -29,15 +30,14 @@ export default class Editor extends Component {
 
   updateCanvas() {
     this.canvas.clear(
-      this.props.editorPane.width - 1,
+      this.props.width - 1,
       Math.ceil(this.props.notes.length / numbers.NOTES_PER_BAR) *
         sizes.EDITOR.BAR.OUTSIDE.HEIGHT
     );
 
     // bars
     const barNum = Math.ceil(this.props.notes.length / numbers.NOTES_PER_BAR);
-    const barWidth =
-      this.props.editorPane.width - 1 - positions.EDITOR.BAR.X * 2;
+    const barWidth = this.props.width - 1 - positions.EDITOR.BAR.X * 2;
     for (let i = 0; i < barNum; i++) {
       this.canvas.drawBar(
         positions.EDITOR.BAR.X,
@@ -85,7 +85,7 @@ export default class Editor extends Component {
         <canvas
           ref={this.canvasRef}
           style={canvasInlineStyle}
-          width={this.props.editorPane.width - 1}
+          width={this.props.width - 1}
           height={
             Math.ceil(this.props.notes.length / numbers.NOTES_PER_BAR) *
             sizes.EDITOR.BAR.OUTSIDE.HEIGHT
@@ -97,3 +97,8 @@ export default class Editor extends Component {
     );
   }
 }
+
+Editor.propTypes = {
+  width: propTypes.number,
+  notes: propTypes.arrayOf(propTypes.number),
+};
