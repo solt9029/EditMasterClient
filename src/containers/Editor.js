@@ -3,7 +3,7 @@ import { reset } from '../actions/editor';
 import Editor from '../components/Editor';
 
 const mapStateToProps = state => ({
-  editorPane: state.ide.panes.editor,
+  width: state.ide.panes.editor.width,
   notes: state.editor.notes,
 });
 const mapDispatchToProps = dispatch => ({
