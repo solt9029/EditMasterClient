@@ -45,6 +45,20 @@ const HelpView = () => (
       </StyledCard>
 
       <StyledCard>
+        <CardHeader>コピー&ペーストはできないの？</CardHeader>
+        <CardBody>
+          <CardText>
+            ●
+            コピーしたい譜面1行の上にカーソルを置き、Cのキーを入力するとコピーできます。
+          </CardText>
+          <CardText>
+            ●
+            ペーストしたい譜面1行の上にカーソルを置き、Vのキーを入力するとペーストできます。
+          </CardText>
+        </CardBody>
+      </StyledCard>
+
+      <StyledCard>
         <CardHeader>YouTube動画IDって何？</CardHeader>
         <CardBody>
           <CardText>
@@ -64,6 +78,20 @@ const HelpView = () => (
           <CardText>
             ●
             上側の画面をクリックしてください。その状態で、FまたはJのキーを入力するとドン、DまたはKのキーを入力するとカッになります。
+          </CardText>
+        </CardBody>
+      </StyledCard>
+
+      <StyledCard>
+        <CardHeader>スマートフォンでうまく動かないんだけど？</CardHeader>
+        <CardBody>
+          <CardText>
+            ●
+            今の所はパソコンでの利用のみを想定していますので、スマートフォンはサポート対象外です。
+          </CardText>
+          <CardText>
+            ●
+            今後、時間はかかると思いますが、スマートフォンでも快適に創作譜面できるように対応したいと思っておりますので、応援よろしくお願いします。
           </CardText>
         </CardBody>
       </StyledCard>
