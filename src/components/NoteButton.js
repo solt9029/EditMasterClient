@@ -11,7 +11,7 @@ const StyledImg = styled.img`
   height: auto;
 `;
 
-export default class NoteRadio extends Component {
+export default class NoteButton extends Component {
   render() {
     // recalculate col size
     let colSize = 3;

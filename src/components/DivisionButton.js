@@ -6,7 +6,7 @@ const StyledButton = styled(Button)`
   min-width: 75px;
 `;
 
-export default class DivisionRadio extends Component {
+export default class DivisionButton extends Component {
   render() {
     // recalculate col size
     let colSize = 3;
