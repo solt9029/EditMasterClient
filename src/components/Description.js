@@ -26,7 +26,7 @@ const CommentText = styled.p`
   margin-bottom: 3px;
 `;
 
-const Jumbotron = () => {
+const Description = () => {
   return (
     <StyledContainer fluid>
       <StyledRow>
@@ -83,4 +83,4 @@ const Jumbotron = () => {
   );
 };
 
-export default Jumbotron;
+export default Description;
