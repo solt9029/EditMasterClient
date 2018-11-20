@@ -1,17 +1,17 @@
+import DivisionButton from '../components/DivisionButton';
 import { connect } from 'react-redux';
-import { setNote } from '../actions/palette';
-import NoteRadio from '../components/NoteRadio';
+import { setDivision } from '../actions/palette';
 
 const mapStateToProps = state => ({
-  note: state.palette.note,
+  division: state.palette.division,
   paletteWidth: state.ide.panes.palette.width,
 });
 const mapDispatchToProps = dispatch => ({
-  setNote(note) {
-    dispatch(setNote(note));
+  setDivision(division) {
+    dispatch(setDivision(division));
   },
 });
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(NoteRadio);
+)(DivisionButton);
