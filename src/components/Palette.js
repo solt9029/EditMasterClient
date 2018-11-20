@@ -1,19 +1,14 @@
 import React, { Component } from 'react';
-import { Row, Container, Button } from 'reactstrap';
+import { Button } from 'reactstrap';
 import styled from 'styled-components';
-import NoteButton from '../containers/NoteButton';
+import NoteButtonList from '../components/NoteButtonList';
 import DivisionButtonList from '../components/DivisionButtonList';
-import { ids } from '../constants';
 
 const StyledDiv = styled.div`
   padding: 15px;
   background-color: #222;
   color: white;
   font-weight: 500;
-`;
-
-const StyledContainer = styled(Container)`
-  margin-bottom: 30px;
 `;
 
 const LineButton = styled(Button)`
@@ -24,57 +19,6 @@ const ModeButton = styled(Button)`
   margin-bottom: 30px;
   min-width: 180px;
 `;
-
-const noteFields = [
-  {
-    label: 'ドン',
-    value: ids.NOTE.DON,
-    color: 'danger',
-    img: '/images/don.png',
-  },
-  {
-    label: 'カッ',
-    value: ids.NOTE.KA,
-    color: 'primary',
-    img: '/images/ka.png',
-  },
-  {
-    label: '大ドン',
-    value: ids.NOTE.BIGDON,
-    color: 'danger',
-    img: '/images/bigdon.png',
-  },
-  {
-    label: '大カッ',
-    value: ids.NOTE.BIGKA,
-    color: 'primary',
-    img: '/images/bigka.png',
-  },
-  {
-    label: '連打',
-    value: ids.NOTE.RENDA,
-    color: 'warning',
-    img: '/images/renda.png',
-  },
-  {
-    label: '大連打',
-    value: ids.NOTE.BIGRENDA,
-    color: 'warning',
-    img: '/images/bigrenda.png',
-  },
-  {
-    label: '風船',
-    value: ids.NOTE.BALLOON,
-    color: 'danger',
-    img: '/images/balloon.png',
-  },
-  {
-    label: '空白',
-    value: ids.NOTE.SPACE,
-    color: 'light',
-    img: '/images/space.png',
-  },
-];
 
 export default class Palette extends Component {
   componentWillUnmount() {
@@ -93,22 +37,7 @@ export default class Palette extends Component {
           {this.props.isAutoMode ? 'プレイモードにする' : 'オート再生にする'}
         </ModeButton>
         <label>譜面の種類</label>
-        <StyledContainer>
-          <Row>
-            {noteFields.map((field, i) => {
-              return (
-                <NoteButton
-                  key={i}
-                  img={field.img}
-                  color={field.color}
-                  label={field.label}
-                  name="note"
-                  value={field.value}
-                />
-              );
-            })}
-          </Row>
-        </StyledContainer>
+        <NoteButtonList />
         <label>1小節あたりの分割数</label>
         <DivisionButtonList />
         <LineButton

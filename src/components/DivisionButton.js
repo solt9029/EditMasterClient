@@ -36,7 +36,6 @@ const DivisionButton = props => {
         onClick={setDivision}
       >
         <div>{value}</div>
-        <input value={value} type="radio" />
       </StyledButton>
     </StyledCol>
   );
