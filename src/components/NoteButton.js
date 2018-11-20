@@ -1,17 +1,7 @@
 import React from 'react';
-import { Button, Col } from 'reactstrap';
 import styled from 'styled-components';
 import propTypes from 'prop-types';
-
-const StyledButton = styled(Button)`
-  min-width: 75px;
-`;
-
-const StyledCol = styled(Col)`
-  && {
-    padding: 3px;
-  }
-`;
+import PaletteButton from './PaletteButton';
 
 const Img = styled.img`
   width: 100%;
@@ -19,32 +9,23 @@ const Img = styled.img`
 `;
 
 const NoteButton = props => {
-  const { currentNote, value, paletteWidth, label, img, color } = props;
-
-  // recalculate col size
-  let size = 3;
-  if (paletteWidth < 200) {
-    size = 12;
-  } else if (paletteWidth < 360) {
-    size = 6;
-  }
+  const { value, img, color, currentNote, paletteWidth, label } = props;
 
   const setNote = () => {
     props.setNote(value);
   };
 
   return (
-    <StyledCol xs={size} className="btn-group-toggle">
-      <StyledButton
-        block
-        color={color}
-        active={currentNote === value}
-        onClick={setNote}
-      >
-        <div>{label}</div>
-        <Img src={img} alt={img} />
-      </StyledButton>
-    </StyledCol>
+    <PaletteButton
+      color={color}
+      currentValue={currentNote}
+      value={value}
+      onClick={setNote}
+      paletteWidth={paletteWidth}
+      label={label}
+    >
+      <Img src={img} alt={img} />
+    </PaletteButton>
   );
 };
 
