@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import * as utils from '../utils';
-import Form from './Form';
+import ConfigForm from './ConfigForm';
 import propTypes from 'prop-types';
 
 const StyledDiv = styled.div`
@@ -22,7 +22,7 @@ export default class Config extends Component {
 
     return (
       <StyledDiv>
-        <Form
+        <ConfigForm
           label="ユーザ名"
           type="text"
           placeholder="ユーザ名（例：通りすがりの創作の達人）"
@@ -32,7 +32,7 @@ export default class Config extends Component {
             props.setUsername(event.target.value);
           }}
         />
-        <Form
+        <ConfigForm
           label="YouTube動画ID"
           type="text"
           placeholder="YouTube動画ID（例：PqJNc9KVIZE）"
@@ -44,7 +44,7 @@ export default class Config extends Component {
             props.fetchSongle(videoId);
           }}
         />
-        <Form
+        <ConfigForm
           label="BPM"
           type="number"
           placeholder="BPM（例：200）"
@@ -54,7 +54,7 @@ export default class Config extends Component {
             props.setBpm(event.target.value);
           }}
         />
-        <Form
+        <ConfigForm
           label="OFFSET：曲の始まる時間（秒）"
           type="number"
           placeholder="OFFSET（例：1.5）"
@@ -64,7 +64,7 @@ export default class Config extends Component {
             props.setOffset(event.target.value);
           }}
         />
-        <Form
+        <ConfigForm
           label="倍速"
           type="number"
           placeholder="倍速（例：2）"
@@ -74,7 +74,7 @@ export default class Config extends Component {
             props.setSpeed(event.target.value);
           }}
         />
-        <Form
+        <ConfigForm
           label="コメント"
           type="text"
           placeholder="コメント（例：創作の達人で創作譜面をしました！）"

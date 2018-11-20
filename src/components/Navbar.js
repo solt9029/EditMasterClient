@@ -12,7 +12,7 @@ import {
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { routes } from '../constants';
-import NavbarSearchForm from '../containers/NavbarSearchForm';
+import SearchForm from '../containers/SearchForm';
 import TjaExportButton from '../containers/TjaExportButton';
 import CreateButton from '../containers/CreateButton';
 
@@ -93,7 +93,7 @@ export default class Navbar extends Component {
                   <CreateButton />
                 </Fragment>
               )}
-            {match.path === routes.SCORES.INDEX && <NavbarSearchForm />}
+            {match.path === routes.SCORES.INDEX && <SearchForm />}
           </Collapse>
         </Container>
       </StyledNavbar>

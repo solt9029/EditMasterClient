@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Row, Container, Button } from 'reactstrap';
 import styled from 'styled-components';
-import NoteRadio from '../containers/NoteRadio';
-import DivisionRadio from '../containers/DivisionRadio';
+import NoteButton from '../containers/NoteButton';
+import DivisionButton from '../containers/DivisionButton';
 import { ids } from '../constants';
 
 const StyledDiv = styled.div`
@@ -99,7 +99,7 @@ export default class Palette extends Component {
           <Row>
             {noteFields.map((field, i) => {
               return (
-                <NoteRadio
+                <NoteButton
                   key={i}
                   img={field.img}
                   color={field.color}
@@ -115,7 +115,7 @@ export default class Palette extends Component {
         <StyledContainer>
           <Row>
             {divisionFields.map((value, i) => {
-              return <DivisionRadio key={i} name="division" value={value} />;
+              return <DivisionButton key={i} name="division" value={value} />;
             })}
           </Row>
         </StyledContainer>
