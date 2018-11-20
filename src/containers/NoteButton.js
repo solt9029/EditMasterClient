@@ -3,7 +3,7 @@ import { setNote } from '../actions/palette';
 import NoteRadio from '../components/NoteButton';
 
 const mapStateToProps = state => ({
-  note: state.palette.note,
+  currentNote: state.palette.note,
   paletteWidth: state.ide.panes.palette.width,
 });
 const mapDispatchToProps = dispatch => ({

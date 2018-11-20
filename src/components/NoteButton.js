@@ -1,41 +1,61 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Button, Col } from 'reactstrap';
 import styled from 'styled-components';
+import propTypes from 'prop-types';
 
 const StyledButton = styled(Button)`
   min-width: 75px;
 `;
 
-const StyledImg = styled.img`
+const StyledCol = styled(Col)`
+  && {
+    padding: 3px;
+  }
+`;
+
+const Img = styled.img`
   width: 100%;
   height: auto;
 `;
 
-export default class NoteButton extends Component {
-  render() {
-    // recalculate col size
-    let colSize = 3;
-    if (this.props.paletteWidth < 200) {
-      colSize = 12;
-    } else if (this.props.paletteWidth < 360) {
-      colSize = 6;
-    }
+const NoteButton = props => {
+  const { currentNote, value, paletteWidth, label, img, color } = props;
 
-    return (
-      <Col xs={colSize} className="btn-group-toggle" style={{ padding: '3px' }}>
-        <StyledButton
-          block
-          color={this.props.color}
-          active={this.props.note === this.props.value}
-          onClick={() => {
-            this.props.setNote(this.props.value);
-          }}
-        >
-          <div>{this.props.label}</div>
-          <StyledImg src={this.props.img} alt={this.props.img} />
-          <input value={this.props.value} type="radio" />
-        </StyledButton>
-      </Col>
-    );
+  // recalculate col size
+  let size = 3;
+  if (paletteWidth < 200) {
+    size = 12;
+  } else if (paletteWidth < 360) {
+    size = 6;
   }
-}
+
+  const setNote = () => {
+    props.setNote(value);
+  };
+
+  return (
+    <StyledCol xs={size} className="btn-group-toggle">
+      <StyledButton
+        block
+        color={color}
+        active={currentNote === value}
+        onClick={setNote}
+      >
+        <div>{label}</div>
+        <Img src={img} alt={img} />
+      </StyledButton>
+    </StyledCol>
+  );
+};
+
+export default NoteButton;
+
+NoteButton.propTypes = {
+  img: propTypes.string.isRequired,
+  label: propTypes.string.isRequired,
+  setNote: propTypes.func.isRequired,
+  color: propTypes.string.isRequired,
+  currentNote: propTypes.number.isRequired,
+  value: propTypes.number.isRequired,
+  paletteWidth: propTypes.number.isRequired,
+};
