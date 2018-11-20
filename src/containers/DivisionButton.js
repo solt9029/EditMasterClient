@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { setDivision } from '../actions/palette';
 
 const mapStateToProps = state => ({
-  division: state.palette.division,
+  currentDivision: state.palette.division,
   paletteWidth: state.ide.panes.palette.width,
 });
 const mapDispatchToProps = dispatch => ({

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Button, Col } from 'reactstrap';
 import styled from 'styled-components';
 
@@ -6,30 +6,40 @@ const StyledButton = styled(Button)`
   min-width: 75px;
 `;
 
-export default class DivisionButton extends Component {
-  render() {
-    // recalculate col size
-    let colSize = 3;
-    if (this.props.paletteWidth < 200) {
-      colSize = 12;
-    } else if (this.props.paletteWidth < 360) {
-      colSize = 6;
-    }
-
-    return (
-      <Col xs={colSize} className="btn-group-toggle" style={{ padding: '3px' }}>
-        <StyledButton
-          block
-          color="light"
-          active={this.props.division === this.props.value}
-          onClick={() => {
-            this.props.setDivision(this.props.value);
-          }}
-        >
-          <div>{this.props.value}</div>
-          <input value={this.props.value} type="radio" />
-        </StyledButton>
-      </Col>
-    );
+const StyledCol = styled(Col)`
+  && {
+    padding: 3px;
   }
-}
+`;
+
+const DivisionButton = props => {
+  const { currentDivision, value, paletteWidth } = props;
+
+  // recalculate col size
+  let size = 3;
+  if (paletteWidth < 200) {
+    size = 12;
+  } else if (paletteWidth < 360) {
+    size = 6;
+  }
+
+  const setDivision = () => {
+    props.setDivision(value);
+  };
+
+  return (
+    <StyledCol xs={size} className="btn-group-toggle">
+      <StyledButton
+        block
+        color="light"
+        active={currentDivision === value}
+        onClick={setDivision}
+      >
+        <div>{value}</div>
+        <input value={value} type="radio" />
+      </StyledButton>
+    </StyledCol>
+  );
+};
+
+export default DivisionButton;

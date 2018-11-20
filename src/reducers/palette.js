@@ -1,8 +1,8 @@
-import { ids, actionTypes } from '../constants/';
+import { ids, actionTypes, numbers } from '../constants/';
 
 const initialState = {
   note: ids.NOTE.DON,
-  division: 16,
+  division: numbers.DIVISIONS[0],
   isAutoMode: true,
 };
 

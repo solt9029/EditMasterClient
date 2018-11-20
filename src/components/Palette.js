@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Row, Container, Button } from 'reactstrap';
 import styled from 'styled-components';
 import NoteButton from '../containers/NoteButton';
-import DivisionButton from '../containers/DivisionButton';
+import DivisionButtonList from '../components/DivisionButtonList';
 import { ids } from '../constants';
 
 const StyledDiv = styled.div`
@@ -76,8 +76,6 @@ const noteFields = [
   },
 ];
 
-const divisionFields = [16, 24, 32, 48];
-
 export default class Palette extends Component {
   componentWillUnmount() {
     this.props.reset();
@@ -112,13 +110,7 @@ export default class Palette extends Component {
           </Row>
         </StyledContainer>
         <label>1小節あたりの分割数</label>
-        <StyledContainer>
-          <Row>
-            {divisionFields.map((value, i) => {
-              return <DivisionButton key={i} name="division" value={value} />;
-            })}
-          </Row>
-        </StyledContainer>
+        <DivisionButtonList />
         <LineButton
           block
           color="success"
