@@ -3,7 +3,7 @@ import { Form, Input, Button } from 'reactstrap';
 import qs from 'qs';
 import propTypes from 'prop-types';
 
-export default class NavbarSearchForm extends Component {
+export default class SearchForm extends Component {
   preventDefault(event) {
     event.preventDefault();
   }
@@ -50,7 +50,7 @@ export default class NavbarSearchForm extends Component {
   }
 }
 
-NavbarSearchForm.propTypes = {
+SearchForm.propTypes = {
   keyword: propTypes.string,
   setKeyword: propTypes.func,
 };
