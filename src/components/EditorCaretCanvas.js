@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { numbers, keys, positions, percentages, sizes } from '../constants';
+import { numbers, keys } from '../constants';
 import Canvas from '../classes/Canvas';
 import * as utils from '../utils';
 
@@ -106,46 +106,33 @@ export default class EditorCaretCanvas extends Component {
   }
 
   updateCaret(event) {
-    const division = this.props.palette.division;
+    const { division } = this.props.palette;
+    const { width } = this.props.editorPane;
+    const { offsetX, offsetY } = event.nativeEvent;
 
-    // calculation
-    const mouseX = event.nativeEvent.offsetX;
-    const mouseY = event.nativeEvent.offsetY;
-    const barWidth =
-      this.props.editorPane.width - 1 - positions.EDITOR.BAR.X * 2;
-    const actualBarWidth = barWidth * (1 - percentages.EDITOR.BAR_START_LINE); // left side of initial beat line is not available
-    const barStartLineX =
-      positions.EDITOR.BAR.X + barWidth * percentages.EDITOR.BAR_START_LINE;
-    let mouseDivisionIndex = Math.round(
-      (mouseX - barStartLineX) /
-        ((barWidth * (1 - percentages.EDITOR.BAR_START_LINE)) / division)
+    const { divisionIndex, barIndex, x, y } = utils.calculations.caret(
+      offsetX,
+      offsetY,
+      width,
+      division
     );
-    if (mouseDivisionIndex < 0) {
-      mouseDivisionIndex = 0;
-    }
-    if (mouseDivisionIndex >= division) {
-      mouseDivisionIndex = division - 1;
-    }
-    this.mouseDivisionIndex = mouseDivisionIndex;
-    this.mouseBarIndex = Math.floor(mouseY / sizes.EDITOR.BAR.OUTSIDE.HEIGHT);
 
-    // canvas drawing
-    this.canvas.clear(
-      this.props.editorPane.width - 1,
-      Math.ceil(this.props.notes.length / numbers.NOTES_PER_BAR) *
-        sizes.EDITOR.BAR.OUTSIDE.HEIGHT
+    this.mouseDivisionIndex = divisionIndex;
+    this.mouseBarIndex = barIndex;
+
+    const height = utils.calculations.editorCanvasHeight(
+      this.props.notes.length
     );
-    const x =
-      barStartLineX +
-      actualBarWidth * (this.mouseDivisionIndex / division) -
-      sizes.EDITOR.CARET.WIDTH / 2;
-    const y =
-      this.mouseBarIndex * sizes.EDITOR.BAR.OUTSIDE.HEIGHT +
-      (sizes.EDITOR.BAR.OUTSIDE.HEIGHT - sizes.EDITOR.BAR.INSIDE.HEIGHT) / 2;
+    this.canvas.clear(width - 1, height);
+
     this.canvas.drawCaret(x, y);
   }
 
   render() {
+    const height = utils.calculations.editorCanvasHeight(
+      this.props.notes.length
+    );
+
     return (
       <canvas
         tabIndex={0}
@@ -155,10 +142,7 @@ export default class EditorCaretCanvas extends Component {
         ref={this.canvasRef}
         style={canvasInlineStyle}
         width={this.props.editorPane.width - 1}
-        height={
-          Math.ceil(this.props.notes.length / numbers.NOTES_PER_BAR) *
-          sizes.EDITOR.BAR.OUTSIDE.HEIGHT
-        }
+        height={height}
       />
     );
   }
