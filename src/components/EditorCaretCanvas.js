@@ -31,7 +31,7 @@ export default class EditorCaretCanvas extends Component {
 
   shouldComponentUpdate(nextProps) {
     return (
-      this.props.editorPane !== nextProps.editorPane ||
+      this.props.editorWidth !== nextProps.editorWidth ||
       this.props.notes.length !== nextProps.notes.length ||
       this.props.palette !== nextProps.palette
     );
@@ -107,7 +107,7 @@ export default class EditorCaretCanvas extends Component {
 
   updateCaret(event) {
     const { division } = this.props.palette;
-    const { width } = this.props.editorPane;
+    const width = this.props.editorWidth;
     const { offsetX, offsetY } = event.nativeEvent;
 
     const { divisionIndex, barIndex, x, y } = utils.calculations.caret(
@@ -129,9 +129,8 @@ export default class EditorCaretCanvas extends Component {
   }
 
   render() {
-    const height = utils.calculations.editorCanvasHeight(
-      this.props.notes.length
-    );
+    const { notes, editorWidth } = this.props;
+    const height = utils.calculations.editorCanvasHeight(notes.length);
 
     return (
       <canvas
@@ -141,7 +140,7 @@ export default class EditorCaretCanvas extends Component {
         onClick={this.changeNotes}
         ref={this.canvasRef}
         style={canvasInlineStyle}
-        width={this.props.editorPane.width - 1}
+        width={editorWidth - 1}
         height={height}
       />
     );
