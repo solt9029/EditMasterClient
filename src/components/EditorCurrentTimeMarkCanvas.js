@@ -18,7 +18,7 @@ export default class EditorCurrentTimeMarkCanvas extends Component {
 
   shouldComponentUpdate(nextProps) {
     return (
-      this.props.editorPane !== nextProps.editorPane ||
+      this.props.editorWidth !== nextProps.editorWidth ||
       this.props.notes.length !== nextProps.notes.length ||
       this.props.currentTime !== nextProps.currentTime ||
       this.props.bpm !== nextProps.bpm ||
@@ -31,30 +31,28 @@ export default class EditorCurrentTimeMarkCanvas extends Component {
   }
 
   updateCanvas() {
-    const height = utils.calculations.editorCanvasHeight(
-      this.props.notes.length
-    );
-    this.canvas.clear(this.props.editorPane.width - 1, height);
+    const { notes, editorWidth, bpm, offset, currentTime } = this.props;
+    const height = utils.calculations.editorCanvasHeight(notes.length);
+    this.canvas.clear(editorWidth - 1, height);
 
     const { x, y } = utils.calculations.currentTimeMark(
-      this.props.editorPane.width,
-      this.props.bpm,
-      this.props.offset,
-      this.props.currentTime
+      editorWidth,
+      bpm,
+      offset,
+      currentTime
     );
     this.canvas.drawCurrentTimeMark(x, y);
   }
 
   render() {
-    const height = utils.calculations.editorCanvasHeight(
-      this.props.notes.length
-    );
+    const { notes, editorWidth } = this.props;
+    const height = utils.calculations.editorCanvasHeight(notes.length);
 
     return (
       <canvas
         ref={this.canvasRef}
         style={canvasInlineStyle}
-        width={this.props.editorPane.width - 1}
+        width={editorWidth - 1}
         height={height}
       />
     );

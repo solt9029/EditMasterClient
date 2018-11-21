@@ -4,7 +4,7 @@ import { addBar } from '../actions/editor';
 import EditorCaretCanvas from '../components/EditorCaretCanvas';
 
 const mapStateToProps = state => ({
-  editorPane: state.ide.panes.editor,
+  editorWidth: state.ide.panes.editor.width,
   palette: state.palette,
   notes: state.editor.notes,
 });
