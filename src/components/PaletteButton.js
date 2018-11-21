@@ -14,7 +14,7 @@ const StyledCol = styled(Col)`
 `;
 
 const PaletteButton = props => {
-  const { currentValue, value, paletteWidth, color, label } = props;
+  const { active, value, paletteWidth, color, label } = props;
 
   // recalculate col size
   let size = 3;
@@ -30,12 +30,7 @@ const PaletteButton = props => {
 
   return (
     <StyledCol xs={size} className="btn-group-toggle">
-      <StyledButton
-        block
-        color={color}
-        active={currentValue === value}
-        onClick={setValue}
-      >
+      <StyledButton block color={color} active={active} onClick={setValue}>
         <div>{label ? label : value}</div>
         {props.children}
       </StyledButton>
@@ -47,7 +42,7 @@ export default PaletteButton;
 
 PaletteButton.propTypes = {
   color: propTypes.string,
-  currentValue: propTypes.any.isRequired,
+  active: propTypes.bool,
   value: propTypes.any.isRequired,
   setValue: propTypes.func.isRequired,
   paletteWidth: propTypes.number.isRequired,
@@ -56,4 +51,5 @@ PaletteButton.propTypes = {
 
 PaletteButton.defaultProps = {
   color: 'light',
+  active: false,
 };

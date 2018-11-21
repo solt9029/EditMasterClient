@@ -5,6 +5,7 @@ import Palette from '../components/Palette';
 
 const mapStateToProps = state => ({
   isAutoMode: state.palette.isAutoMode,
+  width: state.ide.panes.palette.width,
 });
 const mapDispatchToProps = dispatch => ({
   toggleMode() {
