@@ -3,11 +3,7 @@ import { actionTypes } from '../constants/';
 const initialState = {
   data: [],
   currentPage: 0,
-  from: 0,
   lastPage: 0,
-  perPage: 0,
-  total: 0,
-  to: 0,
   isLoading: false,
   error: null,
 };
@@ -21,24 +17,12 @@ export default (state = initialState, action) => {
         error: null,
       };
     case actionTypes.SCORE_CARD_PAGINATE.FINISH_REQUEST_SUCCESS:
-      const {
-        data,
-        current_page,
-        from,
-        last_page,
-        per_page,
-        total,
-        to,
-      } = action.payload.data;
+      const { data, currentPage, lastPage } = action.payload;
       return {
         ...state,
         data,
-        currentPage: current_page,
-        from,
-        lastPage: last_page,
-        perPage: per_page,
-        total,
-        to,
+        currentPage,
+        lastPage,
         isLoading: false,
         error: null,
       };

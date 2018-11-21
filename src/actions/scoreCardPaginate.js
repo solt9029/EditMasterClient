@@ -6,7 +6,8 @@ export const fetch = (page, keyword) => {
     dispatch(startRequest());
     try {
       const result = await utils.http.getScores(page, keyword);
-      dispatch(finishRequestSuccess(result.data));
+      const { current_page, last_page, data } = result.data;
+      dispatch(finishRequestSuccess(data, current_page, last_page));
     } catch (error) {
       dispatch(finishRequestError(error));
     }
@@ -17,14 +18,20 @@ export const startRequest = () => ({
   type: actionTypes.SCORE_CARD_PAGINATE.START_REQUEST,
 });
 
-export const finishRequestSuccess = data => ({
+export const finishRequestSuccess = (data, currentPage, lastPage) => ({
   type: actionTypes.SCORE_CARD_PAGINATE.FINISH_REQUEST_SUCCESS,
-  payload: { data },
+  payload: {
+    data,
+    currentPage,
+    lastPage,
+  },
 });
 
 export const finishRequestError = error => ({
   type: actionTypes.SCORE_CARD_PAGINATE.FINISH_REQUEST_ERROR,
-  payload: { error },
+  payload: {
+    error,
+  },
 });
 
 export const reset = () => ({
