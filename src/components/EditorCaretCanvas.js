@@ -2,13 +2,7 @@ import React, { Component } from 'react';
 import { numbers, keys } from '../constants';
 import Canvas from '../classes/Canvas';
 import * as utils from '../utils';
-
-const canvasInlineStyle = {
-  position: 'absolute',
-  top: '0',
-  left: '0',
-  outline: 'none',
-};
+import Layer from '../styled/Layer';
 
 export default class EditorCaretCanvas extends Component {
   constructor(props) {
@@ -133,13 +127,12 @@ export default class EditorCaretCanvas extends Component {
     const height = utils.calculations.editorCanvasHeight(notes.length);
 
     return (
-      <canvas
+      <Layer
         tabIndex={0}
         onMouseMove={this.updateCaret}
         onKeyDown={this.keyDown}
         onClick={this.changeNotes}
-        ref={this.canvasRef}
-        style={canvasInlineStyle}
+        innerRef={this.canvasRef}
         width={editorWidth - 1}
         height={height}
       />
