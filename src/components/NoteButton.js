@@ -8,23 +8,25 @@ const Img = styled.img`
   height: auto;
 `;
 
-const NoteButton = props => {
-  const { value, img, color, currentNote, paletteWidth, label } = props;
-
-  const setNote = () => {
-    props.setNote(value);
-  };
-
+const NoteButton = ({
+  value,
+  src,
+  color,
+  currentValue,
+  paletteWidth,
+  label,
+  setValue,
+}) => {
   return (
     <PaletteButton
       color={color}
-      currentValue={currentNote}
+      currentValue={currentValue}
       value={value}
-      onClick={setNote}
+      setValue={setValue}
       paletteWidth={paletteWidth}
       label={label}
     >
-      <Img src={img} alt={img} />
+      <Img src={src} alt={label} />
     </PaletteButton>
   );
 };
@@ -32,11 +34,11 @@ const NoteButton = props => {
 export default NoteButton;
 
 NoteButton.propTypes = {
-  img: propTypes.string.isRequired,
+  src: propTypes.string.isRequired,
   label: propTypes.string.isRequired,
-  setNote: propTypes.func.isRequired,
+  setValue: propTypes.func.isRequired,
   color: propTypes.string.isRequired,
-  currentNote: propTypes.number.isRequired,
+  currentValue: propTypes.number.isRequired,
   value: propTypes.number.isRequired,
   paletteWidth: propTypes.number.isRequired,
 };
