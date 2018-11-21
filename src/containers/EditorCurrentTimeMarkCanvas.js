@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import EditorCurrentTimeCanvas from '../components/EditorCurrentTimeCanvas';
+import EditorCurrentTimeMarkCanvas from '../components/EditorCurrentTimeMarkCanvas';
 
 const mapStateToProps = state => ({
   editorPane: state.ide.panes.editor,
@@ -11,4 +11,4 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   null
-)(EditorCurrentTimeCanvas);
+)(EditorCurrentTimeMarkCanvas);
