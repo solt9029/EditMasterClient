@@ -4,8 +4,7 @@ import Canvas from '../classes/Canvas';
 import EditorCaretCanvas from '../containers/EditorCaretCanvas';
 import EditorCurrentTimeMarkCanvas from '../containers/EditorCurrentTimeMarkCanvas';
 import propTypes from 'prop-types';
-
-const canvasInlineStyle = { position: 'absolute', top: '0', left: '0' };
+import Layer from '../styled/Layer';
 
 export default class Editor extends Component {
   constructor(props) {
@@ -82,9 +81,8 @@ export default class Editor extends Component {
   render() {
     return (
       <div>
-        <canvas
-          ref={this.canvasRef}
-          style={canvasInlineStyle}
+        <Layer
+          innerRef={this.canvasRef}
           width={this.props.width - 1}
           height={
             Math.ceil(this.props.notes.length / numbers.NOTES_PER_BAR) *

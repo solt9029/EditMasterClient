@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import Canvas from '../classes/Canvas';
 import * as utils from '../utils';
-
-const canvasInlineStyle = { position: 'absolute', top: '0', left: '0' };
+import Layer from '../styled/Layer';
 
 export default class EditorCurrentTimeMarkCanvas extends Component {
   constructor(props) {
@@ -49,9 +48,8 @@ export default class EditorCurrentTimeMarkCanvas extends Component {
     const height = utils.calculations.editorCanvasHeight(notes.length);
 
     return (
-      <canvas
-        ref={this.canvasRef}
-        style={canvasInlineStyle}
+      <Layer
+        innerRef={this.canvasRef}
         width={editorWidth - 1}
         height={height}
       />
