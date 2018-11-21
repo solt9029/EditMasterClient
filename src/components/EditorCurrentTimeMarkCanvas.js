@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Canvas from '../classes/Canvas';
 import * as utils from '../utils';
 import Layer from '../styled/Layer';
+import propTypes from 'prop-types';
 
 export default class EditorCurrentTimeMarkCanvas extends Component {
   constructor(props) {
@@ -15,23 +16,13 @@ export default class EditorCurrentTimeMarkCanvas extends Component {
     this.canvas = new Canvas(ctx);
   }
 
-  shouldComponentUpdate(nextProps) {
-    return (
-      this.props.editorWidth !== nextProps.editorWidth ||
-      this.props.notes.length !== nextProps.notes.length ||
-      this.props.currentTime !== nextProps.currentTime ||
-      this.props.bpm !== nextProps.bpm ||
-      this.props.offset !== nextProps.offset
-    );
-  }
-
   componentDidUpdate() {
     this.updateCanvas();
   }
 
   updateCanvas() {
-    const { notes, editorWidth, bpm, offset, currentTime } = this.props;
-    const height = utils.calculations.editorCanvasHeight(notes.length);
+    const { notesLength, editorWidth, bpm, offset, currentTime } = this.props;
+    const height = utils.calculations.editorCanvasHeight(notesLength);
     this.canvas.clear(editorWidth - 1, height);
 
     const { x, y } = utils.calculations.currentTimeMark(
@@ -44,8 +35,8 @@ export default class EditorCurrentTimeMarkCanvas extends Component {
   }
 
   render() {
-    const { notes, editorWidth } = this.props;
-    const height = utils.calculations.editorCanvasHeight(notes.length);
+    const { notesLength, editorWidth } = this.props;
+    const height = utils.calculations.editorCanvasHeight(notesLength);
 
     return (
       <Layer
@@ -56,3 +47,11 @@ export default class EditorCurrentTimeMarkCanvas extends Component {
     );
   }
 }
+
+EditorCurrentTimeMarkCanvas.propTypes = {
+  editorWidth: propTypes.number.isRequired,
+  notesLength: propTypes.number.isRequired,
+  bpm: propTypes.number.isRequired,
+  offset: propTypes.number.isRequired,
+  currentTime: propTypes.number.isRequired,
+};
