@@ -3,7 +3,7 @@ import EditorCurrentTimeMarkCanvas from '../components/EditorCurrentTimeMarkCanv
 
 const mapStateToProps = state => ({
   editorWidth: state.ide.panes.editor.width,
-  notes: state.editor.notes,
+  notesLength: state.editor.notes.length,
   currentTime: state.youtube.currentTime,
   bpm: state.config.bpm.value,
   offset: state.config.offset.value,
