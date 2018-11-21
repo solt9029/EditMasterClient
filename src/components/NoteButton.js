@@ -12,7 +12,7 @@ const NoteButton = ({
   value,
   src,
   color,
-  currentValue,
+  active,
   paletteWidth,
   label,
   setValue,
@@ -20,7 +20,7 @@ const NoteButton = ({
   return (
     <PaletteButton
       color={color}
-      currentValue={currentValue}
+      active={active}
       value={value}
       setValue={setValue}
       paletteWidth={paletteWidth}
@@ -38,7 +38,7 @@ NoteButton.propTypes = {
   label: propTypes.string.isRequired,
   setValue: propTypes.func.isRequired,
   color: propTypes.string.isRequired,
-  currentValue: propTypes.number.isRequired,
+  active: propTypes.bool,
   value: propTypes.number.isRequired,
   paletteWidth: propTypes.number.isRequired,
 };

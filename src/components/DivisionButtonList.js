@@ -1,19 +1,27 @@
 import React from 'react';
 import { Row, Container } from 'reactstrap';
 import styled from 'styled-components';
-import DivisionButton from '../containers/DivisionButton';
+import PaletteButton from '../components/PaletteButton';
 import { numbers } from '../constants/';
 
 const StyledContainer = styled(Container)`
   margin-bottom: 30px;
 `;
 
-const DivisionButtonList = () => {
+const DivisionButtonList = ({ currentValue, setValue, paletteWidth }) => {
   return (
     <StyledContainer>
       <Row>
         {numbers.DIVISIONS.map((value, i) => {
-          return <DivisionButton value={value} key={i} />;
+          return (
+            <PaletteButton
+              active={currentValue === value}
+              setValue={setValue}
+              paletteWidth={paletteWidth}
+              value={value}
+              key={i}
+            />
+          );
         })}
       </Row>
     </StyledContainer>

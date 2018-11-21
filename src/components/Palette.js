@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Button } from 'reactstrap';
 import styled from 'styled-components';
-import NoteButtonList from '../components/NoteButtonList';
-import DivisionButtonList from '../components/DivisionButtonList';
+import NoteButtonList from '../containers/NoteButtonList';
+import DivisionButtonList from '../containers/DivisionButtonList';
 
 const StyledDiv = styled.div`
   padding: 15px;
@@ -37,9 +37,9 @@ export default class Palette extends Component {
           {this.props.isAutoMode ? 'プレイモードにする' : 'オート再生にする'}
         </ModeButton>
         <label>譜面の種類</label>
-        <NoteButtonList />
+        <NoteButtonList paletteWidth={this.props.width} />
         <label>1小節あたりの分割数</label>
-        <DivisionButtonList />
+        <DivisionButtonList paletteWidth={this.props.width} />
         <LineButton
           block
           color="success"
