@@ -1,4 +1,4 @@
-import { numbers, percentages, positions } from '../constants/';
+import { numbers, percentages, positions, sizes } from '../constants/';
 
 export const secondsPerNote = bpm => {
   const barPerMinute = bpm / numbers.BEAT;
@@ -59,9 +59,48 @@ export const noteIndexRangeInCanvas = (
   return [initialNoteIndex, finalNoteIndex];
 };
 
+export const caret = (mouseX, mouseY, width, division) => {
+  const barWidth = width - 1 - positions.EDITOR.BAR.X * 2;
+  const actualBarWidth = barWidth * (1 - percentages.EDITOR.BAR_START_LINE); // left side of initial beat line is not available
+  const barStartLineX =
+    positions.EDITOR.BAR.X + barWidth * percentages.EDITOR.BAR_START_LINE;
+  let divisionIndex = Math.round(
+    (mouseX - barStartLineX) /
+      ((barWidth * (1 - percentages.EDITOR.BAR_START_LINE)) / division)
+  );
+  if (divisionIndex < 0) {
+    divisionIndex = 0;
+  }
+  if (divisionIndex >= division) {
+    divisionIndex = division - 1;
+  }
+
+  const barIndex = Math.floor(mouseY / sizes.EDITOR.BAR.OUTSIDE.HEIGHT);
+
+  const x =
+    barStartLineX +
+    actualBarWidth * (divisionIndex / division) -
+    sizes.EDITOR.CARET.WIDTH / 2;
+
+  const y =
+    barIndex * sizes.EDITOR.BAR.OUTSIDE.HEIGHT +
+    (sizes.EDITOR.BAR.OUTSIDE.HEIGHT - sizes.EDITOR.BAR.INSIDE.HEIGHT) / 2;
+
+  return { x, y, divisionIndex, barIndex };
+};
+
+export const editorCanvasHeight = notesLength => {
+  return (
+    Math.ceil(notesLength / numbers.NOTES_PER_BAR) *
+    sizes.EDITOR.BAR.OUTSIDE.HEIGHT
+  );
+};
+
 export default {
   secondsPerNote,
   noteIndexRangeInSecondRange,
   initialNoteX,
   noteIndexRangeInCanvas,
+  caret,
+  editorCanvasHeight,
 };
