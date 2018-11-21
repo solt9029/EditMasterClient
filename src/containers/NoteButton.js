@@ -1,17 +1,17 @@
 import { connect } from 'react-redux';
 import { setNote } from '../actions/palette';
-import NoteRadio from '../components/NoteButton';
+import NoteButton from '../components/NoteButton';
 
 const mapStateToProps = state => ({
-  currentNote: state.palette.note,
+  currentValue: state.palette.note,
   paletteWidth: state.ide.panes.palette.width,
 });
 const mapDispatchToProps = dispatch => ({
-  setNote(note) {
-    dispatch(setNote(note));
+  setValue(value) {
+    dispatch(setNote(value));
   },
 });
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(NoteRadio);
+)(NoteButton);

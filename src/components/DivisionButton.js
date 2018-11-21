@@ -2,18 +2,12 @@ import React from 'react';
 import PaletteButton from './PaletteButton';
 import propTypes from 'prop-types';
 
-const DivisionButton = props => {
-  const { currentDivision, value, paletteWidth } = props;
-
-  const setDivision = () => {
-    props.setDivision(value);
-  };
-
+const DivisionButton = ({ currentValue, value, paletteWidth, setValue }) => {
   return (
     <PaletteButton
-      currentValue={currentDivision}
+      currentValue={currentValue}
       value={value}
-      onClick={setDivision}
+      setValue={setValue}
       paletteWidth={paletteWidth}
     />
   );
@@ -22,8 +16,8 @@ const DivisionButton = props => {
 export default DivisionButton;
 
 DivisionButton.propTypes = {
-  currentDivision: propTypes.number.isRequired,
+  currentValue: propTypes.number.isRequired,
   value: propTypes.number.isRequired,
-  setDivision: propTypes.func.isRequired,
+  setValue: propTypes.func.isRequired,
   paletteWidth: propTypes.number.isRequired,
 };
