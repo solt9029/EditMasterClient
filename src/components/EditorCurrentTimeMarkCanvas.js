@@ -47,15 +47,16 @@ export default class EditorCurrentTimeMarkCanvas extends Component {
   }
 
   render() {
+    const height = utils.calculations.editorCanvasHeight(
+      this.props.notes.length
+    );
+
     return (
       <canvas
         ref={this.canvasRef}
         style={canvasInlineStyle}
         width={this.props.editorPane.width - 1}
-        height={
-          Math.ceil(this.props.notes.length / numbers.NOTES_PER_BAR) *
-          sizes.EDITOR.BAR.OUTSIDE.HEIGHT
-        }
+        height={height}
       />
     );
   }
