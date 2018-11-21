@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { numbers, sizes } from '../constants';
 import Canvas from '../classes/Canvas';
 import * as utils from '../utils';
 
