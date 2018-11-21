@@ -7,8 +7,8 @@ import Layer from '../styled/Layer';
 export default class EditorCaretCanvas extends Component {
   constructor(props) {
     super(props);
-    this.mouseBarIndex = 0;
-    this.mouseDivisionIndex = 0;
+    this.mouseX = 0;
+    this.mouseY = 0;
     this.clipboard = null;
     this.canvasRef = React.createRef();
     this.canvas = null;
@@ -33,11 +33,18 @@ export default class EditorCaretCanvas extends Component {
   };
 
   copyPaste = event => {
+    const { barIndex } = utils.calculations.caret(
+      this.mouseX,
+      this.mouseY,
+      this.props.editorWidth,
+      this.props.palette.division
+    );
+
     switch (event.nativeEvent.key) {
       case keys.COPY:
         this.clipboard = this.props.notes.slice(
-          this.mouseBarIndex * numbers.NOTES_PER_BAR,
-          (this.mouseBarIndex + 1) * numbers.NOTES_PER_BAR
+          barIndex * numbers.NOTES_PER_BAR,
+          (barIndex + 1) * numbers.NOTES_PER_BAR
         );
         return;
       case keys.PASTE:
@@ -48,13 +55,10 @@ export default class EditorCaretCanvas extends Component {
           return;
         }
         this.props.changeNotes(
-          this.mouseBarIndex * numbers.NOTES_PER_BAR,
+          barIndex * numbers.NOTES_PER_BAR,
           this.clipboard
         );
-        if (
-          (this.mouseBarIndex + 1) * numbers.NOTES_PER_BAR >=
-          this.props.notes.length
-        ) {
+        if ((barIndex + 1) * numbers.NOTES_PER_BAR >= this.props.notes.length) {
           this.props.addBar();
         }
         return;
@@ -75,10 +79,16 @@ export default class EditorCaretCanvas extends Component {
       note = keyValue;
     }
 
+    const { barIndex, divisionIndex } = utils.calculations.caret(
+      this.mouseX,
+      this.mouseY,
+      this.props.editorWidth,
+      this.props.palette.division
+    );
+
     const notesPerDivision = numbers.NOTES_PER_BAR / division;
-    const mouseNotesPerBarIndex = this.mouseDivisionIndex * notesPerDivision;
-    const index =
-      this.mouseBarIndex * numbers.NOTES_PER_BAR + mouseNotesPerBarIndex;
+    const mouseNotesPerBarIndex = divisionIndex * notesPerDivision;
+    const index = barIndex * numbers.NOTES_PER_BAR + mouseNotesPerBarIndex;
     let notes = [];
     if (!utils.notes.hasState(note)) {
       for (let i = 0; i < notesPerDivision; i++) {
@@ -96,25 +106,21 @@ export default class EditorCaretCanvas extends Component {
   };
 
   updateCaret = event => {
-    const { division } = this.props.palette;
-    const width = this.props.editorWidth;
     const { offsetX, offsetY } = event.nativeEvent;
-
-    const { divisionIndex, barIndex, x, y } = utils.calculations.caret(
-      offsetX,
-      offsetY,
-      width,
-      division
-    );
-
-    this.mouseDivisionIndex = divisionIndex;
-    this.mouseBarIndex = barIndex;
+    this.mouseX = offsetX;
+    this.mouseY = offsetY;
 
     const height = utils.calculations.editorCanvasHeight(
       this.props.notes.length
     );
-    this.canvas.clear(width - 1, height);
+    this.canvas.clear(this.props.editorWidth - 1, height);
 
+    const { x, y } = utils.calculations.caret(
+      this.mouseX,
+      this.mouseY,
+      this.props.editorWidth,
+      this.props.palette.division
+    );
     this.canvas.drawCaret(x, y);
   };
 
