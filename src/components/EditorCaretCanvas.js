@@ -12,10 +12,6 @@ export default class EditorCaretCanvas extends Component {
     this.clipboard = null;
     this.canvasRef = React.createRef();
     this.canvas = null;
-    this.updateCaret = this.updateCaret.bind(this);
-    this.changeNotes = this.changeNotes.bind(this);
-    this.copyPaste = this.copyPaste.bind(this);
-    this.keyDown = this.keyDown.bind(this);
   }
 
   componentDidMount() {
@@ -31,12 +27,12 @@ export default class EditorCaretCanvas extends Component {
     );
   }
 
-  keyDown(event) {
+  keyDown = event => {
     this.changeNotes(event);
     this.copyPaste(event);
-  }
+  };
 
-  copyPaste(event) {
+  copyPaste = event => {
     switch (event.nativeEvent.key) {
       case keys.COPY:
         this.clipboard = this.props.notes.slice(
@@ -65,9 +61,9 @@ export default class EditorCaretCanvas extends Component {
       default:
         return;
     }
-  }
+  };
 
-  changeNotes(event) {
+  changeNotes = event => {
     let { division, note } = this.props.palette;
 
     // if the event is key event, the note which is going to be put should be key value!
@@ -97,9 +93,9 @@ export default class EditorCaretCanvas extends Component {
     if (index >= this.props.notes.length - numbers.NOTES_PER_BAR) {
       this.props.addBar();
     }
-  }
+  };
 
-  updateCaret(event) {
+  updateCaret = event => {
     const { division } = this.props.palette;
     const width = this.props.editorWidth;
     const { offsetX, offsetY } = event.nativeEvent;
@@ -120,7 +116,7 @@ export default class EditorCaretCanvas extends Component {
     this.canvas.clear(width - 1, height);
 
     this.canvas.drawCaret(x, y);
-  }
+  };
 
   render() {
     const { notes, editorWidth } = this.props;
