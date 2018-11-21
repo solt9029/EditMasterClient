@@ -5,7 +5,7 @@ import * as utils from '../utils';
 
 const canvasInlineStyle = { position: 'absolute', top: '0', left: '0' };
 
-export default class EditorCurrentTimeCanvas extends Component {
+export default class EditorCurrentTimeMarkCanvas extends Component {
   constructor(props) {
     super(props);
     this.canvasRef = React.createRef();
@@ -56,7 +56,7 @@ export default class EditorCurrentTimeCanvas extends Component {
       currentBarIndex * sizes.EDITOR.BAR.OUTSIDE.HEIGHT +
       (sizes.EDITOR.BAR.OUTSIDE.HEIGHT - sizes.EDITOR.BAR.INSIDE.HEIGHT) / 2;
     const x = currentNotesPerBarIndexFloat * spaceWidth;
-    this.canvas.drawCurrentTime(x, y);
+    this.canvas.drawCurrentTimeMark(x, y);
   }
 
   render() {

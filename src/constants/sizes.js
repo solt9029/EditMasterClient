@@ -36,7 +36,7 @@ const sizes = {
     CARET: {
       WIDTH: 2,
     },
-    CURRENT_TIME: {
+    CURRENT_TIME_MARK: {
       WIDTH: 4,
     },
   },

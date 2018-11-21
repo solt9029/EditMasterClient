@@ -27,12 +27,12 @@ export default class Canvas {
     );
   }
 
-  drawCurrentTime(x, y) {
+  drawCurrentTimeMark(x, y) {
     this.ctx.fillStyle = colors.PURPLE;
     this.ctx.fillRect(
-      x - sizes.EDITOR.CURRENT_TIME.WIDTH / 2,
+      x - sizes.EDITOR.CURRENT_TIME_MARK.WIDTH / 2,
       y - 2,
-      sizes.EDITOR.CURRENT_TIME.WIDTH,
+      sizes.EDITOR.CURRENT_TIME_MARK.WIDTH,
       sizes.EDITOR.BAR.INSIDE.HEIGHT + 4
     );
     return;

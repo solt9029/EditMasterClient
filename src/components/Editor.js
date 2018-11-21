@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { percentages, sizes, positions, numbers, ids } from '../constants';
 import Canvas from '../classes/Canvas';
 import EditorCaretCanvas from '../containers/EditorCaretCanvas';
-import EditorCurrentTimeCanvas from '../containers/EditorCurrentTimeCanvas';
+import EditorCurrentTimeMarkCanvas from '../containers/EditorCurrentTimeMarkCanvas';
 import propTypes from 'prop-types';
 
 const canvasInlineStyle = { position: 'absolute', top: '0', left: '0' };
@@ -91,7 +91,7 @@ export default class Editor extends Component {
             sizes.EDITOR.BAR.OUTSIDE.HEIGHT
           }
         />
-        <EditorCurrentTimeCanvas />
+        <EditorCurrentTimeMarkCanvas />
         <EditorCaretCanvas />
       </div>
     );
