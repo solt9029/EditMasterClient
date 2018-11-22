@@ -7,15 +7,18 @@ import Canvas from '../classes/Canvas';
 import JudgeEffect from '../classes/JudgeEffect';
 import Sound from '../classes/Sound';
 import * as utils from '../utils';
+import styled from 'styled-components';
 
-const sliderInlineStyle = {
-  width: '95%',
-  position: 'absolute',
-  bottom: '5px',
-  left: '0',
-  right: '0',
-  margin: 'auto',
-};
+const StyledSlider = styled(Slider)`
+  && {
+    width: 95%;
+    position: absolute;
+    bottom: 5px;
+    left: 0;
+    right: 0;
+    margin: auto;
+  }
+`;
 
 export default class Player extends Component {
   constructor(props) {
@@ -290,8 +293,7 @@ export default class Player extends Component {
           width={playerPane.width - 1}
           height={playerPane.height - 1}
         />
-        <Slider
-          style={sliderInlineStyle}
+        <StyledSlider
           min={0}
           max={ytPlayer ? ytPlayer.getDuration() : 0}
           value={currentTime}
