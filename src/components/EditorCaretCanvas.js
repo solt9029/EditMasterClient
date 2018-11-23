@@ -5,14 +5,11 @@ import * as utils from '../utils';
 import Layer from '../styled/Layer';
 
 export default class EditorCaretCanvas extends Component {
-  constructor(props) {
-    super(props);
-    this.mouseX = 0;
-    this.mouseY = 0;
-    this.clipboard = null;
-    this.canvasRef = React.createRef();
-    this.canvas = null;
-  }
+  mouseX = 0;
+  mouseY = 0;
+  clipboard = null;
+  canvasRef = React.createRef();
+  canvas = null;
 
   componentDidMount() {
     const ctx = this.canvasRef.current.getContext('2d');
