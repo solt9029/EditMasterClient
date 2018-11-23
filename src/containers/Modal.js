@@ -1,15 +1,12 @@
 import { connect } from 'react-redux';
-import { close } from '../actions/modal';
 import Modal from '../components/Modal';
 
 const mapStateToProps = state => ({
-  modal: state.modal,
+  errors: state.modal.errors,
+  id: state.modal.id,
+  isLoading: state.modal.isLoading,
 });
-const mapDispatchToProps = dispatch => ({
-  close() {
-    dispatch(close());
-  },
-});
+const mapDispatchToProps = null;
 export default connect(
   mapStateToProps,
   mapDispatchToProps
