@@ -5,11 +5,8 @@ import Layer from '../styled/Layer';
 import propTypes from 'prop-types';
 
 export default class EditorCurrentTimeMarkCanvas extends Component {
-  constructor(props) {
-    super(props);
-    this.canvasRef = React.createRef();
-    this.canvas = null;
-  }
+  canvasRef = React.createRef();
+  canvas = null;
 
   componentDidMount() {
     const ctx = this.canvasRef.current.getContext('2d');
