@@ -45,7 +45,3 @@ export const finishCreateError = errors => ({
     errors,
   },
 });
-
-export const close = () => ({
-  type: actionTypes.MODAL.CLOSE,
-});

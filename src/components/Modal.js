@@ -6,41 +6,45 @@ import ModalSuccessContent from './ModalSuccessContent';
 import propTypes from 'prop-types';
 
 export default class Modal extends Component {
-  componentWillUnmount() {
-    this.props.close();
+  state = { isOpen: false };
+
+  close = () => {
+    if (this.props.isLoading) {
+      return;
+    }
+    this.setState({
+      isOpen: false,
+    });
+  };
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.isLoading) {
+      this.setState({
+        isOpen: true,
+      });
+    }
   }
 
   render() {
-    const { isLoading, id, errors, isOpen } = this.props.modal;
-
-    let component;
-    if (isLoading) {
-      component = <ModalLoadingContent />;
-    } else if (errors === null) {
-      component = <ModalSuccessContent close={this.props.close} id={id} />;
-    } else {
-      component = (
-        <ModalErrorContent close={this.props.close} errors={errors} />
-      );
-    }
+    const { isLoading, id, errors } = this.props;
+    const { isOpen } = this.state;
 
     return (
-      <ReactstrapModal
-        isOpen={isOpen}
-        toggle={!isLoading ? this.props.close : () => {}}
-      >
-        {component}
+      <ReactstrapModal isOpen={isOpen} toggle={this.close}>
+        {isLoading ? (
+          <ModalLoadingContent />
+        ) : errors === null ? (
+          <ModalSuccessContent close={this.close} id={id} />
+        ) : (
+          <ModalErrorContent close={this.close} errors={errors} />
+        )}
       </ReactstrapModal>
     );
   }
 }
 
 Modal.propTypes = {
-  close: propTypes.func,
-  modal: propTypes.shape({
-    id: propTypes.number,
-    isOpen: propTypes.bool,
-    isLoading: propTypes.bool,
-    errors: propTypes.object,
-  }),
+  id: propTypes.number,
+  isLoading: propTypes.bool.isRequired,
+  errors: propTypes.object,
 };
