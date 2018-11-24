@@ -1,7 +1,7 @@
 import { numbers } from '../constants';
 import { saveAs } from 'file-saver';
 
-export const exportFile = (notes, videoId, bpm, offset) => {
+export const exportTja = (notes, videoId, bpm, offset) => {
   const fixedOffset = -(parseFloat(offset) + 0.08);
 
   let line = [];
@@ -32,5 +32,5 @@ export const exportFile = (notes, videoId, bpm, offset) => {
 };
 
 export default {
-  exportFile,
+  exportTja,
 };

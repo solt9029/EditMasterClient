@@ -6,7 +6,7 @@ import * as utils from '../utils';
 export default class TjaExportButton extends Component {
   exportFile = () => {
     const { notes, config } = this.props;
-    utils.tja.exportFile(
+    utils.file.exportTja(
       notes,
       config.videoId.value,
       config.bpm.value,
