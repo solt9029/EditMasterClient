@@ -70,7 +70,7 @@ export default class EditorCaretCanvas extends Component {
     // if the event is key event, the note which is going to be put should be key value!
     if (event.nativeEvent.key) {
       const keyValue = +event.nativeEvent.key;
-      if (!utils.notes.isNote(keyValue)) {
+      if (!utils.note.isNote(keyValue)) {
         return;
       }
       note = keyValue;
@@ -87,7 +87,7 @@ export default class EditorCaretCanvas extends Component {
     const mouseNotesPerBarIndex = divisionIndex * notesPerDivision;
     const index = barIndex * numbers.NOTES_PER_BAR + mouseNotesPerBarIndex;
     let notes = [];
-    if (!utils.notes.hasState(note)) {
+    if (!utils.note.hasState(note)) {
       for (let i = 0; i < notesPerDivision; i++) {
         notes.push(note);
       }
