@@ -14,7 +14,7 @@ const StyledContainer = styled(Container)`
 
 export default class ScoresIndexView extends Component {
   componentDidMount() {
-    const { page, keyword } = this.getQueries(this.props.location.search);
+    const { page, keyword } = utils.url.getQueries(this.props.location.search);
     this.props.setKeyword(keyword);
     this.props.fetch(page, keyword);
   }
@@ -23,25 +23,23 @@ export default class ScoresIndexView extends Component {
     if (this.props.location.search === nextProps.location.search) {
       return;
     }
-    const { getQueries } = utils.url;
-    const { page, keyword } = getQueries(nextProps.location.search);
+    const { page, keyword } = utils.url.getQueries(nextProps.location.search);
     this.props.fetch(page, keyword);
   }
 
   render() {
     const { isLoading, error } = this.props;
-    let component = <ScoreCardList />;
-    if (isLoading) {
-      component = <StyledContainer>読み込み中です</StyledContainer>;
-    }
-    if (error) {
-      component = <StyledContainer>エラーが発生しました</StyledContainer>;
-    }
 
     return (
       <div>
         <Navbar />
-        {component}
+        {isLoading ? (
+          <StyledContainer>読み込み中です</StyledContainer>
+        ) : error ? (
+          <StyledContainer>エラーが発生しました</StyledContainer>
+        ) : (
+          <ScoreCardList />
+        )}
         <ScoreCardPaginate />
         <Footer />
       </div>

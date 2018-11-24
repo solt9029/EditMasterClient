@@ -1,4 +1,4 @@
-import { keys } from '../constants/';
+import { keys } from '../constants';
 
 export const isDon = pushedKey => {
   return keys.DON.indexOf(pushedKey) >= 0;

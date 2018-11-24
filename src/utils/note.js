@@ -1,4 +1,4 @@
-import { ids } from '../constants/';
+import { ids } from '../constants';
 
 export const isDon = note => {
   return (

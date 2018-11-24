@@ -86,11 +86,11 @@ export default class Player extends Component {
         new JudgeEffect((playerPane.height - 1) / 2, ids.STATE.GOOD)
       );
 
-      if (utils.notes.hasState(note)) {
+      if (utils.note.hasState(note)) {
         setState(i, ids.STATE.GOOD);
       }
 
-      if (utils.notes.isDon(note)) {
+      if (utils.note.isDon(note)) {
         this.sound.trigger('don');
       } else {
         this.sound.trigger('ka');
@@ -118,10 +118,10 @@ export default class Player extends Component {
 
     const { key } = event.nativeEvent;
 
-    if (utils.keys.isDon(key)) {
+    if (utils.key.isDon(key)) {
       this.sound.trigger('don');
     }
-    if (utils.keys.isKa(key)) {
+    if (utils.key.isKa(key)) {
       this.sound.trigger('ka');
     }
 
@@ -156,10 +156,10 @@ export default class Player extends Component {
       }
 
       let hit = false;
-      if (utils.keys.isDon(key) && utils.notes.isDon(note)) {
+      if (utils.key.isDon(key) && utils.note.isDon(note)) {
         hit = true;
       }
-      if (utils.keys.isKa(key) && utils.notes.isKa(note)) {
+      if (utils.key.isKa(key) && utils.note.isKa(note)) {
         hit = true;
       }
       if (!hit) {
@@ -168,7 +168,7 @@ export default class Player extends Component {
 
       this.shots.push(new Shot((playerPane.height - 1) / 2, note));
 
-      if (utils.notes.hasState(note)) {
+      if (utils.note.hasState(note)) {
         let newState = ids.STATE.BAD;
         if (i >= goodRange[0] && i <= goodRange[1]) {
           newState = ids.STATE.GOOD;
