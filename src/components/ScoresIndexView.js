@@ -4,7 +4,7 @@ import Footer from './Footer';
 import ScoreCardList from '../containers/ScoreCardList';
 import { Container } from 'reactstrap';
 import ScoreCardPaginate from '../containers/ScoreCardPaginate';
-import qs from 'qs';
+import * as utils from '../utils';
 import styled from 'styled-components';
 
 const StyledContainer = styled(Container)`
@@ -23,17 +23,9 @@ export default class ScoresIndexView extends Component {
     if (this.props.location.search === nextProps.location.search) {
       return;
     }
-    const { page, keyword } = this.getQueries(nextProps.location.search);
+    const { getQueries } = utils.url;
+    const { page, keyword } = getQueries(nextProps.location.search);
     this.props.fetch(page, keyword);
-  }
-
-  getQueries(search) {
-    const query = qs.parse(search, {
-      ignoreQueryPrefix: true,
-    });
-    const page = query.page ? query.page : 1;
-    const keyword = query.keyword ? query.keyword : '';
-    return { page, keyword };
   }
 
   render() {

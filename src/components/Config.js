@@ -39,7 +39,7 @@ export default class Config extends Component {
           name="videoId"
           object={config.videoId}
           onChange={event => {
-            const videoId = utils.urls.getVideoId(event.target.value);
+            const videoId = utils.url.getVideoId(event.target.value);
             props.setVideoId(videoId);
             props.fetchSongle(videoId);
           }}
