@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { fetch } from '../actions/scoreCardPaginate';
+import { fetch } from '../actions/score-card-paginate';
 import { withRouter } from 'react-router-dom';
 import { setKeyword } from '../actions/navbar';
 import ScoresIndexView from '../components/ScoresIndexView';

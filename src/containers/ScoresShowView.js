@@ -1,8 +1,7 @@
 import ScoresShowView from '../components/ScoresShowView';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { fetch } from '../actions/scoresShowView';
-import { reset } from '../actions/scoresShowView';
+import { fetch, reset } from '../actions/scores-show-view';
 
 const mapStateToProps = state => ({
   error: state.scoresShowView.error,

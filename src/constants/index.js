@@ -7,4 +7,4 @@ export { default as positions } from './positions';
 export { default as routes } from './routes';
 export { default as seconds } from './seconds';
 export { default as sizes } from './sizes';
-export { default as actionTypes } from './actionTypes';
+export { default as actionTypes } from './action-types';

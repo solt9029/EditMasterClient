@@ -1,4 +1,4 @@
-import { actionTypes } from '../constants/';
+import { actionTypes } from '../constants';
 import * as utils from '../utils';
 
 export const finishRequestError = error => ({
