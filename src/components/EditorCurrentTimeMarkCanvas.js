@@ -19,10 +19,10 @@ export default class EditorCurrentTimeMarkCanvas extends Component {
 
   updateCanvas() {
     const { notesLength, editorWidth, bpm, offset, currentTime } = this.props;
-    const height = utils.calculations.editorCanvasHeight(notesLength);
+    const height = utils.calculations.calcEditorCanvasHeight(notesLength);
     this.canvas.clear(editorWidth - 1, height);
 
-    const { x, y } = utils.calculations.currentTimeMark(
+    const { x, y } = utils.calculations.calcCurrentTimeMark(
       editorWidth,
       bpm,
       offset,
@@ -33,7 +33,7 @@ export default class EditorCurrentTimeMarkCanvas extends Component {
 
   render() {
     const { notesLength, editorWidth } = this.props;
-    const height = utils.calculations.editorCanvasHeight(notesLength);
+    const height = utils.calculations.calcEditorCanvasHeight(notesLength);
 
     return (
       <Layer

@@ -62,7 +62,7 @@ export default class Player extends Component {
       return;
     }
 
-    const autoRange = utils.calculations.noteIndexRangeInSecondRange(
+    const autoRange = utils.calculations.calcNoteIndexRangeInSecondRange(
       seconds.RANGE.AUTO,
       currentTime,
       config.bpm.value,
@@ -125,19 +125,19 @@ export default class Player extends Component {
       this.sound.trigger('ka');
     }
 
-    const badRange = utils.calculations.noteIndexRangeInSecondRange(
+    const badRange = utils.calculations.calcNoteIndexRangeInSecondRange(
       seconds.RANGE.BAD,
       currentTime,
       config.bpm.value,
       config.offset.value
     );
-    const okRange = utils.calculations.noteIndexRangeInSecondRange(
+    const okRange = utils.calculations.calcNoteIndexRangeInSecondRange(
       seconds.RANGE.OK,
       currentTime,
       config.bpm.value,
       config.offset.value
     );
-    const goodRange = utils.calculations.noteIndexRangeInSecondRange(
+    const goodRange = utils.calculations.calcNoteIndexRangeInSecondRange(
       seconds.RANGE.GOOD,
       currentTime,
       config.bpm.value,
@@ -193,13 +193,13 @@ export default class Player extends Component {
     this.canvas.clear(playerPane.width - 1, playerPane.height - 1);
     this.canvas.drawJudgeMark((playerPane.height - 1) / 2);
 
-    const initialNoteX = utils.calculations.initialNoteX(
+    const initialNoteX = utils.calculations.calcInitialNoteX(
       currentTime,
       config.bpm.value,
       config.offset.value,
       config.speed.value
     );
-    const canvasRange = utils.calculations.noteIndexRangeInCanvas(
+    const canvasRange = utils.calculations.calcNoteIndexRangeInCanvas(
       notes.length,
       config.speed.value,
       playerPane.width,
