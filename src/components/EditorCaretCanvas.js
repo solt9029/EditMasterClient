@@ -30,7 +30,7 @@ export default class EditorCaretCanvas extends Component {
   };
 
   copyPaste = event => {
-    const { barIndex } = utils.calculations.caret(
+    const { barIndex } = utils.calculations.calcCaret(
       this.mouseX,
       this.mouseY,
       this.props.editorWidth,
@@ -76,7 +76,7 @@ export default class EditorCaretCanvas extends Component {
       note = keyValue;
     }
 
-    const { barIndex, divisionIndex } = utils.calculations.caret(
+    const { barIndex, divisionIndex } = utils.calculations.calcCaret(
       this.mouseX,
       this.mouseY,
       this.props.editorWidth,
@@ -107,12 +107,12 @@ export default class EditorCaretCanvas extends Component {
     this.mouseX = offsetX;
     this.mouseY = offsetY;
 
-    const height = utils.calculations.editorCanvasHeight(
+    const height = utils.calculations.calcEditorCanvasHeight(
       this.props.notes.length
     );
     this.canvas.clear(this.props.editorWidth - 1, height);
 
-    const { x, y } = utils.calculations.caret(
+    const { x, y } = utils.calculations.calcCaret(
       this.mouseX,
       this.mouseY,
       this.props.editorWidth,
@@ -123,7 +123,7 @@ export default class EditorCaretCanvas extends Component {
 
   render() {
     const { notes, editorWidth } = this.props;
-    const height = utils.calculations.editorCanvasHeight(notes.length);
+    const height = utils.calculations.calcEditorCanvasHeight(notes.length);
 
     return (
       <Layer

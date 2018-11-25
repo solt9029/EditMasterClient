@@ -27,6 +27,7 @@ export const create = () => {
       const result = await utils.http.createScore(data);
       dispatch(finishCreateSuccess(result.data.id));
     } catch (error) {
+      // this part should check whether error.response is null or not. (when api doesn't work, it gives error.)
       dispatch(finishCreateError(error.response.data.errors));
     }
   };
