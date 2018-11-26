@@ -2,7 +2,6 @@ import { connect } from 'react-redux';
 import EditorCurrentTimeMarkCanvas from '../components/EditorCurrentTimeMarkCanvas';
 
 const mapStateToProps = state => ({
-  editorWidth: state.ide.panes.editor.width,
   notesLength: state.editor.notes.length,
   currentTime: state.youtube.currentTime,
   bpm: state.config.bpm.value,
