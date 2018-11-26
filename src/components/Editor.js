@@ -18,7 +18,7 @@ export default class Editor extends Component {
         <EditorBarsCanvas width={width} notesLength={notes.length} />
         <EditorNotesCanvas width={width} notes={notes} />
         <EditorCurrentTimeMarkCanvas width={width} />
-        <EditorCaretCanvas />
+        <EditorCaretCanvas width={width} />
       </div>
     );
   }
