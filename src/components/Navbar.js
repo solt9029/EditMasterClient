@@ -36,17 +36,14 @@ const StyledNavLink = styled(NavLink)`
 `;
 
 export default class Navbar extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isOpen: false,
-    };
-  }
+  state = {
+    isOpen: false,
+  };
 
   toggle = () => {
-    this.setState({
-      isOpen: !this.state.isOpen,
-    });
+    this.setState(state => ({
+      isOpen: !state.isOpen,
+    }));
   };
 
   render() {
