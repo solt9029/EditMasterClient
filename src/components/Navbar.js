@@ -49,7 +49,8 @@ export default class Navbar extends Component {
                 active={
                   (match.path === routes.SCORES.SHOW ||
                     match.path === routes.SCORES.NEW) &&
-                  !error
+                  !error &&
+                  !isLoading
                 }
                 to={routes.SCORES.NEW}
               >
