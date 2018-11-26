@@ -36,6 +36,7 @@
     "jest": "^23.6.0",
     "lodash": "^4.17.11",
     "object-assign": "4.1.1",
+    "path-to-regexp": "^2.4.0",
     "postcss-flexbugs-fixes": "3.2.0",
     "postcss-loader": "2.0.8",
     "prettier": "^1.14.2",

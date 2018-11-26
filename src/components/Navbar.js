@@ -12,8 +12,12 @@ import { routes } from '../constants';
 import SearchForm from '../containers/SearchForm';
 import TjaExportButton from '../containers/TjaExportButton';
 import CreateButton from '../containers/CreateButton';
-import { Link } from 'react-router-dom';
 import NavbarBrand from './NavbarBrand';
+import { NavLink as RRNavLink } from 'react-router-dom';
+import {
+  matchScoresCreatePathname,
+  matchScoresIndexPathname,
+} from '../utils/url';
 
 const StyledNavbar = styled(ReactstrapNavbar)`
   font-family: 'HG行書体';
@@ -22,6 +26,10 @@ const StyledNavbar = styled(ReactstrapNavbar)`
 const StyledNavLink = styled(NavLink)`
   font-size: 1em;
 `;
+
+const isScoresCreateActive = (match, location) => {
+  return matchScoresCreatePathname(location.pathname);
+};
 
 export default class Navbar extends Component {
   state = {
@@ -35,7 +43,7 @@ export default class Navbar extends Component {
   };
 
   render() {
-    const { match, error, isLoading } = this.props;
+    const { location, error, isLoading } = this.props;
 
     return (
       <StyledNavbar className="py-0" color="light" light expand="md">
@@ -45,34 +53,20 @@ export default class Navbar extends Component {
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="mr-auto" navbar>
               <StyledNavLink
-                tag={Link}
-                active={
-                  (match.path === routes.SCORES.SHOW ||
-                    match.path === routes.SCORES.NEW) &&
-                  !error &&
-                  !isLoading
-                }
+                tag={RRNavLink}
+                isActive={isScoresCreateActive}
                 to={routes.SCORES.NEW}
               >
                 創作
               </StyledNavLink>
-              <StyledNavLink
-                tag={Link}
-                active={match.path === routes.SCORES.INDEX}
-                to={routes.SCORES.INDEX}
-              >
+              <StyledNavLink tag={RRNavLink} exact to={routes.SCORES.INDEX}>
                 作品一覧
               </StyledNavLink>
-              <StyledNavLink
-                tag={Link}
-                active={match.path === routes.HELP}
-                to={routes.HELP}
-              >
+              <StyledNavLink tag={RRNavLink} exact to={routes.HELP}>
                 ヘルプ
               </StyledNavLink>
             </Nav>
-            {(match.path === routes.SCORES.NEW ||
-              match.path === routes.SCORES.SHOW) &&
+            {matchScoresCreatePathname(location.pathname) &&
               !error &&
               !isLoading && (
                 <Fragment>
@@ -80,7 +74,7 @@ export default class Navbar extends Component {
                   <CreateButton />
                 </Fragment>
               )}
-            {match.path === routes.SCORES.INDEX && <SearchForm />}
+            {matchScoresIndexPathname(location.pathname) && <SearchForm />}
           </Collapse>
         </Container>
       </StyledNavbar>
