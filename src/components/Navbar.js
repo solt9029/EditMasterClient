@@ -4,6 +4,7 @@ import {
   Navbar as ReactstrapNavbar,
   NavbarToggler,
   Nav,
+  NavLink,
   Container,
 } from 'reactstrap';
 import styled from 'styled-components';
@@ -11,11 +12,15 @@ import { routes } from '../constants';
 import SearchForm from '../containers/SearchForm';
 import TjaExportButton from '../containers/TjaExportButton';
 import CreateButton from '../containers/CreateButton';
-import NavItem from './NavItem';
+import { Link } from 'react-router-dom';
 import NavbarBrand from './NavbarBrand';
 
 const StyledNavbar = styled(ReactstrapNavbar)`
   font-family: 'HG行書体';
+`;
+
+const StyledNavLink = styled(NavLink)`
+  font-size: 1em;
 `;
 
 export default class Navbar extends Component {
@@ -39,7 +44,8 @@ export default class Navbar extends Component {
           <NavbarToggler onClick={this.toggle} className="my-2" />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="mr-auto" navbar>
-              <NavItem
+              <StyledNavLink
+                tag={Link}
                 active={
                   (match.path === routes.SCORES.SHOW ||
                     match.path === routes.SCORES.NEW) &&
@@ -48,16 +54,21 @@ export default class Navbar extends Component {
                 to={routes.SCORES.NEW}
               >
                 創作
-              </NavItem>
-              <NavItem
+              </StyledNavLink>
+              <StyledNavLink
+                tag={Link}
                 active={match.path === routes.SCORES.INDEX}
                 to={routes.SCORES.INDEX}
               >
                 作品一覧
-              </NavItem>
-              <NavItem active={match.path === routes.HELP} to={routes.HELP}>
+              </StyledNavLink>
+              <StyledNavLink
+                tag={Link}
+                active={match.path === routes.HELP}
+                to={routes.HELP}
+              >
                 ヘルプ
-              </NavItem>
+              </StyledNavLink>
             </Nav>
             {(match.path === routes.SCORES.NEW ||
               match.path === routes.SCORES.SHOW) &&
