@@ -19,30 +19,26 @@ export default class EditorBarsCanvas extends Component {
   }
 
   updateCanvas() {
-    const { editorWidth, notesLength } = this.props;
+    const { width, notesLength } = this.props;
 
     const height = calcEditorCanvasHeight(notesLength);
-    this.canvas.clear(editorWidth - 1, height);
+    this.canvas.clear(width - 1, height);
 
     const barNum = calcBarNum(notesLength);
-    this.canvas.drawBars(editorWidth, barNum);
+    this.canvas.drawBars(width, barNum);
   }
 
   render() {
-    const { editorWidth, notesLength } = this.props;
+    const { width, notesLength } = this.props;
     const height = calcEditorCanvasHeight(notesLength);
 
     return (
-      <Layer
-        innerRef={this.canvasRef}
-        width={editorWidth - 1}
-        height={height}
-      />
+      <Layer innerRef={this.canvasRef} width={width - 1} height={height} />
     );
   }
 }
 
 EditorBarsCanvas.propTypes = {
-  editorWidth: propTypes.number,
+  width: propTypes.number,
   notesLength: propTypes.number,
 };
