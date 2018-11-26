@@ -4,7 +4,7 @@ const routes = {
   SCORES: {
     INDEX: '/scores',
     NEW: '/scores/new',
-    SHOW: '/scores/:id',
+    SHOW: '/scores/:id(\\d+)',
   },
 };
 
