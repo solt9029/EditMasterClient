@@ -6,6 +6,7 @@ import {
   percentages,
   numbers,
 } from '../constants/';
+import { calcBarWidth } from '../utils/calculations';
 
 export default class Canvas {
   constructor(ctx) {
@@ -130,6 +131,17 @@ export default class Canvas {
         insideY - 1,
         sizes.EDITOR.BEAT_LINE.WIDTH,
         sizes.EDITOR.BAR.INSIDE.HEIGHT + 2
+      );
+    }
+  }
+
+  drawBars(width, barNum) {
+    const barWidth = calcBarWidth(width);
+    for (let i = 0; i < barNum; i++) {
+      this.drawBar(
+        positions.EDITOR.BAR.X,
+        i * sizes.EDITOR.BAR.OUTSIDE.HEIGHT,
+        barWidth
       );
     }
   }
