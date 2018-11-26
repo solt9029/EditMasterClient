@@ -35,7 +35,7 @@ export default class Navbar extends Component {
   };
 
   render() {
-    const { match, notFound, error, isLoading } = this.props;
+    const { match, error, isLoading } = this.props;
 
     return (
       <StyledNavbar className="py-0" color="light" light expand="md">
@@ -49,7 +49,7 @@ export default class Navbar extends Component {
                 active={
                   (match.path === routes.SCORES.SHOW ||
                     match.path === routes.SCORES.NEW) &&
-                  !notFound
+                  !error
                 }
                 to={routes.SCORES.NEW}
               >
