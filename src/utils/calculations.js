@@ -96,8 +96,12 @@ export const calcEditorCanvasHeight = notesLength => {
   );
 };
 
+export const calcBarWidth = width => {
+  return width - 1 - positions.EDITOR.BAR.X * 2;
+};
+
 export const calcCurrentTimeMark = (width, bpm, offset, currentTime) => {
-  const barWidth = width - 1 - positions.EDITOR.BAR.X * 2;
+  const barWidth = calcBarWidth(width);
   const actualBarWidth = barWidth * (1 - percentages.EDITOR.BAR_START_LINE); // left side of initial beat line is not available
   const spaceWidth = actualBarWidth / numbers.NOTES_PER_BAR;
 
@@ -117,6 +121,10 @@ export const calcCurrentTimeMark = (width, bpm, offset, currentTime) => {
   return { x, y };
 };
 
+export const calcBarNum = notesLength => {
+  return Math.ceil(notesLength / numbers.NOTES_PER_BAR);
+};
+
 export default {
   calcSecondsPerNote,
   calcNoteIndexRangeInSecondRange,
@@ -124,5 +132,7 @@ export default {
   calcNoteIndexRangeInCanvas,
   calcCaret,
   calcEditorCanvasHeight,
+  calcBarWidth,
   calcCurrentTimeMark,
+  calcBarNum,
 };
