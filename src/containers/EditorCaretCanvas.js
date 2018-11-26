@@ -4,9 +4,8 @@ import { addBar } from '../actions/editor';
 import EditorCaretCanvas from '../components/EditorCaretCanvas';
 
 const mapStateToProps = state => ({
-  editorWidth: state.ide.panes.editor.width,
   palette: state.palette,
-  notes: state.editor.notes,
+  notesLength: state.editor.notes.length,
 });
 const mapDispatchToProps = dispatch => ({
   changeNotes(index, num, note) {

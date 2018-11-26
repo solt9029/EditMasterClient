@@ -16,14 +16,6 @@ export default class EditorCaretCanvas extends Component {
     this.canvas = new Canvas(ctx);
   }
 
-  shouldComponentUpdate(nextProps) {
-    return (
-      this.props.editorWidth !== nextProps.editorWidth ||
-      this.props.notes.length !== nextProps.notes.length ||
-      this.props.palette !== nextProps.palette
-    );
-  }
-
   keyDown = event => {
     this.changeNotes(event);
     this.copyPaste(event);
@@ -33,7 +25,7 @@ export default class EditorCaretCanvas extends Component {
     const { barIndex } = utils.calculations.calcCaret(
       this.mouseX,
       this.mouseY,
-      this.props.editorWidth,
+      this.props.width,
       this.props.palette.division
     );
 
@@ -55,7 +47,7 @@ export default class EditorCaretCanvas extends Component {
           barIndex * numbers.NOTES_PER_BAR,
           this.clipboard
         );
-        if ((barIndex + 1) * numbers.NOTES_PER_BAR >= this.props.notes.length) {
+        if ((barIndex + 1) * numbers.NOTES_PER_BAR >= this.props.notesLength) {
           this.props.addBar();
         }
         return;
@@ -79,7 +71,7 @@ export default class EditorCaretCanvas extends Component {
     const { barIndex, divisionIndex } = utils.calculations.calcCaret(
       this.mouseX,
       this.mouseY,
-      this.props.editorWidth,
+      this.props.width,
       this.props.palette.division
     );
 
@@ -97,7 +89,7 @@ export default class EditorCaretCanvas extends Component {
     this.props.changeNotes(index, notes);
 
     // add one bar if the user puts a note on the last bar
-    if (index >= this.props.notes.length - numbers.NOTES_PER_BAR) {
+    if (index >= this.props.notesLength - numbers.NOTES_PER_BAR) {
       this.props.addBar();
     }
   };
@@ -108,22 +100,22 @@ export default class EditorCaretCanvas extends Component {
     this.mouseY = offsetY;
 
     const height = utils.calculations.calcEditorCanvasHeight(
-      this.props.notes.length
+      this.props.notesLength
     );
-    this.canvas.clear(this.props.editorWidth - 1, height);
+    this.canvas.clear(this.props.width - 1, height);
 
     const { x, y } = utils.calculations.calcCaret(
       this.mouseX,
       this.mouseY,
-      this.props.editorWidth,
+      this.props.width,
       this.props.palette.division
     );
     this.canvas.drawCaret(x, y);
   };
 
   render() {
-    const { notes, editorWidth } = this.props;
-    const height = utils.calculations.calcEditorCanvasHeight(notes.length);
+    const { notesLength, width } = this.props;
+    const height = utils.calculations.calcEditorCanvasHeight(notesLength);
 
     return (
       <Layer
@@ -132,7 +124,7 @@ export default class EditorCaretCanvas extends Component {
         onKeyDown={this.keyDown}
         onClick={this.changeNotes}
         innerRef={this.canvasRef}
-        width={editorWidth - 1}
+        width={width - 1}
         height={height}
       />
     );
