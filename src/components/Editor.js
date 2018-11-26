@@ -5,6 +5,7 @@ import EditorCaretCanvas from '../containers/EditorCaretCanvas';
 import EditorCurrentTimeMarkCanvas from '../containers/EditorCurrentTimeMarkCanvas';
 import propTypes from 'prop-types';
 import Layer from '../styled/Layer';
+import EditorBarsCanvas from './EditorBarsCanvas';
 
 export default class Editor extends Component {
   canvasRef = React.createRef();
@@ -31,16 +32,7 @@ export default class Editor extends Component {
         sizes.EDITOR.BAR.OUTSIDE.HEIGHT
     );
 
-    // bars
-    const barNum = Math.ceil(this.props.notes.length / numbers.NOTES_PER_BAR);
     const barWidth = this.props.width - 1 - positions.EDITOR.BAR.X * 2;
-    for (let i = 0; i < barNum; i++) {
-      this.canvas.drawBar(
-        positions.EDITOR.BAR.X,
-        i * sizes.EDITOR.BAR.OUTSIDE.HEIGHT,
-        barWidth
-      );
-    }
 
     // notes
     const actualBarWidth = barWidth * (1 - percentages.EDITOR.BAR_START_LINE); // left side of initial beat line is not available
@@ -76,13 +68,16 @@ export default class Editor extends Component {
   }
 
   render() {
+    const { width, notes } = this.props;
+
     return (
       <div>
+        <EditorBarsCanvas editorWidth={width} notesLength={notes.length} />
         <Layer
           innerRef={this.canvasRef}
-          width={this.props.width - 1}
+          width={width - 1}
           height={
-            Math.ceil(this.props.notes.length / numbers.NOTES_PER_BAR) *
+            Math.ceil(notes.length / numbers.NOTES_PER_BAR) *
             sizes.EDITOR.BAR.OUTSIDE.HEIGHT
           }
         />
