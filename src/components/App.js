@@ -8,6 +8,7 @@ import NotFoundView from './NotFoundView';
 import { Switch, Route } from 'react-router-dom';
 import { routes } from '../constants/';
 import ReactGA from 'react-ga';
+import Navbar from '../containers/Navbar';
 
 export default class App extends Component {
   componentDidMount() {
@@ -19,6 +20,7 @@ export default class App extends Component {
   render() {
     return (
       <div>
+        <Navbar />
         <Switch>
           <Route exact path={routes.INDEX} component={IndexView} />
           <Route exact path={routes.SCORES.INDEX} component={ScoresIndexView} />

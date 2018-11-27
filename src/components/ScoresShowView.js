@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Navbar from '../containers/Navbar';
 import IDE from '../containers/IDE';
 import NotFoundView from './NotFoundView';
 import Modal from '../containers/Modal';
@@ -16,7 +15,6 @@ export default class ScoresShowView extends Component {
   render() {
     let component = (
       <div>
-        <Navbar />
         <IDE />
         <Modal />
       </div>

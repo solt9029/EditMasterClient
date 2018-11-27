@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import Navbar from '../containers/Navbar';
 import { Container } from 'reactstrap';
 import Footer from './Footer';
 
@@ -21,7 +20,6 @@ const StyledText = styled.p`
 
 const NotFoundView = () => (
   <div>
-    <Navbar notFound />
     <StyledContainer>
       <Icon src="/images/icon.png" />
       <StyledText>お探しのページは存在しません</StyledText>
