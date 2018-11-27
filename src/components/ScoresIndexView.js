@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Navbar from '../containers/Navbar';
 import Footer from './Footer';
 import ScoreCardList from '../containers/ScoreCardList';
 import { Container } from 'reactstrap';
@@ -32,7 +31,6 @@ export default class ScoresIndexView extends Component {
 
     return (
       <div>
-        <Navbar />
         {isLoading ? (
           <StyledContainer>読み込み中です</StyledContainer>
         ) : error ? (

@@ -1,5 +1,4 @@
 import React from 'react';
-import Navbar from '../containers/Navbar';
 import Footer from './Footer';
 import { Card, CardHeader, CardBody, CardText, Container } from 'reactstrap';
 import styled from 'styled-components';
@@ -15,7 +14,6 @@ const StyledCard = styled(Card)`
 
 const HelpView = () => (
   <div>
-    <Navbar />
     <StyledContainer>
       <StyledCard>
         <CardHeader>どうやって創作譜面をするの？</CardHeader>
