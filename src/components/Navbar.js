@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import {
   Collapse,
-  Navbar as ReactstrapNavbar,
+  Navbar as RNavbar,
   NavbarToggler,
   Container,
 } from 'reactstrap';
@@ -16,7 +16,7 @@ import {
 } from '../utils/url';
 import NavLinkList from './NavLinkList';
 
-const StyledNavbar = styled(ReactstrapNavbar)`
+const StyledNavbar = styled(RNavbar)`
   font-family: 'HG行書体';
 `;
 
