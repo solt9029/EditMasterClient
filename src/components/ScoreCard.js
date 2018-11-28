@@ -1,12 +1,11 @@
 import React from 'react';
-import { Card, Col, CardImg, CardText, CardBody } from 'reactstrap';
+import { Col, CardImg, CardText, CardBody } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import propTypes from 'prop-types';
+import Card from '../styled/Card';
 
 const StyledCard = styled(Card)`
-  margin-top: 15px;
-  margin-bottom: 15px;
   box-shadow: 1px 1px 2px;
   color: black;
   :hover {
@@ -40,12 +39,14 @@ const Icon = styled.img`
   border-radius: 50%;
 `;
 
-const cardBodyInlineStyle = {
-  paddingTop: '0.7rem',
-  paddingBottom: '0.7rem',
-  paddingRight: '1rem',
-  paddingLeft: '1rem',
-};
+const StyledCardBody = styled(CardBody)`
+  && {
+    padding-top: 0.7rem;
+    padding-bottom: 0.7rem;
+    padding-right: 1rem;
+    padding-left: 1rem;
+  }
+`;
 
 const ScoreCard = ({ score }) => {
   return (
@@ -56,7 +57,7 @@ const ScoreCard = ({ score }) => {
           src={`http://i.ytimg.com/vi/${score.video_id}/mqdefault.jpg`}
           alt="score"
         />
-        <CardBody style={cardBodyInlineStyle}>
+        <StyledCardBody>
           <StyledCardText>
             <Icon src="/images/icon.png" alt="icon" />
             <Username>{score.username}</Username>
@@ -64,7 +65,7 @@ const ScoreCard = ({ score }) => {
           <StyledCardText>
             <Comment>{score.comment}</Comment>
           </StyledCardText>
-        </CardBody>
+        </StyledCardBody>
       </StyledCard>
     </Col>
   );
