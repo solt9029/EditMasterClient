@@ -1,15 +1,15 @@
 // development
-let api = {
-  HOST: 'localhost',
-  PORT: 8051,
+let Api = {
+  host: 'localhost',
+  port: 8051,
 };
 
 // production
 if (process.env.NODE_ENV === 'production') {
-  api = {
-    HOST: 'editmasterapi.solt9029.com',
-    PORT: 80,
+  Api = {
+    host: 'editmasterapi.solt9029.com',
+    port: 80,
   };
 }
 
-export default api;
+export default Api;

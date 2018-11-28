@@ -1,9 +1,9 @@
 import axios from 'axios';
-import { api } from '../config';
+import { Api } from '../config';
 
 export const clients = {
   api: axios.create({
-    baseURL: `http://${api.HOST}:${api.PORT}`,
+    baseURL: `http://${Api.host}:${Api.port}`,
   }),
   songle: axios.create({
     baseURL: 'http://widget.songle.jp',
