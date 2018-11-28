@@ -3,7 +3,6 @@ import { numbers, ids, seconds, percentages } from '../constants';
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
 import Shot from '../classes/Shot';
-import Canvas from '../classes/Canvas';
 import JudgeEffect from '../classes/JudgeEffect';
 import Sound from '../classes/Sound';
 import styled from 'styled-components';
@@ -14,6 +13,13 @@ import {
 } from '../utils/calculations';
 import { isDon as isDonNote, isKa as isKaNote, hasState } from '../utils/note';
 import { isDon as isDonKey, isKa as isKaKey } from '../utils/key';
+import {
+  clear,
+  drawNote,
+  drawBarStartLine,
+  drawJudgeMark,
+  drawJudgeEffect,
+} from '../utils/canvas';
 
 const StyledSlider = styled(Slider)`
   && {
@@ -27,19 +33,14 @@ const StyledSlider = styled(Slider)`
 `;
 
 export default class Player extends Component {
-  constructor(props) {
-    super(props);
-    this.shots = [];
-    this.judgeEffects = [];
-    this.canvasRef = React.createRef();
-    this.canvas = null;
-    this.sound = new Sound();
-    this.playMode = this.playMode.bind(this);
-  }
+  shots = [];
+  judgeEffects = [];
+  canvasRef = React.createRef();
+  sound = new Sound();
+  ctx = null;
 
   componentDidMount() {
-    const ctx = this.canvasRef.current.getContext('2d');
-    this.canvas = new Canvas(ctx);
+    this.ctx = this.canvasRef.current.getContext('2d');
     this.updateCanvas();
   }
 
@@ -106,7 +107,7 @@ export default class Player extends Component {
     }
   }
 
-  playMode(event) {
+  playMode = event => {
     const {
       isAutoMode,
       ytPlayerState,
@@ -188,7 +189,7 @@ export default class Player extends Component {
       }
       break;
     }
-  }
+  };
 
   updateCanvas() {
     const { config, playerPane, currentTime, notes, states } = this.props;
@@ -196,8 +197,8 @@ export default class Player extends Component {
     const spaceWidth =
       config.speed.value * percentages.PLAYER.SPEED_TO_SPACE_WIDTH;
 
-    this.canvas.clear(playerPane.width - 1, playerPane.height - 1);
-    this.canvas.drawJudgeMark((playerPane.height - 1) / 2);
+    clear(this.ctx, playerPane.width - 1, playerPane.height - 1);
+    drawJudgeMark(this.ctx, (playerPane.height - 1) / 2);
 
     const initialNoteX = calcInitialNoteX(
       currentTime,
@@ -218,7 +219,8 @@ export default class Player extends Component {
     // judgeEffects
     for (let i = this.judgeEffects.length - 1; i >= 0; i--) {
       this.judgeEffects[i].move(playerPane.height / 50);
-      this.canvas.drawJudgeEffect(
+      drawJudgeEffect(
+        this.ctx,
         this.judgeEffects[i].judgeMarkY,
         this.judgeEffects[i].judgeTextY,
         this.judgeEffects[i].stateId
@@ -237,7 +239,7 @@ export default class Player extends Component {
       i += numbers.NOTES_PER_BAR
     ) {
       const x = initialNoteX + i * spaceWidth;
-      this.canvas.drawBarStartLine(x, playerPane.height - 1);
+      drawBarStartLine(this.ctx, x, playerPane.height - 1);
     }
 
     // notes
@@ -254,7 +256,8 @@ export default class Player extends Component {
       const previousNote = i > 0 ? notes[i - 1] : ids.NOTE.SPACE;
       const nextNote = i < notes.length - 1 ? notes[i + 1] : ids.NOTE.SPACE;
 
-      this.canvas.drawNote(
+      drawNote(
+        this.ctx,
         x,
         y,
         'PLAYER',
@@ -268,7 +271,8 @@ export default class Player extends Component {
     // shots
     for (let i = this.shots.length - 1; i >= 0; i--) {
       this.shots[i].move(playerPane.width / 100, playerPane.height / 10);
-      this.canvas.drawNote(
+      drawNote(
+        this.ctx,
         this.shots[i].x,
         this.shots[i].y,
         'PLAYER',
