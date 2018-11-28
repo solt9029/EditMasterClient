@@ -1,12 +1,11 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Button } from 'reactstrap';
 import propTypes from 'prop-types';
-import * as utils from '../utils';
+import { exportTja } from '../utils/file';
 
-export default class TjaExportButton extends Component {
-  exportFile = () => {
-    const { notes, config } = this.props;
-    utils.file.exportTja(
+const TjaExportButton = ({ notes, config }) => {
+  const exportTjaFile = () => {
+    exportTja(
       notes,
       config.videoId.value,
       config.bpm.value,
@@ -14,14 +13,14 @@ export default class TjaExportButton extends Component {
     );
   };
 
-  render() {
-    return (
-      <Button color="info" className="my-2 mr-2" onClick={this.exportFile}>
-        太鼓さん次郎エクスポート
-      </Button>
-    );
-  }
-}
+  return (
+    <Button color="info" className="my-2 mr-2" onClick={exportTjaFile}>
+      太鼓さん次郎エクスポート
+    </Button>
+  );
+};
+
+export default TjaExportButton;
 
 TjaExportButton.propTypes = {
   notes: propTypes.arrayOf(propTypes.number),

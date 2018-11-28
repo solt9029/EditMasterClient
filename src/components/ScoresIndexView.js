@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import Footer from './Footer';
 import ScoreCardList from '../containers/ScoreCardList';
 import ScoreCardPaginate from '../containers/ScoreCardPaginate';
-import * as utils from '../utils';
+import { getQueries } from '../utils/url';
 import Container from '../styled/Container';
 
 export default class ScoresIndexView extends Component {
   componentDidMount() {
-    const { page, keyword } = utils.url.getQueries(this.props.location.search);
+    const { page, keyword } = getQueries(this.props.location.search);
     this.props.setKeyword(keyword);
     this.props.fetch(page, keyword);
   }
@@ -16,7 +16,7 @@ export default class ScoresIndexView extends Component {
     if (this.props.location.search === nextProps.location.search) {
       return;
     }
-    const { page, keyword } = utils.url.getQueries(nextProps.location.search);
+    const { page, keyword } = getQueries(nextProps.location.search);
     this.props.fetch(page, keyword);
   }
 

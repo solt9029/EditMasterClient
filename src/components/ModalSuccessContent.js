@@ -1,10 +1,14 @@
 import React, { Fragment } from 'react';
 import { ModalHeader, ModalBody, ModalFooter, Button } from 'reactstrap';
 import { Link } from 'react-router-dom';
-import * as utils from '../utils';
+import { openWindow } from '../utils/twitter';
 import propTypes from 'prop-types';
 
 const ModalSuccessContent = ({ id, close }) => {
+  const openTweetWindow = () => {
+    openWindow(id);
+  };
+
   return (
     <Fragment>
       <ModalHeader toggle={close}>保存が完了しました</ModalHeader>
@@ -12,12 +16,7 @@ const ModalSuccessContent = ({ id, close }) => {
         <img alt="modal" width="100%" src="/images/modal.png" />
       </ModalBody>
       <ModalFooter>
-        <Button
-          color="primary"
-          onClick={() => {
-            utils.twitter.openWindow(id);
-          }}
-        >
+        <Button color="primary" onClick={openTweetWindow}>
           ツイート
         </Button>
         <Button color="warning" tag={Link} to="/scores">
