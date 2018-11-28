@@ -38,10 +38,3 @@ export const matchScoresCreatePathname = pathname => {
 export const matchScoresIndexPathname = pathname => {
   return pathname.match(pathToRegexp(routes.SCORES.INDEX)) !== null;
 };
-
-export default {
-  getVideoId,
-  getQueries,
-  matchScoresCreatePathname,
-  matchScoresIndexPathname,
-};

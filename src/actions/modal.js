@@ -1,5 +1,5 @@
 import { actionTypes } from '../constants/';
-import * as utils from '../utils';
+import { createScore } from '../utils/http';
 
 export const startCreate = () => ({
   type: actionTypes.MODAL.START_CREATE,
@@ -24,7 +24,7 @@ export const create = () => {
     };
 
     try {
-      const result = await utils.http.createScore(data);
+      const result = await createScore(data);
       dispatch(finishCreateSuccess(result.data.id));
     } catch (error) {
       // this part should check whether error.response is null or not. (when api doesn't work, it gives error.)

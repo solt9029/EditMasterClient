@@ -1,6 +1,6 @@
 import * as config from './config';
 import { actionTypes } from '../constants/';
-import * as utils from '../utils';
+import { required, maxLength } from '../utils/validations';
 
 describe('config actions', () => {
   it('reset action', () => {
@@ -18,7 +18,7 @@ describe('config actions', () => {
       type: actionTypes.CONFIG.SET_USERNAME,
       payload: {
         value: value,
-        errors: [utils.validations.required(value)],
+        errors: [required(value)],
         touched: true,
       },
     };
@@ -27,7 +27,7 @@ describe('config actions', () => {
 
   it('setUsername action should return maxLength20 error if the length of the value is more than 20', () => {
     const value = 'aaaaaaaaaaaaaaaaaaaaaaaaa';
-    const maxLength20 = utils.validations.maxLength(20);
+    const maxLength20 = maxLength(20);
     const result = config.setUsername(value);
     const expected = {
       type: actionTypes.CONFIG.SET_USERNAME,

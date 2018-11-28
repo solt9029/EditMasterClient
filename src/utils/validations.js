@@ -21,10 +21,3 @@ export const validate = (value, validations) => {
   });
   return errors;
 };
-
-export default {
-  required,
-  maxLength,
-  number,
-  validate,
-};

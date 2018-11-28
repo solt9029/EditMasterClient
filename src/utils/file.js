@@ -30,7 +30,3 @@ export const exportTja = (notes, videoId, bpm, offset) => {
   const blob = new Blob([content], { type: 'tja/plain' });
   saveAs(blob, `${videoId}.tja`);
 };
-
-export default {
-  exportTja,
-};

@@ -1,5 +1,5 @@
 import { actionTypes } from '../constants';
-import * as utils from '../utils';
+import { getScore } from '../utils/http';
 
 export const finishRequestError = error => ({
   type: actionTypes.SCORES_SHOW_VIEW.FINISH_REQUEST_ERROR,
@@ -26,7 +26,7 @@ export const fetch = id => {
   return async dispatch => {
     dispatch(startRequest());
     try {
-      const result = await utils.http.getScore(id);
+      const result = await getScore(id);
       const score = result.data;
 
       const notes = JSON.parse(score.notes);
