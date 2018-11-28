@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import * as utils from '../utils';
+import { getVideoId } from '../utils/url';
 import ConfigForm from './ConfigForm';
 import propTypes from 'prop-types';
 
@@ -39,7 +39,7 @@ export default class Config extends Component {
           name="videoId"
           object={config.videoId}
           onChange={event => {
-            const videoId = utils.url.getVideoId(event.target.value);
+            const videoId = getVideoId(event.target.value);
             props.setVideoId(videoId);
             props.fetchSongle(videoId);
           }}
