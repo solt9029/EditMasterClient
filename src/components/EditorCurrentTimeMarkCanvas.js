@@ -1,19 +1,18 @@
 import React, { Component } from 'react';
-import Canvas from '../classes/Canvas';
 import {
   calcEditorCanvasHeight,
   calcCurrentTimeMark,
 } from '../utils/calculations';
+import { clear, drawCurrentTimeMark } from '../utils/canvas';
 import Layer from '../styled/Layer';
 import propTypes from 'prop-types';
 
 export default class EditorCurrentTimeMarkCanvas extends Component {
   canvasRef = React.createRef();
-  canvas = null;
+  ctx = null;
 
   componentDidMount() {
-    const ctx = this.canvasRef.current.getContext('2d');
-    this.canvas = new Canvas(ctx);
+    this.ctx = this.canvasRef.current.getContext('2d');
   }
 
   componentDidUpdate() {
@@ -23,10 +22,10 @@ export default class EditorCurrentTimeMarkCanvas extends Component {
   updateCanvas() {
     const { notesLength, width, bpm, offset, currentTime } = this.props;
     const height = calcEditorCanvasHeight(notesLength);
-    this.canvas.clear(width - 1, height);
+    clear(this.ctx, width - 1, height);
 
     const { x, y } = calcCurrentTimeMark(width, bpm, offset, currentTime);
-    this.canvas.drawCurrentTimeMark(x, y);
+    drawCurrentTimeMark(this.ctx, x, y);
   }
 
   render() {

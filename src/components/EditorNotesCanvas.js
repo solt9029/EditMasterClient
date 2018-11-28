@@ -1,17 +1,16 @@
 import React, { Component } from 'react';
 import { percentages, sizes, positions, numbers, ids } from '../constants';
-import Canvas from '../classes/Canvas';
 import propTypes from 'prop-types';
 import Layer from '../styled/Layer';
-import { calcEditorCanvasHeight } from '../utils/calculations';
+import { calcEditorCanvasHeight, calcBarWidth } from '../utils/calculations';
+import { clear, drawNote } from '../utils/canvas';
 
 export default class EditorNotesCanvas extends Component {
   canvasRef = React.createRef();
-  canvas = null;
+  ctx = null;
 
   componentDidMount() {
-    const ctx = this.canvasRef.current.getContext('2d');
-    this.canvas = new Canvas(ctx);
+    this.ctx = this.canvasRef.current.getContext('2d');
     this.updateCanvas();
   }
 
@@ -20,10 +19,12 @@ export default class EditorNotesCanvas extends Component {
   }
 
   updateCanvas() {
-    const height = calcEditorCanvasHeight(this.props.notes.length);
-    this.canvas.clear(this.props.width - 1, height);
+    const { notes, width } = this.props;
 
-    const barWidth = this.props.width - 1 - positions.EDITOR.BAR.X * 2;
+    const height = calcEditorCanvasHeight(notes.length);
+    clear(this.ctx, width - 1, height);
+
+    const barWidth = calcBarWidth(width);
 
     // notes
     const actualBarWidth = barWidth * (1 - percentages.EDITOR.BAR_START_LINE); // left side of initial beat line is not available
@@ -31,8 +32,8 @@ export default class EditorNotesCanvas extends Component {
     const barStartLineX =
       positions.EDITOR.BAR.X + barWidth * percentages.EDITOR.BAR_START_LINE;
 
-    for (let i = this.props.notes.length - 1; i >= 0; i--) {
-      const note = this.props.notes[i];
+    for (let i = notes.length - 1; i >= 0; i--) {
+      const note = notes[i];
       if (note === ids.NOTE.SPACE) {
         continue;
       }
@@ -40,13 +41,11 @@ export default class EditorNotesCanvas extends Component {
       const l = Math.floor(i / numbers.NOTES_PER_BAR);
       const x = barStartLineX + spaceWidth * c;
       const y = sizes.EDITOR.BAR.OUTSIDE.HEIGHT * (l + 0.5);
-      const previousNote = i > 0 ? this.props.notes[i - 1] : ids.NOTE.SPACE;
-      const nextNote =
-        i < this.props.notes.length - 1
-          ? this.props.notes[i + 1]
-          : ids.NOTE.SPACE;
+      const previousNote = i > 0 ? notes[i - 1] : ids.NOTE.SPACE;
+      const nextNote = i < notes.length - 1 ? notes[i + 1] : ids.NOTE.SPACE;
 
-      this.canvas.drawNote(
+      drawNote(
+        this.ctx,
         x,
         y,
         'EDITOR',
