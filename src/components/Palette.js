@@ -1,15 +1,8 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { Button } from 'reactstrap';
 import styled from 'styled-components';
 import NoteButtonList from '../containers/NoteButtonList';
 import DivisionButtonList from '../containers/DivisionButtonList';
-
-const StyledDiv = styled.div`
-  padding: 15px;
-  background-color: #222;
-  color: white;
-  font-weight: 500;
-`;
 
 const LineButton = styled(Button)`
   min-width: 90px;
@@ -26,7 +19,7 @@ export default class Palette extends Component {
   }
   render() {
     return (
-      <StyledDiv>
+      <Fragment>
         <ModeButton
           block
           color={this.props.isAutoMode ? 'danger' : 'primary'}
@@ -58,7 +51,7 @@ export default class Palette extends Component {
         >
           行を削除
         </LineButton>
-      </StyledDiv>
+      </Fragment>
     );
   }
 }

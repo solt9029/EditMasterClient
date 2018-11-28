@@ -6,10 +6,7 @@ import Editor from '../containers/Editor';
 import Palette from '../containers/Palette';
 import YouTube from '../containers/YouTube';
 import { debounce } from 'lodash';
-
-const divInlineStyle = {
-  height: '100%',
-};
+import PaneBox from '../styled/PaneBox';
 
 export default class IDE extends Component {
   constructor(props) {
@@ -43,9 +40,9 @@ export default class IDE extends Component {
           secondaryInitialSize={20}
           onSecondaryPaneSizeChange={this.setPanes}
         >
-          <div style={divInlineStyle} ref={this.references.player}>
+          <PaneBox height={100} innerRef={this.references.player}>
             <Player />
-          </div>
+          </PaneBox>
           <SplitterLayout
             percentage
             secondaryInitialSize={70}
@@ -58,24 +55,24 @@ export default class IDE extends Component {
               secondaryInitialSize={20}
               onSecondaryPaneSizeChange={this.setPanes}
             >
-              <div style={divInlineStyle}>
+              <PaneBox height={100}>
                 <YouTube />
-              </div>
-              <div style={divInlineStyle}>
+              </PaneBox>
+              <PaneBox padding={15}>
                 <Config />
-              </div>
+              </PaneBox>
             </SplitterLayout>
             <SplitterLayout
               percentage
               secondaryInitialSize={43}
               onSecondaryPaneSizeChange={this.setPanes}
             >
-              <div style={divInlineStyle} ref={this.references.editor}>
+              <PaneBox height={100} innerRef={this.references.editor}>
                 <Editor />
-              </div>
-              <div style={divInlineStyle} ref={this.references.palette}>
+              </PaneBox>
+              <PaneBox padding={15} innerRef={this.references.palette}>
                 <Palette />
-              </div>
+              </PaneBox>
             </SplitterLayout>
           </SplitterLayout>
         </SplitterLayout>
