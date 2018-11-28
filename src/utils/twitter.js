@@ -5,7 +5,3 @@ export const openWindow = id => {
   let newWindow = window.open('', 'child', 'width=600, height=300');
   newWindow.location.href = `https://twitter.com/share?text=${text}&hashtags=${hashtags}&url=${url}&count=none&lang=ja`;
 };
-
-export default {
-  openWindow,
-};

@@ -7,8 +7,3 @@ export const isDon = pushedKey => {
 export const isKa = pushedKey => {
   return keys.KA.indexOf(pushedKey) >= 0;
 };
-
-export default {
-  isDon,
-  isKa,
-};

@@ -124,15 +124,3 @@ export const calcCurrentTimeMark = (width, bpm, offset, currentTime) => {
 export const calcBarNum = notesLength => {
   return Math.ceil(notesLength / numbers.NOTES_PER_BAR);
 };
-
-export default {
-  calcSecondsPerNote,
-  calcNoteIndexRangeInSecondRange,
-  calcInitialNoteX,
-  calcNoteIndexRangeInCanvas,
-  calcCaret,
-  calcEditorCanvasHeight,
-  calcBarWidth,
-  calcCurrentTimeMark,
-  calcBarNum,
-};

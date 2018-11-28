@@ -40,10 +40,3 @@ export const isNote = note => {
     note === ids.NOTE.SPACE
   );
 };
-
-export default {
-  isDon,
-  isKa,
-  hasState,
-  isNote,
-};

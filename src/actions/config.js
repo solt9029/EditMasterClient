@@ -1,11 +1,11 @@
-import * as utils from '../utils';
+import { required, number, validate, maxLength } from '../utils/validations';
+import { getSongle } from '../utils/http';
 import { actionTypes } from '../constants/';
 
 export const reset = () => ({
   type: actionTypes.CONFIG.RESET,
 });
 
-const { required, number, validate, maxLength } = utils.validations;
 const maxLength20 = maxLength(20);
 const maxLength140 = maxLength(140);
 
@@ -84,7 +84,7 @@ export const setComment = (value, touched = true) => {
 export const fetchSongle = videoId => {
   return async dispatch => {
     try {
-      const result = await utils.http.getSongle(videoId);
+      const result = await getSongle(videoId);
       if (!result.data.beats) {
         return;
       }

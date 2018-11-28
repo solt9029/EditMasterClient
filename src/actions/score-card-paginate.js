@@ -1,11 +1,11 @@
 import { actionTypes } from '../constants';
-import * as utils from '../utils';
+import { getScores } from '../utils/http';
 
 export const fetch = (page, keyword) => {
   return async dispatch => {
     dispatch(startRequest());
     try {
-      const result = await utils.http.getScores(page, keyword);
+      const result = await getScores(page, keyword);
       const { current_page, last_page, data } = result.data;
       dispatch(finishRequestSuccess(data, current_page, last_page));
     } catch (error) {

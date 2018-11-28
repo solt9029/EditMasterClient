@@ -34,5 +34,3 @@ export const getScores = (page, keyword) => {
 export const getScore = id => {
   return clients.api.get(`/scores/${id}`);
 };
-
-export default { clients, getSongle, createScore, getScores, getScore };
