@@ -2,7 +2,11 @@ import React, { Component } from 'react';
 import Canvas from '../classes/Canvas';
 import propTypes from 'prop-types';
 import Layer from '../styled/Layer';
-import { calcBarNum, calcEditorCanvasHeight } from '../utils/calculations';
+import {
+  calcBarNum,
+  calcEditorCanvasHeight,
+  calcBarWidth,
+} from '../utils/calculations';
 
 export default class EditorBarsCanvas extends Component {
   canvasRef = React.createRef();
@@ -25,7 +29,8 @@ export default class EditorBarsCanvas extends Component {
     this.canvas.clear(width - 1, height);
 
     const barNum = calcBarNum(notesLength);
-    this.canvas.drawBars(width, barNum);
+    const barWidth = calcBarWidth(width);
+    this.canvas.drawBars(barWidth, barNum);
   }
 
   render() {
