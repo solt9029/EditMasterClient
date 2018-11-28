@@ -1,9 +1,8 @@
 import React from 'react';
-import { Container } from 'reactstrap';
 import styled from 'styled-components';
+import Container from '../styled/Container';
 
 const StyledContainer = styled(Container)`
-  text-align: center;
   padding: 10px;
   background: linear-gradient(
     45deg,
@@ -11,12 +10,11 @@ const StyledContainer = styled(Container)`
     rgba(70, 150, 180, 0.8)
   );
   color: #fff;
-  margin-top: 50px;
 `;
 
 const Footer = () => {
   return (
-    <StyledContainer fluid>
+    <StyledContainer fluid center top={50}>
       <small>Copyright © Kenshi Shiode. All Rights Reserved.</small>
     </StyledContainer>
   );
