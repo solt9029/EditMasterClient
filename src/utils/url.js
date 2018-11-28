@@ -22,6 +22,7 @@ export const getQueries = search => {
 };
 
 /**
+ *
  * @param {string} pathname
  * @return {boolean}
  */
@@ -32,6 +33,7 @@ export const matchScoresCreatePathname = pathname => {
 };
 
 /**
+ *
  * @param {string} pathname
  * @return {boolean}
  */

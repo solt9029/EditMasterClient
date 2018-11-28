@@ -1,5 +1,9 @@
 import { ids } from '../constants';
 
+/**
+ *
+ * @param {number} note
+ */
 export const isDon = note => {
   return (
     note === ids.NOTE.DON ||

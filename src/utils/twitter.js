@@ -1,3 +1,7 @@
+/**
+ *
+ * @param {number} id
+ */
 export const openWindow = id => {
   const text = '創作譜面をしました！';
   const url = `http://${window.location.host}/scores/${id}`;
