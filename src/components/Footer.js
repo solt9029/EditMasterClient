@@ -14,7 +14,7 @@ const StyledContainer = styled(Container)`
 
 const Footer = () => {
   return (
-    <StyledContainer fluid center top={50}>
+    <StyledContainer fluid center={1} top={50}>
       <small>Copyright © Kenshi Shiode. All Rights Reserved.</small>
     </StyledContainer>
   );
