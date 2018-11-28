@@ -1,15 +1,9 @@
 import React, { Component } from 'react';
 import Footer from './Footer';
 import ScoreCardList from '../containers/ScoreCardList';
-import { Container } from 'reactstrap';
 import ScoreCardPaginate from '../containers/ScoreCardPaginate';
 import * as utils from '../utils';
-import styled from 'styled-components';
-
-const StyledContainer = styled(Container)`
-  margin-top: 30px;
-  margin-bottom: 30px;
-`;
+import Container from '../styled/Container';
 
 export default class ScoresIndexView extends Component {
   componentDidMount() {
@@ -32,9 +26,13 @@ export default class ScoresIndexView extends Component {
     return (
       <div>
         {isLoading ? (
-          <StyledContainer>読み込み中です</StyledContainer>
+          <Container top={30} bottom={30}>
+            読み込み中です
+          </Container>
         ) : error ? (
-          <StyledContainer>エラーが発生しました</StyledContainer>
+          <Container top={30} bottom={30}>
+            エラーが発生しました
+          </Container>
         ) : (
           <ScoreCardList />
         )}

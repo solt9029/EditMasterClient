@@ -1,11 +1,8 @@
 import React from 'react';
 import Footer from './Footer';
-import { Card, CardHeader, CardBody, CardText, Container } from 'reactstrap';
+import { Card, CardHeader, CardBody, CardText } from 'reactstrap';
 import styled from 'styled-components';
-
-const StyledContainer = styled(Container)`
-  margin-top: 50px;
-`;
+import Container from '../styled/Container';
 
 const StyledCard = styled(Card)`
   margin-top: 15px;
@@ -14,7 +11,7 @@ const StyledCard = styled(Card)`
 
 const HelpView = () => (
   <div>
-    <StyledContainer>
+    <Container top={50}>
       <StyledCard>
         <CardHeader>どうやって創作譜面をするの？</CardHeader>
         <CardBody>
@@ -110,7 +107,7 @@ const HelpView = () => (
           </CardText>
         </CardBody>
       </StyledCard>
-    </StyledContainer>
+    </Container>
     <Footer />
   </div>
 );

@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Container } from 'reactstrap';
 import Footer from './Footer';
+import Container from '../styled/Container';
 
 const Icon = styled.img`
   width: 25%;
@@ -10,20 +10,16 @@ const Icon = styled.img`
   opacity: 0.5;
 `;
 
-const StyledContainer = styled(Container)`
-  text-align: center;
-`;
-
 const StyledText = styled.p`
   font-size: 1.2em;
 `;
 
 const NotFoundView = () => (
   <div>
-    <StyledContainer>
+    <Container center>
       <Icon src="/images/icon.png" />
       <StyledText>お探しのページは存在しません</StyledText>
-    </StyledContainer>
+    </Container>
     <Footer />
   </div>
 );

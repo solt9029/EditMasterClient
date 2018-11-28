@@ -1,12 +1,8 @@
 import React from 'react';
-import { Row, Container } from 'reactstrap';
-import styled from 'styled-components';
+import { Row } from 'reactstrap';
 import NoteButton from '../components/NoteButton';
 import { ids } from '../constants';
-
-const StyledContainer = styled(Container)`
-  margin-bottom: 30px;
-`;
+import Container from '../styled/Container';
 
 const notes = [
   {
@@ -61,7 +57,7 @@ const notes = [
 
 const NoteButtonList = ({ currentValue, setValue, paletteWidth }) => {
   return (
-    <StyledContainer>
+    <Container bottom={30}>
       <Row>
         {notes.map((note, i) => {
           const { src, color, label, value } = note;
@@ -79,7 +75,7 @@ const NoteButtonList = ({ currentValue, setValue, paletteWidth }) => {
           );
         })}
       </Row>
-    </StyledContainer>
+    </Container>
   );
 };
 

@@ -1,10 +1,7 @@
 import React from 'react';
-import { Container, Row, Col } from 'reactstrap';
+import { Row, Col } from 'reactstrap';
 import styled from 'styled-components';
-
-const StyledContainer = styled(Container)`
-  text-align: center;
-`;
+import Container from '../styled/Container';
 
 const StyledRow = styled(Row)`
   margin-top: 100px;
@@ -28,7 +25,7 @@ const CommentText = styled.p`
 
 const Description = () => {
   return (
-    <StyledContainer fluid>
+    <Container center fluid>
       <StyledRow>
         <Col xs={12}>
           <h2>創作譜面支援アプリケーション</h2>
@@ -79,7 +76,7 @@ const Description = () => {
           <h2>さあ、始めよう。次世代の創作譜面。</h2>
         </Col>
       </Row>
-    </StyledContainer>
+    </Container>
   );
 };
 
