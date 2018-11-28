@@ -1,15 +1,7 @@
-import React, { Component } from 'react';
-import styled from 'styled-components';
+import React, { Component, Fragment } from 'react';
 import { getVideoId } from '../utils/url';
 import ConfigForm from './ConfigForm';
 import propTypes from 'prop-types';
-
-const StyledDiv = styled.div`
-  padding: 15px;
-  background-color: #222;
-  color: white;
-  font-weight: 500;
-`;
 
 export default class Config extends Component {
   componentWillUnmount() {
@@ -21,7 +13,7 @@ export default class Config extends Component {
     const { config } = props;
 
     return (
-      <StyledDiv>
+      <Fragment>
         <ConfigForm
           label="ユーザ名"
           type="text"
@@ -84,7 +76,7 @@ export default class Config extends Component {
             props.setComment(event.target.value);
           }}
         />
-      </StyledDiv>
+      </Fragment>
     );
   }
 }
