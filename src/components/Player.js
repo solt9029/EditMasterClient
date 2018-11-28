@@ -6,8 +6,14 @@ import Shot from '../classes/Shot';
 import Canvas from '../classes/Canvas';
 import JudgeEffect from '../classes/JudgeEffect';
 import Sound from '../classes/Sound';
-import * as utils from '../utils';
 import styled from 'styled-components';
+import {
+  calcNoteIndexRangeInSecondRange,
+  calcInitialNoteX,
+  calcNoteIndexRangeInCanvas,
+} from '../utils/calculations';
+import { isDon as isDonNote, isKa as isKaNote, hasState } from '../utils/note';
+import { isDon as isDonKey, isKa as isKaKey } from '../utils/key';
 
 const StyledSlider = styled(Slider)`
   && {
@@ -62,7 +68,7 @@ export default class Player extends Component {
       return;
     }
 
-    const autoRange = utils.calculations.calcNoteIndexRangeInSecondRange(
+    const autoRange = calcNoteIndexRangeInSecondRange(
       seconds.RANGE.AUTO,
       currentTime,
       config.bpm.value,
@@ -86,11 +92,11 @@ export default class Player extends Component {
         new JudgeEffect((playerPane.height - 1) / 2, ids.STATE.GOOD)
       );
 
-      if (utils.note.hasState(note)) {
+      if (hasState(note)) {
         setState(i, ids.STATE.GOOD);
       }
 
-      if (utils.note.isDon(note)) {
+      if (isDonNote(note)) {
         this.sound.trigger('don');
       } else {
         this.sound.trigger('ka');
@@ -118,26 +124,26 @@ export default class Player extends Component {
 
     const { key } = event.nativeEvent;
 
-    if (utils.key.isDon(key)) {
+    if (isDonKey(key)) {
       this.sound.trigger('don');
     }
-    if (utils.key.isKa(key)) {
+    if (isKaKey(key)) {
       this.sound.trigger('ka');
     }
 
-    const badRange = utils.calculations.calcNoteIndexRangeInSecondRange(
+    const badRange = calcNoteIndexRangeInSecondRange(
       seconds.RANGE.BAD,
       currentTime,
       config.bpm.value,
       config.offset.value
     );
-    const okRange = utils.calculations.calcNoteIndexRangeInSecondRange(
+    const okRange = calcNoteIndexRangeInSecondRange(
       seconds.RANGE.OK,
       currentTime,
       config.bpm.value,
       config.offset.value
     );
-    const goodRange = utils.calculations.calcNoteIndexRangeInSecondRange(
+    const goodRange = calcNoteIndexRangeInSecondRange(
       seconds.RANGE.GOOD,
       currentTime,
       config.bpm.value,
@@ -156,10 +162,10 @@ export default class Player extends Component {
       }
 
       let hit = false;
-      if (utils.key.isDon(key) && utils.note.isDon(note)) {
+      if (isDonKey(key) && isDonNote(note)) {
         hit = true;
       }
-      if (utils.key.isKa(key) && utils.note.isKa(note)) {
+      if (isKaKey(key) && isKaNote(note)) {
         hit = true;
       }
       if (!hit) {
@@ -168,7 +174,7 @@ export default class Player extends Component {
 
       this.shots.push(new Shot((playerPane.height - 1) / 2, note));
 
-      if (utils.note.hasState(note)) {
+      if (hasState(note)) {
         let newState = ids.STATE.BAD;
         if (i >= goodRange[0] && i <= goodRange[1]) {
           newState = ids.STATE.GOOD;
@@ -193,13 +199,13 @@ export default class Player extends Component {
     this.canvas.clear(playerPane.width - 1, playerPane.height - 1);
     this.canvas.drawJudgeMark((playerPane.height - 1) / 2);
 
-    const initialNoteX = utils.calculations.calcInitialNoteX(
+    const initialNoteX = calcInitialNoteX(
       currentTime,
       config.bpm.value,
       config.offset.value,
       config.speed.value
     );
-    const canvasRange = utils.calculations.calcNoteIndexRangeInCanvas(
+    const canvasRange = calcNoteIndexRangeInCanvas(
       notes.length,
       config.speed.value,
       playerPane.width,
