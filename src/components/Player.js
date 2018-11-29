@@ -20,6 +20,7 @@ import {
   drawJudgeMark,
   drawJudgeEffect,
 } from '../utils/canvas';
+import Layer from '../styled/Layer';
 
 const StyledSlider = styled(Slider)`
   && {
@@ -294,11 +295,10 @@ export default class Player extends Component {
 
     return (
       <div>
-        <canvas
+        <Layer
           tabIndex={0}
           onKeyDown={this.playMode}
-          ref={this.canvasRef}
-          style={{ display: 'block' }}
+          innerRef={this.canvasRef}
           width={playerPane.width - 1}
           height={playerPane.height - 1}
         />
