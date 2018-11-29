@@ -21,6 +21,17 @@ export default class PlayerNotesCanvas extends Component {
     this.updateCanvas();
   }
 
+  shouldComponentUpdate(nextProps) {
+    if (
+      this.props.width === nextProps.height &&
+      this.props.height === nextProps.height
+    ) {
+      this.updateCanvas();
+      return false;
+    }
+    return true;
+  }
+
   updateCanvas() {
     const {
       speed,
