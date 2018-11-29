@@ -1,13 +1,13 @@
 // development
-let googleAnalytics = {
-  id: 'UA-128426361-2',
+let GoogleAnalytics = {
+  ID: 'UA-128426361-2',
 };
 
 // production
 if (process.env.NODE_ENV === 'production') {
-  googleAnalytics = {
-    id: 'UA-128426361-1',
+  GoogleAnalytics = {
+    ID: 'UA-128426361-1',
   };
 }
 
-export default googleAnalytics;
+export default GoogleAnalytics;

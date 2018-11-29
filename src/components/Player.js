@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { numbers, ids, seconds, percentages } from '../constants';
+import { ids, seconds } from '../constants';
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
 import Shot from '../classes/Shot';
 import JudgeEffect from '../classes/JudgeEffect';
 import PlayerJudgeMarkCanvas from '../containers/PlayerJudgeMarkCanvas';
+import PlayerNotesCanvas from '../containers/PlayerNotesCanvas';
 import { triggerDon, triggerKa } from '../utils/sound';
 import styled from 'styled-components';
 import {
@@ -14,12 +15,7 @@ import {
 } from '../utils/calculations';
 import { isDon as isDonNote, isKa as isKaNote, hasState } from '../utils/note';
 import { isDon as isDonKey, isKa as isKaKey } from '../utils/key';
-import {
-  clear,
-  drawNote,
-  drawBarStartLine,
-  drawJudgeEffect,
-} from '../utils/canvas';
+import { clear, drawNote, drawJudgeEffect } from '../utils/canvas';
 import Layer from '../styled/Layer';
 
 const StyledSlider = styled(Slider)`
@@ -192,10 +188,7 @@ export default class Player extends Component {
   };
 
   updateCanvas() {
-    const { config, playerPane, currentTime, notes, states } = this.props;
-
-    const spaceWidth =
-      config.speed.value * percentages.PLAYER.SPEED_TO_SPACE_WIDTH;
+    const { config, playerPane, currentTime, notes } = this.props;
 
     clear(this.ctx, playerPane.width - 1, playerPane.height - 1);
 
@@ -229,44 +222,6 @@ export default class Player extends Component {
       }
     }
 
-    // bar start lines
-    const initialBarStartLineIndex =
-      canvasRange[0] - (canvasRange[0] % numbers.NOTES_PER_BAR);
-    for (
-      let i = initialBarStartLineIndex;
-      i <= canvasRange[1];
-      i += numbers.NOTES_PER_BAR
-    ) {
-      const x = initialNoteX + i * spaceWidth;
-      drawBarStartLine(this.ctx, x, playerPane.height - 1);
-    }
-
-    // notes
-    for (let i = canvasRange[1]; i >= canvasRange[0]; i--) {
-      const note = notes[i];
-      const noteState = states[i];
-      const x = initialNoteX + i * spaceWidth;
-
-      if (noteState !== ids.STATE.FRESH || note === ids.NOTE.SPACE) {
-        continue;
-      }
-
-      const y = (playerPane.height - 1) / 2;
-      const previousNote = i > 0 ? notes[i - 1] : ids.NOTE.SPACE;
-      const nextNote = i < notes.length - 1 ? notes[i + 1] : ids.NOTE.SPACE;
-
-      drawNote(
-        this.ctx,
-        x,
-        y,
-        'PLAYER',
-        note,
-        spaceWidth,
-        previousNote,
-        nextNote
-      );
-    }
-
     // shots
     for (let i = this.shots.length - 1; i >= 0; i--) {
       this.shots[i].move(playerPane.width / 100, playerPane.height / 10);
@@ -295,6 +250,7 @@ export default class Player extends Component {
     return (
       <div>
         <PlayerJudgeMarkCanvas />
+        <PlayerNotesCanvas />
         <Layer
           tabIndex={0}
           onKeyDown={this.playMode}
