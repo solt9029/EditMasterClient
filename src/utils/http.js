@@ -22,6 +22,12 @@ export const createScore = data => {
   return clients.api.post('/scores/create', data);
 };
 
+/**
+ *
+ * @param {number} page
+ * @param {string} keyword
+ * @return {Object}
+ */
 export const getScores = (page, keyword) => {
   return clients.api.get('/scores', {
     params: {
@@ -31,6 +37,11 @@ export const getScores = (page, keyword) => {
   });
 };
 
+/**
+ *
+ * @param {number} id
+ * @return {Object}
+ */
 export const getScore = id => {
   return clients.api.get(`/scores/${id}`);
 };
