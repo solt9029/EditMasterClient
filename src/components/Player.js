@@ -4,7 +4,7 @@ import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
 import Shot from '../classes/Shot';
 import JudgeEffect from '../classes/JudgeEffect';
-import Sound from '../classes/Sound';
+import { triggerDon, triggerKa } from '../utils/sound';
 import styled from 'styled-components';
 import {
   calcNoteIndexRangeInSecondRange,
@@ -36,7 +36,6 @@ export default class Player extends Component {
   shots = [];
   judgeEffects = [];
   canvasRef = React.createRef();
-  sound = new Sound();
   ctx = null;
 
   componentDidMount() {
@@ -98,9 +97,9 @@ export default class Player extends Component {
       }
 
       if (isDonNote(note)) {
-        this.sound.trigger('don');
+        triggerDon();
       } else {
-        this.sound.trigger('ka');
+        triggerKa();
       }
 
       break;
@@ -126,10 +125,10 @@ export default class Player extends Component {
     const { key } = event.nativeEvent;
 
     if (isDonKey(key)) {
-      this.sound.trigger('don');
+      triggerDon();
     }
     if (isKaKey(key)) {
-      this.sound.trigger('ka');
+      triggerKa();
     }
 
     const badRange = calcNoteIndexRangeInSecondRange(
