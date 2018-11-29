@@ -62,7 +62,7 @@ export const drawJudgeMark = (ctx, y) => {
 export const drawJudgeEffect = (ctx, markY, textY, stateId) => {
   // mark
   ctx.beginPath();
-  ctx.strokeStyle = colors.YELLOW;
+  ctx.strokeStyle = colors.TRANSPARENT_YELLOW;
   ctx.lineWidth = 3;
   ctx.arc(
     positions.PLAYER.JUDGE.X,

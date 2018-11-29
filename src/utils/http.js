@@ -3,7 +3,7 @@ import { Api } from '../config';
 
 export const clients = {
   api: axios.create({
-    baseURL: `http://${Api.host}:${Api.port}`,
+    baseURL: `http://${Api.HOST}:${Api.PORT}`,
   }),
   songle: axios.create({
     baseURL: 'http://widget.songle.jp',
