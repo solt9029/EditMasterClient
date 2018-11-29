@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import { getVideoId } from '../utils/url';
+import { normalizeVideoId } from '../utils/url';
 import ConfigForm from './ConfigForm';
 import propTypes from 'prop-types';
 
@@ -31,7 +31,7 @@ export default class Config extends Component {
           name="videoId"
           object={config.videoId}
           onChange={event => {
-            const videoId = getVideoId(event.target.value);
+            const videoId = normalizeVideoId(event.target.value);
             props.setVideoId(videoId);
             props.fetchSongle(videoId);
           }}

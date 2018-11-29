@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Form, Input, Button } from 'reactstrap';
-import qs from 'qs';
+import { stringifySearchQuery } from '../utils/url';
 import propTypes from 'prop-types';
 
 export default class SearchForm extends Component {
@@ -10,13 +10,8 @@ export default class SearchForm extends Component {
 
   search = () => {
     const { keyword, history } = this.props;
-    const search = qs.stringify(
-      {
-        page: 1,
-        keyword,
-      },
-      { addQueryPrefix: true }
-    );
+
+    const search = stringifySearchQuery(keyword);
     history.push({
       search,
     });
