@@ -4,6 +4,7 @@ import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
 import Shot from '../classes/Shot';
 import JudgeEffect from '../classes/JudgeEffect';
+import PlayerJudgeMarkCanvas from '../containers/PlayerJudgeMarkCanvas';
 import { triggerDon, triggerKa } from '../utils/sound';
 import styled from 'styled-components';
 import {
@@ -17,7 +18,6 @@ import {
   clear,
   drawNote,
   drawBarStartLine,
-  drawJudgeMark,
   drawJudgeEffect,
 } from '../utils/canvas';
 import Layer from '../styled/Layer';
@@ -198,7 +198,6 @@ export default class Player extends Component {
       config.speed.value * percentages.PLAYER.SPEED_TO_SPACE_WIDTH;
 
     clear(this.ctx, playerPane.width - 1, playerPane.height - 1);
-    drawJudgeMark(this.ctx, (playerPane.height - 1) / 2);
 
     const initialNoteX = calcInitialNoteX(
       currentTime,
@@ -295,6 +294,7 @@ export default class Player extends Component {
 
     return (
       <div>
+        <PlayerJudgeMarkCanvas />
         <Layer
           tabIndex={0}
           onKeyDown={this.playMode}
