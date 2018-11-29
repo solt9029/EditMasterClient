@@ -1,5 +1,10 @@
 import { numbers, percentages, positions, sizes } from '../constants/';
 
+/**
+ *
+ * @param {number} bpm
+ * @return {number}
+ */
 export const calcSecondsPerNote = bpm => {
   const barPerMinute = bpm / numbers.BEAT;
   const barPerSecond = barPerMinute / 60;
@@ -23,6 +28,14 @@ export const calcNoteIndexRangeInSecondRange = (
   return [initialNoteIndex, finalNoteIndex];
 };
 
+/**
+ *
+ * @param {number} currentTime
+ * @param {number} bpm
+ * @param {number} offset
+ * @param {number} speed
+ * @return {number}
+ */
 export const calcInitialNoteX = (currentTime, bpm, offset, speed) => {
   const spaceWidth = speed * percentages.PLAYER.SPEED_TO_SPACE_WIDTH;
   const initialNoteX =
@@ -89,6 +102,11 @@ export const calcCaret = (mouseX, mouseY, width, division) => {
   return { x, y, divisionIndex, barIndex };
 };
 
+/**
+ *
+ * @param {number} notesLength
+ * @return {number}
+ */
 export const calcEditorCanvasHeight = notesLength => {
   return (
     Math.ceil(notesLength / numbers.NOTES_PER_BAR) *
@@ -121,6 +139,11 @@ export const calcCurrentTimeMark = (width, bpm, offset, currentTime) => {
   return { x, y };
 };
 
+/**
+ *
+ * @param {number} notesLength
+ * @return {number}
+ */
 export const calcBarNum = notesLength => {
   return Math.ceil(notesLength / numbers.NOTES_PER_BAR);
 };

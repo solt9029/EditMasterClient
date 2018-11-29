@@ -3,6 +3,7 @@ import { ids } from '../constants';
 /**
  *
  * @param {number} note
+ * @return {boolean}
  */
 export const isDon = note => {
   return (
@@ -14,6 +15,11 @@ export const isDon = note => {
   );
 };
 
+/**
+ *
+ * @param {number} note
+ * @return {boolean}
+ */
 export const isKa = note => {
   return (
     note === ids.NOTE.KA ||
@@ -23,6 +29,11 @@ export const isKa = note => {
   );
 };
 
+/**
+ *
+ * @param {number} note
+ * @return {boolean}
+ */
 export const hasState = note => {
   return (
     note === ids.NOTE.DON ||
@@ -32,6 +43,11 @@ export const hasState = note => {
   );
 };
 
+/**
+ *
+ * @param {number} note
+ * @return {boolean}
+ */
 export const isNote = note => {
   return (
     note === ids.NOTE.DON ||
