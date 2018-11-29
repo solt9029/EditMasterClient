@@ -1,5 +1,5 @@
 import { required, number, validate, maxLength } from '../utils/validations';
-import { getSongle } from '../utils/http';
+import { fetchSongBeat } from '../utils/http';
 import { actionTypes } from '../constants/';
 
 export const reset = () => ({
@@ -84,7 +84,7 @@ export const setComment = (value, touched = true) => {
 export const fetchSongle = videoId => {
   return async dispatch => {
     try {
-      const result = await getSongle(videoId);
+      const result = await fetchSongBeat(videoId);
       if (!result.data.beats) {
         return;
       }
