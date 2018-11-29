@@ -10,7 +10,12 @@ export const clients = {
   }),
 };
 
-export const getSongle = videoId => {
+/**
+ *
+ * @param {string} videoId
+ * @return {Object}
+ */
+export const fetchSongBeat = videoId => {
   return clients.songle.get('/api/v1/song/beat.json', {
     params: {
       url: `www.youtube.com/watch?v=${videoId}`,
@@ -18,6 +23,11 @@ export const getSongle = videoId => {
   });
 };
 
+/**
+ *
+ * @param {Object} data
+ * @return {Object}
+ */
 export const createScore = data => {
   return clients.api.post('/scores/create', data);
 };
@@ -28,7 +38,7 @@ export const createScore = data => {
  * @param {string} keyword
  * @return {Object}
  */
-export const getScores = (page, keyword) => {
+export const fetchScores = (page, keyword) => {
   return clients.api.get('/scores', {
     params: {
       page,
@@ -42,6 +52,6 @@ export const getScores = (page, keyword) => {
  * @param {number} id
  * @return {Object}
  */
-export const getScore = id => {
+export const fetchScore = id => {
   return clients.api.get(`/scores/${id}`);
 };
