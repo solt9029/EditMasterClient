@@ -1,15 +1,25 @@
 import React, { Component } from 'react';
 import ReactPaginate from 'react-paginate';
-import qs from 'qs';
 import propTypes from 'prop-types';
+import { parseSearchQuery, stringifySearchQuery } from '../utils/url';
 
 export default class ScoreCardPaginate extends Component {
   componentWillUnmount() {
     this.props.reset();
   }
 
+  onPageChange = data => {
+    const { location, history } = this.props;
+
+    const { keyword } = parseSearchQuery(location.search);
+    const search = stringifySearchQuery(keyword, data.selected + 1);
+    history.push({
+      search,
+    });
+  };
+
   render() {
-    const { currentPage, lastPage, location, history } = this.props;
+    const { currentPage, lastPage } = this.props;
 
     return (
       <ReactPaginate
@@ -20,22 +30,7 @@ export default class ScoreCardPaginate extends Component {
         pageCount={lastPage}
         marginPagesDisplayed={1}
         pageRangeDisplayed={3}
-        onPageChange={data => {
-          const query = qs.parse(location.search, {
-            ignoreQueryPrefix: true,
-          });
-          const keyword = query.keyword ? query.keyword : '';
-          const search = qs.stringify(
-            {
-              page: data.selected + 1,
-              keyword,
-            },
-            { addQueryPrefix: true }
-          );
-          history.push({
-            search,
-          });
-        }}
+        onPageChange={this.onPageChange}
         activeClassName="active"
         breakClassName="page-item"
         breakLabel={<a className="page-link">...</a>}
