@@ -1,12 +1,13 @@
 import { Sizes } from '../constants/';
 
 export default class JudgeEffect {
-  constructor(y, stateId) {
+  g = 1;
+  limit = 10;
+
+  constructor(y, state) {
     this.judgeMarkY = y;
     this.judgeTextY = y - Sizes.PLAYER.NORMAL.OUTSIDE;
-    this.g = 1;
-    this.stateId = stateId;
-    this.limit = 10;
+    this.state = state;
   }
 
   move(y) {
