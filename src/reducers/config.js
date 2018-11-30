@@ -1,4 +1,4 @@
-import { actionTypes } from '../constants/';
+import { ActionTypes } from '../constants/';
 
 const defaultConfig = {
   username: '通りすがりの創作の達人',
@@ -44,7 +44,7 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case actionTypes.SCORES_NEW_VIEW.SET_DEFAULT_SCORE: {
+    case ActionTypes.SCORES_NEW_VIEW.SET_DEFAULT_SCORE: {
       const { username, videoId, bpm, offset, comment, speed } = defaultConfig;
       return {
         ...state,
@@ -80,7 +80,7 @@ export default (state = initialState, action) => {
         },
       };
     }
-    case actionTypes.SCORES_SHOW_VIEW.FINISH_REQUEST_SUCCESS: {
+    case ActionTypes.SCORES_SHOW_VIEW.FINISH_REQUEST_SUCCESS: {
       const {
         username,
         videoId,
@@ -123,9 +123,9 @@ export default (state = initialState, action) => {
         },
       };
     }
-    case actionTypes.CONFIG.RESET:
+    case ActionTypes.CONFIG.RESET:
       return initialState;
-    case actionTypes.CONFIG.SET_USERNAME:
+    case ActionTypes.CONFIG.SET_USERNAME:
       return {
         ...state,
         username: {
@@ -134,7 +134,7 @@ export default (state = initialState, action) => {
           touched: action.payload.touched,
         },
       };
-    case actionTypes.CONFIG.SET_VIDEO_ID:
+    case ActionTypes.CONFIG.SET_VIDEO_ID:
       return {
         ...state,
         videoId: {
@@ -143,7 +143,7 @@ export default (state = initialState, action) => {
           touched: action.payload.touched,
         },
       };
-    case actionTypes.CONFIG.SET_BPM:
+    case ActionTypes.CONFIG.SET_BPM:
       return {
         ...state,
         bpm: {
@@ -152,7 +152,7 @@ export default (state = initialState, action) => {
           touched: action.payload.touched,
         },
       };
-    case actionTypes.CONFIG.SET_OFFSET:
+    case ActionTypes.CONFIG.SET_OFFSET:
       return {
         ...state,
         offset: {
@@ -161,7 +161,7 @@ export default (state = initialState, action) => {
           touched: action.payload.touched,
         },
       };
-    case actionTypes.CONFIG.SET_SPEED:
+    case ActionTypes.CONFIG.SET_SPEED:
       return {
         ...state,
         speed: {
@@ -170,7 +170,7 @@ export default (state = initialState, action) => {
           touched: action.payload.touched,
         },
       };
-    case actionTypes.CONFIG.SET_COMMENT:
+    case ActionTypes.CONFIG.SET_COMMENT:
       return {
         ...state,
         comment: {

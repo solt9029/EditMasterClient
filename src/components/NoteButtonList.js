@@ -1,7 +1,7 @@
 import React from 'react';
 import { Row } from 'reactstrap';
 import NoteButton from '../components/NoteButton';
-import { ids } from '../constants';
+import { Ids } from '../constants';
 import Container from '../styled/Container';
 
 const notes = [
@@ -9,49 +9,49 @@ const notes = [
     src: '/images/don.png',
     color: 'danger',
     label: 'ドン',
-    value: ids.NOTE.DON,
+    value: Ids.NOTE.DON,
   },
   {
     src: '/images/ka.png',
     color: 'primary',
     label: 'カッ',
-    value: ids.NOTE.KA,
+    value: Ids.NOTE.KA,
   },
   {
     src: '/images/bigdon.png',
     color: 'danger',
     label: '大ドン',
-    value: ids.NOTE.BIGDON,
+    value: Ids.NOTE.BIGDON,
   },
   {
     src: '/images/bigka.png',
     color: 'primary',
     label: '大カッ',
-    value: ids.NOTE.BIGKA,
+    value: Ids.NOTE.BIGKA,
   },
   {
     src: '/images/renda.png',
     color: 'warning',
     label: '連打',
-    value: ids.NOTE.RENDA,
+    value: Ids.NOTE.RENDA,
   },
   {
     src: '/images/bigrenda.png',
     color: 'warning',
     label: '大連打',
-    value: ids.NOTE.BIGRENDA,
+    value: Ids.NOTE.BIGRENDA,
   },
   {
     src: '/images/balloon.png',
     color: 'danger',
     label: '風船',
-    value: ids.NOTE.BALLOON,
+    value: Ids.NOTE.BALLOON,
   },
   {
     src: '/images/space.png',
     color: 'light',
     label: '空白',
-    value: ids.NOTE.SPACE,
+    value: Ids.NOTE.SPACE,
   },
 ];
 

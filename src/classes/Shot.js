@@ -1,9 +1,9 @@
-import { positions } from '../constants/';
+import { Positions } from '../constants/';
 
 export default class Shot {
   constructor(y, id) {
     this.id = id;
-    this.x = positions.PLAYER.JUDGE.X;
+    this.x = Positions.PLAYER.JUDGE.X;
     this.y = y;
     this.g = 1;
     this.limit = 5;

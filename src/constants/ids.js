@@ -1,4 +1,4 @@
-const ids = {
+const Ids = {
   // ids.NOTE is also used for keys
   NOTE: {
     SPACE: 0,
@@ -26,4 +26,4 @@ const ids = {
   },
 };
 
-export default ids;
+export default Ids;

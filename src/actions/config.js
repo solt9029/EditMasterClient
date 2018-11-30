@@ -1,9 +1,9 @@
 import { required, number, validate, maxLength } from '../utils/validations';
 import { fetchSongBeat } from '../utils/http';
-import { actionTypes } from '../constants/';
+import { ActionTypes } from '../constants/';
 
 export const reset = () => ({
-  type: actionTypes.CONFIG.RESET,
+  type: ActionTypes.CONFIG.RESET,
 });
 
 const maxLength20 = maxLength(20);
@@ -12,7 +12,7 @@ const maxLength140 = maxLength(140);
 export const setUsername = (value, touched = true) => {
   const errors = validate(value, [required, maxLength20]);
   return {
-    type: actionTypes.CONFIG.SET_USERNAME,
+    type: ActionTypes.CONFIG.SET_USERNAME,
     payload: {
       value,
       errors,
@@ -24,7 +24,7 @@ export const setUsername = (value, touched = true) => {
 export const setVideoId = (value, touched = true) => {
   const errors = validate(value, [required]);
   return {
-    type: actionTypes.CONFIG.SET_VIDEO_ID,
+    type: ActionTypes.CONFIG.SET_VIDEO_ID,
     payload: {
       value,
       errors,
@@ -36,7 +36,7 @@ export const setVideoId = (value, touched = true) => {
 export const setBpm = (value, touched = true) => {
   const errors = validate(value, [required, number]);
   return {
-    type: actionTypes.CONFIG.SET_BPM,
+    type: ActionTypes.CONFIG.SET_BPM,
     payload: {
       value,
       errors,
@@ -48,7 +48,7 @@ export const setBpm = (value, touched = true) => {
 export const setOffset = (value, touched = true) => {
   const errors = validate(value, [required, number]);
   return {
-    type: actionTypes.CONFIG.SET_OFFSET,
+    type: ActionTypes.CONFIG.SET_OFFSET,
     payload: {
       value,
       errors,
@@ -60,7 +60,7 @@ export const setOffset = (value, touched = true) => {
 export const setSpeed = (value, touched = true) => {
   const errors = validate(value, [required, number]);
   return {
-    type: actionTypes.CONFIG.SET_SPEED,
+    type: ActionTypes.CONFIG.SET_SPEED,
     payload: {
       value,
       errors,
@@ -72,7 +72,7 @@ export const setSpeed = (value, touched = true) => {
 export const setComment = (value, touched = true) => {
   const errors = validate(value, [maxLength140]);
   return {
-    type: actionTypes.CONFIG.SET_COMMENT,
+    type: ActionTypes.CONFIG.SET_COMMENT,
     payload: {
       value,
       errors,

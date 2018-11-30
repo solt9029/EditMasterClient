@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { percentages, sizes, positions, numbers, ids } from '../constants';
+import { Percentages, Sizes, Positions, Numbers, Ids } from '../constants';
 import propTypes from 'prop-types';
 import Layer from '../styled/Layer';
 import { calcEditorCanvasHeight, calcBarWidth } from '../utils/calculations';
@@ -27,22 +27,22 @@ export default class EditorNotesCanvas extends Component {
     const barWidth = calcBarWidth(width);
 
     // notes
-    const actualBarWidth = barWidth * (1 - percentages.EDITOR.BAR_START_LINE); // left side of initial beat line is not available
-    const spaceWidth = actualBarWidth / numbers.NOTES_PER_BAR;
+    const actualBarWidth = barWidth * (1 - Percentages.EDITOR.BAR_START_LINE); // left side of initial beat line is not available
+    const spaceWidth = actualBarWidth / Numbers.NOTES_PER_BAR;
     const barStartLineX =
-      positions.EDITOR.BAR.X + barWidth * percentages.EDITOR.BAR_START_LINE;
+      Positions.EDITOR.BAR.X + barWidth * Percentages.EDITOR.BAR_START_LINE;
 
     for (let i = notes.length - 1; i >= 0; i--) {
       const note = notes[i];
-      if (note === ids.NOTE.SPACE) {
+      if (note === Ids.NOTE.SPACE) {
         continue;
       }
-      const c = i % numbers.NOTES_PER_BAR;
-      const l = Math.floor(i / numbers.NOTES_PER_BAR);
+      const c = i % Numbers.NOTES_PER_BAR;
+      const l = Math.floor(i / Numbers.NOTES_PER_BAR);
       const x = barStartLineX + spaceWidth * c;
-      const y = sizes.EDITOR.BAR.OUTSIDE.HEIGHT * (l + 0.5);
-      const previousNote = i > 0 ? notes[i - 1] : ids.NOTE.SPACE;
-      const nextNote = i < notes.length - 1 ? notes[i + 1] : ids.NOTE.SPACE;
+      const y = Sizes.EDITOR.BAR.OUTSIDE.HEIGHT * (l + 0.5);
+      const previousNote = i > 0 ? notes[i - 1] : Ids.NOTE.SPACE;
+      const nextNote = i < notes.length - 1 ? notes[i + 1] : Ids.NOTE.SPACE;
 
       drawNote(
         this.ctx,

@@ -1,14 +1,14 @@
 import React from 'react';
 import { Row } from 'reactstrap';
 import PaletteButton from '../components/PaletteButton';
-import { numbers } from '../constants/';
+import { Numbers } from '../constants/';
 import Container from '../styled/Container';
 
 const DivisionButtonList = ({ currentValue, setValue, paletteWidth }) => {
   return (
     <Container bottom={30}>
       <Row>
-        {numbers.DIVISIONS.map((value, i) => {
+        {Numbers.DIVISIONS.map((value, i) => {
           return (
             <PaletteButton
               active={currentValue === value}

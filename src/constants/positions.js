@@ -1,4 +1,4 @@
-const positions = {
+const Positions = {
   PLAYER: {
     JUDGE: {
       X: 50,
@@ -11,4 +11,4 @@ const positions = {
   },
 };
 
-export default positions;
+export default Positions;

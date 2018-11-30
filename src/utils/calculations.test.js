@@ -4,7 +4,7 @@ import {
   calcInitialNoteX,
   calcNoteIndexRangeInCanvas,
 } from './calculations';
-import { seconds } from '../constants/';
+import { Seconds } from '../constants/';
 
 describe('calculations', () => {
   it('calcSecondsPerNote(240) to be 1 / 96', () => {
@@ -17,7 +17,7 @@ describe('calculations', () => {
 
   it('calcNoteIndexRangeInSecondRange(seconds.RANGE.AUTO, 10, 150, 1) to equal [539, 541]', () => {
     expect(
-      calcNoteIndexRangeInSecondRange(seconds.RANGE.AUTO, 10, 150, 1)
+      calcNoteIndexRangeInSecondRange(Seconds.RANGE.AUTO, 10, 150, 1)
     ).toEqual([539, 541]);
   });
 

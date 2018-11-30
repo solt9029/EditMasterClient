@@ -1,4 +1,4 @@
-import { ids } from '../constants';
+import { Ids } from '../constants';
 
 /**
  *
@@ -7,11 +7,11 @@ import { ids } from '../constants';
  */
 export const isDon = note => {
   return (
-    note === ids.NOTE.DON ||
-    note === ids.NOTE.BIGDON ||
-    note === ids.NOTE.RENDA ||
-    note === ids.NOTE.BIGRENDA ||
-    note === ids.NOTE.BALLOON
+    note === Ids.NOTE.DON ||
+    note === Ids.NOTE.BIGDON ||
+    note === Ids.NOTE.RENDA ||
+    note === Ids.NOTE.BIGRENDA ||
+    note === Ids.NOTE.BALLOON
   );
 };
 
@@ -22,10 +22,10 @@ export const isDon = note => {
  */
 export const isKa = note => {
   return (
-    note === ids.NOTE.KA ||
-    note === ids.NOTE.BIGKA ||
-    note === ids.NOTE.RENDA ||
-    note === ids.NOTE.BIGRENDA
+    note === Ids.NOTE.KA ||
+    note === Ids.NOTE.BIGKA ||
+    note === Ids.NOTE.RENDA ||
+    note === Ids.NOTE.BIGRENDA
   );
 };
 
@@ -36,10 +36,10 @@ export const isKa = note => {
  */
 export const hasState = note => {
   return (
-    note === ids.NOTE.DON ||
-    note === ids.NOTE.KA ||
-    note === ids.NOTE.BIGDON ||
-    note === ids.NOTE.BIGKA
+    note === Ids.NOTE.DON ||
+    note === Ids.NOTE.KA ||
+    note === Ids.NOTE.BIGDON ||
+    note === Ids.NOTE.BIGKA
   );
 };
 
@@ -50,13 +50,13 @@ export const hasState = note => {
  */
 export const isNote = note => {
   return (
-    note === ids.NOTE.DON ||
-    note === ids.NOTE.KA ||
-    note === ids.NOTE.BIGDON ||
-    note === ids.NOTE.BIGKA ||
-    note === ids.NOTE.RENDA ||
-    note === ids.NOTE.BIGRENDA ||
-    note === ids.NOTE.BALLOON ||
-    note === ids.NOTE.SPACE
+    note === Ids.NOTE.DON ||
+    note === Ids.NOTE.KA ||
+    note === Ids.NOTE.BIGDON ||
+    note === Ids.NOTE.BIGKA ||
+    note === Ids.NOTE.RENDA ||
+    note === Ids.NOTE.BIGRENDA ||
+    note === Ids.NOTE.BALLOON ||
+    note === Ids.NOTE.SPACE
   );
 };

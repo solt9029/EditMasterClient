@@ -6,7 +6,7 @@ import ScoresShowView from '../containers/ScoresShowView';
 import HelpView from './HelpView';
 import NotFoundView from './NotFoundView';
 import { Switch, Route } from 'react-router-dom';
-import { routes } from '../constants/';
+import { Routes } from '../constants/';
 import ReactGA from 'react-ga';
 import Navbar from '../containers/Navbar';
 
@@ -22,11 +22,11 @@ export default class App extends Component {
       <div>
         <Navbar />
         <Switch>
-          <Route exact path={routes.INDEX} component={IndexView} />
-          <Route exact path={routes.SCORES.INDEX} component={ScoresIndexView} />
-          <Route exact path={routes.SCORES.NEW} component={ScoresNewView} />
-          <Route exact path={routes.SCORES.SHOW} component={ScoresShowView} />
-          <Route exact path={routes.HELP} component={HelpView} />
+          <Route exact path={Routes.INDEX} component={IndexView} />
+          <Route exact path={Routes.SCORES.INDEX} component={ScoresIndexView} />
+          <Route exact path={Routes.SCORES.NEW} component={ScoresNewView} />
+          <Route exact path={Routes.SCORES.SHOW} component={ScoresShowView} />
+          <Route exact path={Routes.HELP} component={HelpView} />
           <Route component={NotFoundView} />
         </Switch>
       </div>

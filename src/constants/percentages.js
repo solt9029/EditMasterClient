@@ -1,4 +1,4 @@
-const percentages = {
+const Percentages = {
   PLAYER: {
     SPEED_TO_SPACE_WIDTH: 3,
   },
@@ -7,4 +7,4 @@ const percentages = {
   },
 };
 
-export default percentages;
+export default Percentages;

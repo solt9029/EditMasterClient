@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ReactYouTube from 'react-youtube';
-import { ids } from '../constants';
+import { Ids } from '../constants';
 import propTypes from 'prop-types';
 
 const opts = {
@@ -41,7 +41,7 @@ export default class YouTube extends Component {
     freshStates();
     setYtPlayerState(event.data);
 
-    if (event.data !== ids.YOUTUBE.PLAYING) {
+    if (event.data !== Ids.YOUTUBE.PLAYING) {
       window.cancelAnimationFrame(this.frameId);
       return;
     }

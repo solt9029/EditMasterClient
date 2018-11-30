@@ -1,4 +1,4 @@
-import { actionTypes } from '../constants';
+import { ActionTypes } from '../constants';
 import { fetchScores } from '../utils/http';
 
 export const fetch = (page, keyword) => {
@@ -15,11 +15,11 @@ export const fetch = (page, keyword) => {
 };
 
 export const startRequest = () => ({
-  type: actionTypes.SCORE_CARD_PAGINATE.START_REQUEST,
+  type: ActionTypes.SCORE_CARD_PAGINATE.START_REQUEST,
 });
 
 export const finishRequestSuccess = (data, currentPage, lastPage) => ({
-  type: actionTypes.SCORE_CARD_PAGINATE.FINISH_REQUEST_SUCCESS,
+  type: ActionTypes.SCORE_CARD_PAGINATE.FINISH_REQUEST_SUCCESS,
   payload: {
     data,
     currentPage,
@@ -28,12 +28,12 @@ export const finishRequestSuccess = (data, currentPage, lastPage) => ({
 });
 
 export const finishRequestError = error => ({
-  type: actionTypes.SCORE_CARD_PAGINATE.FINISH_REQUEST_ERROR,
+  type: ActionTypes.SCORE_CARD_PAGINATE.FINISH_REQUEST_ERROR,
   payload: {
     error,
   },
 });
 
 export const reset = () => ({
-  type: actionTypes.SCORE_CARD_PAGINATE.RESET,
+  type: ActionTypes.SCORE_CARD_PAGINATE.RESET,
 });

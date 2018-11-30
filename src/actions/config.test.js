@@ -1,12 +1,12 @@
 import * as config from './config';
-import { actionTypes } from '../constants/';
+import { ActionTypes } from '../constants/';
 import { required, maxLength } from '../utils/validations';
 
 describe('config actions', () => {
   it('reset action', () => {
     const result = config.reset();
     const expected = {
-      type: actionTypes.CONFIG.RESET,
+      type: ActionTypes.CONFIG.RESET,
     };
     expect(result).toEqual(expected);
   });
@@ -15,7 +15,7 @@ describe('config actions', () => {
     const value = '';
     const result = config.setUsername(value);
     const expected = {
-      type: actionTypes.CONFIG.SET_USERNAME,
+      type: ActionTypes.CONFIG.SET_USERNAME,
       payload: {
         value: value,
         errors: [required(value)],
@@ -30,7 +30,7 @@ describe('config actions', () => {
     const maxLength20 = maxLength(20);
     const result = config.setUsername(value);
     const expected = {
-      type: actionTypes.CONFIG.SET_USERNAME,
+      type: ActionTypes.CONFIG.SET_USERNAME,
       payload: {
         value: value,
         errors: [maxLength20(value)],
@@ -44,7 +44,7 @@ describe('config actions', () => {
     const value = 'username';
     const result = config.setUsername(value);
     const expected = {
-      type: actionTypes.CONFIG.SET_USERNAME,
+      type: ActionTypes.CONFIG.SET_USERNAME,
       payload: {
         value: value,
         errors: [],

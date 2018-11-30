@@ -1,10 +1,10 @@
 import {
-  colors,
-  sizes,
-  positions,
-  ids,
-  percentages,
-  numbers,
+  Colors,
+  Sizes,
+  Positions,
+  Ids,
+  Percentages,
+  Numbers,
 } from '../constants/';
 
 export const clear = (ctx, width, height) => {
@@ -13,45 +13,45 @@ export const clear = (ctx, width, height) => {
 };
 
 export const drawBarStartLine = (ctx, x, height) => {
-  ctx.fillStyle = colors.GRAY;
+  ctx.fillStyle = Colors.GRAY;
   ctx.fillRect(
-    x - sizes.PLAYER.BAR_START_LINE.WIDTH / 2,
+    x - Sizes.PLAYER.BAR_START_LINE.WIDTH / 2,
     0,
-    sizes.PLAYER.BAR_START_LINE.WIDTH,
+    Sizes.PLAYER.BAR_START_LINE.WIDTH,
     height
   );
   return;
 };
 
 export const drawCurrentTimeMark = (ctx, x, y) => {
-  ctx.fillStyle = colors.PURPLE;
+  ctx.fillStyle = Colors.PURPLE;
   ctx.fillRect(
-    x - sizes.EDITOR.CURRENT_TIME_MARK.WIDTH / 2,
+    x - Sizes.EDITOR.CURRENT_TIME_MARK.WIDTH / 2,
     y - 2,
-    sizes.EDITOR.CURRENT_TIME_MARK.WIDTH,
-    sizes.EDITOR.BAR.INSIDE.HEIGHT + 4
+    Sizes.EDITOR.CURRENT_TIME_MARK.WIDTH,
+    Sizes.EDITOR.BAR.INSIDE.HEIGHT + 4
   );
   return;
 };
 
 export const drawCaret = (ctx, x, y) => {
-  ctx.fillStyle = colors.YELLOW;
+  ctx.fillStyle = Colors.YELLOW;
   ctx.fillRect(
-    x - sizes.EDITOR.CARET.WIDTH / 2,
+    x - Sizes.EDITOR.CARET.WIDTH / 2,
     y - 2,
-    sizes.EDITOR.CARET.WIDTH,
-    sizes.EDITOR.BAR.INSIDE.HEIGHT + 4
+    Sizes.EDITOR.CARET.WIDTH,
+    Sizes.EDITOR.BAR.INSIDE.HEIGHT + 4
   );
   return;
 };
 
 export const drawJudgeMark = (ctx, y) => {
   ctx.beginPath();
-  ctx.strokeStyle = colors.WHITE;
+  ctx.strokeStyle = Colors.WHITE;
   ctx.arc(
-    positions.PLAYER.JUDGE.X,
+    Positions.PLAYER.JUDGE.X,
     y,
-    sizes.PLAYER.NORMAL.OUTSIDE,
+    Sizes.PLAYER.NORMAL.OUTSIDE,
     0,
     Math.PI * 2
   );
@@ -62,12 +62,12 @@ export const drawJudgeMark = (ctx, y) => {
 export const drawJudgeEffect = (ctx, markY, textY, stateId) => {
   // mark
   ctx.beginPath();
-  ctx.strokeStyle = colors.TRANSPARENT_YELLOW;
+  ctx.strokeStyle = Colors.TRANSPARENT_YELLOW;
   ctx.lineWidth = 3;
   ctx.arc(
-    positions.PLAYER.JUDGE.X,
+    Positions.PLAYER.JUDGE.X,
     markY,
-    sizes.PLAYER.NORMAL.OUTSIDE,
+    Sizes.PLAYER.NORMAL.OUTSIDE,
     0,
     Math.PI * 2
   );
@@ -75,17 +75,17 @@ export const drawJudgeEffect = (ctx, markY, textY, stateId) => {
   ctx.lineWidth = 1;
 
   // text
-  ctx.font = `${sizes.PLAYER.JUDGE_TEXT}px HG行書体, bold`;
+  ctx.font = `${Sizes.PLAYER.JUDGE_TEXT}px HG行書体, bold`;
   let text = '良';
-  let textColor = colors.RED;
+  let textColor = Colors.RED;
   switch (stateId) {
-    case ids.STATE.OK:
+    case Ids.STATE.OK:
       text = '可';
-      textColor = colors.WHITE;
+      textColor = Colors.WHITE;
       break;
-    case ids.STATE.BAD:
+    case Ids.STATE.BAD:
       text = '不可';
-      textColor = colors.BLUE;
+      textColor = Colors.BLUE;
       break;
     default:
       break;
@@ -93,13 +93,13 @@ export const drawJudgeEffect = (ctx, markY, textY, stateId) => {
   ctx.fillStyle = textColor;
   ctx.fillText(
     text,
-    positions.PLAYER.JUDGE.X - (text.length * sizes.PLAYER.JUDGE_TEXT) / 2,
+    Positions.PLAYER.JUDGE.X - (text.length * Sizes.PLAYER.JUDGE_TEXT) / 2,
     textY
   );
-  ctx.strokeStyle = colors.BLACK;
+  ctx.strokeStyle = Colors.BLACK;
   ctx.strokeText(
     text,
-    positions.PLAYER.JUDGE.X - (text.length * sizes.PLAYER.JUDGE_TEXT) / 2,
+    Positions.PLAYER.JUDGE.X - (text.length * Sizes.PLAYER.JUDGE_TEXT) / 2,
     textY
   );
   return;
@@ -107,23 +107,23 @@ export const drawJudgeEffect = (ctx, markY, textY, stateId) => {
 
 export const drawBar = (ctx, x, y, width) => {
   const insideY =
-    y + (sizes.EDITOR.BAR.OUTSIDE.HEIGHT - sizes.EDITOR.BAR.INSIDE.HEIGHT) / 2;
-  ctx.fillStyle = colors.GRAY;
-  ctx.fillRect(x, insideY, width, sizes.EDITOR.BAR.INSIDE.HEIGHT);
+    y + (Sizes.EDITOR.BAR.OUTSIDE.HEIGHT - Sizes.EDITOR.BAR.INSIDE.HEIGHT) / 2;
+  ctx.fillStyle = Colors.GRAY;
+  ctx.fillRect(x, insideY, width, Sizes.EDITOR.BAR.INSIDE.HEIGHT);
 
-  ctx.fillStyle = colors.WHITE;
-  for (let i = 0; i < numbers.BEAT; i++) {
+  ctx.fillStyle = Colors.WHITE;
+  for (let i = 0; i < Numbers.BEAT; i++) {
     const beatLineX =
       x +
       width *
-        (percentages.EDITOR.BAR_START_LINE +
-          ((1 - percentages.EDITOR.BAR_START_LINE) * i) / numbers.BEAT) -
-      sizes.EDITOR.BEAT_LINE.WIDTH / 2;
+        (Percentages.EDITOR.BAR_START_LINE +
+          ((1 - Percentages.EDITOR.BAR_START_LINE) * i) / Numbers.BEAT) -
+      Sizes.EDITOR.BEAT_LINE.WIDTH / 2;
     ctx.fillRect(
       beatLineX,
       insideY - 1,
-      sizes.EDITOR.BEAT_LINE.WIDTH,
-      sizes.EDITOR.BAR.INSIDE.HEIGHT + 2
+      Sizes.EDITOR.BEAT_LINE.WIDTH,
+      Sizes.EDITOR.BAR.INSIDE.HEIGHT + 2
     );
   }
   return;
@@ -133,8 +133,8 @@ export const drawBars = (ctx, width, num) => {
   for (let i = 0; i < num; i++) {
     drawBar(
       ctx,
-      positions.EDITOR.BAR.X,
-      i * sizes.EDITOR.BAR.OUTSIDE.HEIGHT,
+      Positions.EDITOR.BAR.X,
+      i * Sizes.EDITOR.BAR.OUTSIDE.HEIGHT,
       width
     );
   }
@@ -148,28 +148,28 @@ export const drawNote = (
   pane,
   note,
   spaceWidth = 0,
-  previousNote = ids.NOTE.SPACE,
-  nextNote = ids.NOTE.SPACE
+  previousNote = Ids.NOTE.SPACE,
+  nextNote = Ids.NOTE.SPACE
 ) => {
   let noteSize = 'NORMAL';
-  let noteColor = colors.RED;
+  let noteColor = Colors.RED;
 
   switch (note) {
-    case ids.NOTE.KA:
-      noteColor = colors.BLUE;
+    case Ids.NOTE.KA:
+      noteColor = Colors.BLUE;
       break;
-    case ids.NOTE.BIGDON:
+    case Ids.NOTE.BIGDON:
       noteSize = 'BIG';
       break;
-    case ids.NOTE.BIGKA:
+    case Ids.NOTE.BIGKA:
       noteSize = 'BIG';
-      noteColor = colors.BLUE;
+      noteColor = Colors.BLUE;
       break;
-    case ids.NOTE.RENDA:
-      noteColor = colors.YELLOW;
+    case Ids.NOTE.RENDA:
+      noteColor = Colors.YELLOW;
       break;
-    case ids.NOTE.BIGRENDA:
-      noteColor = colors.YELLOW;
+    case Ids.NOTE.BIGRENDA:
+      noteColor = Colors.YELLOW;
       noteSize = 'BIG';
       break;
     default:
@@ -177,9 +177,9 @@ export const drawNote = (
   }
 
   if (
-    note === ids.NOTE.RENDA ||
-    note === ids.NOTE.BIGRENDA ||
-    note === ids.NOTE.BALLOON
+    note === Ids.NOTE.RENDA ||
+    note === Ids.NOTE.BIGRENDA ||
+    note === Ids.NOTE.BALLOON
   ) {
     if (note === previousNote) {
       if (note === nextNote) {
@@ -187,20 +187,20 @@ export const drawNote = (
         ctx.fillStyle = noteColor;
         ctx.fillRect(
           x - spaceWidth - 1,
-          y - sizes[pane][noteSize].OUTSIDE,
+          y - Sizes[pane][noteSize].OUTSIDE,
           spaceWidth * 2 + 2,
-          sizes[pane][noteSize].OUTSIDE * 2
+          Sizes[pane][noteSize].OUTSIDE * 2
         );
 
-        ctx.strokeStyle = colors.BLACK;
+        ctx.strokeStyle = Colors.BLACK;
         ctx.beginPath();
-        ctx.moveTo(x - spaceWidth - 1, y - sizes[pane][noteSize].OUTSIDE);
-        ctx.lineTo(x + spaceWidth + 1, y - sizes[pane][noteSize].OUTSIDE);
+        ctx.moveTo(x - spaceWidth - 1, y - Sizes[pane][noteSize].OUTSIDE);
+        ctx.lineTo(x + spaceWidth + 1, y - Sizes[pane][noteSize].OUTSIDE);
         ctx.stroke();
 
         ctx.beginPath();
-        ctx.moveTo(x - spaceWidth - 1, y + sizes[pane][noteSize].OUTSIDE);
-        ctx.lineTo(x + spaceWidth + 1, y + sizes[pane][noteSize].OUTSIDE);
+        ctx.moveTo(x - spaceWidth - 1, y + Sizes[pane][noteSize].OUTSIDE);
+        ctx.lineTo(x + spaceWidth + 1, y + Sizes[pane][noteSize].OUTSIDE);
         ctx.stroke();
 
         return;
@@ -209,8 +209,8 @@ export const drawNote = (
       // end
       ctx.beginPath();
       ctx.fillStyle = noteColor;
-      ctx.strokeStyle = colors.BLACK;
-      ctx.arc(x, y, sizes[pane][noteSize].OUTSIDE, 0, Math.PI * 2);
+      ctx.strokeStyle = Colors.BLACK;
+      ctx.arc(x, y, Sizes[pane][noteSize].OUTSIDE, 0, Math.PI * 2);
       ctx.fill();
       ctx.stroke();
       return;
@@ -219,15 +219,15 @@ export const drawNote = (
 
   // start
   ctx.beginPath();
-  ctx.fillStyle = colors.WHITE;
-  ctx.strokeStyle = colors.BLACK;
-  ctx.arc(x, y, sizes[pane][noteSize].OUTSIDE, 0, Math.PI * 2);
+  ctx.fillStyle = Colors.WHITE;
+  ctx.strokeStyle = Colors.BLACK;
+  ctx.arc(x, y, Sizes[pane][noteSize].OUTSIDE, 0, Math.PI * 2);
   ctx.fill();
   ctx.stroke();
 
   ctx.beginPath();
   ctx.fillStyle = noteColor;
-  ctx.arc(x, y, sizes[pane][noteSize].INSIDE, 0, Math.PI * 2);
+  ctx.arc(x, y, Sizes[pane][noteSize].INSIDE, 0, Math.PI * 2);
   ctx.fill();
 
   return;

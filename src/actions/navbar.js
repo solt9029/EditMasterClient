@@ -1,7 +1,7 @@
-import { actionTypes } from '../constants/';
+import { ActionTypes } from '../constants/';
 
 export const setKeyword = keyword => ({
-  type: actionTypes.NAVBAR.SET_KEYWORD,
+  type: ActionTypes.NAVBAR.SET_KEYWORD,
   payload: {
     keyword,
   },

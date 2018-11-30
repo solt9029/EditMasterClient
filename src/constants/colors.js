@@ -1,4 +1,4 @@
-const colors = {
+const Colors = {
   RED: '#f00',
   YELLOW: '#ff0',
   TRANSPARENT_YELLOW: 'rgba(255, 255, 0, 0.5)',
@@ -9,4 +9,4 @@ const colors = {
   PURPLE: '#800080',
 };
 
-export default colors;
+export default Colors;

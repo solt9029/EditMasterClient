@@ -1,17 +1,17 @@
-import { actionTypes } from '../constants';
+import { ActionTypes } from '../constants';
 import { fetchScore } from '../utils/http';
 
 export const finishRequestError = error => ({
-  type: actionTypes.SCORES_SHOW_VIEW.FINISH_REQUEST_ERROR,
+  type: ActionTypes.SCORES_SHOW_VIEW.FINISH_REQUEST_ERROR,
   payload: { error },
 });
 
 export const startRequest = () => ({
-  type: actionTypes.SCORES_SHOW_VIEW.START_REQUEST,
+  type: ActionTypes.SCORES_SHOW_VIEW.START_REQUEST,
 });
 
 export const finishRequestSuccess = (notes, config) => ({
-  type: actionTypes.SCORES_SHOW_VIEW.FINISH_REQUEST_SUCCESS,
+  type: ActionTypes.SCORES_SHOW_VIEW.FINISH_REQUEST_SUCCESS,
   payload: {
     notes,
     config,
@@ -19,7 +19,7 @@ export const finishRequestSuccess = (notes, config) => ({
 });
 
 export const reset = () => ({
-  type: actionTypes.SCORES_SHOW_VIEW.RESET,
+  type: ActionTypes.SCORES_SHOW_VIEW.RESET,
 });
 
 export const fetch = id => {

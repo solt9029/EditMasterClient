@@ -1,23 +1,23 @@
-import { actionTypes } from '../constants/';
+import { ActionTypes } from '../constants/';
 
 export const setNote = note => ({
-  type: actionTypes.PALETTE.SET_NOTE,
+  type: ActionTypes.PALETTE.SET_NOTE,
   payload: {
     note: +note,
   },
 });
 
 export const setDivision = division => ({
-  type: actionTypes.PALETTE.SET_DIVISION,
+  type: ActionTypes.PALETTE.SET_DIVISION,
   payload: {
     division: +division,
   },
 });
 
 export const reset = () => ({
-  type: actionTypes.PALETTE.RESET,
+  type: ActionTypes.PALETTE.RESET,
 });
 
 export const toggleMode = () => ({
-  type: actionTypes.PALETTE.TOGGLE_MODE,
+  type: ActionTypes.PALETTE.TOGGLE_MODE,
 });

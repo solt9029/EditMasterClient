@@ -1,4 +1,4 @@
-import { ids, numbers, actionTypes } from '../constants/';
+import { Ids, Numbers, ActionTypes } from '../constants/';
 
 /* eslint-disable */
 export const defaultNotes = [
@@ -20,20 +20,20 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case actionTypes.SCORES_NEW_VIEW.SET_DEFAULT_SCORE: {
+    case ActionTypes.SCORES_NEW_VIEW.SET_DEFAULT_SCORE: {
       return {
         ...state,
         notes: defaultNotes,
       };
     }
-    case actionTypes.SCORES_SHOW_VIEW.FINISH_REQUEST_SUCCESS: {
+    case ActionTypes.SCORES_SHOW_VIEW.FINISH_REQUEST_SUCCESS: {
       const { notes } = action.payload;
       return {
         ...state,
         notes,
       };
     }
-    case actionTypes.EDITOR.CHANGE_NOTES: {
+    case ActionTypes.EDITOR.CHANGE_NOTES: {
       let notes = state.notes.concat();
       for (let i = 0; i < action.payload.notes.length; i++) {
         notes[action.payload.index + i] = action.payload.notes[i];
@@ -43,33 +43,33 @@ export default (state = initialState, action) => {
         notes,
       };
     }
-    case actionTypes.EDITOR.ADD_BAR: {
+    case ActionTypes.EDITOR.ADD_BAR: {
       let notes = state.notes.concat();
-      for (let i = 0; i < numbers.NOTES_PER_BAR; i++) {
-        notes.push(ids.NOTE.SPACE);
+      for (let i = 0; i < Numbers.NOTES_PER_BAR; i++) {
+        notes.push(Ids.NOTE.SPACE);
       }
       return {
         ...state,
         notes,
       };
     }
-    case actionTypes.EDITOR.RESET: {
+    case ActionTypes.EDITOR.RESET: {
       return initialState;
     }
-    case actionTypes.EDITOR.REMOVE_BAR: {
-      if (state.notes.length < numbers.NOTES_PER_BAR * 2) {
+    case ActionTypes.EDITOR.REMOVE_BAR: {
+      if (state.notes.length < Numbers.NOTES_PER_BAR * 2) {
         return state;
       }
       const notes = state.notes.slice(
         0,
-        state.notes.length - numbers.NOTES_PER_BAR
+        state.notes.length - Numbers.NOTES_PER_BAR
       );
       return {
         ...state,
         notes,
       };
     }
-    case actionTypes.EDITOR.SET_NOTES: {
+    case ActionTypes.EDITOR.SET_NOTES: {
       return {
         ...state,
         notes: action.payload.notes,
