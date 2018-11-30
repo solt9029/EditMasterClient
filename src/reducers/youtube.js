@@ -1,29 +1,29 @@
-import { ids, actionTypes } from '../constants/';
+import { Ids, ActionTypes } from '../constants/';
 
 const initialState = {
   ytPlayer: null,
-  ytPlayerState: ids.YOUTUBE.UNSTARTED,
+  ytPlayerState: Ids.YOUTUBE.UNSTARTED,
   currentTime: 0,
 };
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case actionTypes.YOUTUBE.SET_YT_PLAYER:
+    case ActionTypes.YOUTUBE.SET_YT_PLAYER:
       return {
         ...state,
         ytPlayer: action.payload.ytPlayer,
       };
-    case actionTypes.YOUTUBE.SET_CURRENT_TIME:
+    case ActionTypes.YOUTUBE.SET_CURRENT_TIME:
       return {
         ...state,
         currentTime: action.payload.currentTime,
       };
-    case actionTypes.YOUTUBE.SET_YT_PLAYER_STATE:
+    case ActionTypes.YOUTUBE.SET_YT_PLAYER_STATE:
       return {
         ...state,
         ytPlayerState: action.payload.ytPlayerState,
       };
-    case actionTypes.YOUTUBE.RESET:
+    case ActionTypes.YOUTUBE.RESET:
       return initialState;
     default:
       return state;

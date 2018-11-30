@@ -1,4 +1,4 @@
-import { actionTypes } from '../constants';
+import { ActionTypes } from '../constants';
 
 const initialState = {
   data: [],
@@ -10,13 +10,13 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case actionTypes.SCORE_CARD_PAGINATE.START_REQUEST:
+    case ActionTypes.SCORE_CARD_PAGINATE.START_REQUEST:
       return {
         ...initialState,
         isLoading: true,
         error: null,
       };
-    case actionTypes.SCORE_CARD_PAGINATE.FINISH_REQUEST_SUCCESS:
+    case ActionTypes.SCORE_CARD_PAGINATE.FINISH_REQUEST_SUCCESS:
       const { data, currentPage, lastPage } = action.payload;
       return {
         ...state,
@@ -26,14 +26,14 @@ export default (state = initialState, action) => {
         isLoading: false,
         error: null,
       };
-    case actionTypes.SCORE_CARD_PAGINATE.FINISH_REQUEST_ERROR:
+    case ActionTypes.SCORE_CARD_PAGINATE.FINISH_REQUEST_ERROR:
       const { error } = action.payload;
       return {
         ...state,
         isLoading: false,
         error,
       };
-    case actionTypes.SCORE_CARD_PAGINATE.RESET:
+    case ActionTypes.SCORE_CARD_PAGINATE.RESET:
       return initialState;
     default:
       return state;

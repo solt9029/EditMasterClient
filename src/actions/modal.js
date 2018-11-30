@@ -1,8 +1,8 @@
-import { actionTypes } from '../constants/';
+import { ActionTypes } from '../constants/';
 import { createScore } from '../utils/http';
 
 export const startCreate = () => ({
-  type: actionTypes.MODAL.START_CREATE,
+  type: ActionTypes.MODAL.START_CREATE,
 });
 
 export const create = () => {
@@ -34,14 +34,14 @@ export const create = () => {
 };
 
 export const finishCreateSuccess = id => ({
-  type: actionTypes.MODAL.FINISH_CREATE_SUCCESS,
+  type: ActionTypes.MODAL.FINISH_CREATE_SUCCESS,
   payload: {
     id,
   },
 });
 
 export const finishCreateError = errors => ({
-  type: actionTypes.MODAL.FINISH_CREATE_ERROR,
+  type: ActionTypes.MODAL.FINISH_CREATE_ERROR,
   payload: {
     errors,
   },

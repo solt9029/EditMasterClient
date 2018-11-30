@@ -1,4 +1,4 @@
-import { actionTypes } from '../constants/';
+import { ActionTypes } from '../constants/';
 
 const initialState = {
   panes: {
@@ -19,7 +19,7 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case actionTypes.IDE.SET_PANES:
+    case ActionTypes.IDE.SET_PANES:
       return {
         ...state,
         panes: action.payload.panes,

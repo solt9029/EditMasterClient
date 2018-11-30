@@ -1,4 +1,4 @@
-import { actionTypes } from '../constants';
+import { ActionTypes } from '../constants';
 
 const initialState = {
   error: null,
@@ -7,19 +7,19 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case actionTypes.SCORES_SHOW_VIEW.START_REQUEST:
+    case ActionTypes.SCORES_SHOW_VIEW.START_REQUEST:
       return {
         ...initialState,
         isLoading: true,
       };
-    case actionTypes.SCORES_SHOW_VIEW.FINISH_REQUEST_ERROR:
+    case ActionTypes.SCORES_SHOW_VIEW.FINISH_REQUEST_ERROR:
       const { error } = action.payload;
       return {
         ...state,
         isLoading: false,
         error,
       };
-    case actionTypes.SCORES_SHOW_VIEW.FINISH_REQUEST_SUCCESS:
+    case ActionTypes.SCORES_SHOW_VIEW.FINISH_REQUEST_SUCCESS:
       return {
         ...state,
         isLoading: false,

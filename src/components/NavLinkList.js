@@ -1,7 +1,7 @@
 import React from 'react';
 import { Nav, NavLink } from 'reactstrap';
 import styled from 'styled-components';
-import { routes } from '../constants';
+import { Routes } from '../constants';
 import { NavLink as RRNavLink } from 'react-router-dom';
 import { matchScoresCreatePathname } from '../utils/url';
 
@@ -24,14 +24,14 @@ const NavLinkList = () => {
       <StyledNavLink
         tag={RRNavLink}
         isActive={isScoresCreateActive}
-        to={routes.SCORES.NEW}
+        to={Routes.SCORES.NEW}
       >
         創作
       </StyledNavLink>
-      <StyledNavLink tag={RRNavLink} exact to={routes.SCORES.INDEX}>
+      <StyledNavLink tag={RRNavLink} exact to={Routes.SCORES.INDEX}>
         作品一覧
       </StyledNavLink>
-      <StyledNavLink tag={RRNavLink} exact to={routes.HELP}>
+      <StyledNavLink tag={RRNavLink} exact to={Routes.HELP}>
         ヘルプ
       </StyledNavLink>
     </Nav>

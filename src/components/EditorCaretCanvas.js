@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { numbers, keys } from '../constants';
+import { Numbers, Keys } from '../constants';
 import Layer from '../styled/Layer';
 import { drawCaret, clear } from '../utils/canvas';
 import { calcCaret, calcEditorCanvasHeight } from '../utils/calculations';
@@ -30,24 +30,24 @@ export default class EditorCaretCanvas extends Component {
     );
 
     switch (event.nativeEvent.key) {
-      case keys.COPY:
+      case Keys.COPY:
         this.clipboard = this.props.notes.slice(
-          barIndex * numbers.NOTES_PER_BAR,
-          (barIndex + 1) * numbers.NOTES_PER_BAR
+          barIndex * Numbers.NOTES_PER_BAR,
+          (barIndex + 1) * Numbers.NOTES_PER_BAR
         );
         return;
-      case keys.PASTE:
+      case Keys.PASTE:
         if (!this.clipboard) {
           return;
         }
-        if (this.clipboard.length !== numbers.NOTES_PER_BAR) {
+        if (this.clipboard.length !== Numbers.NOTES_PER_BAR) {
           return;
         }
         this.props.changeNotes(
-          barIndex * numbers.NOTES_PER_BAR,
+          barIndex * Numbers.NOTES_PER_BAR,
           this.clipboard
         );
-        if ((barIndex + 1) * numbers.NOTES_PER_BAR >= this.props.notesLength) {
+        if ((barIndex + 1) * Numbers.NOTES_PER_BAR >= this.props.notesLength) {
           this.props.addBar();
         }
         return;
@@ -75,9 +75,9 @@ export default class EditorCaretCanvas extends Component {
       this.props.palette.division
     );
 
-    const notesPerDivision = numbers.NOTES_PER_BAR / division;
+    const notesPerDivision = Numbers.NOTES_PER_BAR / division;
     const mouseNotesPerBarIndex = divisionIndex * notesPerDivision;
-    const index = barIndex * numbers.NOTES_PER_BAR + mouseNotesPerBarIndex;
+    const index = barIndex * Numbers.NOTES_PER_BAR + mouseNotesPerBarIndex;
     let notes = [];
     if (!hasState(note)) {
       for (let i = 0; i < notesPerDivision; i++) {
@@ -89,7 +89,7 @@ export default class EditorCaretCanvas extends Component {
     this.props.changeNotes(index, notes);
 
     // add one bar if the user puts a note on the last bar
-    if (index >= this.props.notesLength - numbers.NOTES_PER_BAR) {
+    if (index >= this.props.notesLength - Numbers.NOTES_PER_BAR) {
       this.props.addBar();
     }
   };

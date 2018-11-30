@@ -1,4 +1,4 @@
-import { actionTypes } from '../constants/';
+import { ActionTypes } from '../constants/';
 
 export const setPanes = references => {
   let panes = {};
@@ -13,7 +13,7 @@ export const setPanes = references => {
   }
 
   return {
-    type: actionTypes.IDE.SET_PANES,
+    type: ActionTypes.IDE.SET_PANES,
     payload: { panes },
   };
 };

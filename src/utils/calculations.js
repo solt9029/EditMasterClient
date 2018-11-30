@@ -1,4 +1,4 @@
-import { numbers, percentages, positions, sizes } from '../constants/';
+import { Numbers, Percentages, Positions, Sizes } from '../constants/';
 
 /**
  *
@@ -6,9 +6,9 @@ import { numbers, percentages, positions, sizes } from '../constants/';
  * @return {number}
  */
 export const calcSecondsPerNote = bpm => {
-  const barPerMinute = bpm / numbers.BEAT;
+  const barPerMinute = bpm / Numbers.BEAT;
   const barPerSecond = barPerMinute / 60;
-  const notesPerSecond = barPerSecond * numbers.NOTES_PER_BAR;
+  const notesPerSecond = barPerSecond * Numbers.NOTES_PER_BAR;
   const secondsPerNote = 1 / notesPerSecond;
   return secondsPerNote;
 };
@@ -37,9 +37,9 @@ export const calcNoteIndexRangeInSecondRange = (
  * @return {number}
  */
 export const calcInitialNoteX = (currentTime, bpm, offset, speed) => {
-  const spaceWidth = speed * percentages.PLAYER.SPEED_TO_SPACE_WIDTH;
+  const spaceWidth = speed * Percentages.PLAYER.SPEED_TO_SPACE_WIDTH;
   const initialNoteX =
-    positions.PLAYER.JUDGE.X +
+    Positions.PLAYER.JUDGE.X +
     ((offset - currentTime) / calcSecondsPerNote(bpm)) * spaceWidth;
   return initialNoteX;
 };
@@ -50,7 +50,7 @@ export const calcNoteIndexRangeInCanvas = (
   width,
   initialNoteX
 ) => {
-  const spaceWidth = speed * percentages.PLAYER.SPEED_TO_SPACE_WIDTH;
+  const spaceWidth = speed * Percentages.PLAYER.SPEED_TO_SPACE_WIDTH;
   let initialNoteIndex = Math.floor(-initialNoteX / spaceWidth) - 3; // Math.floor(-initialNoteX / spaceWidth) is the number of notes that already passed from canvas
   const notesNumber = Math.ceil((width - 1) / spaceWidth); // the number of notes that canvas can display in it
   let finalNoteIndex = initialNoteIndex + notesNumber + 6;
@@ -73,13 +73,13 @@ export const calcNoteIndexRangeInCanvas = (
 };
 
 export const calcCaret = (mouseX, mouseY, width, division) => {
-  const barWidth = width - 1 - positions.EDITOR.BAR.X * 2;
-  const actualBarWidth = barWidth * (1 - percentages.EDITOR.BAR_START_LINE); // left side of initial beat line is not available
+  const barWidth = width - 1 - Positions.EDITOR.BAR.X * 2;
+  const actualBarWidth = barWidth * (1 - Percentages.EDITOR.BAR_START_LINE); // left side of initial beat line is not available
   const barStartLineX =
-    positions.EDITOR.BAR.X + barWidth * percentages.EDITOR.BAR_START_LINE;
+    Positions.EDITOR.BAR.X + barWidth * Percentages.EDITOR.BAR_START_LINE;
   let divisionIndex = Math.round(
     (mouseX - barStartLineX) /
-      ((barWidth * (1 - percentages.EDITOR.BAR_START_LINE)) / division)
+      ((barWidth * (1 - Percentages.EDITOR.BAR_START_LINE)) / division)
   );
   if (divisionIndex < 0) {
     divisionIndex = 0;
@@ -88,16 +88,16 @@ export const calcCaret = (mouseX, mouseY, width, division) => {
     divisionIndex = division - 1;
   }
 
-  const barIndex = Math.floor(mouseY / sizes.EDITOR.BAR.OUTSIDE.HEIGHT);
+  const barIndex = Math.floor(mouseY / Sizes.EDITOR.BAR.OUTSIDE.HEIGHT);
 
   const x =
     barStartLineX +
     actualBarWidth * (divisionIndex / division) -
-    sizes.EDITOR.CARET.WIDTH / 2;
+    Sizes.EDITOR.CARET.WIDTH / 2;
 
   const y =
-    barIndex * sizes.EDITOR.BAR.OUTSIDE.HEIGHT +
-    (sizes.EDITOR.BAR.OUTSIDE.HEIGHT - sizes.EDITOR.BAR.INSIDE.HEIGHT) / 2;
+    barIndex * Sizes.EDITOR.BAR.OUTSIDE.HEIGHT +
+    (Sizes.EDITOR.BAR.OUTSIDE.HEIGHT - Sizes.EDITOR.BAR.INSIDE.HEIGHT) / 2;
 
   return { x, y, divisionIndex, barIndex };
 };
@@ -109,31 +109,31 @@ export const calcCaret = (mouseX, mouseY, width, division) => {
  */
 export const calcEditorCanvasHeight = notesLength => {
   return (
-    Math.ceil(notesLength / numbers.NOTES_PER_BAR) *
-    sizes.EDITOR.BAR.OUTSIDE.HEIGHT
+    Math.ceil(notesLength / Numbers.NOTES_PER_BAR) *
+    Sizes.EDITOR.BAR.OUTSIDE.HEIGHT
   );
 };
 
 export const calcBarWidth = width => {
-  return width - 1 - positions.EDITOR.BAR.X * 2;
+  return width - 1 - Positions.EDITOR.BAR.X * 2;
 };
 
 export const calcCurrentTimeMark = (width, bpm, offset, currentTime) => {
   const barWidth = calcBarWidth(width);
-  const actualBarWidth = barWidth * (1 - percentages.EDITOR.BAR_START_LINE); // left side of initial beat line is not available
-  const spaceWidth = actualBarWidth / numbers.NOTES_PER_BAR;
+  const actualBarWidth = barWidth * (1 - Percentages.EDITOR.BAR_START_LINE); // left side of initial beat line is not available
+  const spaceWidth = actualBarWidth / Numbers.NOTES_PER_BAR;
 
   const currentNoteIndexFloat =
     (currentTime - offset) / calcSecondsPerNote(bpm);
   const currentNotesPerBarIndexFloat =
-    currentNoteIndexFloat % numbers.NOTES_PER_BAR;
+    currentNoteIndexFloat % Numbers.NOTES_PER_BAR;
   const currentBarIndex = Math.floor(
-    currentNoteIndexFloat / numbers.NOTES_PER_BAR
+    currentNoteIndexFloat / Numbers.NOTES_PER_BAR
   );
 
   const y =
-    currentBarIndex * sizes.EDITOR.BAR.OUTSIDE.HEIGHT +
-    (sizes.EDITOR.BAR.OUTSIDE.HEIGHT - sizes.EDITOR.BAR.INSIDE.HEIGHT) / 2;
+    currentBarIndex * Sizes.EDITOR.BAR.OUTSIDE.HEIGHT +
+    (Sizes.EDITOR.BAR.OUTSIDE.HEIGHT - Sizes.EDITOR.BAR.INSIDE.HEIGHT) / 2;
   const x = currentNotesPerBarIndexFloat * spaceWidth;
 
   return { x, y };
@@ -145,5 +145,5 @@ export const calcCurrentTimeMark = (width, bpm, offset, currentTime) => {
  * @return {number}
  */
 export const calcBarNum = notesLength => {
-  return Math.ceil(notesLength / numbers.NOTES_PER_BAR);
+  return Math.ceil(notesLength / Numbers.NOTES_PER_BAR);
 };

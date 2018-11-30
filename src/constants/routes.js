@@ -1,4 +1,4 @@
-const routes = {
+const Routes = {
   INDEX: '/',
   HELP: '/help',
   SCORES: {
@@ -8,4 +8,4 @@ const routes = {
   },
 };
 
-export default routes;
+export default Routes;

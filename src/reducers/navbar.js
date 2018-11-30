@@ -1,4 +1,4 @@
-import { actionTypes } from '../constants/';
+import { ActionTypes } from '../constants/';
 
 const initialState = {
   keyword: '',
@@ -6,7 +6,7 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case actionTypes.NAVBAR.SET_KEYWORD:
+    case ActionTypes.NAVBAR.SET_KEYWORD:
       return {
         ...state,
         keyword: action.payload.keyword,

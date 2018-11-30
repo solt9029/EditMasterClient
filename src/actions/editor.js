@@ -1,7 +1,7 @@
-import { actionTypes } from '../constants/';
+import { ActionTypes } from '../constants/';
 
 export const changeNotes = (index, notes) => ({
-  type: actionTypes.EDITOR.CHANGE_NOTES,
+  type: ActionTypes.EDITOR.CHANGE_NOTES,
   payload: {
     index,
     notes,
@@ -9,20 +9,20 @@ export const changeNotes = (index, notes) => ({
 });
 
 export const setNotes = notes => ({
-  type: actionTypes.EDITOR.SET_NOTES,
+  type: ActionTypes.EDITOR.SET_NOTES,
   payload: {
     notes,
   },
 });
 
 export const reset = () => ({
-  type: actionTypes.EDITOR.RESET,
+  type: ActionTypes.EDITOR.RESET,
 });
 
 export const addBar = () => ({
-  type: actionTypes.EDITOR.ADD_BAR,
+  type: ActionTypes.EDITOR.ADD_BAR,
 });
 
 export const removeBar = () => ({
-  type: actionTypes.EDITOR.REMOVE_BAR,
+  type: ActionTypes.EDITOR.REMOVE_BAR,
 });

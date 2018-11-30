@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import { NavbarBrand as RNavbarBrand } from 'reactstrap';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import { routes } from '../constants';
+import { Routes } from '../constants';
 
 const Logo = styled(RNavbarBrand)`
   background: url('/images/icon.png') no-repeat left center;
@@ -18,8 +18,8 @@ const Brand = styled.span`
 const NavbarBrand = () => {
   return (
     <Fragment>
-      <Logo tag={Link} to={routes.INDEX} />
-      <RNavbarBrand tag={Link} to={routes.INDEX}>
+      <Logo tag={Link} to={Routes.INDEX} />
+      <RNavbarBrand tag={Link} to={Routes.INDEX}>
         <Brand>創作の達人</Brand>
       </RNavbarBrand>
     </Fragment>

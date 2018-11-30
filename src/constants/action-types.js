@@ -1,4 +1,4 @@
-const actionTypes = {
+const ActionTypes = {
   CONFIG: {
     RESET: 'CONFIG/RESET',
     SET_USERNAME: 'CONFIG/SET_USERNAME',
@@ -61,4 +61,4 @@ const actionTypes = {
   },
 };
 
-export default actionTypes;
+export default ActionTypes;

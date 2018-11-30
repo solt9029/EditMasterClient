@@ -1,9 +1,9 @@
-import { sizes } from '../constants/';
+import { Sizes } from '../constants/';
 
 export default class JudgeEffect {
   constructor(y, stateId) {
     this.judgeMarkY = y;
-    this.judgeTextY = y - sizes.PLAYER.NORMAL.OUTSIDE;
+    this.judgeTextY = y - Sizes.PLAYER.NORMAL.OUTSIDE;
     this.g = 1;
     this.stateId = stateId;
     this.limit = 10;

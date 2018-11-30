@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { numbers, ids, percentages } from '../constants';
+import { Numbers, Ids, Percentages } from '../constants';
 import {
   calcInitialNoteX,
   calcNoteIndexRangeInCanvas,
@@ -44,7 +44,7 @@ export default class PlayerNotesCanvas extends Component {
       states,
     } = this.props;
 
-    const spaceWidth = speed * percentages.PLAYER.SPEED_TO_SPACE_WIDTH;
+    const spaceWidth = speed * Percentages.PLAYER.SPEED_TO_SPACE_WIDTH;
 
     clear(this.ctx, width - 1, height - 1);
 
@@ -61,11 +61,11 @@ export default class PlayerNotesCanvas extends Component {
 
     // bar start lines
     const initialBarStartLineIndex =
-      canvasRange[0] - (canvasRange[0] % numbers.NOTES_PER_BAR);
+      canvasRange[0] - (canvasRange[0] % Numbers.NOTES_PER_BAR);
     for (
       let i = initialBarStartLineIndex;
       i <= canvasRange[1];
-      i += numbers.NOTES_PER_BAR
+      i += Numbers.NOTES_PER_BAR
     ) {
       const x = initialNoteX + i * spaceWidth;
       drawBarStartLine(this.ctx, x, height - 1);
@@ -75,14 +75,14 @@ export default class PlayerNotesCanvas extends Component {
     for (let i = canvasRange[1]; i >= canvasRange[0]; i--) {
       const note = notes[i];
       const state = states[i];
-      if (state !== ids.STATE.FRESH || note === ids.NOTE.SPACE) {
+      if (state !== Ids.STATE.FRESH || note === Ids.NOTE.SPACE) {
         continue;
       }
 
       const x = initialNoteX + i * spaceWidth;
       const y = (height - 1) / 2;
-      const previousNote = i > 0 ? notes[i - 1] : ids.NOTE.SPACE;
-      const nextNote = i < notes.length - 1 ? notes[i + 1] : ids.NOTE.SPACE;
+      const previousNote = i > 0 ? notes[i - 1] : Ids.NOTE.SPACE;
+      const nextNote = i < notes.length - 1 ? notes[i + 1] : Ids.NOTE.SPACE;
 
       drawNote(
         this.ctx,

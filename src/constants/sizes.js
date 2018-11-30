@@ -1,4 +1,4 @@
-const sizes = {
+const Sizes = {
   PLAYER: {
     NORMAL: {
       OUTSIDE: 16,
@@ -42,4 +42,4 @@ const sizes = {
   },
 };
 
-export default sizes;
+export default Sizes;

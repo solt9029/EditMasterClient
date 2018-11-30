@@ -1,4 +1,4 @@
-const seconds = {
+const Seconds = {
   RANGE: {
     AUTO: 0.02,
     GOOD: 0.034,
@@ -7,4 +7,4 @@ const seconds = {
   },
 };
 
-export default seconds;
+export default Seconds;

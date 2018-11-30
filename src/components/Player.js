@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ids, seconds } from '../constants';
+import { Ids, Seconds } from '../constants';
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
 import Shot from '../classes/Shot';
@@ -61,12 +61,12 @@ export default class Player extends Component {
       setState,
     } = this.props;
 
-    if (!isAutoMode || ytPlayerState !== ids.YOUTUBE.PLAYING) {
+    if (!isAutoMode || ytPlayerState !== Ids.YOUTUBE.PLAYING) {
       return;
     }
 
     const autoRange = calcNoteIndexRangeInSecondRange(
-      seconds.RANGE.AUTO,
+      Seconds.RANGE.AUTO,
       currentTime,
       config.bpm.value,
       config.offset.value
@@ -80,17 +80,17 @@ export default class Player extends Component {
       const note = notes[i];
       const state = states[i];
 
-      if (state !== ids.STATE.FRESH || note === ids.NOTE.SPACE) {
+      if (state !== Ids.STATE.FRESH || note === Ids.NOTE.SPACE) {
         continue;
       }
 
       this.shots.push(new Shot((playerPane.height - 1) / 2, note));
       this.judgeEffects.push(
-        new JudgeEffect((playerPane.height - 1) / 2, ids.STATE.GOOD)
+        new JudgeEffect((playerPane.height - 1) / 2, Ids.STATE.GOOD)
       );
 
       if (hasState(note)) {
-        setState(i, ids.STATE.GOOD);
+        setState(i, Ids.STATE.GOOD);
       }
 
       if (isDonNote(note)) {
@@ -115,7 +115,7 @@ export default class Player extends Component {
       setState,
     } = this.props;
 
-    if (isAutoMode || ytPlayerState !== ids.YOUTUBE.PLAYING) {
+    if (isAutoMode || ytPlayerState !== Ids.YOUTUBE.PLAYING) {
       return;
     }
 
@@ -129,19 +129,19 @@ export default class Player extends Component {
     }
 
     const badRange = calcNoteIndexRangeInSecondRange(
-      seconds.RANGE.BAD,
+      Seconds.RANGE.BAD,
       currentTime,
       config.bpm.value,
       config.offset.value
     );
     const okRange = calcNoteIndexRangeInSecondRange(
-      seconds.RANGE.OK,
+      Seconds.RANGE.OK,
       currentTime,
       config.bpm.value,
       config.offset.value
     );
     const goodRange = calcNoteIndexRangeInSecondRange(
-      seconds.RANGE.GOOD,
+      Seconds.RANGE.GOOD,
       currentTime,
       config.bpm.value,
       config.offset.value
@@ -154,7 +154,7 @@ export default class Player extends Component {
 
       const note = notes[i];
       const state = states[i];
-      if (state !== ids.STATE.FRESH || note === ids.NOTE.SPACE) {
+      if (state !== Ids.STATE.FRESH || note === Ids.NOTE.SPACE) {
         continue;
       }
 
@@ -172,11 +172,11 @@ export default class Player extends Component {
       this.shots.push(new Shot((playerPane.height - 1) / 2, note));
 
       if (hasState(note)) {
-        let newState = ids.STATE.BAD;
+        let newState = Ids.STATE.BAD;
         if (i >= goodRange[0] && i <= goodRange[1]) {
-          newState = ids.STATE.GOOD;
+          newState = Ids.STATE.GOOD;
         } else if (i >= okRange[0] && i <= okRange[1]) {
-          newState = ids.STATE.OK;
+          newState = Ids.STATE.OK;
         }
         setState(i, newState);
         this.judgeEffects.push(

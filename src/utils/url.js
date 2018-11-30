@@ -1,7 +1,7 @@
 import urlParse from 'url-parse';
 import qs from 'qs';
 import pathToRegexp from 'path-to-regexp';
-import { routes } from '../constants/';
+import { Routes } from '../constants/';
 
 /**
  *
@@ -53,8 +53,8 @@ export const stringifySearchQuery = (keyword, page = 1) => {
  * @return {boolean}
  */
 export const matchScoresCreatePathname = pathname => {
-  const isScoresShow = pathname.match(pathToRegexp(routes.SCORES.SHOW));
-  const isScoresNew = pathname.match(pathToRegexp(routes.SCORES.NEW));
+  const isScoresShow = pathname.match(pathToRegexp(Routes.SCORES.SHOW));
+  const isScoresNew = pathname.match(pathToRegexp(Routes.SCORES.NEW));
   return isScoresShow !== null || isScoresNew !== null;
 };
 
@@ -64,5 +64,5 @@ export const matchScoresCreatePathname = pathname => {
  * @return {boolean}
  */
 export const matchScoresIndexPathname = pathname => {
-  return pathname.match(pathToRegexp(routes.SCORES.INDEX)) !== null;
+  return pathname.match(pathToRegexp(Routes.SCORES.INDEX)) !== null;
 };
