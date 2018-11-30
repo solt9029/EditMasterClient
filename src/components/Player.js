@@ -84,9 +84,9 @@ export default class Player extends Component {
         continue;
       }
 
-      this.shots.push(new Shot((playerPane.height - 1) / 2, note));
+      this.shots.push(new Shot(note, playerPane.width, playerPane.height));
       this.judgeEffects.push(
-        new JudgeEffect((playerPane.height - 1) / 2, Ids.STATE.GOOD)
+        new JudgeEffect(Ids.STATE.GOOD, playerPane.height)
       );
 
       if (hasState(note)) {
@@ -169,7 +169,7 @@ export default class Player extends Component {
         continue;
       }
 
-      this.shots.push(new Shot((playerPane.height - 1) / 2, note));
+      this.shots.push(new Shot(note, playerPane.width, playerPane.height));
 
       if (hasState(note)) {
         let newState = Ids.STATE.BAD;
@@ -179,9 +179,7 @@ export default class Player extends Component {
           newState = Ids.STATE.OK;
         }
         setState(i, newState);
-        this.judgeEffects.push(
-          new JudgeEffect((playerPane.height - 1) / 2, newState)
-        );
+        this.judgeEffects.push(new JudgeEffect(newState, playerPane.height));
       }
       break;
     }
@@ -210,12 +208,12 @@ export default class Player extends Component {
 
     // judgeEffects
     for (let i = this.judgeEffects.length - 1; i >= 0; i--) {
-      this.judgeEffects[i].move(playerPane.height / 50);
+      this.judgeEffects[i].update();
       drawJudgeEffect(
         this.ctx,
         this.judgeEffects[i].judgeMarkY,
         this.judgeEffects[i].judgeTextY,
-        this.judgeEffects[i].stateId
+        this.judgeEffects[i].state
       );
       if (this.judgeEffects[i].limit < 0) {
         this.judgeEffects.splice(i, 1);
@@ -224,13 +222,13 @@ export default class Player extends Component {
 
     // shots
     for (let i = this.shots.length - 1; i >= 0; i--) {
-      this.shots[i].move(playerPane.width / 100, playerPane.height / 10);
+      this.shots[i].update(playerPane.width / 100, playerPane.height / 10);
       drawNote(
         this.ctx,
         this.shots[i].x,
         this.shots[i].y,
         'PLAYER',
-        this.shots[i].id
+        this.shots[i].note
       );
       if (this.shots[i].limit < 0) {
         this.shots.splice(i, 1);

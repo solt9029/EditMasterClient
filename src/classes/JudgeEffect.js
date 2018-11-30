@@ -4,14 +4,20 @@ export default class JudgeEffect {
   g = 1;
   limit = 10;
 
-  constructor(y, state) {
-    this.judgeMarkY = y;
-    this.judgeTextY = y - Sizes.PLAYER.NORMAL.OUTSIDE;
+  /**
+   *
+   * @param {number} state
+   * @param {number} playerHeight
+   */
+  constructor(state, playerHeight) {
     this.state = state;
+    this.playerHeight = playerHeight;
+    this.judgeMarkY = (playerHeight - 1) / 2;
+    this.judgeTextY = this.judgeMarkY - Sizes.PLAYER.NORMAL.OUTSIDE;
   }
 
-  move(y) {
-    this.judgeTextY -= y / this.g;
+  update() {
+    this.judgeTextY -= this.playerHeight / 50 / this.g;
     this.g += 0.4;
     this.limit--;
   }
