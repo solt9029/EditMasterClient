@@ -5,14 +5,22 @@ export default class Shot {
   g = 1;
   limit = 5;
 
-  constructor(y, note) {
+  /**
+   *
+   * @param {number} note
+   * @param {number} playerWidth
+   * @param {number} playerHeight
+   */
+  constructor(note, playerWidth, playerHeight) {
     this.note = note;
-    this.y = y;
+    this.playerWidth = playerWidth;
+    this.playerHeight = playerHeight;
+    this.y = (playerHeight - 1) / 2;
   }
 
-  move(x, y) {
-    this.x += x;
-    this.y -= y / this.g;
+  update() {
+    this.x += this.playerWidth / 100;
+    this.y -= this.playerHeight / 10 / this.g;
     this.g += 0.1;
     this.limit--;
   }
