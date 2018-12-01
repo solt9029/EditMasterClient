@@ -4,7 +4,6 @@ import Canvas from '../styled/Canvas';
 import PropTypes from 'prop-types';
 
 export default class PlayerJudgeEffectsCanvas extends Component {
-  judgeEffects = [];
   canvasRef = React.createRef();
   ctx = null;
 
@@ -56,5 +55,5 @@ PlayerJudgeEffectsCanvas.propTypes = {
   width: PropTypes.number.isRequired,
   height: PropTypes.number.isRequired,
   judgeEffects: PropTypes.arrayOf(PropTypes.object).isRequired,
-  judgeEffectsUpdatedCount: PropTypes.number.isRequired,
+  updatedCount: PropTypes.number.isRequired,
 };
