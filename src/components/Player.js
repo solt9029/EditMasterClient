@@ -16,7 +16,7 @@ import {
 import { isDon as isDonNote, isKa as isKaNote, hasState } from '../utils/note';
 import { isDon as isDonKey, isKa as isKaKey } from '../utils/key';
 import { clear } from '../utils/canvas';
-import Layer from '../styled/Layer';
+import Canvas from '../styled/Canvas';
 
 const StyledSlider = styled(Slider)`
   && {
@@ -219,7 +219,7 @@ export default class Player extends Component {
         <PlayerNotesCanvas />
         <PlayerShotsCanvas />
         <PlayerJudgeEffectsCanvas />
-        <Layer
+        <Canvas
           tabIndex={0}
           onKeyDown={this.playMode}
           innerRef={this.canvasRef}

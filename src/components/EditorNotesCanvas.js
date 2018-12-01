@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Percentages, Sizes, Positions, Numbers, Ids } from '../constants';
 import propTypes from 'prop-types';
-import Layer from '../styled/Layer';
+import Canvas from '../styled/Canvas';
 import { calcEditorCanvasHeight, calcBarWidth } from '../utils/calculations';
 import { clear, drawNote } from '../utils/canvas';
 
@@ -62,7 +62,7 @@ export default class EditorNotesCanvas extends Component {
     const height = calcEditorCanvasHeight(notes.length);
 
     return (
-      <Layer innerRef={this.canvasRef} width={width - 1} height={height} />
+      <Canvas innerRef={this.canvasRef} width={width - 1} height={height} />
     );
   }
 }

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Numbers, Keys } from '../constants';
-import Layer from '../styled/Layer';
+import Canvas from '../styled/Canvas';
 import { drawCaret, clear } from '../utils/canvas';
 import { calcCaret, calcEditorCanvasHeight } from '../utils/calculations';
 import { isNote, hasState } from '../utils/note';
@@ -116,7 +116,7 @@ export default class EditorCaretCanvas extends Component {
     const height = calcEditorCanvasHeight(notesLength);
 
     return (
-      <Layer
+      <Canvas
         tabIndex={0}
         onMouseMove={this.updateCaret}
         onKeyDown={this.keyDown}
