@@ -170,7 +170,7 @@ export default class Player extends Component {
     } = this.props;
 
     return (
-      <div>
+      <div onKeyDown={this.playMode} tabIndex={0}>
         <PlayerJudgeMarkCanvas />
         <PlayerNotesCanvas />
         <PlayerShotsCanvas />
