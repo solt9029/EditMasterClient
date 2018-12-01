@@ -1,40 +1,17 @@
 import React, { Component } from 'react';
 import { Ids, Seconds } from '../constants';
-import Slider from 'rc-slider';
-import 'rc-slider/assets/index.css';
+import Slider from '../styled/Slider';
 import PlayerJudgeMarkCanvas from '../containers/PlayerJudgeMarkCanvas';
 import PlayerNotesCanvas from '../containers/PlayerNotesCanvas';
 import PlayerShotsCanvas from '../containers/PlayerShotsCanvas';
 import PlayerJudgeEffectsCanvas from '../containers/PlayerJudgeEffectsCanvas';
 import { triggerDon, triggerKa } from '../utils/sound';
-import styled from 'styled-components';
-import {
-  calcNoteIndexRangeInSecondRange,
-  calcInitialNoteX,
-  calcNoteIndexRangeInCanvas,
-} from '../utils/calculations';
+import { calcNoteIndexRangeInSecondRange } from '../utils/calculations';
 import { isDon as isDonNote, isKa as isKaNote, hasState } from '../utils/note';
 import { isDon as isDonKey, isKa as isKaKey } from '../utils/key';
-import { clear } from '../utils/canvas';
-import Canvas from '../styled/Canvas';
-
-const StyledSlider = styled(Slider)`
-  && {
-    width: 95%;
-    position: absolute;
-    bottom: 5px;
-    left: 0;
-    right: 0;
-    margin: auto;
-  }
-`;
 
 export default class Player extends Component {
-  canvasRef = React.createRef();
-  ctx = null;
-
   componentDidMount() {
-    this.ctx = this.canvasRef.current.getContext('2d');
     this.updateCanvas();
   }
 
@@ -180,33 +157,12 @@ export default class Player extends Component {
   };
 
   updateCanvas() {
-    const { config, playerPane, currentTime, notes } = this.props;
-
-    clear(this.ctx, playerPane.width - 1, playerPane.height - 1);
-
-    const initialNoteX = calcInitialNoteX(
-      currentTime,
-      config.bpm.value,
-      config.offset.value,
-      config.speed.value
-    );
-    const canvasRange = calcNoteIndexRangeInCanvas(
-      notes.length,
-      config.speed.value,
-      playerPane.width,
-      initialNoteX
-    );
-    if (!canvasRange) {
-      return;
-    }
-
     this.props.updateJudgeEffects();
     this.props.updateShots();
   }
 
   render() {
     const {
-      playerPane,
       ytPlayer,
       currentTime,
       setChangingSlider,
@@ -219,14 +175,7 @@ export default class Player extends Component {
         <PlayerNotesCanvas />
         <PlayerShotsCanvas />
         <PlayerJudgeEffectsCanvas />
-        <Canvas
-          tabIndex={0}
-          onKeyDown={this.playMode}
-          innerRef={this.canvasRef}
-          width={playerPane.width - 1}
-          height={playerPane.height - 1}
-        />
-        <StyledSlider
+        <Slider
           min={0}
           max={ytPlayer ? ytPlayer.getDuration() : 0}
           value={currentTime}
