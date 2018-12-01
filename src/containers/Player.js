@@ -2,7 +2,8 @@ import { connect } from 'react-redux';
 import { setState } from '../actions/player';
 import { setChangingSlider } from '../actions/player';
 import { setCurrentTime } from '../actions/youtube';
-import { reset, addJudgeEffect, updateJudgeEffects } from '../actions/player';
+import { reset } from '../actions/player';
+import { addJudgeEffect, updateJudgeEffects } from '../actions/judge-effects';
 import { addShot, updateShots } from '../actions/shots';
 import Player from '../components/Player';
 
