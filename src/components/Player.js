@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { Ids, Seconds } from '../constants';
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
-import JudgeEffect from '../classes/JudgeEffect';
 import PlayerJudgeMarkCanvas from '../containers/PlayerJudgeMarkCanvas';
 import PlayerNotesCanvas from '../containers/PlayerNotesCanvas';
 import PlayerShotsCanvas from '../containers/PlayerShotsCanvas';
+import PlayerJudgeEffectsCanvas from '../containers/PlayerJudgeEffectsCanvas';
 import { triggerDon, triggerKa } from '../utils/sound';
 import styled from 'styled-components';
 import {
@@ -15,7 +15,7 @@ import {
 } from '../utils/calculations';
 import { isDon as isDonNote, isKa as isKaNote, hasState } from '../utils/note';
 import { isDon as isDonKey, isKa as isKaKey } from '../utils/key';
-import { clear, drawJudgeEffect } from '../utils/canvas';
+import { clear } from '../utils/canvas';
 import Layer from '../styled/Layer';
 
 const StyledSlider = styled(Slider)`
@@ -30,7 +30,6 @@ const StyledSlider = styled(Slider)`
 `;
 
 export default class Player extends Component {
-  judgeEffects = [];
   canvasRef = React.createRef();
   ctx = null;
 
@@ -54,7 +53,6 @@ export default class Player extends Component {
       ytPlayerState,
       notes,
       states,
-      playerPane,
       currentTime,
       config,
       setState,
@@ -84,9 +82,7 @@ export default class Player extends Component {
       }
 
       this.props.addShot(note);
-      this.judgeEffects.push(
-        new JudgeEffect(Ids.STATE.GOOD, playerPane.height)
-      );
+      this.props.addJudgeEffect(Ids.STATE.GOOD);
 
       if (hasState(note)) {
         setState(i, Ids.STATE.GOOD);
@@ -110,7 +106,6 @@ export default class Player extends Component {
       config,
       notes,
       states,
-      playerPane,
       setState,
     } = this.props;
 
@@ -168,7 +163,7 @@ export default class Player extends Component {
         continue;
       }
 
-      this.props.addShots(note);
+      this.props.addShot(note);
 
       if (hasState(note)) {
         let newState = Ids.STATE.BAD;
@@ -178,7 +173,7 @@ export default class Player extends Component {
           newState = Ids.STATE.OK;
         }
         setState(i, newState);
-        this.judgeEffects.push(new JudgeEffect(newState, playerPane.height));
+        this.props.addJudgeEffect(newState);
       }
       break;
     }
@@ -205,20 +200,7 @@ export default class Player extends Component {
       return;
     }
 
-    // judgeEffects
-    for (let i = this.judgeEffects.length - 1; i >= 0; i--) {
-      this.judgeEffects[i].update();
-      drawJudgeEffect(
-        this.ctx,
-        this.judgeEffects[i].judgeMarkY,
-        this.judgeEffects[i].judgeTextY,
-        this.judgeEffects[i].state
-      );
-      if (this.judgeEffects[i].limit < 0) {
-        this.judgeEffects.splice(i, 1);
-      }
-    }
-
+    this.props.updateJudgeEffects();
     this.props.updateShots();
   }
 
@@ -236,6 +218,7 @@ export default class Player extends Component {
         <PlayerJudgeMarkCanvas />
         <PlayerNotesCanvas />
         <PlayerShotsCanvas />
+        <PlayerJudgeEffectsCanvas />
         <Layer
           tabIndex={0}
           onKeyDown={this.playMode}

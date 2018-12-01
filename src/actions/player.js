@@ -21,6 +21,25 @@ export const updateShots = () => ({
   type: ActionTypes.PLAYER.UPDATE_SHOTS,
 });
 
+const _addJudgeEffect = (state, playerHeight) => ({
+  type: ActionTypes.PLAYER.ADD_JUDGE_EFFECT,
+  payload: {
+    state,
+    playerHeight,
+  },
+});
+
+export const addJudgeEffect = state => {
+  return (dispatch, getState) => {
+    const { height } = getState().ide.panes.player;
+    dispatch(_addJudgeEffect(state, height));
+  };
+};
+
+export const updateJudgeEffects = () => ({
+  type: ActionTypes.PLAYER.UPDATE_JUDGE_EFFECTS,
+});
+
 export const setChangingSlider = isChangingSlider => ({
   type: ActionTypes.PLAYER.SET_CHANGING_SLIDER,
   payload: {

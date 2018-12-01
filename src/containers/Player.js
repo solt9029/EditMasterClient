@@ -2,7 +2,13 @@ import { connect } from 'react-redux';
 import { setState } from '../actions/player';
 import { setChangingSlider } from '../actions/player';
 import { setCurrentTime } from '../actions/youtube';
-import { reset, addShot, updateShots } from '../actions/player';
+import {
+  reset,
+  addShot,
+  updateShots,
+  addJudgeEffect,
+  updateJudgeEffects,
+} from '../actions/player';
 import Player from '../components/Player';
 
 const mapStateToProps = state => ({
@@ -16,6 +22,12 @@ const mapStateToProps = state => ({
   ytPlayerState: state.youtube.ytPlayerState,
 });
 const mapDispatchToProps = dispatch => ({
+  addJudgeEffect(state) {
+    dispatch(addJudgeEffect(state));
+  },
+  updateJudgeEffects() {
+    dispatch(updateJudgeEffects());
+  },
   addShot(note) {
     dispatch(addShot(note));
   },
