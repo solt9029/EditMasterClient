@@ -4,7 +4,7 @@ import {
   calcCurrentTimeMark,
 } from '../utils/calculations';
 import { clear, drawCurrentTimeMark } from '../utils/canvas';
-import Layer from '../styled/Layer';
+import Canvas from '../styled/Canvas';
 import propTypes from 'prop-types';
 
 export default class EditorCurrentTimeMarkCanvas extends Component {
@@ -33,7 +33,7 @@ export default class EditorCurrentTimeMarkCanvas extends Component {
     const height = calcEditorCanvasHeight(notesLength);
 
     return (
-      <Layer innerRef={this.canvasRef} width={width - 1} height={height} />
+      <Canvas innerRef={this.canvasRef} width={width - 1} height={height} />
     );
   }
 }

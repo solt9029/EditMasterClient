@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { clear, drawJudgeEffect } from '../utils/canvas';
-import Layer from '../styled/Layer';
+import Canvas from '../styled/Canvas';
 import PropTypes from 'prop-types';
 
 export default class PlayerJudgeEffectsCanvas extends Component {
@@ -47,7 +47,7 @@ export default class PlayerJudgeEffectsCanvas extends Component {
     const { width, height } = this.props;
 
     return (
-      <Layer innerRef={this.canvasRef} width={width - 1} height={height - 1} />
+      <Canvas innerRef={this.canvasRef} width={width - 1} height={height - 1} />
     );
   }
 }

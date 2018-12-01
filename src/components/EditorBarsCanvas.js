@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import propTypes from 'prop-types';
-import Layer from '../styled/Layer';
+import Canvas from '../styled/Canvas';
 import {
   calcBarNum,
   calcEditorCanvasHeight,
@@ -37,7 +37,7 @@ export default class EditorBarsCanvas extends Component {
     const height = calcEditorCanvasHeight(notesLength);
 
     return (
-      <Layer innerRef={this.canvasRef} width={width - 1} height={height} />
+      <Canvas innerRef={this.canvasRef} width={width - 1} height={height} />
     );
   }
 }
