@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { Ids, Seconds } from '../constants';
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
-import Shot from '../classes/Shot';
 import JudgeEffect from '../classes/JudgeEffect';
 import PlayerJudgeMarkCanvas from '../containers/PlayerJudgeMarkCanvas';
 import PlayerNotesCanvas from '../containers/PlayerNotesCanvas';
+import PlayerShotsCanvas from '../containers/PlayerShotsCanvas';
 import { triggerDon, triggerKa } from '../utils/sound';
 import styled from 'styled-components';
 import {
@@ -15,7 +15,7 @@ import {
 } from '../utils/calculations';
 import { isDon as isDonNote, isKa as isKaNote, hasState } from '../utils/note';
 import { isDon as isDonKey, isKa as isKaKey } from '../utils/key';
-import { clear, drawNote, drawJudgeEffect } from '../utils/canvas';
+import { clear, drawJudgeEffect } from '../utils/canvas';
 import Layer from '../styled/Layer';
 
 const StyledSlider = styled(Slider)`
@@ -30,7 +30,6 @@ const StyledSlider = styled(Slider)`
 `;
 
 export default class Player extends Component {
-  shots = [];
   judgeEffects = [];
   canvasRef = React.createRef();
   ctx = null;
@@ -84,7 +83,7 @@ export default class Player extends Component {
         continue;
       }
 
-      this.shots.push(new Shot(note, playerPane.width, playerPane.height));
+      this.props.addShot(note);
       this.judgeEffects.push(
         new JudgeEffect(Ids.STATE.GOOD, playerPane.height)
       );
@@ -169,7 +168,7 @@ export default class Player extends Component {
         continue;
       }
 
-      this.shots.push(new Shot(note, playerPane.width, playerPane.height));
+      this.props.addShots(note);
 
       if (hasState(note)) {
         let newState = Ids.STATE.BAD;
@@ -220,20 +219,7 @@ export default class Player extends Component {
       }
     }
 
-    // shots
-    for (let i = this.shots.length - 1; i >= 0; i--) {
-      this.shots[i].update(playerPane.width / 100, playerPane.height / 10);
-      drawNote(
-        this.ctx,
-        this.shots[i].x,
-        this.shots[i].y,
-        'PLAYER',
-        this.shots[i].note
-      );
-      if (this.shots[i].limit < 0) {
-        this.shots.splice(i, 1);
-      }
-    }
+    this.props.updateShots();
   }
 
   render() {
@@ -249,6 +235,7 @@ export default class Player extends Component {
       <div>
         <PlayerJudgeMarkCanvas />
         <PlayerNotesCanvas />
+        <PlayerShotsCanvas />
         <Layer
           tabIndex={0}
           onKeyDown={this.playMode}
