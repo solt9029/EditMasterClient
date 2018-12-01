@@ -50,5 +50,5 @@ PlayerShotsCanvas.propTypes = {
   width: PropTypes.number.isRequired,
   height: PropTypes.number.isRequired,
   shots: PropTypes.arrayOf(PropTypes.object).isRequired,
-  shotsUpdatedCount: PropTypes.number.isRequired,
+  updatedCount: PropTypes.number.isRequired,
 };

@@ -8,3 +8,4 @@ export { default as scoresShowView } from './scores-show-view';
 export { default as modal } from './modal';
 export { default as navbar } from './navbar';
 export { default as youtube } from './youtube';
+export { default as shots } from './shots';
