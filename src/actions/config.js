@@ -1,6 +1,7 @@
 import { required, number, validate, maxLength } from '../utils/validations';
 import { fetchSongBeat } from '../utils/http';
 import { ActionTypes } from '../constants/';
+import { createAction } from 'redux-actions';
 
 export const reset = () => ({
   type: ActionTypes.CONFIG.RESET,
@@ -9,77 +10,44 @@ export const reset = () => ({
 const maxLength20 = maxLength(20);
 const maxLength140 = maxLength(140);
 
-export const setUsername = (value, touched = true) => {
-  const errors = validate(value, [required, maxLength20]);
-  return {
-    type: ActionTypes.CONFIG.SET_USERNAME,
-    payload: {
-      value,
-      errors,
-      touched,
-    },
-  };
-};
+export const setUsername = createAction(
+  ActionTypes.CONFIG.SET_USERNAME,
+  value => {
+    const errors = validate(value, [required, maxLength20]);
+    return { value, errors, touched: true };
+  }
+);
 
-export const setVideoId = (value, touched = true) => {
-  const errors = validate(value, [required]);
-  return {
-    type: ActionTypes.CONFIG.SET_VIDEO_ID,
-    payload: {
-      value,
-      errors,
-      touched,
-    },
-  };
-};
+export const setVideoId = createAction(
+  ActionTypes.CONFIG.SET_VIDEO_ID,
+  value => {
+    const errors = validate(value, [required]);
+    return { value, errors, touched: true };
+  }
+);
 
-export const setBpm = (value, touched = true) => {
+export const setBpm = createAction(ActionTypes.CONFIG.SET_BPM, value => {
   const errors = validate(value, [required, number]);
-  return {
-    type: ActionTypes.CONFIG.SET_BPM,
-    payload: {
-      value,
-      errors,
-      touched,
-    },
-  };
-};
+  return { value, errors, touched: true };
+});
 
-export const setOffset = (value, touched = true) => {
+export const setOffset = createAction(ActionTypes.CONFIG.SET_OFFSET, value => {
   const errors = validate(value, [required, number]);
-  return {
-    type: ActionTypes.CONFIG.SET_OFFSET,
-    payload: {
-      value,
-      errors,
-      touched,
-    },
-  };
-};
+  return { value, errors, touched: true };
+});
 
-export const setSpeed = (value, touched = true) => {
+export const setSpeed = createAction(ActionTypes.CONFIG.SET_SPEED, value => {
   const errors = validate(value, [required, number]);
-  return {
-    type: ActionTypes.CONFIG.SET_SPEED,
-    payload: {
-      value,
-      errors,
-      touched,
-    },
-  };
-};
+  return { value, errors, touched: true };
+});
 
-export const setComment = (value, touched = true) => {
-  const errors = validate(value, [maxLength140]);
-  return {
-    type: ActionTypes.CONFIG.SET_COMMENT,
-    payload: {
-      value,
-      errors,
-      touched,
-    },
-  };
-};
+export const setComment = createAction(
+  ActionTypes.CONFIG.SET_COMMENT,
+  value => {
+    const errors = validate(value, [maxLength140]);
+    return { value, errors, touched: true };
+  }
+);
 
 export const fetchSongle = videoId => {
   return async dispatch => {
