@@ -2,7 +2,6 @@ import { Ids, Numbers, ActionTypes } from '../constants/';
 import { defaultNotes } from './editor';
 
 const initialState = {
-  isChangingSlider: false,
   states: [],
 };
 
@@ -22,11 +21,6 @@ export default (state = initialState, action) => {
         states,
       };
     }
-    case ActionTypes.PLAYER.SET_CHANGING_SLIDER:
-      return {
-        ...state,
-        isChangingSlider: action.payload.isChangingSlider,
-      };
     case ActionTypes.PLAYER.SET_STATE: {
       let states = state.states.concat();
       states[action.payload.index] = action.payload.state;

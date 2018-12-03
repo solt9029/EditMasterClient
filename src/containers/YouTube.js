@@ -5,13 +5,14 @@ import {
   setYtPlayerState,
   reset,
 } from '../actions/youtube';
-import { setChangingSlider, freshStates } from '../actions/player';
+import { freshStates } from '../actions/player';
+import { setIsSliderChanging } from '../actions/slider';
 import YouTube from '../components/YouTube';
 
 const mapStateToProps = state => ({
   // config: state.config,
   videoId: state.config.videoId.value,
-  isSliderChanging: state.player.isChangingSlider,
+  isSliderChanging: state.slider.isChanging,
   ytPlayer: state.youtube.ytPlayer,
 });
 const mapDispatchToProps = dispatch => ({
@@ -25,7 +26,7 @@ const mapDispatchToProps = dispatch => ({
     dispatch(setCurrentTime(currentTime));
   },
   setIsSliderChanging(isSliderChanging) {
-    dispatch(setChangingSlider(isSliderChanging));
+    dispatch(setIsSliderChanging(isSliderChanging));
   },
   setYtPlayerState(ytPlayerState) {
     dispatch(setYtPlayerState(ytPlayerState));
