@@ -165,7 +165,7 @@ export default class Player extends Component {
     const {
       ytPlayer,
       currentTime,
-      setChangingSlider,
+      setIsSliderChanging,
       setCurrentTime,
     } = this.props;
 
@@ -180,14 +180,14 @@ export default class Player extends Component {
           max={ytPlayer ? ytPlayer.getDuration() : 0}
           value={currentTime}
           onChange={value => {
-            setChangingSlider(true);
+            setIsSliderChanging(true);
             setCurrentTime(value);
           }}
           onAfterChange={() => {
             if (ytPlayer) {
               ytPlayer.seekTo(currentTime);
             }
-            setChangingSlider(false);
+            setIsSliderChanging(false);
           }}
         />
       </div>

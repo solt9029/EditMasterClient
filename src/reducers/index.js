@@ -11,3 +11,4 @@ export { default as youtube } from './youtube';
 export { default as shots } from './shots';
 export { default as judgeEffects } from './judge-effects';
 export { default as sizes } from './sizes';
+export { default as slider } from './slider';

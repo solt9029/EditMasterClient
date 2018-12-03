@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { setState } from '../actions/player';
-import { setChangingSlider } from '../actions/player';
+import { setIsSliderChanging } from '../actions/slider';
 import { setCurrentTime } from '../actions/youtube';
 import { reset } from '../actions/player';
 import { addJudgeEffect, updateJudgeEffects } from '../actions/judge-effects';
@@ -36,8 +36,8 @@ const mapDispatchToProps = dispatch => ({
   setCurrentTime(currentTime) {
     dispatch(setCurrentTime(currentTime));
   },
-  setChangingSlider(isChangingSlider) {
-    dispatch(setChangingSlider(isChangingSlider));
+  setIsSliderChanging(isSliderChanging) {
+    dispatch(setIsSliderChanging(isSliderChanging));
   },
   reset() {
     dispatch(reset());
