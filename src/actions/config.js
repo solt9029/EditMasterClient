@@ -14,7 +14,7 @@ export const setUsername = createAction(
   ActionTypes.CONFIG.SET_USERNAME,
   value => {
     const errors = validate(value, [required, maxLength20]);
-    return { value, errors, touched: true };
+    return { value, errors };
   }
 );
 
@@ -22,30 +22,30 @@ export const setVideoId = createAction(
   ActionTypes.CONFIG.SET_VIDEO_ID,
   value => {
     const errors = validate(value, [required]);
-    return { value, errors, touched: true };
+    return { value, errors };
   }
 );
 
 export const setBpm = createAction(ActionTypes.CONFIG.SET_BPM, value => {
   const errors = validate(value, [required, number]);
-  return { value, errors, touched: true };
+  return { value, errors };
 });
 
 export const setOffset = createAction(ActionTypes.CONFIG.SET_OFFSET, value => {
   const errors = validate(value, [required, number]);
-  return { value, errors, touched: true };
+  return { value, errors };
 });
 
 export const setSpeed = createAction(ActionTypes.CONFIG.SET_SPEED, value => {
   const errors = validate(value, [required, number]);
-  return { value, errors, touched: true };
+  return { value, errors };
 });
 
 export const setComment = createAction(
   ActionTypes.CONFIG.SET_COMMENT,
   value => {
     const errors = validate(value, [maxLength140]);
-    return { value, errors, touched: true };
+    return { value, errors };
   }
 );
 
