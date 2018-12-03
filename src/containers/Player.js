@@ -3,8 +3,11 @@ import { setState } from '../actions/player';
 import { setIsSliderChanging } from '../actions/slider';
 import { setCurrentTime } from '../actions/youtube';
 import { reset } from '../actions/player';
-import { addJudgeEffect, updateJudgeEffects } from '../actions/judge-effects';
-import { addShot, updateShots } from '../actions/shots';
+import {
+  addShotEffect,
+  addJudgeEffect,
+  updateEffects,
+} from '../actions/effects';
 import Player from '../components/Player';
 
 const mapStateToProps = state => ({
@@ -18,17 +21,14 @@ const mapStateToProps = state => ({
   ytPlayerState: state.youtube.ytPlayerState,
 });
 const mapDispatchToProps = dispatch => ({
+  updateEffects() {
+    dispatch(updateEffects());
+  },
   addJudgeEffect(state) {
     dispatch(addJudgeEffect(state));
   },
-  updateJudgeEffects() {
-    dispatch(updateJudgeEffects());
-  },
-  addShot(note) {
-    dispatch(addShot(note));
-  },
-  updateShots() {
-    dispatch(updateShots());
+  addShotEffect(note) {
+    dispatch(addShotEffect(note));
   },
   setState(index, state) {
     dispatch(setState(index, state));

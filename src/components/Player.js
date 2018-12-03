@@ -58,7 +58,7 @@ export default class Player extends Component {
         continue;
       }
 
-      this.props.addShot(note);
+      this.props.addShotEffect(note);
       this.props.addJudgeEffect(Ids.STATE.GOOD);
 
       if (hasState(note)) {
@@ -140,7 +140,7 @@ export default class Player extends Component {
         continue;
       }
 
-      this.props.addShot(note);
+      this.props.addShotEffect(note);
 
       if (hasState(note)) {
         let newState = Ids.STATE.BAD;
@@ -157,8 +157,7 @@ export default class Player extends Component {
   };
 
   updateCanvas() {
-    this.props.updateJudgeEffects();
-    this.props.updateShots();
+    this.props.updateEffects();
   }
 
   render() {
