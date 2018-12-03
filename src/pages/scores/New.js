@@ -18,13 +18,7 @@ class New extends Component {
   }
 }
 
-const mapStateToProps = null;
-const mapDispatchToProps = dispatch => ({
-  setDefaultScore() {
-    dispatch(setDefaultScore());
-  },
-});
 export default connect(
-  mapStateToProps,
-  mapDispatchToProps
+  null,
+  { setDefaultScore }
 )(New);
