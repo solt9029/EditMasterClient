@@ -27,7 +27,7 @@ export default class Player extends Component {
   autoMode() {
     const {
       isAutoMode,
-      ytPlayerState,
+      ytPlayer,
       notes,
       states,
       currentTime,
@@ -35,7 +35,10 @@ export default class Player extends Component {
       setState,
     } = this.props;
 
-    if (!isAutoMode || ytPlayerState !== Ids.YOUTUBE.PLAYING) {
+    if (
+      !isAutoMode ||
+      (ytPlayer ? ytPlayer.getPlayerState() !== Ids.YOUTUBE.PLAYING : false)
+    ) {
       return;
     }
 
@@ -78,7 +81,7 @@ export default class Player extends Component {
   playMode = event => {
     const {
       isAutoMode,
-      ytPlayerState,
+      ytPlayer,
       currentTime,
       config,
       notes,
@@ -86,7 +89,10 @@ export default class Player extends Component {
       setState,
     } = this.props;
 
-    if (isAutoMode || ytPlayerState !== Ids.YOUTUBE.PLAYING) {
+    if (
+      isAutoMode ||
+      (ytPlayer ? ytPlayer.getPlayerState() !== Ids.YOUTUBE.PLAYING : false)
+    ) {
       return;
     }
 

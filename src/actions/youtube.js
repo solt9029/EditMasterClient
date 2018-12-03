@@ -1,26 +1,6 @@
 import { ActionTypes } from '../constants/';
+import { createAction } from 'redux-actions';
 
-export const setYtPlayer = ytPlayer => ({
-  type: ActionTypes.YOUTUBE.SET_YT_PLAYER,
-  payload: {
-    ytPlayer,
-  },
-});
-
-export const setYtPlayerState = ytPlayerState => ({
-  type: ActionTypes.YOUTUBE.SET_YT_PLAYER_STATE,
-  payload: {
-    ytPlayerState,
-  },
-});
-
-export const setCurrentTime = currentTime => ({
-  type: ActionTypes.YOUTUBE.SET_CURRENT_TIME,
-  payload: {
-    currentTime,
-  },
-});
-
-export const reset = () => ({
-  type: ActionTypes.YOUTUBE.RESET,
-});
+export const setYtPlayer = createAction(ActionTypes.SET_YT_PLAYER);
+export const setCurrentTime = createAction(ActionTypes.SET_CURRENT_TIME);
+export const reset = createAction(ActionTypes.YOUTUBE.RESET);
