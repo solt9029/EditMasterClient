@@ -10,7 +10,7 @@ const ConfigForm = ({ label, type, placeholder, name, object, onChange }) => {
         type={type}
         placeholder={placeholder}
         name={name}
-        invalid={object.touched && object.errors.length > 0}
+        invalid={object.errors.length > 0}
         value={object.value}
         onChange={onChange}
       />
@@ -29,7 +29,6 @@ ConfigForm.propTypes = {
   placeholder: propTypes.string,
   name: propTypes.string,
   object: propTypes.shape({
-    touched: propTypes.bool,
     errors: propTypes.arrayOf(propTypes.string),
     value: propTypes.any,
   }),

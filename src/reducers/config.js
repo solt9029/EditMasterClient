@@ -1,4 +1,5 @@
 import { ActionTypes } from '../constants/';
+import { handleActions } from 'redux-actions';
 
 const defaultConfig = {
   username: '通りすがりの創作の達人',
@@ -12,75 +13,63 @@ const defaultConfig = {
 const initialState = {
   username: {
     value: '',
-    touched: false,
     errors: [],
   },
   videoId: {
     value: '',
-    touched: false,
     errors: [],
   },
   bpm: {
     value: 0,
-    touched: false,
     errors: [],
   },
   offset: {
     value: 0,
-    touched: false,
     errors: [],
   },
   comment: {
     value: '',
-    touched: false,
     errors: [],
   },
   speed: {
     value: 0,
-    touched: false,
     errors: [],
   },
 };
 
-export default (state = initialState, action) => {
-  switch (action.type) {
-    case ActionTypes.SCORES_NEW_VIEW.SET_DEFAULT_SCORE: {
+export default handleActions(
+  {
+    [ActionTypes.SCORES_NEW_VIEW.SET_DEFAULT_SCORE]: (state, action) => {
       const { username, videoId, bpm, offset, comment, speed } = defaultConfig;
       return {
         ...state,
         username: {
           value: username,
-          touched: false,
           errors: [],
         },
         videoId: {
           value: videoId,
-          touched: false,
           errors: [],
         },
         bpm: {
           value: bpm,
-          touched: false,
           errors: [],
         },
         offset: {
           value: offset,
-          touched: false,
           errors: [],
         },
         comment: {
           value: comment,
-          touched: false,
           errors: [],
         },
         speed: {
           value: speed,
-          touched: false,
           errors: [],
         },
       };
-    }
-    case ActionTypes.SCORES_SHOW_VIEW.FINISH_REQUEST_SUCCESS: {
+    },
+    [ActionTypes.SCORES_SHOW_VIEW.FINISH_REQUEST_SUCCESS]: (state, action) => {
       const {
         username,
         videoId,
@@ -93,93 +82,87 @@ export default (state = initialState, action) => {
         ...state,
         username: {
           value: username,
-          touched: false,
           errors: [],
         },
         videoId: {
           value: videoId,
-          touched: false,
           errors: [],
         },
         bpm: {
           value: bpm,
-          touched: false,
           errors: [],
         },
         offset: {
           value: offset,
-          touched: false,
           errors: [],
         },
         comment: {
           value: comment,
-          touched: false,
           errors: [],
         },
         speed: {
           value: speed,
-          touched: false,
           errors: [],
         },
       };
-    }
-    case ActionTypes.CONFIG.RESET:
+    },
+    [ActionTypes.CONFIG.RESET]: (state, action) => {
       return initialState;
-    case ActionTypes.CONFIG.SET_USERNAME:
+    },
+    [ActionTypes.CONFIG.SET_USERNAME]: (state, action) => {
       return {
         ...state,
         username: {
           value: action.payload.value,
           errors: action.payload.errors,
-          touched: action.payload.touched,
         },
       };
-    case ActionTypes.CONFIG.SET_VIDEO_ID:
+    },
+    [ActionTypes.CONFIG.SET_VIDEO_ID]: (state, action) => {
       return {
         ...state,
         videoId: {
           value: action.payload.value,
           errors: action.payload.errors,
-          touched: action.payload.touched,
         },
       };
-    case ActionTypes.CONFIG.SET_BPM:
+    },
+    [ActionTypes.CONFIG.SET_BPM]: (state, action) => {
       return {
         ...state,
         bpm: {
           value: action.payload.value,
           errors: action.payload.errors,
-          touched: action.payload.touched,
         },
       };
-    case ActionTypes.CONFIG.SET_OFFSET:
+    },
+    [ActionTypes.CONFIG.SET_OFFSET]: (state, action) => {
       return {
         ...state,
         offset: {
           value: action.payload.value,
           errors: action.payload.errors,
-          touched: action.payload.touched,
         },
       };
-    case ActionTypes.CONFIG.SET_SPEED:
+    },
+    [ActionTypes.CONFIG.SET_SPEED]: (state, action) => {
       return {
         ...state,
         speed: {
           value: action.payload.value,
           errors: action.payload.errors,
-          touched: action.payload.touched,
         },
       };
-    case ActionTypes.CONFIG.SET_COMMENT:
+    },
+    [ActionTypes.CONFIG.SET_COMMENT]: (state, action) => {
       return {
         ...state,
         comment: {
           value: action.payload.value,
           errors: action.payload.errors,
-          touched: action.payload.touched,
         },
       };
-    default:
-      return state;
-  }
-};
+    },
+  },
+  initialState
+);

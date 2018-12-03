@@ -19,7 +19,6 @@ describe('config actions', () => {
       payload: {
         value: value,
         errors: [required(value)],
-        touched: true,
       },
     };
     expect(result).toEqual(expected);
@@ -34,7 +33,6 @@ describe('config actions', () => {
       payload: {
         value: value,
         errors: [maxLength20(value)],
-        touched: true,
       },
     };
     expect(result).toEqual(expected);
@@ -48,7 +46,6 @@ describe('config actions', () => {
       payload: {
         value: value,
         errors: [],
-        touched: true,
       },
     };
     expect(result).toEqual(expected);
