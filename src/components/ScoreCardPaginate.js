@@ -4,10 +4,6 @@ import propTypes from 'prop-types';
 import { parseSearchQuery, stringifySearchQuery } from '../utils/url';
 
 export default class ScoreCardPaginate extends Component {
-  componentWillUnmount() {
-    this.props.reset();
-  }
-
   onPageChange = data => {
     const { location, history } = this.props;
 
@@ -49,5 +45,5 @@ export default class ScoreCardPaginate extends Component {
 ScoreCardPaginate.propTypes = {
   lastPage: propTypes.number,
   currentPage: propTypes.number,
-  reset: propTypes.func,
+  resetScores: propTypes.func,
 };

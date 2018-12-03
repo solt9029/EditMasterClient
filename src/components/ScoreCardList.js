@@ -9,7 +9,7 @@ export default class ScoreCardList extends Component {
     return (
       <Container top={30} bottom={30}>
         <Row>
-          {this.props.data.map((score, i) => {
+          {this.props.scores.map((score, i) => {
             return <ScoreCard score={score} key={i} />;
           })}
         </Row>
@@ -19,5 +19,5 @@ export default class ScoreCardList extends Component {
 }
 
 ScoreCardList.propTypes = {
-  data: propTypes.array,
+  scores: propTypes.array,
 };

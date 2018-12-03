@@ -5,16 +5,20 @@ import ScoreCardPaginate from '../../containers/ScoreCardPaginate';
 import { parseSearchQuery } from '../../utils/url';
 import Container from '../../styled/Container';
 import { connect } from 'react-redux';
-import { fetch } from '../../actions/score-card-paginate';
+import { fetchScores, resetScores } from '../../actions/scores';
+import { setKeyword } from '../../actions/keyword';
 import { withRouter } from 'react-router-dom';
-import { setKeyword } from '../../actions/navbar';
 
 class Index extends Component {
   componentDidMount() {
-    const { location, setKeyword, fetch } = this.props;
+    const { location, setKeyword, fetchScores } = this.props;
     const { page, keyword } = parseSearchQuery(location.search);
     setKeyword(keyword);
-    fetch(page, keyword);
+    fetchScores(page, keyword);
+  }
+
+  componentWillUnmount() {
+    this.props.resetScores();
   }
 
   componentWillReceiveProps(nextProps) {
@@ -22,7 +26,7 @@ class Index extends Component {
       return;
     }
     const { page, keyword } = parseSearchQuery(nextProps.location.search);
-    this.props.fetch(page, keyword);
+    this.props.fetchScores(page, keyword);
   }
 
   render() {
@@ -51,9 +55,9 @@ class Index extends Component {
 export default withRouter(
   connect(
     state => ({
-      isLoading: state.scoreCardPaginate.isLoading,
-      error: state.scoreCardPaginate.error,
+      isLoading: state.scores.isLoading,
+      error: state.scores.error,
     }),
-    { fetch, setKeyword }
+    { fetchScores, resetScores, setKeyword }
   )(Index)
 );
