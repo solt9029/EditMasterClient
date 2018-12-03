@@ -7,46 +7,39 @@ export const reset = () => ({
   type: ActionTypes.CONFIG.RESET,
 });
 
-const maxLength20 = maxLength(20);
-const maxLength140 = maxLength(140);
+const createPayloadWithValidation = rules => value => {
+  const errors = validate(value, rules);
+  return { value, errors };
+};
 
 export const setUsername = createAction(
   ActionTypes.CONFIG.SET_USERNAME,
-  value => {
-    const errors = validate(value, [required, maxLength20]);
-    return { value, errors };
-  }
+  createPayloadWithValidation([required, maxLength(20)])
 );
 
 export const setVideoId = createAction(
   ActionTypes.CONFIG.SET_VIDEO_ID,
-  value => {
-    const errors = validate(value, [required]);
-    return { value, errors };
-  }
+  createPayloadWithValidation([required])
 );
 
-export const setBpm = createAction(ActionTypes.CONFIG.SET_BPM, value => {
-  const errors = validate(value, [required, number]);
-  return { value, errors };
-});
+export const setBpm = createAction(
+  ActionTypes.CONFIG.SET_BPM,
+  createPayloadWithValidation([required, number])
+);
 
-export const setOffset = createAction(ActionTypes.CONFIG.SET_OFFSET, value => {
-  const errors = validate(value, [required, number]);
-  return { value, errors };
-});
+export const setOffset = createAction(
+  ActionTypes.CONFIG.SET_OFFSET,
+  createPayloadWithValidation([required, number])
+);
 
-export const setSpeed = createAction(ActionTypes.CONFIG.SET_SPEED, value => {
-  const errors = validate(value, [required, number]);
-  return { value, errors };
-});
+export const setSpeed = createAction(
+  ActionTypes.CONFIG.SET_SPEED,
+  createPayloadWithValidation([required, number])
+);
 
 export const setComment = createAction(
   ActionTypes.CONFIG.SET_COMMENT,
-  value => {
-    const errors = validate(value, [maxLength140]);
-    return { value, errors };
-  }
+  createPayloadWithValidation([maxLength(140)])
 );
 
 export const fetchSongle = videoId => {
