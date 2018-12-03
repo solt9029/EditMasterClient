@@ -2,8 +2,8 @@ import { connect } from 'react-redux';
 import PlayerShotsCanvas from '../components/PlayerShotsCanvas';
 
 const mapStateToProps = state => ({
-  width: state.ide.panes.player.width,
-  height: state.ide.panes.player.height,
+  width: state.sizes.player.width,
+  height: state.sizes.player.height,
   shots: state.shots.list,
   updatedCount: state.shots.updatedCount,
 });

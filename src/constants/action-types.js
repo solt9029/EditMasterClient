@@ -1,4 +1,5 @@
 const ActionTypes = {
+  SET_SIZES: 'SET_SIZES',
   CONFIG: {
     RESET: 'CONFIG/RESET',
     SET_USERNAME: 'CONFIG/SET_USERNAME',

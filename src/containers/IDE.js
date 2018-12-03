@@ -1,11 +1,11 @@
 import { connect } from 'react-redux';
-import { setPanes } from '../actions/ide';
+import { setSizes } from '../actions/sizes';
 import IDE from '../components/IDE';
 
 const mapStateToProps = null;
 const mapDispatchToProps = dispatch => ({
-  setPanes(references) {
-    dispatch(setPanes(references));
+  setSizes(sizes) {
+    dispatch(setSizes(sizes));
   },
 });
 export default connect(

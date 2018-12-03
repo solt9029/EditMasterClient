@@ -10,7 +10,7 @@ const _addJudgeEffect = (state, playerHeight) => ({
 
 export const addJudgeEffect = state => {
   return (dispatch, getState) => {
-    const { height } = getState().ide.panes.player;
+    const { height } = getState().sizes.player;
     dispatch(_addJudgeEffect(state, height));
   };
 };

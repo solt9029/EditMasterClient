@@ -2,8 +2,8 @@ import { connect } from 'react-redux';
 import PlayerNotesCanvas from '../components/PlayerNotesCanvas';
 
 const mapStateToProps = state => ({
-  width: state.ide.panes.player.width,
-  height: state.ide.panes.player.height,
+  width: state.sizes.player.width,
+  height: state.sizes.player.height,
   bpm: state.config.bpm.value,
   speed: state.config.speed.value,
   offset: state.config.offset.value,
