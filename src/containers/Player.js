@@ -8,7 +8,7 @@ import { addShot, updateShots } from '../actions/shots';
 import Player from '../components/Player';
 
 const mapStateToProps = state => ({
-  playerPane: state.ide.panes.player,
+  playerPane: state.sizes.player,
   notes: state.editor.notes,
   states: state.player.states,
   currentTime: state.youtube.currentTime,

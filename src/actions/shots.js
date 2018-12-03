@@ -12,7 +12,7 @@ const _addShot = (note, playerWidth, playerHeight) => ({
 export const addShot = note => {
   return (dispatch, getState) => {
     const state = getState();
-    const { width, height } = state.ide.panes.player;
+    const { width, height } = state.sizes.player;
     dispatch(_addShot(note, width, height));
   };
 };

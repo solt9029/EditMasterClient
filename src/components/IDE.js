@@ -7,27 +7,29 @@ import Palette from '../containers/Palette';
 import YouTube from '../containers/YouTube';
 import { debounce } from 'lodash';
 import PaneBox from '../styled/PaneBox';
+import { normalizeSizes } from '../utils/ref';
 
 export default class IDE extends Component {
-  constructor(props) {
-    super(props);
-    this.references = {
-      player: React.createRef(),
-      editor: React.createRef(),
-      palette: React.createRef(),
-    };
-    this.setPanes = debounce(() => {
-      this.props.setPanes(this.references);
-    }, 100).bind(this);
-  }
+  // You can't use a name "refs" because of React specification.
+  references = {
+    player: React.createRef(),
+    editor: React.createRef(),
+    palette: React.createRef(),
+  };
+
+  setSizes = debounce(() => {
+    const sizes = normalizeSizes(this.references);
+    this.props.setSizes(sizes);
+  }, 100);
 
   componentDidMount() {
-    this.props.setPanes(this.references);
-    window.addEventListener('resize', this.setPanes, false);
+    const sizes = normalizeSizes(this.references);
+    this.props.setSizes(sizes);
+    window.addEventListener('resize', this.setSizes, false);
   }
 
   componentWillUnmount() {
-    window.removeEventListener('resize', this.setPanes, false);
+    window.removeEventListener('resize', this.setSizes, false);
   }
 
   render() {
@@ -38,7 +40,7 @@ export default class IDE extends Component {
           vertical
           percentage
           secondaryInitialSize={20}
-          onSecondaryPaneSizeChange={this.setPanes}
+          onSecondaryPaneSizeChange={this.setSizes}
         >
           <PaneBox height={100} innerRef={this.references.player}>
             <Player />
@@ -46,14 +48,14 @@ export default class IDE extends Component {
           <SplitterLayout
             percentage
             secondaryInitialSize={70}
-            onSecondaryPaneSizeChange={this.setPanes}
+            onSecondaryPaneSizeChange={this.setSizes}
           >
             <SplitterLayout
               percentage
               vertical
               primaryIndex={1}
               secondaryInitialSize={20}
-              onSecondaryPaneSizeChange={this.setPanes}
+              onSecondaryPaneSizeChange={this.setSizes}
             >
               <PaneBox height={100}>
                 <YouTube />
@@ -65,7 +67,7 @@ export default class IDE extends Component {
             <SplitterLayout
               percentage
               secondaryInitialSize={43}
-              onSecondaryPaneSizeChange={this.setPanes}
+              onSecondaryPaneSizeChange={this.setSizes}
             >
               <PaneBox height={100} innerRef={this.references.editor}>
                 <Editor />

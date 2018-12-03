@@ -1,4 +1,4 @@
-export { default as ide } from './ide';
+// export { default as ide } from './ide';
 export { default as player } from './player';
 export { default as editor } from './editor';
 export { default as config } from './config';
@@ -10,3 +10,4 @@ export { default as navbar } from './navbar';
 export { default as youtube } from './youtube';
 export { default as shots } from './shots';
 export { default as judgeEffects } from './judge-effects';
+export { default as sizes } from './sizes';
