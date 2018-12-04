@@ -55,19 +55,24 @@ const initialState = {
   },
 };
 
+/**
+ *
+ * @param {string} name
+ * @return {function}
+ */
+const handleSetConfigFormAction = name => (state, action) => ({
+  ...state,
+  [name]: action.payload,
+});
+
 export default handleActions(
   {
     [ActionTypes.SET_DEFAULT_SCORE]: () => defaultState,
     [ActionTypes.FINISH_FETCHING_SCORE]: {
-      next: (state, action) => {
-        const {
-          username,
-          videoId,
-          bpm,
-          offset,
-          comment,
-          speed,
-        } = action.payload;
+      next: (
+        state,
+        { payload: { username, videoId, bpm, offset, comment, speed } }
+      ) => {
         return {
           ...state,
           username: {
@@ -97,45 +102,13 @@ export default handleActions(
         };
       },
     },
-    [ActionTypes.RESET_IDE]: (state, action) => {
-      return initialState;
-    },
-    [ActionTypes.CONFIG.SET_USERNAME]: (state, action) => {
-      return {
-        ...state,
-        username: action.payload,
-      };
-    },
-    [ActionTypes.CONFIG.SET_VIDEO_ID]: (state, action) => {
-      return {
-        ...state,
-        videoId: action.payload,
-      };
-    },
-    [ActionTypes.CONFIG.SET_BPM]: (state, action) => {
-      return {
-        ...state,
-        bpm: action.payload,
-      };
-    },
-    [ActionTypes.CONFIG.SET_OFFSET]: (state, action) => {
-      return {
-        ...state,
-        offset: action.payload,
-      };
-    },
-    [ActionTypes.CONFIG.SET_SPEED]: (state, action) => {
-      return {
-        ...state,
-        speed: action.payload,
-      };
-    },
-    [ActionTypes.CONFIG.SET_COMMENT]: (state, action) => {
-      return {
-        ...state,
-        comment: action.payload,
-      };
-    },
+    [ActionTypes.RESET_IDE]: () => initialState,
+    [ActionTypes.CONFIG.SET_USERNAME]: handleSetConfigFormAction('username'),
+    [ActionTypes.CONFIG.SET_VIDEO_ID]: handleSetConfigFormAction('videoId'),
+    [ActionTypes.CONFIG.SET_BPM]: handleSetConfigFormAction('bpm'),
+    [ActionTypes.CONFIG.SET_OFFSET]: handleSetConfigFormAction('offset'),
+    [ActionTypes.CONFIG.SET_SPEED]: handleSetConfigFormAction('speed'),
+    [ActionTypes.CONFIG.SET_COMMENT]: handleSetConfigFormAction('comment'),
   },
   initialState
 );
