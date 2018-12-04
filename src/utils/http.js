@@ -15,7 +15,7 @@ export const clients = {
  * @param {string} videoId
  * @return {Object}
  */
-export const fetchSongBeat = videoId => {
+export const fetchSongle = videoId => {
   return clients.songle.get('/api/v1/song/beat.json', {
     params: {
       url: `www.youtube.com/watch?v=${videoId}`,

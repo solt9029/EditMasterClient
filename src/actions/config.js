@@ -1,5 +1,5 @@
 import { required, number, validate, maxLength } from '../utils/validations';
-import { fetchSongBeat } from '../utils/http';
+import { fetchSongle as _fetchSongle } from '../utils/http';
 import { ActionTypes } from '../constants/';
 import { createAction } from 'redux-actions';
 
@@ -41,7 +41,7 @@ export const setComment = createAction(
 export const fetchSongle = videoId => {
   return async dispatch => {
     try {
-      const result = await fetchSongBeat(videoId);
+      const result = await _fetchSongle(videoId);
       if (!result.data.beats) {
         return;
       }
