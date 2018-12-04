@@ -8,7 +8,7 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case ActionTypes.PALETTE.RESET:
+    case ActionTypes.RESET_IDE:
       return initialState;
     case ActionTypes.PALETTE.SET_NOTE:
       return {

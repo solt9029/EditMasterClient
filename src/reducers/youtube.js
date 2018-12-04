@@ -20,7 +20,7 @@ export default handleActions(
   {
     [ActionTypes.SET_YT_PLAYER]: handleSetYtPlayerAction,
     [ActionTypes.SET_CURRENT_TIME]: handleSetCurrentTimeAction,
-    [ActionTypes.YOUTUBE.RESET]: () => initialState,
+    [ActionTypes.RESET_IDE]: () => initialState,
   },
   initialState
 );

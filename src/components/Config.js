@@ -4,10 +4,6 @@ import ConfigForm from './ConfigForm';
 import propTypes from 'prop-types';
 
 export default class Config extends Component {
-  componentWillUnmount() {
-    this.props.reset();
-  }
-
   render() {
     const { props } = this;
     const { config } = props;

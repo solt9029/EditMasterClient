@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { addBar, removeBar } from '../actions/editor';
-import { reset, toggleMode } from '../actions/palette';
+import { toggleMode } from '../actions/palette';
 import Palette from '../components/Palette';
 
 const mapStateToProps = state => ({
@@ -16,9 +16,6 @@ const mapDispatchToProps = dispatch => ({
   },
   removeBar() {
     dispatch(removeBar());
-  },
-  reset() {
-    dispatch(reset());
   },
 });
 export default connect(

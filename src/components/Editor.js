@@ -6,10 +6,6 @@ import EditorNotesCanvas from './EditorNotesCanvas';
 import propTypes from 'prop-types';
 
 export default class Editor extends Component {
-  componentWillUnmount() {
-    this.props.reset();
-  }
-
   render() {
     const { width, notes } = this.props;
 

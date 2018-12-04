@@ -12,6 +12,7 @@ export default handleActions(
         isChanging: action.payload,
       };
     },
+    [ActionTypes.RESET_IDE]: () => initialState,
   },
   initialState
 );

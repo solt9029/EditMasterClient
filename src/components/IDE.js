@@ -29,6 +29,7 @@ export default class IDE extends Component {
   }
 
   componentWillUnmount() {
+    this.props.resetIDE();
     window.removeEventListener('resize', this.setSizes, false);
   }
 
