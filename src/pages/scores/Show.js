@@ -4,15 +4,11 @@ import NotFound from '../NotFound';
 import Modal from '../../containers/Modal';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { fetch, reset } from '../../actions/scores-show-view';
+import { fetch } from '../../actions/scores-show-view';
 
 class Show extends Component {
   componentDidMount() {
     this.props.fetch(this.props.match.params.id);
-  }
-
-  componentWillUnmount() {
-    this.props.reset();
   }
 
   render() {
@@ -36,6 +32,6 @@ export default withRouter(
       error: state.scoresShowView.error,
       isLoading: state.scoresShowView.isLoading,
     }),
-    { fetch, reset }
+    { fetch }
   )(Show)
 );

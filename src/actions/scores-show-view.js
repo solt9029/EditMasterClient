@@ -18,10 +18,6 @@ export const finishRequestSuccess = (notes, config) => ({
   },
 });
 
-export const reset = () => ({
-  type: ActionTypes.SCORES_SHOW_VIEW.RESET,
-});
-
 export const fetch = id => {
   return async dispatch => {
     dispatch(startRequest());
