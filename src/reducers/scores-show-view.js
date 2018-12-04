@@ -1,31 +1,24 @@
 import { ActionTypes } from '../constants';
+import { handleActions } from 'redux-actions';
 
 const initialState = {
   error: null,
   isLoading: false,
 };
 
-export default (state = initialState, action) => {
-  switch (action.type) {
-    case ActionTypes.SCORES_SHOW_VIEW.START_REQUEST:
-      return {
-        ...initialState,
-        isLoading: true,
-      };
-    case ActionTypes.SCORES_SHOW_VIEW.FINISH_REQUEST_ERROR:
-      const { error } = action.payload;
-      return {
-        ...state,
+export default handleActions(
+  {
+    [ActionTypes.START_FETCHING_SCORE]: () => ({
+      error: null,
+      isLoading: true,
+    }),
+    [ActionTypes.FINISH_FETCHING_SCORE]: {
+      next: () => initialState,
+      throw: (state, { payload }) => ({
+        error: payload,
         isLoading: false,
-        error,
-      };
-    case ActionTypes.SCORES_SHOW_VIEW.FINISH_REQUEST_SUCCESS:
-      return {
-        ...state,
-        isLoading: false,
-        error: null,
-      };
-    default:
-      return state;
-  }
-};
+      }),
+    },
+  },
+  initialState
+);

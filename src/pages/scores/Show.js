@@ -4,11 +4,11 @@ import NotFound from '../NotFound';
 import Modal from '../../containers/Modal';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { fetch } from '../../actions/scores-show-view';
+import { fetchScore } from '../../actions/scores-show-view';
 
 class Show extends Component {
   componentDidMount() {
-    this.props.fetch(this.props.match.params.id);
+    this.props.fetchScore(this.props.match.params.id);
   }
 
   render() {
@@ -32,6 +32,6 @@ export default withRouter(
       error: state.scoresShowView.error,
       isLoading: state.scoresShowView.isLoading,
     }),
-    { fetch }
+    { fetchScore }
   )(Show)
 );

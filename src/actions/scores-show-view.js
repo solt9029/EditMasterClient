@@ -1,44 +1,36 @@
 import { ActionTypes } from '../constants';
-import { fetchScore } from '../utils/http';
+import { fetchScore as _fetchScore } from '../utils/http';
+import { createAction } from 'redux-actions';
 
-export const finishRequestError = error => ({
-  type: ActionTypes.SCORES_SHOW_VIEW.FINISH_REQUEST_ERROR,
-  payload: { error },
-});
+export const finishFetchingScore = createAction(
+  ActionTypes.FINISH_FETCHING_SCORE
+);
+export const startFetchingScore = createAction(
+  ActionTypes.START_FETCHING_SCORE
+);
 
-export const startRequest = () => ({
-  type: ActionTypes.SCORES_SHOW_VIEW.START_REQUEST,
-});
-
-export const finishRequestSuccess = (notes, config) => ({
-  type: ActionTypes.SCORES_SHOW_VIEW.FINISH_REQUEST_SUCCESS,
-  payload: {
-    notes,
-    config,
-  },
-});
-
-export const fetch = id => {
+export const fetchScore = id => {
   return async dispatch => {
-    dispatch(startRequest());
+    dispatch(startFetchingScore());
     try {
-      const result = await fetchScore(id);
-      const score = result.data;
-
-      const notes = JSON.parse(score.notes);
-      const { username, video_id, bpm, offset, speed, comment } = score;
-      const config = {
-        username,
-        videoId: video_id,
-        bpm,
-        offset,
-        speed,
-        comment,
-      };
-
-      dispatch(finishRequestSuccess(notes, config));
+      const result = await _fetchScore(id);
+      const { data } = result;
+      const videoId = data.video_id;
+      const notes = JSON.parse(data.notes);
+      const { username, bpm, offset, speed, comment } = data;
+      dispatch(
+        finishFetchingScore({
+          username,
+          bpm,
+          offset,
+          speed,
+          comment,
+          videoId,
+          notes,
+        })
+      );
     } catch (error) {
-      dispatch(finishRequestError(error));
+      dispatch(finishFetchingScore(error));
     }
   };
 };

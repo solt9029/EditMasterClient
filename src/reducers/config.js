@@ -59,42 +59,44 @@ export default handleActions(
   {
     [ActionTypes.SCORES_NEW_VIEW.SET_DEFAULT_SCORE]: (state, action) =>
       defaultState,
-    [ActionTypes.SCORES_SHOW_VIEW.FINISH_REQUEST_SUCCESS]: (state, action) => {
-      const {
-        username,
-        videoId,
-        bpm,
-        offset,
-        comment,
-        speed,
-      } = action.payload.config;
-      return {
-        ...state,
-        username: {
-          value: username,
-          errors: [],
-        },
-        videoId: {
-          value: videoId,
-          errors: [],
-        },
-        bpm: {
-          value: bpm,
-          errors: [],
-        },
-        offset: {
-          value: offset,
-          errors: [],
-        },
-        comment: {
-          value: comment,
-          errors: [],
-        },
-        speed: {
-          value: speed,
-          errors: [],
-        },
-      };
+    [ActionTypes.FINISH_FETCHING_SCORE]: {
+      next: (state, action) => {
+        const {
+          username,
+          videoId,
+          bpm,
+          offset,
+          comment,
+          speed,
+        } = action.payload;
+        return {
+          ...state,
+          username: {
+            value: username,
+            errors: [],
+          },
+          videoId: {
+            value: videoId,
+            errors: [],
+          },
+          bpm: {
+            value: bpm,
+            errors: [],
+          },
+          offset: {
+            value: offset,
+            errors: [],
+          },
+          comment: {
+            value: comment,
+            errors: [],
+          },
+          speed: {
+            value: speed,
+            errors: [],
+          },
+        };
+      },
     },
     [ActionTypes.RESET_IDE]: (state, action) => {
       return initialState;

@@ -1,4 +1,5 @@
 import { Ids, Numbers, ActionTypes } from '../constants/';
+import { handleActions } from 'redux-actions';
 
 /* eslint-disable */
 export const defaultNotes = [
@@ -18,32 +19,31 @@ const initialState = {
   notes: [],
 };
 
-export default (state = initialState, action) => {
-  switch (action.type) {
-    case ActionTypes.SCORES_NEW_VIEW.SET_DEFAULT_SCORE: {
-      return {
-        ...state,
-        notes: defaultNotes,
-      };
-    }
-    case ActionTypes.SCORES_SHOW_VIEW.FINISH_REQUEST_SUCCESS: {
-      const { notes } = action.payload;
-      return {
+export default handleActions(
+  {
+    [ActionTypes.SCORES_NEW_VIEW.SET_DEFAULT_SCORE]: state => ({
+      ...state,
+      notes: defaultNotes,
+    }),
+    [ActionTypes.FINISH_FETCHING_SCORE]: {
+      next: (state, { payload: { notes } }) => ({
         ...state,
         notes,
-      };
-    }
-    case ActionTypes.EDITOR.CHANGE_NOTES: {
+      }),
+    },
+
+    [ActionTypes.EDITOR.CHANGE_NOTES]: (state, { payload }) => {
       let notes = state.notes.concat();
-      for (let i = 0; i < action.payload.notes.length; i++) {
-        notes[action.payload.index + i] = action.payload.notes[i];
+      for (let i = 0; i < payload.notes.length; i++) {
+        notes[payload.index + i] = payload.notes[i];
       }
       return {
         ...state,
         notes,
       };
-    }
-    case ActionTypes.EDITOR.ADD_BAR: {
+    },
+
+    [ActionTypes.EDITOR.ADD_BAR]: state => {
       let notes = state.notes.concat();
       for (let i = 0; i < Numbers.NOTES_PER_BAR; i++) {
         notes.push(Ids.NOTE.SPACE);
@@ -52,11 +52,11 @@ export default (state = initialState, action) => {
         ...state,
         notes,
       };
-    }
-    case ActionTypes.RESET_IDE: {
-      return initialState;
-    }
-    case ActionTypes.EDITOR.REMOVE_BAR: {
+    },
+
+    [ActionTypes.RESET_IDE]: () => initialState,
+
+    [ActionTypes.EDITOR.REMOVE_BAR]: state => {
       if (state.notes.length < Numbers.NOTES_PER_BAR * 2) {
         return state;
       }
@@ -68,14 +68,12 @@ export default (state = initialState, action) => {
         ...state,
         notes,
       };
-    }
-    case ActionTypes.EDITOR.SET_NOTES: {
-      return {
-        ...state,
-        notes: action.payload.notes,
-      };
-    }
-    default:
-      return state;
-  }
-};
+    },
+
+    [ActionTypes.EDITOR.SET_NOTES]: (state, { payload }) => ({
+      ...state,
+      notes: payload.notes,
+    }),
+  },
+  initialState
+);
