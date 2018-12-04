@@ -6,6 +6,7 @@ import EditorCaretCanvas from '../components/EditorCaretCanvas';
 const mapStateToProps = state => ({
   palette: state.palette,
   notesLength: state.editor.notes.length,
+  notes: state.editor.notes,
 });
 const mapDispatchToProps = dispatch => ({
   changeNotes(index, num, note) {
