@@ -1,5 +1,4 @@
 import { ActionTypes } from '../constants';
+import { createAction } from 'redux-actions';
 
-export const setDefaultScore = () => ({
-  type: ActionTypes.SCORES_NEW_VIEW.SET_DEFAULT_SCORE,
-});
+export const setDefaultScore = createAction(ActionTypes.SET_DEFAULT_SCORE);
