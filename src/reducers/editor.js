@@ -21,7 +21,7 @@ const initialState = {
 
 export default handleActions(
   {
-    [ActionTypes.SCORES_NEW_VIEW.SET_DEFAULT_SCORE]: state => ({
+    [ActionTypes.SET_DEFAULT_SCORE]: state => ({
       ...state,
       notes: defaultNotes,
     }),

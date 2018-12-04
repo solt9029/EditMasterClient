@@ -57,8 +57,7 @@ const initialState = {
 
 export default handleActions(
   {
-    [ActionTypes.SCORES_NEW_VIEW.SET_DEFAULT_SCORE]: (state, action) =>
-      defaultState,
+    [ActionTypes.SET_DEFAULT_SCORE]: () => defaultState,
     [ActionTypes.FINISH_FETCHING_SCORE]: {
       next: (state, action) => {
         const {
