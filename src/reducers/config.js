@@ -112,55 +112,37 @@ export default handleActions(
     [ActionTypes.CONFIG.SET_USERNAME]: (state, action) => {
       return {
         ...state,
-        username: {
-          value: action.payload.value,
-          errors: action.payload.errors,
-        },
+        username: action.payload,
       };
     },
     [ActionTypes.CONFIG.SET_VIDEO_ID]: (state, action) => {
       return {
         ...state,
-        videoId: {
-          value: action.payload.value,
-          errors: action.payload.errors,
-        },
+        videoId: action.payload,
       };
     },
     [ActionTypes.CONFIG.SET_BPM]: (state, action) => {
       return {
         ...state,
-        bpm: {
-          value: action.payload.value,
-          errors: action.payload.errors,
-        },
+        bpm: action.payload,
       };
     },
     [ActionTypes.CONFIG.SET_OFFSET]: (state, action) => {
       return {
         ...state,
-        offset: {
-          value: action.payload.value,
-          errors: action.payload.errors,
-        },
+        offset: action.payload,
       };
     },
     [ActionTypes.CONFIG.SET_SPEED]: (state, action) => {
       return {
         ...state,
-        speed: {
-          value: action.payload.value,
-          errors: action.payload.errors,
-        },
+        speed: action.payload,
       };
     },
     [ActionTypes.CONFIG.SET_COMMENT]: (state, action) => {
       return {
         ...state,
-        comment: {
-          value: action.payload.value,
-          errors: action.payload.errors,
-        },
+        comment: action.payload,
       };
     },
   },
