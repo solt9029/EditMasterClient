@@ -106,7 +106,7 @@ export default handleActions(
         },
       };
     },
-    [ActionTypes.CONFIG.RESET]: (state, action) => {
+    [ActionTypes.RESET_IDE]: (state, action) => {
       return initialState;
     },
     [ActionTypes.CONFIG.SET_USERNAME]: (state, action) => {

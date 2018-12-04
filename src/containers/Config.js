@@ -7,7 +7,6 @@ import {
   setOffset,
   setSpeed,
   setComment,
-  reset,
 } from '../actions/config';
 import Config from '../components/Config';
 
@@ -32,9 +31,6 @@ const mapDispatchToProps = dispatch => ({
   },
   setComment(value) {
     dispatch(setComment(value));
-  },
-  reset() {
-    dispatch(reset());
   },
   setBpm(value) {
     dispatch(setBpm(value));

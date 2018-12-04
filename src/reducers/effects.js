@@ -2,6 +2,7 @@ import { ActionTypes } from '../constants/';
 import { handleActions } from 'redux-actions';
 import Shot from '../classes/Shot';
 import JudgeEffect from '../classes/JudgeEffect';
+import { cloneDeep } from 'lodash';
 
 const initialState = {
   judges: {
@@ -59,6 +60,7 @@ export default handleActions(
     [ActionTypes.ADD_SHOT_EFFECT]: handleAddShotEffectAction,
     [ActionTypes.ADD_JUDGE_EFFECT]: handleAddJudgeEffectAction,
     [ActionTypes.UPDATE_EFFECTS]: handleUpdateEffectsAction,
+    [ActionTypes.RESET_IDE]: () => cloneDeep(initialState),
   },
-  initialState
+  cloneDeep(initialState)
 );

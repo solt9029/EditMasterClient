@@ -21,6 +21,7 @@ export default handleActions(
     [ActionTypes.SET_SIZES]: (state, action) => {
       return action.payload;
     },
+    [ActionTypes.RESET_IDE]: () => initialState,
   },
   initialState
 );

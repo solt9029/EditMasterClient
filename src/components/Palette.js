@@ -14,9 +14,6 @@ const ModeButton = styled(Button)`
 `;
 
 export default class Palette extends Component {
-  componentWillUnmount() {
-    this.props.reset();
-  }
   render() {
     return (
       <Fragment>

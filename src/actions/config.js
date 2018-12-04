@@ -3,10 +3,6 @@ import { fetchSongBeat } from '../utils/http';
 import { ActionTypes } from '../constants/';
 import { createAction } from 'redux-actions';
 
-export const reset = () => ({
-  type: ActionTypes.CONFIG.RESET,
-});
-
 const createPayloadWithValidation = rules => value => {
   const errors = validate(value, rules);
   return { value, errors };

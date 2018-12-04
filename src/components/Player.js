@@ -15,10 +15,6 @@ export default class Player extends Component {
     this.updateCanvas();
   }
 
-  componentWillUnmount() {
-    this.props.reset();
-  }
-
   componentDidUpdate() {
     this.updateCanvas();
     this.autoMode();

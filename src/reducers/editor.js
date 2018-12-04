@@ -53,7 +53,7 @@ export default (state = initialState, action) => {
         notes,
       };
     }
-    case ActionTypes.EDITOR.RESET: {
+    case ActionTypes.RESET_IDE: {
       return initialState;
     }
     case ActionTypes.EDITOR.REMOVE_BAR: {

@@ -15,10 +15,6 @@ export const setNotes = notes => ({
   },
 });
 
-export const reset = () => ({
-  type: ActionTypes.EDITOR.RESET,
-});
-
 export const addBar = () => ({
   type: ActionTypes.EDITOR.ADD_BAR,
 });

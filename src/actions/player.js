@@ -11,7 +11,3 @@ export const setState = (index, state) => ({
 export const freshStates = () => ({
   type: ActionTypes.PLAYER.FRESH_STATES,
 });
-
-export const reset = () => ({
-  type: ActionTypes.PLAYER.RESET,
-});

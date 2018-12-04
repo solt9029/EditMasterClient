@@ -69,7 +69,7 @@ export default (state = initialState, action) => {
         states,
       };
     }
-    case ActionTypes.PLAYER.RESET:
+    case ActionTypes.RESET_IDE:
       return initialState;
     default:
       return state;

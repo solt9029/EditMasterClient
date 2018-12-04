@@ -17,7 +17,6 @@ export default class YouTube extends Component {
 
   componentWillUnmount() {
     window.cancelAnimationFrame(this.frameId);
-    this.props.reset();
   }
 
   loop = () => {

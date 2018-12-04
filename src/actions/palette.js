@@ -14,10 +14,6 @@ export const setDivision = division => ({
   },
 });
 
-export const reset = () => ({
-  type: ActionTypes.PALETTE.RESET,
-});
-
 export const toggleMode = () => ({
   type: ActionTypes.PALETTE.TOGGLE_MODE,
 });
