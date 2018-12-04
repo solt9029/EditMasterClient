@@ -4,6 +4,7 @@ import Shot from '../classes/Shot';
 import JudgeEffect from '../classes/JudgeEffect';
 import { cloneDeep } from 'lodash';
 
+// HACK: this is mutable for performance!
 const initialState = {
   judges: {
     list: [],
