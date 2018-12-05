@@ -1,5 +1,6 @@
 import { required, number, validate, maxLength } from '../utils/validations';
 import { fetchSongle as _fetchSongle } from '../utils/http';
+import { calcSongle } from '../utils/calculations';
 import { ActionTypes } from '../constants/';
 import { createAction } from 'redux-actions';
 
@@ -49,15 +50,8 @@ export const fetchSongle = videoId => {
       if (!result.data.beats) {
         return;
       }
-
-      const offset = result.data.beats[0].start / 1000;
-      let bpmSum = 0;
-      for (let i = 30; i < result.data.beats.length - 30; i++) {
-        bpmSum += result.data.beats[i].bpm;
-      }
-      const bpm = bpmSum / (result.data.beats.length - 60);
-
-      dispatch(finishFetchingSongle({ bpm, offset }));
+      const payload = calcSongle(result.data.beats);
+      dispatch(finishFetchingSongle(payload));
     } catch (error) {
       // error handling
     }

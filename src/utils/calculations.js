@@ -147,3 +147,18 @@ export const calcCurrentTimeMark = (width, bpm, offset, currentTime) => {
 export const calcBarNum = notesLength => {
   return Math.ceil(notesLength / Numbers.NOTES_PER_BAR);
 };
+
+/**
+ *
+ * @param {Array} beats
+ * @return {Object}
+ */
+export const calcSongle = beats => {
+  const offset = beats[0].start / 1000;
+  let bpmSum = 0;
+  for (let i = 30; i < beats.length - 30; i++) {
+    bpmSum += beats[i].bpm;
+  }
+  const bpm = bpmSum / (beats.length - 60);
+  return { bpm, offset };
+};
