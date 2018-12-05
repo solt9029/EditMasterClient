@@ -1,4 +1,5 @@
 import { ActionTypes } from '../constants/';
+import { handleActions } from 'redux-actions';
 
 const initialState = {
   isLoading: false,
@@ -6,27 +7,24 @@ const initialState = {
   errors: null,
 };
 
-export default (state = initialState, action) => {
-  switch (action.type) {
-    case ActionTypes.MODAL.START_CREATE:
-      return {
-        ...state,
-        isLoading: true,
-      };
-    case ActionTypes.MODAL.FINISH_CREATE_SUCCESS:
-      return {
-        ...state,
+export default handleActions(
+  {
+    [ActionTypes.START_CREATING_SCORE]: state => ({
+      ...state,
+      isLoading: true,
+    }),
+    [ActionTypes.FINISH_CREATING_SCORE]: {
+      next: (state, { payload }) => ({
         isLoading: false,
-        id: action.payload.id,
         errors: null,
-      };
-    case ActionTypes.MODAL.FINISH_CREATE_ERROR:
-      return {
+        id: payload,
+      }),
+      throw: (state, { payload }) => ({
         ...state,
         isLoading: false,
-        errors: action.payload.errors,
-      };
-    default:
-      return state;
-  }
-};
+        errors: payload.response.data.errors,
+      }),
+    },
+  },
+  initialState
+);

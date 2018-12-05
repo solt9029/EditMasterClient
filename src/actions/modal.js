@@ -1,13 +1,17 @@
 import { ActionTypes } from '../constants/';
-import { createScore } from '../utils/http';
+import { createScore as _createScore } from '../utils/http';
+import { createAction } from 'redux-actions';
 
-export const startCreate = () => ({
-  type: ActionTypes.MODAL.START_CREATE,
-});
+export const startCreatingScore = createAction(
+  ActionTypes.START_CREATING_SCORE
+);
+export const finishCreatingScore = createAction(
+  ActionTypes.FINISH_CREATING_SCORE
+);
 
-export const create = () => {
+export const createScore = () => {
   return async (dispatch, getState) => {
-    dispatch(startCreate());
+    dispatch(startCreatingScore());
 
     const state = getState();
     const { bpm, videoId, username, offset, speed, comment } = state.config;
@@ -24,25 +28,11 @@ export const create = () => {
     };
 
     try {
-      const result = await createScore(data);
-      dispatch(finishCreateSuccess(result.data.id));
+      const result = await _createScore(data);
+      dispatch(finishCreatingScore(result.data.id));
     } catch (error) {
-      // this part should check whether error.response is null or not. (when api doesn't work, it gives error.)
-      dispatch(finishCreateError(error.response.data.errors));
+      // error.response.data.errors
+      dispatch(finishCreatingScore(error));
     }
   };
 };
-
-export const finishCreateSuccess = id => ({
-  type: ActionTypes.MODAL.FINISH_CREATE_SUCCESS,
-  payload: {
-    id,
-  },
-});
-
-export const finishCreateError = errors => ({
-  type: ActionTypes.MODAL.FINISH_CREATE_ERROR,
-  payload: {
-    errors,
-  },
-});

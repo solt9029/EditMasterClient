@@ -2,9 +2,9 @@ import React from 'react';
 import { Button } from 'reactstrap';
 import propTypes from 'prop-types';
 
-const CreateButton = ({ create }) => {
+const CreateButton = ({ createScore }) => {
   return (
-    <Button color="success" className="my-2 mr-2" onClick={create}>
+    <Button color="success" className="my-2 mr-2" onClick={createScore}>
       保存
     </Button>
   );
@@ -13,5 +13,5 @@ const CreateButton = ({ create }) => {
 export default CreateButton;
 
 CreateButton.propTypes = {
-  create: propTypes.func,
+  createScore: propTypes.func,
 };
