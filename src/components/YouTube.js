@@ -35,9 +35,9 @@ export default class YouTube extends Component {
   };
 
   onYouTubeStateChange = event => {
-    const { freshStates, setIsSliderChanging } = this.props;
+    const { resetPlay, setIsSliderChanging } = this.props;
 
-    freshStates();
+    resetPlay();
 
     if (event.data !== Ids.YOUTUBE.PLAYING) {
       window.cancelAnimationFrame(this.frameId);
@@ -64,7 +64,7 @@ export default class YouTube extends Component {
 YouTube.propTypes = {
   videoId: propTypes.string,
   setYtPlayer: propTypes.func,
-  freshStates: propTypes.func,
+  resetPlay: propTypes.func,
   setIsSliderChanging: propTypes.func,
   isSliderChanging: propTypes.bool,
 };

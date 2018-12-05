@@ -25,7 +25,7 @@ export default handleActions(
       };
     },
 
-    [ActionTypes.PLAYER.FRESH_STATES]: state => {
+    [ActionTypes.RESET_PLAY]: state => {
       let states = state.states.concat();
       for (let i = 0; i < states.length; i++) {
         states[i] = Ids.STATE.FRESH;

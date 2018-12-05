@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { setYtPlayer, setCurrentTime } from '../actions/youtube';
-import { freshStates } from '../actions/player';
+import { resetPlay } from '../actions/others';
 import { setIsSliderChanging } from '../actions/slider';
 import YouTube from '../components/YouTube';
 
@@ -13,8 +13,8 @@ const mapDispatchToProps = dispatch => ({
   setYtPlayer(ytPlayer) {
     dispatch(setYtPlayer(ytPlayer));
   },
-  freshStates() {
-    dispatch(freshStates());
+  resetPlay() {
+    dispatch(resetPlay());
   },
   setCurrentTime(currentTime) {
     dispatch(setCurrentTime(currentTime));
