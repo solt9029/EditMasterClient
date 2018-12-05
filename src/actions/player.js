@@ -7,7 +7,3 @@ export const updateState = (index, state) => ({
     state,
   },
 });
-
-export const freshStates = () => ({
-  type: ActionTypes.PLAYER.FRESH_STATES,
-});

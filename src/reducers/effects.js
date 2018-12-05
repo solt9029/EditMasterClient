@@ -62,6 +62,7 @@ export default handleActions(
     [ActionTypes.ADD_JUDGE_EFFECT]: handleAddJudgeEffectAction,
     [ActionTypes.UPDATE_EFFECTS]: handleUpdateEffectsAction,
     [ActionTypes.RESET_IDE]: () => cloneDeep(initialState),
+    [ActionTypes.RESET_PLAY]: () => cloneDeep(initialState),
   },
   cloneDeep(initialState)
 );
