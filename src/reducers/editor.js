@@ -69,11 +69,6 @@ export default handleActions(
         notes,
       };
     },
-
-    [ActionTypes.EDITOR.SET_NOTES]: (state, { payload }) => ({
-      ...state,
-      notes: payload.notes,
-    }),
   },
   initialState
 );

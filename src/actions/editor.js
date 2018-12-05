@@ -8,13 +8,6 @@ export const changeNotes = (index, notes) => ({
   },
 });
 
-export const setNotes = notes => ({
-  type: ActionTypes.EDITOR.SET_NOTES,
-  payload: {
-    notes,
-  },
-});
-
 export const addBar = () => ({
   type: ActionTypes.EDITOR.ADD_BAR,
 });
