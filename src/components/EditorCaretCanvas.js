@@ -43,10 +43,10 @@ export default class EditorCaretCanvas extends Component {
         if (this.clipboard.length !== Numbers.NOTES_PER_BAR) {
           return;
         }
-        this.props.updateNotes(
-          barIndex * Numbers.NOTES_PER_BAR,
-          this.clipboard
-        );
+        this.props.updateNotes({
+          index: barIndex * Numbers.NOTES_PER_BAR,
+          notes: this.clipboard,
+        });
         if ((barIndex + 1) * Numbers.NOTES_PER_BAR >= this.props.notesLength) {
           this.props.addBar();
         }
@@ -86,7 +86,7 @@ export default class EditorCaretCanvas extends Component {
     } else {
       notes.push(currentNote);
     }
-    this.props.updateNotes(index, notes);
+    this.props.updateNotes({ index, notes });
 
     // add one bar if the user puts a note on the last bar
     if (index >= this.props.notesLength - Numbers.NOTES_PER_BAR) {
