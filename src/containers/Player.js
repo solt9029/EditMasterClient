@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { setState } from '../actions/player';
+import { updateState } from '../actions/player';
 import { setIsSliderChanging } from '../actions/slider';
 import { setCurrentTime } from '../actions/youtube';
 import {
@@ -29,8 +29,8 @@ const mapDispatchToProps = dispatch => ({
   addShotEffect(note) {
     dispatch(addShotEffect(note));
   },
-  setState(index, state) {
-    dispatch(setState(index, state));
+  updateState(index, state) {
+    dispatch(updateState(index, state));
   },
   setCurrentTime(currentTime) {
     dispatch(setCurrentTime(currentTime));

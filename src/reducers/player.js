@@ -16,7 +16,7 @@ export default handleActions(
         states: Array(payload.notes.length).fill(Ids.NOTE.SPACE),
       }),
     },
-    [ActionTypes.PLAYER.SET_STATE]: (state, { payload }) => {
+    [ActionTypes.UPDATE_STATE]: (state, { payload }) => {
       let states = state.states.concat();
       states[payload.index] = payload.state;
       return {
