@@ -17,7 +17,7 @@ export default class EditorCaretCanvas extends Component {
   }
 
   keyDown = event => {
-    this.changeNotes(event);
+    this.updateNotes(event);
     this.copyPaste(event);
   };
 
@@ -43,7 +43,7 @@ export default class EditorCaretCanvas extends Component {
         if (this.clipboard.length !== Numbers.NOTES_PER_BAR) {
           return;
         }
-        this.props.changeNotes(
+        this.props.updateNotes(
           barIndex * Numbers.NOTES_PER_BAR,
           this.clipboard
         );
@@ -56,7 +56,7 @@ export default class EditorCaretCanvas extends Component {
     }
   };
 
-  changeNotes = event => {
+  updateNotes = event => {
     let { division, note } = this.props.palette;
 
     // if the event is key event, the note which is going to be put should be key value!
@@ -86,7 +86,7 @@ export default class EditorCaretCanvas extends Component {
     } else {
       notes.push(note);
     }
-    this.props.changeNotes(index, notes);
+    this.props.updateNotes(index, notes);
 
     // add one bar if the user puts a note on the last bar
     if (index >= this.props.notesLength - Numbers.NOTES_PER_BAR) {
@@ -120,7 +120,7 @@ export default class EditorCaretCanvas extends Component {
         tabIndex={0}
         onMouseMove={this.updateCaret}
         onKeyDown={this.keyDown}
-        onClick={this.changeNotes}
+        onClick={this.updateNotes}
         innerRef={this.canvasRef}
         width={width - 1}
         height={height}
