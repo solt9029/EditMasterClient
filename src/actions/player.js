@@ -1,7 +1,7 @@
 import { ActionTypes } from '../constants/';
 
-export const setState = (index, state) => ({
-  type: ActionTypes.PLAYER.SET_STATE,
+export const updateState = (index, state) => ({
+  type: ActionTypes.UPDATE_STATE,
   payload: {
     index,
     state,
