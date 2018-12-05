@@ -32,7 +32,7 @@ export default handleActions(
       }),
     },
 
-    [ActionTypes.EDITOR.CHANGE_NOTES]: (state, { payload }) => {
+    [ActionTypes.UPDATE_NOTES]: (state, { payload }) => {
       let notes = state.notes.concat();
       for (let i = 0; i < payload.notes.length; i++) {
         notes[payload.index + i] = payload.notes[i];
@@ -43,7 +43,7 @@ export default handleActions(
       };
     },
 
-    [ActionTypes.EDITOR.ADD_BAR]: state => {
+    [ActionTypes.ADD_BAR]: state => {
       let notes = state.notes.concat();
       for (let i = 0; i < Numbers.NOTES_PER_BAR; i++) {
         notes.push(Ids.NOTE.SPACE);
@@ -56,7 +56,7 @@ export default handleActions(
 
     [ActionTypes.RESET_IDE]: () => initialState,
 
-    [ActionTypes.EDITOR.REMOVE_BAR]: state => {
+    [ActionTypes.REMOVE_BAR]: state => {
       if (state.notes.length < Numbers.NOTES_PER_BAR * 2) {
         return state;
       }

@@ -35,7 +35,7 @@ export default handleActions(
       };
     },
 
-    [ActionTypes.EDITOR.ADD_BAR]: state => {
+    [ActionTypes.ADD_BAR]: state => {
       let states = state.states.concat();
       for (let i = 0; i < Numbers.NOTES_PER_BAR; i++) {
         states.push(Ids.NOTE.SPACE);
@@ -46,7 +46,7 @@ export default handleActions(
       };
     },
 
-    [ActionTypes.EDITOR.REMOVE_BAR]: state => {
+    [ActionTypes.REMOVE_BAR]: state => {
       if (state.states.length < Numbers.NOTES_PER_BAR * 2) {
         return state;
       }
