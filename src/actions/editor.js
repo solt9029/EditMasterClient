@@ -1,17 +1,6 @@
 import { ActionTypes } from '../constants/';
+import { createAction } from 'redux-actions';
 
-export const updateNotes = (index, notes) => ({
-  type: ActionTypes.UPDATE_NOTES,
-  payload: {
-    index,
-    notes,
-  },
-});
-
-export const addBar = () => ({
-  type: ActionTypes.ADD_BAR,
-});
-
-export const removeBar = () => ({
-  type: ActionTypes.REMOVE_BAR,
-});
+export const updateNotes = createAction(ActionTypes.UPDATE_NOTES);
+export const addBar = createAction(ActionTypes.ADD_BAR);
+export const removeBar = createAction(ActionTypes.REMOVE_BAR);
