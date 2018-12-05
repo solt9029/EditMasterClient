@@ -61,7 +61,7 @@ export default class Player extends Component {
       this.props.addJudgeEffect(Ids.STATE.GOOD);
 
       if (hasState(note)) {
-        updateState(i, Ids.STATE.GOOD);
+        updateState({ index: i, state: Ids.STATE.GOOD });
       }
 
       if (isDonNote(note)) {
@@ -151,7 +151,7 @@ export default class Player extends Component {
         } else if (i >= okRange[0] && i <= okRange[1]) {
           newState = Ids.STATE.OK;
         }
-        updateState(i, newState);
+        updateState({ index: i, state: newState });
         this.props.addJudgeEffect(newState);
       }
       break;

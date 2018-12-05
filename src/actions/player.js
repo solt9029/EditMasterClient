@@ -1,9 +1,4 @@
 import { ActionTypes } from '../constants/';
+import { createAction } from 'redux-actions';
 
-export const updateState = (index, state) => ({
-  type: ActionTypes.UPDATE_STATE,
-  payload: {
-    index,
-    state,
-  },
-});
+export const updateState = createAction(ActionTypes.UPDATE_STATE);

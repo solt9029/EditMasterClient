@@ -29,8 +29,8 @@ const mapDispatchToProps = dispatch => ({
   addShotEffect(note) {
     dispatch(addShotEffect(note));
   },
-  updateState(index, state) {
-    dispatch(updateState(index, state));
+  updateState(value) {
+    dispatch(updateState(value));
   },
   setCurrentTime(currentTime) {
     dispatch(setCurrentTime(currentTime));
