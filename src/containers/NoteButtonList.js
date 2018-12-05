@@ -1,13 +1,13 @@
 import { connect } from 'react-redux';
-import { setNote } from '../actions/palette';
+import { setCurrentNote } from '../actions/palette';
 import NoteButtonList from '../components/NoteButtonList';
 
 const mapStateToProps = state => ({
-  currentValue: state.palette.note,
+  currentValue: state.palette.currentNote,
 });
 const mapDispatchToProps = dispatch => ({
   setValue(value) {
-    dispatch(setNote(value));
+    dispatch(setCurrentNote(value));
   },
 });
 export default connect(

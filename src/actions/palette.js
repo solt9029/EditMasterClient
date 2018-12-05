@@ -1,19 +1,14 @@
 import { ActionTypes } from '../constants/';
+import { createAction } from 'redux-actions';
 
-export const setNote = note => ({
-  type: ActionTypes.PALETTE.SET_NOTE,
-  payload: {
-    note: +note,
-  },
-});
+export const setCurrentNote = createAction(
+  ActionTypes.SET_CURRENT_NOTE,
+  value => +value
+);
 
-export const setDivision = division => ({
-  type: ActionTypes.PALETTE.SET_DIVISION,
-  payload: {
-    division: +division,
-  },
-});
+export const setCurrentDivision = createAction(
+  ActionTypes.SET_CURRENT_DIVISION,
+  value => +value
+);
 
-export const toggleMode = () => ({
-  type: ActionTypes.PALETTE.TOGGLE_MODE,
-});
+export const toggleMode = createAction(ActionTypes.TOGGLE_MODE);

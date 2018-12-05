@@ -26,7 +26,7 @@ export default class EditorCaretCanvas extends Component {
       this.mouseX,
       this.mouseY,
       this.props.width,
-      this.props.palette.division
+      this.props.palette.currentDivision
     );
 
     switch (event.nativeEvent.key) {
@@ -57,7 +57,7 @@ export default class EditorCaretCanvas extends Component {
   };
 
   updateNotes = event => {
-    let { division, note } = this.props.palette;
+    let { currentDivision, currentNote } = this.props.palette;
 
     // if the event is key event, the note which is going to be put should be key value!
     if (event.nativeEvent.key) {
@@ -65,26 +65,26 @@ export default class EditorCaretCanvas extends Component {
       if (!isNote(keyValue)) {
         return;
       }
-      note = keyValue;
+      currentNote = keyValue;
     }
 
     const { barIndex, divisionIndex } = calcCaret(
       this.mouseX,
       this.mouseY,
       this.props.width,
-      this.props.palette.division
+      currentDivision
     );
 
-    const notesPerDivision = Numbers.NOTES_PER_BAR / division;
+    const notesPerDivision = Numbers.NOTES_PER_BAR / currentDivision;
     const mouseNotesPerBarIndex = divisionIndex * notesPerDivision;
     const index = barIndex * Numbers.NOTES_PER_BAR + mouseNotesPerBarIndex;
     let notes = [];
-    if (!hasState(note)) {
+    if (!hasState(currentNote)) {
       for (let i = 0; i < notesPerDivision; i++) {
-        notes.push(note);
+        notes.push(currentNote);
       }
     } else {
-      notes.push(note);
+      notes.push(currentNote);
     }
     this.props.updateNotes(index, notes);
 
@@ -106,7 +106,7 @@ export default class EditorCaretCanvas extends Component {
       this.mouseX,
       this.mouseY,
       this.props.width,
-      this.props.palette.division
+      this.props.palette.currentDivision
     );
     drawCaret(this.ctx, x, y);
   };
