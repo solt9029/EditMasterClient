@@ -49,6 +49,15 @@ const handleSetVideoIdAction = (state, { payload }) => ({
   videoId: payload,
 });
 
+const handleFinishFetchingSongleAction = (
+  state,
+  { payload: { bpm, offset } }
+) => ({
+  ...state,
+  bpm: { value: bpm, errors: [] },
+  offset: { value: offset, errors: [] },
+});
+
 const handleFinishFetchingScoreAction = (
   state,
   { payload: { username, videoId, bpm, offset, comment, speed } }
@@ -68,6 +77,7 @@ export default handleActions(
     [ActionTypes.FINISH_FETCHING_SCORE]: {
       next: handleFinishFetchingScoreAction,
     },
+    [ActionTypes.FINISH_FETCHING_SONGLE]: handleFinishFetchingSongleAction,
     [ActionTypes.RESET_IDE]: () => initialState,
     [ActionTypes.SET_USERNAME]: handleSetUsernameAction,
     [ActionTypes.SET_VIDEO_ID]: handleSetVideoIdAction,

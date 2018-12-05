@@ -38,6 +38,10 @@ export const setComment = createAction(
   createPayloadWithValidation([maxLength(140)])
 );
 
+export const finishFetchingSongle = createAction(
+  ActionTypes.FINISH_FETCHING_SONGLE
+);
+
 export const fetchSongle = videoId => {
   return async dispatch => {
     try {
@@ -47,14 +51,13 @@ export const fetchSongle = videoId => {
       }
 
       const offset = result.data.beats[0].start / 1000;
-      dispatch(setOffset(offset));
-
       let bpmSum = 0;
       for (let i = 30; i < result.data.beats.length - 30; i++) {
         bpmSum += result.data.beats[i].bpm;
       }
       const bpm = bpmSum / (result.data.beats.length - 60);
-      dispatch(setBpm(bpm));
+
+      dispatch(finishFetchingSongle({ bpm, offset }));
     } catch (error) {
       // error handling
     }
