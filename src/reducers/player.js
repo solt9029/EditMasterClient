@@ -25,10 +25,6 @@ export default handleActions(
       };
     },
 
-    [ActionTypes.EDITOR.SET_NOTES]: (state, { payload }) => ({
-      states: Array(payload.notes.length).fill(Ids.NOTE.SPACE),
-    }),
-
     [ActionTypes.PLAYER.FRESH_STATES]: state => {
       let states = state.states.concat();
       for (let i = 0; i < states.length; i++) {
