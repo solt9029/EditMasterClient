@@ -1,13 +1,13 @@
 import DivisionButtonList from '../components/DivisionButtonList';
 import { connect } from 'react-redux';
-import { setDivision } from '../actions/palette';
+import { setCurrentDivision } from '../actions/palette';
 
 const mapStateToProps = state => ({
-  currentValue: state.palette.division,
+  currentValue: state.palette.currentDivision,
 });
 const mapDispatchToProps = dispatch => ({
   setValue(value) {
-    dispatch(setDivision(value));
+    dispatch(setCurrentDivision(value));
   },
 });
 export default connect(
