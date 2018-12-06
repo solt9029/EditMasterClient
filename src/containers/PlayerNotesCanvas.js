@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import PlayerNotesCanvas from '../components/PlayerNotesCanvas';
 
-const mapStateToProps = state => ({
+export default connect(state => ({
   width: state.sizes.player.width,
   height: state.sizes.player.height,
   bpm: state.score.bpm.value,
@@ -12,9 +12,4 @@ const mapStateToProps = state => ({
   notesUpdatedCount: state.score.notes.updatedCount,
   statesUpdatedCount: state.score.states.updatedCount,
   currentTime: state.youtube.currentTime,
-});
-const mapDispatchToProps = null;
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(PlayerNotesCanvas);
+}))(PlayerNotesCanvas);
