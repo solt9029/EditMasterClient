@@ -11,5 +11,3 @@ export const setCurrentDivision = createAction(
   ActionTypes.SET_CURRENT_DIVISION,
   toNumber
 );
-
-export const toggleMode = createAction(ActionTypes.TOGGLE_MODE);
