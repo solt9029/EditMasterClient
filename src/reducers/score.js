@@ -3,6 +3,7 @@ import { handleActions } from 'redux-actions';
 import { Ids, Numbers } from '../constants';
 import { cloneDeep } from 'lodash'; // when you use initialState, you have to use cloneDeep to ensure that initialState's properties are always same.
 
+// HACK: notes and states are mutable for performance.
 const initialState = {
   username: { value: '', errors: [] },
   comment: { value: '', errors: [] },
