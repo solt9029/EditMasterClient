@@ -26,7 +26,7 @@ export default class EditorCaretCanvas extends Component {
       this.mouseX,
       this.mouseY,
       this.props.width,
-      this.props.palette.currentDivision
+      this.props.currentDivision
     );
 
     switch (event.nativeEvent.key) {
@@ -57,7 +57,7 @@ export default class EditorCaretCanvas extends Component {
   };
 
   updateNotes = event => {
-    let { currentDivision, currentNote } = this.props.palette;
+    let { currentDivision, currentNote } = this.props;
 
     // if the event is key event, the note which is going to be put should be key value!
     if (event.nativeEvent.key) {
@@ -106,7 +106,7 @@ export default class EditorCaretCanvas extends Component {
       this.mouseX,
       this.mouseY,
       this.props.width,
-      this.props.palette.currentDivision
+      this.props.currentDivision
     );
     drawCaret(this.ctx, x, y);
   };
