@@ -6,7 +6,6 @@ import propTypes from 'prop-types';
 export default class Config extends Component {
   render() {
     const { props } = this;
-    const { config } = props;
 
     return (
       <Fragment>
@@ -15,7 +14,7 @@ export default class Config extends Component {
           type="text"
           placeholder="ユーザ名（例：通りすがりの創作の達人）"
           name="username"
-          object={config.username}
+          object={props.username}
           onChange={event => {
             props.setUsername(event.target.value);
           }}
@@ -25,7 +24,7 @@ export default class Config extends Component {
           type="text"
           placeholder="YouTube動画ID（例：PqJNc9KVIZE）"
           name="videoId"
-          object={config.videoId}
+          object={props.videoId}
           onChange={event => {
             const videoId = normalizeVideoId(event.target.value);
             props.setVideoId(videoId);
@@ -37,7 +36,7 @@ export default class Config extends Component {
           type="number"
           placeholder="BPM（例：200）"
           name="bpm"
-          object={config.bpm}
+          object={props.bpm}
           onChange={event => {
             props.setBpm(event.target.value);
           }}
@@ -47,7 +46,7 @@ export default class Config extends Component {
           type="number"
           placeholder="OFFSET（例：1.5）"
           name="offset"
-          object={config.offset}
+          object={props.offset}
           onChange={event => {
             props.setOffset(event.target.value);
           }}
@@ -57,7 +56,7 @@ export default class Config extends Component {
           type="number"
           placeholder="倍速（例：2）"
           name="speed"
-          object={config.speed}
+          object={props.speed}
           onChange={event => {
             props.setSpeed(event.target.value);
           }}
@@ -67,7 +66,7 @@ export default class Config extends Component {
           type="text"
           placeholder="コメント（例：創作の達人で創作譜面をしました！）"
           name="comment"
-          object={config.comment}
+          object={props.comment}
           onChange={event => {
             props.setComment(event.target.value);
           }}

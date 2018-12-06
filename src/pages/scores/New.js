@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import IDE from '../../containers/IDE';
 import Modal from '../../containers/Modal';
 import { connect } from 'react-redux';
-import { setDefaultScore } from '../../actions/scores-new-view';
+import { setDefaultScore } from '../../actions/score';
 
 class New extends Component {
   componentDidMount() {

@@ -4,11 +4,13 @@ import PlayerNotesCanvas from '../components/PlayerNotesCanvas';
 const mapStateToProps = state => ({
   width: state.sizes.player.width,
   height: state.sizes.player.height,
-  bpm: state.config.bpm.value,
-  speed: state.config.speed.value,
-  offset: state.config.offset.value,
-  notes: state.editor.notes,
-  states: state.player.states,
+  bpm: state.score.bpm.value,
+  speed: state.score.speed.value,
+  offset: state.score.offset.value,
+  notes: state.score.notes.list,
+  states: state.score.states.list,
+  notesUpdatedCount: state.score.notes.updatedCount,
+  statesUpdatedCount: state.score.states.updatedCount,
   currentTime: state.youtube.currentTime,
 });
 const mapDispatchToProps = null;

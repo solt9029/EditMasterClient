@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import SplitterLayout from './SplitterLayout';
 import Config from '../containers/Config';
 import Player from '../containers/Player';
-import Editor from '../containers/Editor';
+import Editor from '../components/Editor';
 import Palette from '../containers/Palette';
 import YouTube from '../containers/YouTube';
 import { debounce } from 'lodash';

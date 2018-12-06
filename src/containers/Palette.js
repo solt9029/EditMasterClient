@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { addBar, removeBar } from '../actions/editor';
+import { addBar, removeBar } from '../actions/score';
 import { toggleMode } from '../actions/palette';
 import Palette from '../components/Palette';
 

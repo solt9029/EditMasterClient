@@ -5,7 +5,7 @@ import { setIsSliderChanging } from '../actions/slider';
 import YouTube from '../components/YouTube';
 
 const mapStateToProps = state => ({
-  videoId: state.config.videoId.value,
+  videoId: state.score.videoId.value,
   isSliderChanging: state.slider.isChanging,
   ytPlayer: state.youtube.ytPlayer,
 });
