@@ -1,4 +1,4 @@
-import { Positions } from '../constants/';
+import { Positions } from '../constants';
 
 export default class Shot {
   x = Positions.PLAYER.JUDGE.X;
