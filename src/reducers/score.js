@@ -193,13 +193,10 @@ const handleUpdateStateAction = (state, { payload }) => {
 };
 
 const handleResetPlayAction = state => {
-  for (let i = 0; i < state.states.list.length; i++) {
-    state.states.list[i] = Ids.STATE.FRESH;
-  }
   return {
     ...state,
     states: {
-      ...state.states,
+      list: Array(state.states.list.length).fill(Ids.NOTE.SPACE),
       updatedCount: state.states.updatedCount + 1,
     },
   };
