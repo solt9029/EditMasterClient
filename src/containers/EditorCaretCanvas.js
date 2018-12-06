@@ -1,13 +1,14 @@
 import { connect } from 'react-redux';
-import { updateNotes } from '../actions/editor';
-import { addBar } from '../actions/editor';
+import { updateNotes, addBar } from '../actions/score';
 import EditorCaretCanvas from '../components/EditorCaretCanvas';
 
 export default connect(
   state => ({
     palette: state.palette,
-    notesLength: state.editor.notes.length,
-    notes: state.editor.notes,
+    notesLength: state.score.notes.list.length,
+    notes: state.score.notes.list,
+    updatedCount: state.score.notes.updatedCount,
+    width: state.sizes.editor.width,
   }),
   { updateNotes, addBar }
 )(EditorCaretCanvas);

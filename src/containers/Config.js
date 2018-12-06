@@ -7,11 +7,16 @@ import {
   setOffset,
   setSpeed,
   setComment,
-} from '../actions/config';
+} from '../actions/score';
 import Config from '../components/Config';
 
 const mapStateToProps = state => ({
-  config: state.config,
+  username: state.score.username,
+  videoId: state.score.videoId,
+  offset: state.score.offset,
+  speed: state.score.speed,
+  comment: state.score.comment,
+  bpm: state.score.bpm,
 });
 const mapDispatchToProps = dispatch => ({
   setUsername(value) {

@@ -4,7 +4,7 @@ import NotFound from '../NotFound';
 import Modal from '../../containers/Modal';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { fetchScore } from '../../actions/scores-show-view';
+import { fetchScore } from '../../actions/score';
 
 class Show extends Component {
   componentDidMount() {
@@ -29,8 +29,8 @@ class Show extends Component {
 export default withRouter(
   connect(
     state => ({
-      error: state.scoresShowView.error,
-      isLoading: state.scoresShowView.isLoading,
+      error: state.score.fetching.error,
+      isLoading: state.score.fetching.isLoading,
     }),
     { fetchScore }
   )(Show)
