@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import IDE from '../../containers/IDE';
 import NotFound from '../NotFound';
 import Modal from '../../containers/Modal';
@@ -8,21 +8,23 @@ import { fetchScore } from '../../actions/score';
 
 class Show extends Component {
   componentDidMount() {
-    this.props.fetchScore(this.props.match.params.id);
+    const { fetchScore, match } = this.props;
+    fetchScore(match.params.id);
   }
 
   render() {
-    let component = (
-      <div>
-        <IDE />
-        <Modal />
-      </div>
+    return (
+      <Fragment>
+        {this.props.error ? (
+          <NotFound />
+        ) : (
+          <div>
+            <IDE />
+            <Modal />
+          </div>
+        )}
+      </Fragment>
     );
-    if (this.props.error) {
-      component = <NotFound />;
-    }
-
-    return component;
   }
 }
 
