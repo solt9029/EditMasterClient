@@ -4,7 +4,6 @@ import { handleActions } from 'redux-actions';
 const initialState = {
   currentNote: Ids.NOTE.DON,
   currentDivision: Numbers.DIVISIONS[0],
-  isAutoMode: true,
 };
 
 export default handleActions(
@@ -17,10 +16,6 @@ export default handleActions(
     [ActionTypes.SET_CURRENT_DIVISION]: (state, { payload }) => ({
       ...state,
       currentDivision: payload,
-    }),
-    [ActionTypes.TOGGLE_MODE]: state => ({
-      ...state,
-      isAutoMode: !state.isAutoMode,
     }),
   },
   initialState

@@ -18,7 +18,7 @@ export default connect(
     statesUpdatedCount: state.score.states.updatedCount,
     currentTime: state.youtube.currentTime,
     config: state.score,
-    isAutoMode: state.palette.isAutoMode,
+    isAutoMode: state.player.isAutoMode,
     ytPlayer: state.youtube.ytPlayer,
   }),
   {

@@ -6,3 +6,4 @@ export { default as sizes } from './sizes';
 export { default as slider } from './slider';
 export { default as keyword } from './keyword';
 export { default as effects } from './effects';
+export { default as player } from './player';
