@@ -3,6 +3,7 @@ import { createAction } from 'redux-actions';
 
 const _addShotEffect = createAction(ActionTypes.ADD_SHOT_EFFECT);
 const _addJudgeEffect = createAction(ActionTypes.ADD_JUDGE_EFFECT);
+export const updateEffects = createAction(ActionTypes.UPDATE_EFFECTS);
 
 export const addShotEffect = note => {
   return (dispatch, getState) => {
@@ -19,5 +20,3 @@ export const addJudgeEffect = state => {
     dispatch(_addJudgeEffect(payload));
   };
 };
-
-export const updateEffects = createAction(ActionTypes.UPDATE_EFFECTS);

@@ -9,28 +9,32 @@ const initialState = {
   error: null,
 };
 
+const handleStartFetchingScoresAction = () => ({
+  ...initialState,
+  isLoading: true,
+});
+
+const handleFinishFetchingScoresAction = {
+  next: (state, { payload: { list, currentPage, lastPage } }) => {
+    return {
+      list,
+      currentPage,
+      lastPage,
+      isLoading: false,
+      error: null,
+    };
+  },
+  throw: (state, { payload }) => ({
+    ...state,
+    isLoading: false,
+    error: payload,
+  }),
+};
+
 export default handleActions(
   {
-    [ActionTypes.START_FETCHING_SCORES]: () => ({
-      ...initialState,
-      isLoading: true,
-    }),
-    [ActionTypes.FINISH_FETCHING_SCORES]: {
-      next: (state, { payload: { list, currentPage, lastPage } }) => {
-        return {
-          list,
-          currentPage,
-          lastPage,
-          isLoading: false,
-          error: null,
-        };
-      },
-      throw: (state, { payload }) => ({
-        ...state,
-        isLoading: false,
-        error: payload,
-      }),
-    },
+    [ActionTypes.START_FETCHING_SCORES]: handleStartFetchingScoresAction,
+    [ActionTypes.FINISH_FETCHING_SCORES]: handleFinishFetchingScoresAction,
     [ActionTypes.RESET_SCORES]: () => initialState,
   },
   initialState

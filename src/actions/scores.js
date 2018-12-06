@@ -2,6 +2,14 @@ import { ActionTypes } from '../constants';
 import { createAction } from 'redux-actions';
 import { fetchScores as _fetchScores } from '../utils/http';
 
+export const resetScores = createAction(ActionTypes.RESET_SCORES);
+export const startFetchingScores = createAction(
+  ActionTypes.START_FETCHING_SCORES
+);
+export const finishFetchingScores = createAction(
+  ActionTypes.FINISH_FETCHING_SCORES
+);
+
 export const fetchScores = (page, keyword) => {
   return async dispatch => {
     dispatch(startFetchingScores());
@@ -20,13 +28,3 @@ export const fetchScores = (page, keyword) => {
     }
   };
 };
-
-export const startFetchingScores = createAction(
-  ActionTypes.START_FETCHING_SCORES
-);
-
-export const finishFetchingScores = createAction(
-  ActionTypes.FINISH_FETCHING_SCORES
-);
-
-export const resetScores = createAction(ActionTypes.RESET_SCORES);

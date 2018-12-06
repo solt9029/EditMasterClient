@@ -6,17 +6,21 @@ const initialState = {
   currentDivision: Numbers.DIVISIONS[0],
 };
 
+const handleSetCurrentNoteAction = (state, { payload }) => ({
+  ...state,
+  currentNote: payload,
+});
+
+const handleSetCurrentDivisionAction = (state, { payload }) => ({
+  ...state,
+  currentDivision: payload,
+});
+
 export default handleActions(
   {
     [ActionTypes.RESET_IDE]: () => initialState,
-    [ActionTypes.SET_CURRENT_NOTE]: (state, { payload }) => ({
-      ...state,
-      currentNote: payload,
-    }),
-    [ActionTypes.SET_CURRENT_DIVISION]: (state, { payload }) => ({
-      ...state,
-      currentDivision: payload,
-    }),
+    [ActionTypes.SET_CURRENT_NOTE]: handleSetCurrentNoteAction,
+    [ActionTypes.SET_CURRENT_DIVISION]: handleSetCurrentDivisionAction,
   },
   initialState
 );
