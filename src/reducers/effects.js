@@ -1,6 +1,6 @@
 import { ActionTypes } from '../constants/';
 import { handleActions } from 'redux-actions';
-import Shot from '../classes/Shot';
+import ShotEffect from '../classes/ShotEffect';
 import JudgeEffect from '../classes/JudgeEffect';
 import { cloneDeep } from 'lodash';
 
@@ -26,7 +26,7 @@ const initialState = {
 
 const handleAddShotEffectAction = (state, { payload }) => {
   state.shots.list.push(
-    new Shot(payload.note, payload.playerWidth, payload.playerHeight)
+    new ShotEffect(payload.note, payload.playerWidth, payload.playerHeight)
   );
   state.shots.updatedCount++;
   return state;
