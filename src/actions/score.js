@@ -9,29 +9,24 @@ import { ActionTypes } from '../constants/';
 import { createAction } from 'redux-actions';
 
 export const updateNotes = createAction(ActionTypes.UPDATE_NOTES);
-
 export const addBar = createAction(ActionTypes.ADD_BAR);
-
 export const removeBar = createAction(ActionTypes.REMOVE_BAR);
-
+export const updateState = createAction(ActionTypes.UPDATE_STATE);
+export const setDefaultScore = createAction(ActionTypes.SET_DEFAULT_SCORE);
 export const startCreatingScore = createAction(
   ActionTypes.START_CREATING_SCORE
 );
-
 export const finishCreatingScore = createAction(
   ActionTypes.FINISH_CREATING_SCORE
 );
-
-export const updateState = createAction(ActionTypes.UPDATE_STATE);
-
-export const setDefaultScore = createAction(ActionTypes.SET_DEFAULT_SCORE);
-
 export const finishFetchingScore = createAction(
   ActionTypes.FINISH_FETCHING_SCORE
 );
-
 export const startFetchingScore = createAction(
   ActionTypes.START_FETCHING_SCORE
+);
+export const finishFetchingSongle = createAction(
+  ActionTypes.FINISH_FETCHING_SONGLE
 );
 
 const createPayloadWithValidation = rules => value => {
@@ -67,10 +62,6 @@ export const setSpeed = createAction(
 export const setComment = createAction(
   ActionTypes.SET_COMMENT,
   createPayloadWithValidation([maxLength(140)])
-);
-
-export const finishFetchingSongle = createAction(
-  ActionTypes.FINISH_FETCHING_SONGLE
 );
 
 export const fetchSongle = videoId => {
