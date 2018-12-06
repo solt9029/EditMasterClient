@@ -50,7 +50,7 @@ const handleUpdateEffectsAction = state => {
         state[key].list.splice(i, 1);
       }
     }
-    state[key].updatedCount++;
+    state[key].updatedCount++; // TODO: check how this works
   }
 
   return state;
