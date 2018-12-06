@@ -55,7 +55,7 @@ const notes = [
   },
 ];
 
-const NoteButtonList = ({ currentValue, setValue, paletteWidth }) => {
+const NoteButtonList = ({ currentNote, setCurrentNote, paletteWidth }) => {
   return (
     <Container bottom={30}>
       <Row>
@@ -67,8 +67,8 @@ const NoteButtonList = ({ currentValue, setValue, paletteWidth }) => {
               color={color}
               label={label}
               value={value}
-              active={value === currentValue}
-              setValue={setValue}
+              active={value === currentNote}
+              setValue={setCurrentNote}
               paletteWidth={paletteWidth}
               key={i}
             />
