@@ -4,15 +4,19 @@ import PaletteButton from '../components/PaletteButton';
 import { Numbers } from '../constants/';
 import Container from '../styled/Container';
 
-const DivisionButtonList = ({ currentValue, setValue, paletteWidth }) => {
+const DivisionButtonList = ({
+  currentDivision,
+  setCurrentDivision,
+  paletteWidth,
+}) => {
   return (
     <Container bottom={30}>
       <Row>
         {Numbers.DIVISIONS.map((value, i) => {
           return (
             <PaletteButton
-              active={currentValue === value}
-              setValue={setValue}
+              active={currentDivision === value}
+              setValue={setCurrentDivision}
               paletteWidth={paletteWidth}
               value={value}
               key={i}
