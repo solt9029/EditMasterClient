@@ -1,4 +1,4 @@
-import { ActionTypes } from '../constants/';
+import { ActionTypes } from '../constants';
 import { createAction } from 'redux-actions';
 import { toNumber } from '../utils/type';
 

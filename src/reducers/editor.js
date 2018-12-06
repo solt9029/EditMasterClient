@@ -1,4 +1,4 @@
-import { Ids, ActionTypes, Numbers } from '../constants/';
+import { Ids, ActionTypes, Numbers } from '../constants';
 import { handleActions } from 'redux-actions';
 
 const initialState = {
