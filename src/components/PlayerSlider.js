@@ -1,10 +1,10 @@
 import React from 'react';
-import RCSlider from 'rc-slider';
+import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
-const Slider = styled(RCSlider)`
+const StyledSlider = styled(Slider)`
   && {
     width: 95%;
     position: absolute;
@@ -34,7 +34,7 @@ const PlayerSlider = ({
   };
 
   return (
-    <Slider
+    <StyledSlider
       min={0}
       max={max}
       value={currentTime}

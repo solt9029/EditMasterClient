@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import NoteButtonList from '../containers/NoteButtonList';
 import DivisionButtonList from '../containers/DivisionButtonList';
 
-const LineButton = styled(Button)`
+const BarButton = styled(Button)`
   min-width: 90px;
 `;
 
@@ -30,7 +30,7 @@ export default class Palette extends Component {
         <NoteButtonList paletteWidth={this.props.width} />
         <label>1小節あたりの分割数</label>
         <DivisionButtonList paletteWidth={this.props.width} />
-        <LineButton
+        <BarButton
           block
           color="success"
           onClick={() => {
@@ -38,8 +38,8 @@ export default class Palette extends Component {
           }}
         >
           行を追加
-        </LineButton>
-        <LineButton
+        </BarButton>
+        <BarButton
           block
           color="danger"
           onClick={() => {
@@ -47,7 +47,7 @@ export default class Palette extends Component {
           }}
         >
           行を削除
-        </LineButton>
+        </BarButton>
       </Fragment>
     );
   }
