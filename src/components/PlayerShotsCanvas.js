@@ -30,7 +30,7 @@ export default class PlayerShotsCanvas extends Component {
   updateCanvas() {
     const { width, height, shots } = this.props;
 
-    clear(this.ctx, width - 1, height - 1);
+    clear(this.ctx, width, height);
 
     for (let i = shots.length - 1; i >= 0; i--) {
       drawNote(this.ctx, shots[i].x, shots[i].y, 'PLAYER', shots[i].note);
@@ -40,9 +40,7 @@ export default class PlayerShotsCanvas extends Component {
   render() {
     const { width, height } = this.props;
 
-    return (
-      <Canvas innerRef={this.canvasRef} width={width - 1} height={height - 1} />
-    );
+    return <Canvas innerRef={this.canvasRef} width={width} height={height} />;
   }
 }
 

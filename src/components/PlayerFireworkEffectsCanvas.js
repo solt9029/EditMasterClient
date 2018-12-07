@@ -30,7 +30,7 @@ export default class PlayerFireworkEffectsCanvas extends Component {
   updateCanvas() {
     const { width, height, fireworkEffects } = this.props;
 
-    clear(this.ctx, width - 1, height - 1);
+    clear(this.ctx, width, height);
 
     for (let i = fireworkEffects.length - 1; i >= 0; i--) {
       drawFireworkEffect(
@@ -44,9 +44,7 @@ export default class PlayerFireworkEffectsCanvas extends Component {
   render() {
     const { width, height } = this.props;
 
-    return (
-      <Canvas innerRef={this.canvasRef} width={width - 1} height={height - 1} />
-    );
+    return <Canvas innerRef={this.canvasRef} width={width} height={height} />;
   }
 }
 
