@@ -33,12 +33,7 @@ export default class PlayerJudgeEffectsCanvas extends Component {
     clear(this.ctx, width - 1, height - 1);
 
     for (let i = judgeEffects.length - 1; i >= 0; i--) {
-      drawJudgeEffect(
-        this.ctx,
-        judgeEffects[i].judgeMarkY,
-        judgeEffects[i].judgeTextY,
-        judgeEffects[i].state
-      );
+      drawJudgeEffect(this.ctx, judgeEffects[i].y, judgeEffects[i].state);
     }
   }
 

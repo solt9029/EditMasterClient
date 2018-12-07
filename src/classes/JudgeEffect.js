@@ -12,12 +12,11 @@ export default class JudgeEffect {
   constructor(state, playerHeight) {
     this.state = state;
     this.playerHeight = playerHeight;
-    this.judgeMarkY = (playerHeight - 1) / 2;
-    this.judgeTextY = this.judgeMarkY - Sizes.PLAYER.NORMAL.OUTSIDE;
+    this.y = (playerHeight - 1) / 2 - Sizes.PLAYER.NORMAL.OUTSIDE;
   }
 
   update() {
-    this.judgeTextY -= this.playerHeight / 50 / this.g;
+    this.y -= this.playerHeight / 50 / this.g;
     this.g += 0.4;
     this.limit--;
   }
