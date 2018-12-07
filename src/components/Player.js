@@ -60,12 +60,12 @@ export default class Player extends Component {
       }
 
       this.props.addShotEffect(note);
-      this.props.addJudgeEffect(Ids.STATE.GOOD);
-      this.props.addFireworkEffect(Ids.STATE.GOOD);
       this.props.addBackgroundEffect(isDonNote(note));
 
       if (hasState(note)) {
         updateState({ index: i, state: Ids.STATE.GOOD });
+        this.props.addFireworkEffect(Ids.STATE.GOOD);
+        this.props.addJudgeEffect(Ids.STATE.GOOD);
       }
 
       if (isDonNote(note)) {
