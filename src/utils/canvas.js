@@ -73,8 +73,16 @@ export const drawJudgeMark = (ctx, y) => {
  * @param {number} state used for color change.
  */
 export const drawFireworkEffect = (ctx, y, state) => {
+  const goodColor = 'rgba(255, 255, 0, 0.3)';
+  ctx.strokeStyle = goodColor;
+  ctx.fillStyle = goodColor;
+  if (state === Ids.STATE.OK) {
+    const okColor = 'rgba(255, 255, 255, 0.3)';
+    ctx.strokeStyle = okColor;
+    ctx.fillStyle = okColor;
+  }
+
   ctx.beginPath();
-  ctx.strokeStyle = Colors.TRANSPARENT_YELLOW;
   ctx.lineWidth = 3;
   ctx.arc(
     Positions.PLAYER.JUDGE.X,
@@ -86,13 +94,12 @@ export const drawFireworkEffect = (ctx, y, state) => {
   ctx.stroke();
   ctx.lineWidth = 1;
 
-  ctx.fillStyle = Colors.TRANSPARENT_YELLOW;
   for (let deg = 0; deg < 360; deg += 20) {
     // circle
     ctx.save();
     ctx.beginPath();
-    let cX = Positions.PLAYER.JUDGE.X - Math.cos(radians(deg)) * 40;
-    let cY = y - Math.sin(radians(deg)) * 40;
+    const cX = Positions.PLAYER.JUDGE.X - Math.cos(radians(deg)) * 40;
+    const cY = y - Math.sin(radians(deg)) * 40;
     ctx.translate(cX, cY);
     ctx.arc(0, 0, 3, 0, Math.PI * 2);
     ctx.restore();
@@ -101,8 +108,8 @@ export const drawFireworkEffect = (ctx, y, state) => {
     // ellipse
     ctx.save();
     ctx.beginPath();
-    let eX = Positions.PLAYER.JUDGE.X - Math.cos(radians(deg)) * 28;
-    let eY = y - Math.sin(radians(deg)) * 28;
+    const eX = Positions.PLAYER.JUDGE.X - Math.cos(radians(deg)) * 28;
+    const eY = y - Math.sin(radians(deg)) * 28;
     ctx.translate(eX, eY);
     ctx.rotate(radians(deg));
     ctx.scale(4.5, 1);
@@ -110,6 +117,27 @@ export const drawFireworkEffect = (ctx, y, state) => {
     ctx.restore();
     ctx.fill();
   }
+  return;
+};
+
+/**
+ *
+ * @param {*} ctx
+ * @param {boolean} isDon
+ * @param {number} playerWidth
+ * @param {number} playerHeight
+ */
+export const drawBackgroundEffect = (ctx, isDon, playerWidth, playerHeight) => {
+  const color = ctx.createLinearGradient(0, 0, playerWidth, playerHeight);
+  if (isDon) {
+    color.addColorStop(0.0, 'rgb(255, 0, 0, 0.2)');
+    color.addColorStop(1.0, 'rgb(255, 0, 0, 0)');
+  } else {
+    color.addColorStop(0.0, 'rgb(0, 0, 255, 0.2)');
+    color.addColorStop(1.0, 'rgb(0, 0, 255, 0)');
+  }
+  ctx.fillStyle = color;
+  ctx.fillRect(0, 0, playerWidth, playerHeight);
   return;
 };
 

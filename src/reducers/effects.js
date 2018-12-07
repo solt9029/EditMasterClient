@@ -3,6 +3,7 @@ import { handleActions } from 'redux-actions';
 import ShotEffect from '../classes/ShotEffect';
 import JudgeEffect from '../classes/JudgeEffect';
 import FireworkEffect from '../classes/FireworkEffect';
+import BackgroundEffect from '../classes/BackgroundEffect';
 import { cloneDeep } from 'lodash';
 
 // HACK: this is mutable for performance!
@@ -25,10 +26,11 @@ const initialState = {
   },
 };
 
-const handleAddShotEffectAction = (state, { payload }) => {
-  state.shots.list.push(
-    new ShotEffect(payload.note, payload.playerWidth, payload.playerHeight)
-  );
+const handleAddShotEffectAction = (
+  state,
+  { payload: { note, playerWidth, playerHeight } }
+) => {
+  state.shots.list.push(new ShotEffect(note, playerWidth, playerHeight));
   state.shots.updatedCount++;
   return state;
 };
@@ -44,6 +46,17 @@ const handleAddFireworkEffectAction = (state, { payload }) => {
     new FireworkEffect(payload.state, payload.playerHeight)
   );
   state.fireworks.updatedCount++;
+  return state;
+};
+
+const handleAddBackgroundEffectAction = (
+  state,
+  { payload: { isDon, playerWidth, playerHeight } }
+) => {
+  state.backgrounds.list.push(
+    new BackgroundEffect(isDon, playerWidth, playerHeight)
+  );
+  state.backgrounds.updatedCount++;
   return state;
 };
 
@@ -70,6 +83,7 @@ export default handleActions(
     [ActionTypes.ADD_SHOT_EFFECT]: handleAddShotEffectAction,
     [ActionTypes.ADD_JUDGE_EFFECT]: handleAddJudgeEffectAction,
     [ActionTypes.ADD_FIREWORK_EFFECT]: handleAddFireworkEffectAction,
+    [ActionTypes.ADD_BACKGROUND_EFFECT]: handleAddBackgroundEffectAction,
     [ActionTypes.UPDATE_EFFECTS]: handleUpdateEffectsAction,
     [ActionTypes.RESET_IDE]: () => cloneDeep(initialState),
     [ActionTypes.RESET_PLAY]: () => cloneDeep(initialState),

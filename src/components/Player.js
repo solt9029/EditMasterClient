@@ -6,6 +6,7 @@ import PlayerNotesCanvas from '../containers/PlayerNotesCanvas';
 import PlayerShotsCanvas from '../containers/PlayerShotsCanvas';
 import PlayerJudgeEffectsCanvas from '../containers/PlayerJudgeEffectsCanvas';
 import PlayerFireworkEffectsCanvas from '../containers/PlayerFireworkEffectsCanvas';
+import PlayerBackgroundEffectsCanvas from '../containers/PlayerBackgroundEffectsCanvas';
 import { triggerDon, triggerKa } from '../utils/sound';
 import { calcNoteIndexRangeInSecondRange } from '../utils/calculations';
 import { isDon as isDonNote, isKa as isKaNote, hasState } from '../utils/note';
@@ -61,6 +62,7 @@ export default class Player extends Component {
       this.props.addShotEffect(note);
       this.props.addJudgeEffect(Ids.STATE.GOOD);
       this.props.addFireworkEffect(Ids.STATE.GOOD);
+      this.props.addBackgroundEffect(isDonNote(note));
 
       if (hasState(note)) {
         updateState({ index: i, state: Ids.STATE.GOOD });
@@ -95,6 +97,8 @@ export default class Player extends Component {
     }
 
     const { key } = event.nativeEvent;
+
+    this.props.addBackgroundEffect(isDonKey(key));
 
     if (isDonKey(key)) {
       triggerDon();
@@ -155,7 +159,9 @@ export default class Player extends Component {
         }
         updateState({ index: i, state: newState });
         this.props.addJudgeEffect(newState);
-        this.props.addFireworkEffect(newState);
+        if (newState !== Ids.STATE.BAD) {
+          this.props.addFireworkEffect(newState);
+        }
       }
       break;
     }
@@ -175,6 +181,7 @@ export default class Player extends Component {
 
     return (
       <div onKeyDown={this.playMode} tabIndex={0}>
+        <PlayerBackgroundEffectsCanvas />
         <PlayerJudgeMarkCanvas />
         <PlayerNotesCanvas />
         <PlayerShotsCanvas />
