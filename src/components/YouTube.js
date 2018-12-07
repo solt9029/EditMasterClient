@@ -20,11 +20,19 @@ export default class YouTube extends Component {
   }
 
   loop = () => {
-    const { ytPlayer, isSliderChanging, setCurrentTime } = this.props;
+    const {
+      ytPlayer,
+      isSliderChanging,
+      setCurrentTime,
+      updateEffects,
+      doAutoMode,
+    } = this.props;
 
     if (ytPlayer !== null && !isSliderChanging) {
       const currentTime = ytPlayer.getCurrentTime();
       setCurrentTime(currentTime);
+      updateEffects();
+      doAutoMode(currentTime);
     }
     this.frameId = window.requestAnimationFrame(this.loop);
   };
