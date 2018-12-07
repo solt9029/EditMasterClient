@@ -1,37 +1,13 @@
-import React, { Component } from 'react';
 import { Numbers, Ids, Percentages } from '../constants';
 import {
   calcInitialNoteX,
   calcNoteIndexRangeInCanvas,
 } from '../utils/calculations';
 import { clear, drawNote, drawBarStartLine } from '../utils/canvas';
-import Canvas from '../styled/Canvas';
 import propTypes from 'prop-types';
+import PlayerCanvas from './PlayerCanvas';
 
-export default class PlayerNotesCanvas extends Component {
-  canvasRef = React.createRef();
-  ctx = null;
-
-  componentDidMount() {
-    this.ctx = this.canvasRef.current.getContext('2d');
-    this.updateCanvas();
-  }
-
-  componentDidUpdate() {
-    this.updateCanvas();
-  }
-
-  shouldComponentUpdate(nextProps) {
-    if (
-      this.props.width === nextProps.width &&
-      this.props.height === nextProps.height
-    ) {
-      this.updateCanvas();
-      return false;
-    }
-    return true;
-  }
-
+export default class PlayerNotesCanvas extends PlayerCanvas {
   updateCanvas() {
     const {
       speed,
@@ -95,12 +71,6 @@ export default class PlayerNotesCanvas extends Component {
         nextNote
       );
     }
-  }
-
-  render() {
-    const { width, height } = this.props;
-
-    return <Canvas innerRef={this.canvasRef} width={width} height={height} />;
   }
 }
 

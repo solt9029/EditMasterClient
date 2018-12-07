@@ -1,37 +1,11 @@
-import React, { Component } from 'react';
 import { clear, drawFireworkEffect } from '../utils/canvas';
-import Canvas from '../styled/Canvas';
 import PropTypes from 'prop-types';
+import PlayerCanvas from './PlayerCanvas';
 
-export default class PlayerFireworkEffectsCanvas extends Component {
-  canvasRef = React.createRef();
-  ctx = null;
-
-  componentDidMount() {
-    this.ctx = this.canvasRef.current.getContext('2d');
-    this.updateCanvas();
-  }
-
-  componentDidUpdate() {
-    this.updateCanvas();
-  }
-
-  shouldComponentUpdate(nextProps) {
-    if (
-      this.props.width === nextProps.width &&
-      this.props.height === nextProps.height
-    ) {
-      this.updateCanvas();
-      return false;
-    }
-    return true;
-  }
-
+export default class PlayerFireworkEffectsCanvas extends PlayerCanvas {
   updateCanvas() {
     const { width, height, fireworkEffects } = this.props;
-
     clear(this.ctx, width, height);
-
     for (let i = fireworkEffects.length - 1; i >= 0; i--) {
       drawFireworkEffect(
         this.ctx,
@@ -39,12 +13,6 @@ export default class PlayerFireworkEffectsCanvas extends Component {
         fireworkEffects[i].state
       );
     }
-  }
-
-  render() {
-    const { width, height } = this.props;
-
-    return <Canvas innerRef={this.canvasRef} width={width} height={height} />;
   }
 }
 
