@@ -11,10 +11,8 @@ import {
   addFireworkEffect,
   addJudgeEffect,
   addShotEffect,
-  updateEffects,
 } from './effects';
 import { updateState } from './score';
-import { setCurrentTime } from './youtube';
 
 export const resetIDE = createAction(ActionTypes.RESET_IDE);
 export const resetPlay = createAction(ActionTypes.RESET_PLAY);
