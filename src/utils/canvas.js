@@ -7,6 +7,8 @@ import {
   Numbers,
 } from '../constants/';
 
+const radians = deg => deg * (Math.PI / 180);
+
 export const clear = (ctx, width, height) => {
   ctx.clearRect(0, 0, width, height);
   return;
@@ -68,7 +70,7 @@ export const drawJudgeMark = (ctx, y) => {
  *
  * @param {*} ctx
  * @param {number} y
- * @param {number} state
+ * @param {number} state used for color change.
  */
 export const drawFireworkEffect = (ctx, y, state) => {
   ctx.beginPath();
@@ -83,6 +85,31 @@ export const drawFireworkEffect = (ctx, y, state) => {
   );
   ctx.stroke();
   ctx.lineWidth = 1;
+
+  ctx.fillStyle = Colors.TRANSPARENT_YELLOW;
+  for (let deg = 0; deg < 360; deg += 20) {
+    // circle
+    ctx.save();
+    ctx.beginPath();
+    let cX = Positions.PLAYER.JUDGE.X - Math.cos(radians(deg)) * 40;
+    let cY = y - Math.sin(radians(deg)) * 40;
+    ctx.translate(cX, cY);
+    ctx.arc(0, 0, 3, 0, Math.PI * 2);
+    ctx.restore();
+    ctx.fill();
+
+    // ellipse
+    ctx.save();
+    ctx.beginPath();
+    let eX = Positions.PLAYER.JUDGE.X - Math.cos(radians(deg)) * 28;
+    let eY = y - Math.sin(radians(deg)) * 28;
+    ctx.translate(eX, eY);
+    ctx.rotate(radians(deg));
+    ctx.scale(4.5, 1);
+    ctx.arc(0, 0, 1.5, 0, Math.PI * 2);
+    ctx.restore();
+    ctx.fill();
+  }
   return;
 };
 

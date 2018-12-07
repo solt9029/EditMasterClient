@@ -178,8 +178,8 @@ export default class Player extends Component {
         <PlayerJudgeMarkCanvas />
         <PlayerNotesCanvas />
         <PlayerShotsCanvas />
-        <PlayerJudgeEffectsCanvas />
         <PlayerFireworkEffectsCanvas />
+        <PlayerJudgeEffectsCanvas />
         <Slider
           min={0}
           max={ytPlayer ? ytPlayer.getDuration() : 0}
