@@ -46,7 +46,7 @@ export default class PlayerNotesCanvas extends Component {
 
     const spaceWidth = speed * Percentages.PLAYER.SPEED_TO_SPACE_WIDTH;
 
-    clear(this.ctx, width - 1, height - 1);
+    clear(this.ctx, width, height);
 
     const initialNoteX = calcInitialNoteX(currentTime, bpm, offset, speed);
     const canvasRange = calcNoteIndexRangeInCanvas(
@@ -100,9 +100,7 @@ export default class PlayerNotesCanvas extends Component {
   render() {
     const { width, height } = this.props;
 
-    return (
-      <Canvas innerRef={this.canvasRef} width={width - 1} height={height - 1} />
-    );
+    return <Canvas innerRef={this.canvasRef} width={width} height={height} />;
   }
 }
 

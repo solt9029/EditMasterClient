@@ -19,16 +19,14 @@ export default class PlayerJudgeMarkCanvas extends Component {
   updateCanvas() {
     const { width, height } = this.props;
 
-    clear(this.ctx, width - 1, height - 1);
+    clear(this.ctx, width, height);
     drawJudgeMark(this.ctx, (height - 1) / 2);
   }
 
   render() {
     const { width, height } = this.props;
 
-    return (
-      <Canvas innerRef={this.canvasRef} width={width - 1} height={height - 1} />
-    );
+    return <Canvas innerRef={this.canvasRef} width={width} height={height} />;
   }
 }
 
