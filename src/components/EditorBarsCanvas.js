@@ -21,6 +21,17 @@ export default class EditorBarsCanvas extends Component {
     this.updateCanvas();
   }
 
+  shouldComponentUpdate(nextProps) {
+    if (
+      this.props.width === nextProps.width &&
+      this.props.notesLength === nextProps.notesLength
+    ) {
+      this.updateCanvas();
+      return false;
+    }
+    return true;
+  }
+
   updateCanvas() {
     const { width, notesLength } = this.props;
 

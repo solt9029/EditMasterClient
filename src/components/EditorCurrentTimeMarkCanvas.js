@@ -13,10 +13,22 @@ export default class EditorCurrentTimeMarkCanvas extends Component {
 
   componentDidMount() {
     this.ctx = this.canvasRef.current.getContext('2d');
+    this.updateCanvas();
   }
 
   componentDidUpdate() {
     this.updateCanvas();
+  }
+
+  shouldComponentUpdate(nextProps) {
+    if (
+      this.props.width === nextProps.width &&
+      this.props.notesLength === nextProps.notesLength
+    ) {
+      this.updateCanvas();
+      return false;
+    }
+    return true;
   }
 
   updateCanvas() {

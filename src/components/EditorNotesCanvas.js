@@ -18,6 +18,17 @@ export default class EditorNotesCanvas extends Component {
     this.updateCanvas();
   }
 
+  shouldComponentUpdate(nextProps) {
+    if (
+      this.props.width === nextProps.width &&
+      this.props.notes.length === nextProps.notes.length
+    ) {
+      this.updateCanvas();
+      return false;
+    }
+    return true;
+  }
+
   updateCanvas() {
     const { notes, width } = this.props;
 
