@@ -13,13 +13,13 @@ import Player from '../components/Player';
 
 export default connect(
   state => ({
-    playerPane: state.sizes.player,
     notes: state.score.notes.list,
     states: state.score.states.list,
     notesUpdatedCount: state.score.notes.updatedCount,
     statesUpdatedCount: state.score.states.updatedCount,
     currentTime: state.youtube.currentTime,
-    config: state.score,
+    bpm: state.score.bpm.value,
+    offset: state.score.offset.value,
     isAutoMode: state.player.isAutoMode,
     ytPlayer: state.youtube.ytPlayer,
   }),

@@ -29,7 +29,8 @@ export default class Player extends Component {
       notes,
       states,
       currentTime,
-      config,
+      offset,
+      bpm,
       updateState,
     } = this.props;
 
@@ -43,8 +44,8 @@ export default class Player extends Component {
     const autoRange = calcNoteIndexRangeInSecondRange(
       Seconds.RANGE.AUTO,
       currentTime,
-      config.bpm.value,
-      config.offset.value
+      bpm,
+      offset
     );
 
     for (let i = autoRange[0]; i <= autoRange[1]; i++) {
@@ -83,7 +84,8 @@ export default class Player extends Component {
       isAutoMode,
       ytPlayer,
       currentTime,
-      config,
+      bpm,
+      offset,
       notes,
       states,
       updateState,
@@ -110,20 +112,20 @@ export default class Player extends Component {
     const badRange = calcNoteIndexRangeInSecondRange(
       Seconds.RANGE.BAD,
       currentTime,
-      config.bpm.value,
-      config.offset.value
+      bpm,
+      offset
     );
     const okRange = calcNoteIndexRangeInSecondRange(
       Seconds.RANGE.OK,
       currentTime,
-      config.bpm.value,
-      config.offset.value
+      bpm,
+      offset
     );
     const goodRange = calcNoteIndexRangeInSecondRange(
       Seconds.RANGE.GOOD,
       currentTime,
-      config.bpm.value,
-      config.offset.value
+      bpm,
+      offset
     );
 
     for (let i = badRange[0]; i <= badRange[1]; i++) {
