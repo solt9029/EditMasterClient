@@ -1,37 +1,11 @@
-import React, { Component } from 'react';
 import { clear, drawBackgroundEffect } from '../utils/canvas';
-import Canvas from '../styled/Canvas';
+import PlayerCanvas from './PlayerCanvas';
 import PropTypes from 'prop-types';
 
-export default class PlayerBackgroundEffectsCanvas extends Component {
-  canvasRef = React.createRef();
-  ctx = null;
-
-  componentDidMount() {
-    this.ctx = this.canvasRef.current.getContext('2d');
-    this.updateCanvas();
-  }
-
-  componentDidUpdate() {
-    this.updateCanvas();
-  }
-
-  shouldComponentUpdate(nextProps) {
-    if (
-      this.props.width === nextProps.width &&
-      this.props.height === nextProps.height
-    ) {
-      this.updateCanvas();
-      return false;
-    }
-    return true;
-  }
-
+export default class PlayerBackgroundEffectsCanvas extends PlayerCanvas {
   updateCanvas() {
     const { width, height, backgroundEffects } = this.props;
-
     clear(this.ctx, width, height);
-
     for (let i = backgroundEffects.length - 1; i >= 0; i--) {
       drawBackgroundEffect(
         this.ctx,
@@ -40,12 +14,6 @@ export default class PlayerBackgroundEffectsCanvas extends Component {
         backgroundEffects[i].playerHeight
       );
     }
-  }
-
-  render() {
-    const { width, height } = this.props;
-
-    return <Canvas innerRef={this.canvasRef} width={width} height={height} />;
   }
 }
 
