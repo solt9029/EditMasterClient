@@ -9,6 +9,7 @@ import {
   addBackgroundEffect,
   updateEffects,
 } from '../actions/effects';
+import { doPlayMode } from '../actions/others';
 import Player from '../components/Player';
 
 export default connect(
@@ -32,5 +33,6 @@ export default connect(
     updateState,
     setCurrentTime,
     setIsSliderChanging,
+    doPlayMode,
   }
 )(Player);
