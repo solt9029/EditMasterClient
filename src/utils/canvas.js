@@ -45,6 +45,11 @@ export const drawCaret = (ctx, x, y) => {
   return;
 };
 
+/**
+ *
+ * @param {*} ctx
+ * @param {number} y
+ */
 export const drawJudgeMark = (ctx, y) => {
   ctx.beginPath();
   ctx.strokeStyle = Colors.WHITE;
@@ -61,7 +66,7 @@ export const drawJudgeMark = (ctx, y) => {
 
 /**
  *
- * @param {any} ctx
+ * @param {*} ctx
  * @param {number} y
  * @param {number} state
  */
@@ -81,12 +86,17 @@ export const drawFireworkEffect = (ctx, y, state) => {
   return;
 };
 
-export const drawJudgeEffect = (ctx, markY, textY, stateId) => {
-  // text
+/**
+ *
+ * @param {*} ctx
+ * @param {number} y
+ * @param {number} state
+ */
+export const drawJudgeEffect = (ctx, y, state) => {
   ctx.font = `${Sizes.PLAYER.JUDGE_TEXT}px HG行書体, bold`;
   let text = '良';
   let textColor = Colors.RED;
-  switch (stateId) {
+  switch (state) {
     case Ids.STATE.OK:
       text = '可';
       textColor = Colors.WHITE;
@@ -102,13 +112,13 @@ export const drawJudgeEffect = (ctx, markY, textY, stateId) => {
   ctx.fillText(
     text,
     Positions.PLAYER.JUDGE.X - (text.length * Sizes.PLAYER.JUDGE_TEXT) / 2,
-    textY
+    y
   );
   ctx.strokeStyle = Colors.BLACK;
   ctx.strokeText(
     text,
     Positions.PLAYER.JUDGE.X - (text.length * Sizes.PLAYER.JUDGE_TEXT) / 2,
-    textY
+    y
   );
   return;
 };
