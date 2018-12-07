@@ -6,6 +6,7 @@ import {
   addShotEffect,
   addJudgeEffect,
   addFireworkEffect,
+  addBackgroundEffect,
   updateEffects,
 } from '../actions/effects';
 import Player from '../components/Player';
@@ -27,6 +28,7 @@ export default connect(
     addJudgeEffect,
     addShotEffect,
     addFireworkEffect,
+    addBackgroundEffect,
     updateState,
     setCurrentTime,
     setIsSliderChanging,
