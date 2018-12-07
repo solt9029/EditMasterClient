@@ -18,7 +18,7 @@ export default class PlayerBackgroundEffectsCanvas extends Component {
 
   shouldComponentUpdate(nextProps) {
     if (
-      this.props.width === nextProps.height &&
+      this.props.width === nextProps.width &&
       this.props.height === nextProps.height
     ) {
       this.updateCanvas();
