@@ -5,6 +5,7 @@ import PlayerJudgeMarkCanvas from '../containers/PlayerJudgeMarkCanvas';
 import PlayerNotesCanvas from '../containers/PlayerNotesCanvas';
 import PlayerShotsCanvas from '../containers/PlayerShotsCanvas';
 import PlayerJudgeEffectsCanvas from '../containers/PlayerJudgeEffectsCanvas';
+import PlayerFireworkEffectsCanvas from '../containers/PlayerFireworkEffectsCanvas';
 import { triggerDon, triggerKa } from '../utils/sound';
 import { calcNoteIndexRangeInSecondRange } from '../utils/calculations';
 import { isDon as isDonNote, isKa as isKaNote, hasState } from '../utils/note';
@@ -59,6 +60,7 @@ export default class Player extends Component {
 
       this.props.addShotEffect(note);
       this.props.addJudgeEffect(Ids.STATE.GOOD);
+      this.props.addFireworkEffect(Ids.STATE.GOOD);
 
       if (hasState(note)) {
         updateState({ index: i, state: Ids.STATE.GOOD });
@@ -153,6 +155,7 @@ export default class Player extends Component {
         }
         updateState({ index: i, state: newState });
         this.props.addJudgeEffect(newState);
+        this.props.addFireworkEffect(newState);
       }
       break;
     }
@@ -176,6 +179,7 @@ export default class Player extends Component {
         <PlayerNotesCanvas />
         <PlayerShotsCanvas />
         <PlayerJudgeEffectsCanvas />
+        <PlayerFireworkEffectsCanvas />
         <Slider
           min={0}
           max={ytPlayer ? ytPlayer.getDuration() : 0}

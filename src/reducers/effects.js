@@ -2,6 +2,7 @@ import { ActionTypes } from '../constants/';
 import { handleActions } from 'redux-actions';
 import ShotEffect from '../classes/ShotEffect';
 import JudgeEffect from '../classes/JudgeEffect';
+import FireworkEffect from '../classes/FireworkEffect';
 import { cloneDeep } from 'lodash';
 
 // HACK: this is mutable for performance!
@@ -38,6 +39,14 @@ const handleAddJudgeEffectAction = (state, { payload }) => {
   return state;
 };
 
+const handleAddFireworkEffectAction = (state, { payload }) => {
+  state.fireworks.list.push(
+    new FireworkEffect(payload.state, payload.playerHeight)
+  );
+  state.fireworks.updatedCount++;
+  return state;
+};
+
 const handleUpdateEffectsAction = state => {
   for (let key in state) {
     if (state[key].list.length <= 0) {
@@ -60,6 +69,7 @@ export default handleActions(
   {
     [ActionTypes.ADD_SHOT_EFFECT]: handleAddShotEffectAction,
     [ActionTypes.ADD_JUDGE_EFFECT]: handleAddJudgeEffectAction,
+    [ActionTypes.ADD_FIREWORK_EFFECT]: handleAddFireworkEffectAction,
     [ActionTypes.UPDATE_EFFECTS]: handleUpdateEffectsAction,
     [ActionTypes.RESET_IDE]: () => cloneDeep(initialState),
     [ActionTypes.RESET_PLAY]: () => cloneDeep(initialState),

@@ -59,21 +59,29 @@ export const drawJudgeMark = (ctx, y) => {
   return;
 };
 
-export const drawJudgeEffect = (ctx, markY, textY, stateId) => {
-  // mark
+/**
+ *
+ * @param {any} ctx
+ * @param {number} y
+ * @param {number} state
+ */
+export const drawFireworkEffect = (ctx, y, state) => {
   ctx.beginPath();
   ctx.strokeStyle = Colors.TRANSPARENT_YELLOW;
   ctx.lineWidth = 3;
   ctx.arc(
     Positions.PLAYER.JUDGE.X,
-    markY,
+    y,
     Sizes.PLAYER.NORMAL.OUTSIDE,
     0,
     Math.PI * 2
   );
   ctx.stroke();
   ctx.lineWidth = 1;
+  return;
+};
 
+export const drawJudgeEffect = (ctx, markY, textY, stateId) => {
   // text
   ctx.font = `${Sizes.PLAYER.JUDGE_TEXT}px HG行書体, bold`;
   let text = '良';

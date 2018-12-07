@@ -5,6 +5,7 @@ import { setCurrentTime } from '../actions/youtube';
 import {
   addShotEffect,
   addJudgeEffect,
+  addFireworkEffect,
   updateEffects,
 } from '../actions/effects';
 import Player from '../components/Player';
@@ -25,6 +26,7 @@ export default connect(
     updateEffects,
     addJudgeEffect,
     addShotEffect,
+    addFireworkEffect,
     updateState,
     setCurrentTime,
     setIsSliderChanging,

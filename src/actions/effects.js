@@ -3,7 +3,16 @@ import { createAction } from 'redux-actions';
 
 const _addShotEffect = createAction(ActionTypes.ADD_SHOT_EFFECT);
 const _addJudgeEffect = createAction(ActionTypes.ADD_JUDGE_EFFECT);
+const _addFireworkEffect = createAction(ActionTypes.ADD_FIREWORK_EFFECT);
 export const updateEffects = createAction(ActionTypes.UPDATE_EFFECTS);
+
+export const addFireworkEffect = state => {
+  return (dispatch, getState) => {
+    const { height } = getState().sizes.player;
+    const payload = { state, playerHeight: height };
+    dispatch(_addFireworkEffect(payload));
+  };
+};
 
 export const addShotEffect = note => {
   return (dispatch, getState) => {
