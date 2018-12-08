@@ -1,7 +1,6 @@
 import urlParse from 'url-parse';
 import qs from 'qs';
 import pathToRegexp from 'path-to-regexp';
-import { Routes } from '../constants/';
 
 /**
  *
@@ -49,20 +48,15 @@ export const stringifySearchQuery = (keyword, page = 1) => {
 
 /**
  *
- * @param {string} pathname
+ * @param {string} target
+ * @param {Array} pathnames
  * @return {boolean}
  */
-export const matchScoresCreatePathname = pathname => {
-  const isScoresShow = pathname.match(pathToRegexp(Routes.SCORES.SHOW));
-  const isScoresNew = pathname.match(pathToRegexp(Routes.SCORES.NEW));
-  return isScoresShow !== null || isScoresNew !== null;
-};
-
-/**
- *
- * @param {string} pathname
- * @return {boolean}
- */
-export const matchScoresIndexPathname = pathname => {
-  return pathname.match(pathToRegexp(Routes.SCORES.INDEX)) !== null;
+export const matchPathnames = (target, pathnames) => {
+  for (let i = 0; i < pathnames.length; i++) {
+    if (target.match(pathToRegexp(pathnames[i])) !== null) {
+      return true;
+    }
+  }
+  return false;
 };

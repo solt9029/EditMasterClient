@@ -9,11 +9,9 @@ import {
 import styled from 'styled-components';
 import SearchForm from '../containers/SearchForm';
 import NavbarBrand from './NavbarBrand';
-import {
-  matchScoresCreatePathname,
-  matchScoresIndexPathname,
-} from '../utils/url';
+import { matchPathnames } from '../utils/url';
 import NavLinkList from './NavLinkList';
+import { Routes } from '../constants';
 
 const StyledNavbar = styled(RNavbar)`
   font-family: 'HG行書体';
@@ -46,7 +44,10 @@ export default class Navbar extends Component {
           <NavbarToggler onClick={this.toggle} className="my-2" />
           <Collapse isOpen={this.state.isOpen} navbar>
             <NavLinkList />
-            {matchScoresCreatePathname(location.pathname) &&
+            {matchPathnames(location.pathname, [
+              Routes.SCORES.NEW,
+              Routes.SCORES.SHOW,
+            ]) &&
               !error &&
               !isLoading && (
                 <Fragment>
@@ -66,7 +67,9 @@ export default class Navbar extends Component {
                   </Button>
                 </Fragment>
               )}
-            {matchScoresIndexPathname(location.pathname) && <SearchForm />}
+            {matchPathnames(location.pathname, [Routes.SCORES.INDEX]) && (
+              <SearchForm />
+            )}
           </Collapse>
         </Container>
       </StyledNavbar>
