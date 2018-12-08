@@ -1,18 +1,11 @@
-import React, { Component } from 'react';
-import Canvas from '../styled/Canvas';
 import { drawCaret, clear } from '../utils/canvas';
 import { calcEditorCanvasHeight } from '../utils/calculations';
+import EditorCanvas from './EditorCanvas';
 
-export default class EditorCaretCanvas extends Component {
-  canvasRef = React.createRef();
-  ctx = null;
-
-  componentDidMount() {
-    this.ctx = this.canvasRef.current.getContext('2d');
-  }
-
-  componentDidUpdate() {
-    this.updateCanvas();
+export default class EditorCaretCanvas extends EditorCanvas {
+  // TODO: if shouldComponentUpdate isn't impletemented here, delay occurs. check this issue later.
+  shouldComponentUpdate() {
+    return true;
   }
 
   updateCanvas() {
@@ -22,11 +15,5 @@ export default class EditorCaretCanvas extends Component {
 
     const { x, y } = this.props;
     drawCaret(this.ctx, x, y);
-  }
-
-  render() {
-    const { notesLength, width } = this.props;
-    const height = calcEditorCanvasHeight(notesLength);
-    return <Canvas innerRef={this.canvasRef} width={width} height={height} />;
   }
 }
