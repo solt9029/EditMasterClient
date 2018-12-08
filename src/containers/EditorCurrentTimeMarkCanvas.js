@@ -4,7 +4,7 @@ import EditorCurrentTimeMarkCanvas from '../components/EditorCurrentTimeMarkCanv
 export default connect(state => ({
   notesLength: state.score.notes.list.length,
   updatedCount: state.score.notes.updatedCount,
-  currentTime: state.youtube.currentTime,
+  currentTime: state.currentTime,
   bpm: state.score.bpm.value,
   offset: state.score.offset.value,
   width: state.sizes.editor.width,
