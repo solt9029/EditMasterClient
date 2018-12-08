@@ -4,8 +4,8 @@ import EditorCaretCanvas from '../components/EditorCaretCanvas';
 
 export default connect(
   state => ({
-    currentNote: state.editor.currentNote,
-    currentDivision: state.editor.currentDivision,
+    currentNote: state.currentNote,
+    currentDivision: state.currentDivision,
     notesLength: state.score.notes.list.length,
     notes: state.score.notes.list,
     updatedCount: state.score.notes.updatedCount,

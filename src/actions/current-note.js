@@ -6,8 +6,3 @@ export const setCurrentNote = createAction(
   ActionTypes.SET_CURRENT_NOTE,
   toNumber
 );
-
-export const setCurrentDivision = createAction(
-  ActionTypes.SET_CURRENT_DIVISION,
-  toNumber
-);

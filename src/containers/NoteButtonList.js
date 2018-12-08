@@ -1,10 +1,10 @@
 import { connect } from 'react-redux';
-import { setCurrentNote } from '../actions/editor';
+import { setCurrentNote } from '../actions/current-note';
 import NoteButtonList from '../components/NoteButtonList';
 
 export default connect(
   state => ({
-    currentNote: state.editor.currentNote,
+    currentNote: state.currentNote,
   }),
   { setCurrentNote }
 )(NoteButtonList);
