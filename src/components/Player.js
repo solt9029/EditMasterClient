@@ -1,7 +1,7 @@
 import React from 'react';
 import PlayerJudgeMarkCanvas from '../containers/PlayerJudgeMarkCanvas';
 import PlayerNotesCanvas from '../containers/PlayerNotesCanvas';
-import PlayerShotsCanvas from '../containers/PlayerShotsCanvas';
+import PlayerShotEffectsCanvas from '../containers/PlayerShotEffectsCanvas';
 import PlayerJudgeEffectsCanvas from '../containers/PlayerJudgeEffectsCanvas';
 import PlayerFireworkEffectsCanvas from '../containers/PlayerFireworkEffectsCanvas';
 import PlayerBackgroundEffectsCanvas from '../containers/PlayerBackgroundEffectsCanvas';
@@ -13,7 +13,7 @@ const Player = ({ doPlayMode }) => (
     <PlayerBackgroundEffectsCanvas />
     <PlayerJudgeMarkCanvas />
     <PlayerNotesCanvas />
-    <PlayerShotsCanvas />
+    <PlayerShotEffectsCanvas />
     <PlayerFireworkEffectsCanvas />
     <PlayerJudgeEffectsCanvas />
     <PlayerSlider />
