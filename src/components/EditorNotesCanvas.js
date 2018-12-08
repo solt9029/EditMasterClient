@@ -21,7 +21,7 @@ export default class EditorNotesCanvas extends Component {
   shouldComponentUpdate(nextProps) {
     if (
       this.props.width === nextProps.width &&
-      this.props.notes.length === nextProps.notes.length
+      this.props.notesLength === nextProps.notesLength
     ) {
       this.updateCanvas();
       return false;
