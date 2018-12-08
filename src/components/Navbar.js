@@ -4,11 +4,10 @@ import {
   Navbar as RNavbar,
   NavbarToggler,
   Container,
+  Button,
 } from 'reactstrap';
 import styled from 'styled-components';
 import SearchForm from '../containers/SearchForm';
-import TjaExportButton from '../containers/TjaExportButton';
-import CreateButton from '../containers/CreateButton';
 import NavbarBrand from './NavbarBrand';
 import {
   matchScoresCreatePathname,
@@ -32,7 +31,13 @@ export default class Navbar extends Component {
   };
 
   render() {
-    const { location, error, isLoading } = this.props;
+    const {
+      location,
+      error,
+      isLoading,
+      createScore,
+      exportTjaFile,
+    } = this.props;
 
     return (
       <StyledNavbar className="py-0" color="light" light expand="md">
@@ -45,8 +50,20 @@ export default class Navbar extends Component {
               !error &&
               !isLoading && (
                 <Fragment>
-                  <TjaExportButton />
-                  <CreateButton />
+                  <Button
+                    color="info"
+                    className="my-2 mr-2"
+                    onClick={exportTjaFile}
+                  >
+                    太鼓さん次郎エクスポート
+                  </Button>
+                  <Button
+                    color="success"
+                    className="my-2 mr-2"
+                    onClick={createScore}
+                  >
+                    保存
+                  </Button>
                 </Fragment>
               )}
             {matchScoresIndexPathname(location.pathname) && <SearchForm />}
