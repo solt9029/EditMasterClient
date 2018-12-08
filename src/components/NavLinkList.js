@@ -3,7 +3,7 @@ import { Nav, NavLink } from 'reactstrap';
 import styled from 'styled-components';
 import { Routes } from '../constants';
 import { NavLink as RRNavLink } from 'react-router-dom';
-import { matchScoresCreatePathname } from '../utils/url';
+import { matchPathnames } from '../utils/url';
 
 const StyledNavLink = styled(NavLink)`
   font-size: 1em;
@@ -14,18 +14,17 @@ const StyledNavLink = styled(NavLink)`
  * @param {Object} location
  * @return {boolean}
  */
-const isScoresCreateActive = (match, location) => {
-  return matchScoresCreatePathname(location.pathname);
+const isActive = (match, location) => {
+  return matchPathnames(location.pathname, [
+    Routes.SCORES.SHOW,
+    Routes.SCORES.NEW,
+  ]);
 };
 
 const NavLinkList = () => {
   return (
     <Nav className="mr-auto" navbar>
-      <StyledNavLink
-        tag={RRNavLink}
-        isActive={isScoresCreateActive}
-        to={Routes.SCORES.NEW}
-      >
+      <StyledNavLink tag={RRNavLink} isActive={isActive} to={Routes.SCORES.NEW}>
         創作
       </StyledNavLink>
       <StyledNavLink tag={RRNavLink} exact to={Routes.SCORES.INDEX}>
