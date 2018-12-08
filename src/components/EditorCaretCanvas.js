@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
-import { Numbers, Keys } from '../constants';
+import { Keys } from '../constants';
 import Canvas from '../styled/Canvas';
 import { drawCaret, clear } from '../utils/canvas';
 import { calcCaret, calcEditorCanvasHeight } from '../utils/calculations';
-import { isNote, hasState } from '../utils/note';
 
 export default class EditorCaretCanvas extends Component {
-  clipboard = null;
   canvasRef = React.createRef();
   ctx = null;
 
@@ -18,14 +16,10 @@ export default class EditorCaretCanvas extends Component {
     this.updateCanvas();
   }
 
-  keyDown = event => {
-    this.updateNotes(event);
-    this.copyPaste(event);
-  };
-
-  copyPaste = event => {
+  onKeyDown = event => {
     const { key } = event.nativeEvent;
-    const { copy, paste } = this.props;
+    const { updateNotes, copy, paste } = this.props;
+    updateNotes(key);
     if (key === Keys.COPY) {
       copy();
     } else if (key === Keys.PASTE) {
@@ -33,43 +27,8 @@ export default class EditorCaretCanvas extends Component {
     }
   };
 
-  updateNotes = event => {
-    let {
-      currentDivision,
-      currentNote,
-      updateNotes,
-      addBar,
-      notesLength,
-      barIndex,
-      divisionIndex,
-    } = this.props;
-
-    // if the event is key event, the note which is going to be put should be key value!
-    if (event.nativeEvent.key) {
-      const keyValue = +event.nativeEvent.key;
-      if (!isNote(keyValue)) {
-        return;
-      }
-      currentNote = keyValue;
-    }
-
-    const notesPerDivision = Numbers.NOTES_PER_BAR / currentDivision;
-    const mouseNotesPerBarIndex = divisionIndex * notesPerDivision;
-    const index = barIndex * Numbers.NOTES_PER_BAR + mouseNotesPerBarIndex;
-    let notes = [];
-    if (!hasState(currentNote)) {
-      for (let i = 0; i < notesPerDivision; i++) {
-        notes.push(currentNote);
-      }
-    } else {
-      notes.push(currentNote);
-    }
-    updateNotes({ index, notes });
-
-    // add one bar if the user puts a note on the last bar
-    if (index >= notesLength - Numbers.NOTES_PER_BAR) {
-      addBar();
-    }
+  onClick = () => {
+    this.props.updateNotes();
   };
 
   onMouseMove = event => {
@@ -96,8 +55,8 @@ export default class EditorCaretCanvas extends Component {
       <Canvas
         tabIndex={0}
         onMouseMove={this.onMouseMove}
-        onKeyDown={this.keyDown}
-        onClick={this.updateNotes}
+        onKeyDown={this.onKeyDown}
+        onClick={this.onClick}
         innerRef={this.canvasRef}
         width={width - 1}
         height={height}

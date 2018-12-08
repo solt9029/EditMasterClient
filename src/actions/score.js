@@ -7,8 +7,9 @@ import {
 import { calcSongle } from '../utils/calculations';
 import { ActionTypes, Numbers } from '../constants/';
 import { createAction } from 'redux-actions';
+import { hasState, isNote } from '../utils/note';
 
-export const updateNotes = createAction(ActionTypes.UPDATE_NOTES);
+const _updateNotes = createAction(ActionTypes.UPDATE_NOTES);
 export const addBar = createAction(ActionTypes.ADD_BAR);
 export const removeBar = createAction(ActionTypes.REMOVE_BAR);
 export const updateState = createAction(ActionTypes.UPDATE_STATE);
@@ -64,26 +65,50 @@ export const setComment = createAction(
   createPayloadWithValidation([maxLength(140)])
 );
 
+/**
+ *
+ * @param {?string} key
+ */
+export const updateNotes = (key = null) => {
+  return (dispatch, getState) => {
+    const state = getState();
+    const { caret, currentDivision } = state;
+    let { currentNote } = state;
+
+    if (key !== null) {
+      if (isNote(+key)) {
+        currentNote = +key;
+      } else {
+        return;
+      }
+    }
+
+    // TODO: make a utility function for this calc part.
+    const notesPerDivision = Numbers.NOTES_PER_BAR / currentDivision;
+    const mouseNotesPerBarIndex = caret.divisionIndex * notesPerDivision;
+    const index =
+      caret.barIndex * Numbers.NOTES_PER_BAR + mouseNotesPerBarIndex;
+
+    let notes = [];
+    if (!hasState(currentNote)) {
+      for (let i = 0; i < notesPerDivision; i++) {
+        notes.push(currentNote);
+      }
+    } else {
+      notes.push(currentNote);
+    }
+    dispatch(_updateNotes({ index, notes }));
+  };
+};
+
 export const paste = () => {
   return (dispatch, getState) => {
-    const { clipboard, caret, score } = getState();
+    const { clipboard, caret } = getState();
     if (clipboard.length <= 0) {
       return;
     }
-
-    dispatch(
-      updateNotes({
-        index: caret.barIndex * Numbers.NOTES_PER_BAR,
-        notes: clipboard,
-      })
-    );
-
-    if (
-      (caret.barIndex + 1) * Numbers.NOTES_PER_BAR >=
-      score.notes.list.length
-    ) {
-      dispatch(addBar());
-    }
+    const index = caret.barIndex * Numbers.NOTES_PER_BAR;
+    dispatch(_updateNotes({ index, notes: clipboard }));
   };
 };
 
