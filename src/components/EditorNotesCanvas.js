@@ -72,9 +72,7 @@ export default class EditorNotesCanvas extends Component {
     const { width, notes } = this.props;
     const height = calcEditorCanvasHeight(notes.length);
 
-    return (
-      <Canvas innerRef={this.canvasRef} width={width - 1} height={height} />
-    );
+    return <Canvas innerRef={this.canvasRef} width={width} height={height} />;
   }
 }
 

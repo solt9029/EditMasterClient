@@ -58,7 +58,7 @@ export default class EditorCaretCanvas extends Component {
         onKeyDown={this.onKeyDown}
         onClick={this.onClick}
         innerRef={this.canvasRef}
-        width={width - 1}
+        width={width}
         height={height}
       />
     );

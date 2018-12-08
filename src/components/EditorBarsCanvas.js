@@ -47,9 +47,7 @@ export default class EditorBarsCanvas extends Component {
     const { width, notesLength } = this.props;
     const height = calcEditorCanvasHeight(notesLength);
 
-    return (
-      <Canvas innerRef={this.canvasRef} width={width - 1} height={height} />
-    );
+    return <Canvas innerRef={this.canvasRef} width={width} height={height} />;
   }
 }
 
