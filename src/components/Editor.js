@@ -1,24 +1,49 @@
-import React, { Component } from 'react';
+import React from 'react';
 import EditorCaretCanvas from '../containers/EditorCaretCanvas';
 import EditorCurrentTimeMarkCanvas from '../containers/EditorCurrentTimeMarkCanvas';
 import EditorBarsCanvas from '../containers/EditorBarsCanvas';
 import EditorNotesCanvas from '../containers/EditorNotesCanvas';
-import propTypes from 'prop-types';
+import PropTypes from 'prop-types';
+import { Keys } from '../constants';
 
-export default class Editor extends Component {
-  render() {
-    return (
-      <div>
-        <EditorBarsCanvas />
-        <EditorNotesCanvas />
-        <EditorCurrentTimeMarkCanvas />
-        <EditorCaretCanvas />
-      </div>
-    );
-  }
-}
+const Editor = ({ updateNotes, setCaret, copy, paste }) => {
+  const onClick = () => updateNotes();
+
+  const onMouseMove = event => {
+    const { offsetX, offsetY } = event.nativeEvent;
+    setCaret({ offsetX, offsetY });
+  };
+
+  const onKeyDown = event => {
+    const { key } = event.nativeEvent;
+    updateNotes(key);
+    if (key === Keys.COPY) {
+      copy();
+    } else if (key === Keys.PASTE) {
+      paste();
+    }
+  };
+
+  return (
+    <div
+      tabIndex={0}
+      onMouseMove={onMouseMove}
+      onKeyDown={onKeyDown}
+      onClick={onClick}
+    >
+      <EditorBarsCanvas />
+      <EditorNotesCanvas />
+      <EditorCurrentTimeMarkCanvas />
+      <EditorCaretCanvas />
+    </div>
+  );
+};
+
+export default Editor;
 
 Editor.propTypes = {
-  width: propTypes.number,
-  notes: propTypes.arrayOf(propTypes.number),
+  updateNotes: PropTypes.func.isRequired,
+  setCaret: PropTypes.func.isRequired,
+  copy: PropTypes.func.isRequired,
+  paste: PropTypes.func.isRequired,
 };
