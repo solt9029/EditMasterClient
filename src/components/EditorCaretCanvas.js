@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Keys } from '../constants';
 import Canvas from '../styled/Canvas';
 import { drawCaret, clear } from '../utils/canvas';
-import { calcCaret, calcEditorCanvasHeight } from '../utils/calculations';
+import { calcEditorCanvasHeight } from '../utils/calculations';
 
 export default class EditorCaretCanvas extends Component {
   canvasRef = React.createRef();
@@ -33,9 +33,7 @@ export default class EditorCaretCanvas extends Component {
 
   onMouseMove = event => {
     const { offsetX, offsetY } = event.nativeEvent;
-    const { width, currentDivision } = this.props;
-    const caret = calcCaret(offsetX, offsetY, width, currentDivision);
-    this.props.setCaret(caret);
+    this.props.setCaret({ offsetX, offsetY });
   };
 
   updateCanvas() {
