@@ -24,32 +24,12 @@ export default class EditorCaretCanvas extends Component {
   };
 
   copyPaste = event => {
-    const { barIndex } = this.props;
-
-    switch (event.nativeEvent.key) {
-      case Keys.COPY:
-        this.clipboard = this.props.notes.slice(
-          barIndex * Numbers.NOTES_PER_BAR,
-          (barIndex + 1) * Numbers.NOTES_PER_BAR
-        );
-        return;
-      case Keys.PASTE:
-        if (!this.clipboard) {
-          return;
-        }
-        if (this.clipboard.length !== Numbers.NOTES_PER_BAR) {
-          return;
-        }
-        this.props.updateNotes({
-          index: barIndex * Numbers.NOTES_PER_BAR,
-          notes: this.clipboard,
-        });
-        if ((barIndex + 1) * Numbers.NOTES_PER_BAR >= this.props.notesLength) {
-          this.props.addBar();
-        }
-        return;
-      default:
-        return;
+    const { key } = event.nativeEvent;
+    const { copy, paste } = this.props;
+    if (key === Keys.COPY) {
+      copy();
+    } else if (key === Keys.PASTE) {
+      paste();
     }
   };
 

@@ -5,7 +5,7 @@ import {
   fetchScore as _fetchScore,
 } from '../utils/http';
 import { calcSongle } from '../utils/calculations';
-import { ActionTypes } from '../constants/';
+import { ActionTypes, Numbers } from '../constants/';
 import { createAction } from 'redux-actions';
 
 export const updateNotes = createAction(ActionTypes.UPDATE_NOTES);
@@ -63,6 +63,29 @@ export const setComment = createAction(
   ActionTypes.SET_COMMENT,
   createPayloadWithValidation([maxLength(140)])
 );
+
+export const paste = () => {
+  return (dispatch, getState) => {
+    const { clipboard, caret, score } = getState();
+    if (clipboard.length <= 0) {
+      return;
+    }
+
+    dispatch(
+      updateNotes({
+        index: caret.barIndex * Numbers.NOTES_PER_BAR,
+        notes: clipboard,
+      })
+    );
+
+    if (
+      (caret.barIndex + 1) * Numbers.NOTES_PER_BAR >=
+      score.notes.list.length
+    ) {
+      dispatch(addBar());
+    }
+  };
+};
 
 export const fetchSongle = videoId => {
   return async dispatch => {
