@@ -7,8 +7,10 @@ import { isNote, hasState } from '../utils/note';
 
 export default class EditorCaretCanvas extends Component {
   state = {
-    mouseX: 0,
-    mouseY: 0,
+    x: 0,
+    y: 0,
+    barIndex: 0,
+    divisionIndex: 0,
   };
   clipboard = null;
   canvasRef = React.createRef();
@@ -28,12 +30,7 @@ export default class EditorCaretCanvas extends Component {
   };
 
   copyPaste = event => {
-    const { barIndex } = calcCaret(
-      this.state.mouseX,
-      this.state.mouseY,
-      this.props.width,
-      this.props.currentDivision
-    );
+    const { barIndex } = this.state;
 
     switch (event.nativeEvent.key) {
       case Keys.COPY:
@@ -66,12 +63,11 @@ export default class EditorCaretCanvas extends Component {
     let {
       currentDivision,
       currentNote,
-      width,
       updateNotes,
       addBar,
       notesLength,
     } = this.props;
-    const { mouseX, mouseY } = this.state;
+    const { barIndex, divisionIndex } = this.state;
 
     // if the event is key event, the note which is going to be put should be key value!
     if (event.nativeEvent.key) {
@@ -81,13 +77,6 @@ export default class EditorCaretCanvas extends Component {
       }
       currentNote = keyValue;
     }
-
-    const { barIndex, divisionIndex } = calcCaret(
-      mouseX,
-      mouseY,
-      width,
-      currentDivision
-    );
 
     const notesPerDivision = Numbers.NOTES_PER_BAR / currentDivision;
     const mouseNotesPerBarIndex = divisionIndex * notesPerDivision;
@@ -110,18 +99,17 @@ export default class EditorCaretCanvas extends Component {
 
   onMouseMove = event => {
     const { offsetX, offsetY } = event.nativeEvent;
-    this.setState({
-      mouseX: offsetX,
-      mouseY: offsetY,
-    });
+    const { width, currentDivision } = this.props;
+    const caret = calcCaret(offsetX, offsetY, width, currentDivision);
+    this.setState({ ...caret });
   };
 
   updateCanvas() {
-    const { width, notesLength, currentDivision } = this.props;
-    const { mouseX, mouseY } = this.state;
+    const { width, notesLength } = this.props;
     const height = calcEditorCanvasHeight(notesLength);
     clear(this.ctx, width - 1, height);
-    const { x, y } = calcCaret(mouseX, mouseY, width, currentDivision);
+
+    const { x, y } = this.state;
     drawCaret(this.ctx, x, y);
   }
 
