@@ -133,11 +133,22 @@ const handleUpdateNotesAction = (state, { payload: { notes, index } }) => {
   for (let i = 0; i < notes.length; i++) {
     state.notes.list[index + i] = notes[i];
   }
+  // add bar
+  if (index >= state.notes.list.length - Numbers.NOTES_PER_BAR) {
+    for (let i = 0; i < Numbers.NOTES_PER_BAR; i++) {
+      state.notes.list.push(Ids.NOTE.SPACE);
+      state.states.list.push(Ids.STATE.FRESH);
+    }
+  }
   return {
     ...state,
     notes: {
       ...state.notes,
       updatedCount: state.notes.updatedCount + 1,
+    },
+    states: {
+      ...state.states,
+      updatedCount: state.states.updatedCount + 1,
     },
   };
 };
