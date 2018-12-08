@@ -44,9 +44,7 @@ export default class EditorCurrentTimeMarkCanvas extends Component {
     const { notesLength, width } = this.props;
     const height = calcEditorCanvasHeight(notesLength);
 
-    return (
-      <Canvas innerRef={this.canvasRef} width={width - 1} height={height} />
-    );
+    return <Canvas innerRef={this.canvasRef} width={width} height={height} />;
   }
 }
 
