@@ -33,6 +33,7 @@ const ActionTypes = {
   SET_CURRENT_DIVISION: 'SET_CURRENT_DIVISION',
   TOGGLE_MODE: 'TOGGLE_MODE',
   UPDATE_STATE: 'UPDATE_STATE',
+  SET_CARET: 'SET_CARET',
 };
 
 export default ActionTypes;
