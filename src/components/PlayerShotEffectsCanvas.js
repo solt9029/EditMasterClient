@@ -2,7 +2,7 @@ import { clear, drawNote } from '../utils/canvas';
 import PropTypes from 'prop-types';
 import PlayerCanvas from './PlayerCanvas';
 
-export default class PlayerShotsCanvas extends PlayerCanvas {
+export default class PlayerShotEffectsCanvas extends PlayerCanvas {
   updateCanvas() {
     const { width, height, shots } = this.props;
     clear(this.ctx, width, height);
@@ -12,7 +12,7 @@ export default class PlayerShotsCanvas extends PlayerCanvas {
   }
 }
 
-PlayerShotsCanvas.propTypes = {
+PlayerShotEffectsCanvas.propTypes = {
   width: PropTypes.number.isRequired,
   height: PropTypes.number.isRequired,
   shots: PropTypes.arrayOf(PropTypes.object).isRequired,
