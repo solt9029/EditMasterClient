@@ -10,3 +10,4 @@ export { default as currentNote } from './current-note';
 export { default as ytPlayer } from './yt-player';
 export { default as currentTime } from './current-time';
 export { default as caret } from './caret';
+export { default as clipboard } from './clipboard';

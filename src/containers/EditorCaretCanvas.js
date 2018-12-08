@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
-import { updateNotes, addBar } from '../actions/score';
+import { updateNotes, addBar, paste } from '../actions/score';
 import { setCaret } from '../actions/caret';
+import { copy } from '../actions/clipboard';
 import EditorCaretCanvas from '../components/EditorCaretCanvas';
 
 export default connect(
@@ -16,5 +17,5 @@ export default connect(
     barIndex: state.caret.barIndex,
     divisionIndex: state.caret.divisionIndex,
   }),
-  { updateNotes, addBar, setCaret }
+  { updateNotes, addBar, setCaret, copy, paste }
 )(EditorCaretCanvas);
