@@ -6,14 +6,20 @@ import { calcCaret, calcEditorCanvasHeight } from '../utils/calculations';
 import { isNote, hasState } from '../utils/note';
 
 export default class EditorCaretCanvas extends Component {
-  mouseX = 0;
-  mouseY = 0;
+  state = {
+    mouseX: 0,
+    mouseY: 0,
+  };
   clipboard = null;
   canvasRef = React.createRef();
   ctx = null;
 
   componentDidMount() {
     this.ctx = this.canvasRef.current.getContext('2d');
+  }
+
+  componentDidUpdate() {
+    this.updateCanvas();
   }
 
   keyDown = event => {
@@ -23,8 +29,8 @@ export default class EditorCaretCanvas extends Component {
 
   copyPaste = event => {
     const { barIndex } = calcCaret(
-      this.mouseX,
-      this.mouseY,
+      this.state.mouseX,
+      this.state.mouseY,
       this.props.width,
       this.props.currentDivision
     );
@@ -57,7 +63,15 @@ export default class EditorCaretCanvas extends Component {
   };
 
   updateNotes = event => {
-    let { currentDivision, currentNote } = this.props;
+    let {
+      currentDivision,
+      currentNote,
+      width,
+      updateNotes,
+      addBar,
+      notesLength,
+    } = this.props;
+    const { mouseX, mouseY } = this.state;
 
     // if the event is key event, the note which is going to be put should be key value!
     if (event.nativeEvent.key) {
@@ -69,9 +83,9 @@ export default class EditorCaretCanvas extends Component {
     }
 
     const { barIndex, divisionIndex } = calcCaret(
-      this.mouseX,
-      this.mouseY,
-      this.props.width,
+      mouseX,
+      mouseY,
+      width,
       currentDivision
     );
 
@@ -86,30 +100,30 @@ export default class EditorCaretCanvas extends Component {
     } else {
       notes.push(currentNote);
     }
-    this.props.updateNotes({ index, notes });
+    updateNotes({ index, notes });
 
     // add one bar if the user puts a note on the last bar
-    if (index >= this.props.notesLength - Numbers.NOTES_PER_BAR) {
-      this.props.addBar();
+    if (index >= notesLength - Numbers.NOTES_PER_BAR) {
+      addBar();
     }
   };
 
-  updateCaret = event => {
+  onMouseMove = event => {
     const { offsetX, offsetY } = event.nativeEvent;
-    this.mouseX = offsetX;
-    this.mouseY = offsetY;
-
-    const height = calcEditorCanvasHeight(this.props.notesLength);
-    clear(this.ctx, this.props.width - 1, height);
-
-    const { x, y } = calcCaret(
-      this.mouseX,
-      this.mouseY,
-      this.props.width,
-      this.props.currentDivision
-    );
-    drawCaret(this.ctx, x, y);
+    this.setState({
+      mouseX: offsetX,
+      mouseY: offsetY,
+    });
   };
+
+  updateCanvas() {
+    const { width, notesLength, currentDivision } = this.props;
+    const { mouseX, mouseY } = this.state;
+    const height = calcEditorCanvasHeight(notesLength);
+    clear(this.ctx, width - 1, height);
+    const { x, y } = calcCaret(mouseX, mouseY, width, currentDivision);
+    drawCaret(this.ctx, x, y);
+  }
 
   render() {
     const { notesLength, width } = this.props;
@@ -118,7 +132,7 @@ export default class EditorCaretCanvas extends Component {
     return (
       <Canvas
         tabIndex={0}
-        onMouseMove={this.updateCaret}
+        onMouseMove={this.onMouseMove}
         onKeyDown={this.keyDown}
         onClick={this.updateNotes}
         innerRef={this.canvasRef}
