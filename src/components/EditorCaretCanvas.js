@@ -6,12 +6,6 @@ import { calcCaret, calcEditorCanvasHeight } from '../utils/calculations';
 import { isNote, hasState } from '../utils/note';
 
 export default class EditorCaretCanvas extends Component {
-  state = {
-    x: 0,
-    y: 0,
-    barIndex: 0,
-    divisionIndex: 0,
-  };
   clipboard = null;
   canvasRef = React.createRef();
   ctx = null;
@@ -30,7 +24,7 @@ export default class EditorCaretCanvas extends Component {
   };
 
   copyPaste = event => {
-    const { barIndex } = this.state;
+    const { barIndex } = this.props;
 
     switch (event.nativeEvent.key) {
       case Keys.COPY:
@@ -66,8 +60,9 @@ export default class EditorCaretCanvas extends Component {
       updateNotes,
       addBar,
       notesLength,
+      barIndex,
+      divisionIndex,
     } = this.props;
-    const { barIndex, divisionIndex } = this.state;
 
     // if the event is key event, the note which is going to be put should be key value!
     if (event.nativeEvent.key) {
@@ -101,7 +96,7 @@ export default class EditorCaretCanvas extends Component {
     const { offsetX, offsetY } = event.nativeEvent;
     const { width, currentDivision } = this.props;
     const caret = calcCaret(offsetX, offsetY, width, currentDivision);
-    this.setState({ ...caret });
+    this.props.setCaret(caret);
   };
 
   updateCanvas() {
@@ -109,7 +104,7 @@ export default class EditorCaretCanvas extends Component {
     const height = calcEditorCanvasHeight(notesLength);
     clear(this.ctx, width - 1, height);
 
-    const { x, y } = this.state;
+    const { x, y } = this.props;
     drawCaret(this.ctx, x, y);
   }
 
