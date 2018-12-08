@@ -85,9 +85,8 @@ export const doAutoMode = currentTime => {
 export const doPlayMode = event => {
   return (dispatch, getState) => {
     const state = getState();
-    const { player, score, youtube } = state;
+    const { player, score, currentTime, ytPlayer } = state;
     const { isAutoMode } = player;
-    const { currentTime, ytPlayer } = youtube;
     const { notes, states, offset, bpm } = score;
 
     let isYouTubePlaying = false;

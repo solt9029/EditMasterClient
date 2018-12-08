@@ -11,5 +11,5 @@ export default connect(state => ({
   states: state.score.states.list,
   notesUpdatedCount: state.score.notes.updatedCount,
   statesUpdatedCount: state.score.states.updatedCount,
-  currentTime: state.youtube.currentTime,
+  currentTime: state.currentTime,
 }))(PlayerNotesCanvas);
