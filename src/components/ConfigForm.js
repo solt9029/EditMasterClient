@@ -1,8 +1,8 @@
 import React from 'react';
 import { FormFeedback, Input, Label, FormGroup } from 'reactstrap';
-import propTypes from 'prop-types';
+import PropTypes from 'prop-types';
 
-const ConfigForm = ({ label, type, placeholder, name, object, onChange }) => {
+const ConfigForm = ({ label, type, placeholder, name, form, onChange }) => {
   return (
     <FormGroup>
       <Label>{label}</Label>
@@ -10,11 +10,11 @@ const ConfigForm = ({ label, type, placeholder, name, object, onChange }) => {
         type={type}
         placeholder={placeholder}
         name={name}
-        invalid={object.errors.length > 0}
-        value={object.value}
+        invalid={form.errors.length > 0}
+        value={form.value}
         onChange={onChange}
       />
-      {object.errors.map((error, i) => {
+      {form.errors.map((error, i) => {
         return <FormFeedback key={i}>{error}</FormFeedback>;
       })}
     </FormGroup>
@@ -24,13 +24,17 @@ const ConfigForm = ({ label, type, placeholder, name, object, onChange }) => {
 export default ConfigForm;
 
 ConfigForm.propTypes = {
-  label: propTypes.string,
-  type: propTypes.string,
-  placeholder: propTypes.string,
-  name: propTypes.string,
-  object: propTypes.shape({
-    errors: propTypes.arrayOf(propTypes.string),
-    value: propTypes.any,
-  }),
-  onChange: propTypes.func,
+  label: PropTypes.string.isRequired,
+  type: PropTypes.string,
+  placeholder: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  form: PropTypes.shape({
+    errors: PropTypes.arrayOf(PropTypes.string),
+    value: PropTypes.any,
+  }).isRequired,
+  onChange: PropTypes.func.isRequired,
+};
+
+ConfigForm.defaultProps = {
+  type: 'text',
 };
