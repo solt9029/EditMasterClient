@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Footer from '../../components/Footer';
-import ScoreCardList from '../../containers/ScoreCardList';
+import ScoreCardList from '../../components/ScoreCardList';
 import ScoreCardPaginate from '../../containers/ScoreCardPaginate';
 import { parseSearchQuery } from '../../utils/url';
 import Container from '../../styled/Container';
@@ -8,6 +8,7 @@ import { connect } from 'react-redux';
 import { fetchScores, resetScores } from '../../actions/scores';
 import { setKeyword } from '../../actions/keyword';
 import { withRouter } from 'react-router-dom';
+import { Row } from 'reactstrap';
 
 class Index extends Component {
   componentDidMount() {
@@ -30,7 +31,7 @@ class Index extends Component {
   }
 
   render() {
-    const { isLoading, error } = this.props;
+    const { isLoading, error, scores } = this.props;
 
     return (
       <div>
@@ -43,7 +44,11 @@ class Index extends Component {
             エラーが発生しました
           </Container>
         ) : (
-          <ScoreCardList />
+          <Container top={30} bottom={30}>
+            <Row>
+              <ScoreCardList scores={scores} />
+            </Row>
+          </Container>
         )}
         <ScoreCardPaginate />
         <Footer />
@@ -57,6 +62,7 @@ export default withRouter(
     state => ({
       isLoading: state.scores.isLoading,
       error: state.scores.error,
+      scores: state.scores.list,
     }),
     { fetchScores, resetScores, setKeyword }
   )(Index)
