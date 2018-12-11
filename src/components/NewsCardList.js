@@ -3,6 +3,9 @@ import NewsCard from './NewsCard';
 
 const NewsCardList = () => (
   <Fragment>
+    <NewsCard title="プレイ画面のアニメーションを改善しました" date="2018/12/11">
+      プレイ画面のアニメーションを改善しました。具体的には、バックグラウンドの色変化・ノーツが叩かれた時の花火描画などです。
+    </NewsCard>
     <NewsCard title="太鼓さん次郎エクスポートを追加しました" date="2018/10/03">
       太鼓さん次郎エクスポートを追加しました。現在、連打・大連打・風船のエクスポート処理が不完全なので、今後修正していく予定です。
     </NewsCard>
