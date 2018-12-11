@@ -28,6 +28,15 @@ export default class Navbar extends Component {
     }));
   };
 
+  componentWillReceiveProps(nextProps) {
+    if (this.props.location.pathname === nextProps.location.pathname) {
+      return;
+    }
+    this.setState({
+      isOpen: false,
+    });
+  }
+
   render() {
     const {
       location,

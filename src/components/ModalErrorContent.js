@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { ModalHeader, ModalBody, ModalFooter, Button } from 'reactstrap';
-import propTypes from 'prop-types';
+import PropTypes from 'prop-types';
 
 const ModalErrorContent = ({ errors, close }) => {
   let errorList = [];
@@ -26,6 +26,6 @@ const ModalErrorContent = ({ errors, close }) => {
 export default ModalErrorContent;
 
 ModalErrorContent.propTypes = {
-  errors: propTypes.object,
-  close: propTypes.func,
+  errors: PropTypes.object,
+  close: PropTypes.func.isRequired,
 };

@@ -3,7 +3,7 @@ import { Modal as ReactstrapModal } from 'reactstrap';
 import ModalErrorContent from './ModalErrorContent';
 import ModalLoadingContent from './ModalLoadingContent';
 import ModalSuccessContent from './ModalSuccessContent';
-import propTypes from 'prop-types';
+import PropTypes from 'prop-types';
 
 export default class Modal extends Component {
   state = { isOpen: false };
@@ -27,16 +27,16 @@ export default class Modal extends Component {
 
   render() {
     const { isLoading, id, errors } = this.props;
-    const { isOpen } = this.state;
+    const { close } = this;
 
     return (
-      <ReactstrapModal isOpen={isOpen} toggle={this.close}>
+      <ReactstrapModal isOpen={this.state.isOpen} toggle={close}>
         {isLoading ? (
           <ModalLoadingContent />
         ) : errors === null ? (
-          <ModalSuccessContent close={this.close} id={id} />
+          <ModalSuccessContent close={close} id={id} />
         ) : (
-          <ModalErrorContent close={this.close} errors={errors} />
+          <ModalErrorContent close={close} errors={errors} />
         )}
       </ReactstrapModal>
     );
@@ -44,7 +44,7 @@ export default class Modal extends Component {
 }
 
 Modal.propTypes = {
-  id: propTypes.number,
-  isLoading: propTypes.bool.isRequired,
-  errors: propTypes.object,
+  id: PropTypes.number,
+  isLoading: PropTypes.bool.isRequired,
+  errors: PropTypes.object,
 };
