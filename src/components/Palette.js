@@ -31,13 +31,13 @@ const Palette = ({ toggleMode, isAutoMode, width, addBar, removeBar }) => {
       <label>譜面の種類</label>
       <Container bottom={30}>
         <Row>
-          <NoteButtonList paletteWidth={width} />
+          <NoteButtonList width={width} />
         </Row>
       </Container>
       <label>1小節あたりの分割数</label>
       <Container bottom={30}>
         <Row>
-          <DivisionButtonList paletteWidth={width} />
+          <DivisionButtonList width={width} />
         </Row>
       </Container>
       <BarButton block color="success" onClick={onAddBarButtonClick}>

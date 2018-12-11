@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
 import NoteButton from '../components/NoteButton';
 import { Ids } from '../constants';
+import { calcPaletteButtonColSize } from '../utils/calculations';
 
 const notes = [
   {
@@ -53,11 +54,15 @@ const notes = [
   },
 ];
 
-const NoteButtonList = ({ currentNote, setCurrentNote, paletteWidth }) => {
+const NoteButtonList = ({ currentNote, setCurrentNote, width }) => {
+  const size = calcPaletteButtonColSize(width);
+
   return (
     <Fragment>
       {notes.map((note, i) => {
         const { src, color, label, value } = note;
+        const onClick = () => setCurrentNote(value);
+
         return (
           <NoteButton
             src={src}
@@ -65,8 +70,8 @@ const NoteButtonList = ({ currentNote, setCurrentNote, paletteWidth }) => {
             label={label}
             value={value}
             active={value === currentNote}
-            setValue={setCurrentNote}
-            paletteWidth={paletteWidth}
+            onClick={onClick}
+            size={size}
             key={i}
           />
         );
