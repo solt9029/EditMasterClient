@@ -1,6 +1,6 @@
 const express = require('express');
-const path = require('path');
 const request = require('request');
+const path = require('path');
 const app = express();
 
 // view settings
@@ -33,7 +33,7 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'ogp', 'index.html'));
     return;
   }
-  res.sendFile(path.join(__dirname, 'index.html'));
+  res.sendFile(path.resolve(__dirname, '../build/index.html'));
 });
 
 app.get('/help', (req, res) => {
@@ -41,7 +41,7 @@ app.get('/help', (req, res) => {
     res.sendFile(path.join(__dirname, 'ogp', 'help.html'));
     return;
   }
-  res.sendFile(path.join(__dirname, 'index.html'));
+  res.sendFile(path.resolve(__dirname, '../build/index.html'));
 });
 
 app.get('/scores', (req, res) => {
@@ -49,7 +49,7 @@ app.get('/scores', (req, res) => {
     res.sendFile(path.join(__dirname, 'ogp', 'scores', 'index.html'));
     return;
   }
-  res.sendFile(path.join(__dirname, 'index.html'));
+  res.sendFile(path.resolve(__dirname, '../build/index.html'));
 });
 
 app.get('/scores/new', (req, res) => {
@@ -57,7 +57,7 @@ app.get('/scores/new', (req, res) => {
     res.sendFile(path.join(__dirname, 'ogp', 'scores', 'new.html'));
     return;
   }
-  res.sendFile(path.join(__dirname, 'index.html'));
+  res.sendFile(path.resolve(__dirname, '../build/index.html'));
 });
 
 app.get('/scores/:id', (req, res) => {
@@ -76,14 +76,16 @@ app.get('/scores/:id', (req, res) => {
     );
     return;
   }
-  res.sendFile(path.join(__dirname, 'index.html'));
+  res.sendFile(path.resolve(__dirname, '../build/index.html'));
 });
 
 // static
-app.use(express.static(__dirname));
+app.use(express.static(path.resolve(__dirname, '../build')));
 
 // all
-app.get('*', (req, res) => res.sendFile(path.join(__dirname, 'index.html')));
+app.get('*', (req, res) =>
+  res.sendFile(path.resolve(__dirname, '../build/index.html'))
+);
 
 // listen
 app.listen(80);

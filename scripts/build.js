@@ -102,10 +102,6 @@ measureFileSizesBeforeBuild(paths.appBuild)
 function build(previousFileSizes) {
   console.log('Creating an optimized production build...');
 
-  // Copy files to build directory.
-  const fsExtra = require('fs-extra');
-  fsExtra.copySync('./docker', './build');
-
   let compiler = webpack(config);
   return new Promise((resolve, reject) => {
     compiler.run((err, stats) => {
