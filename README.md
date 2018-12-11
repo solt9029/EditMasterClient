@@ -56,3 +56,11 @@ docker push solt9029/editmasterclient:latest
 docker pull solt9029/editmasterclient:latest
 docker run -d -p 8053:80 solt9029/editmasterclient:latest
 ```
+
+
+## Release
+
+```
+git tag v*.*
+git push origin v*.*
+```
