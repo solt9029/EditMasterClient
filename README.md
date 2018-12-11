@@ -46,7 +46,7 @@ yarn deploy
 
 ```
 docker login
-docker build —tag=solt9029/editmasterclient:latest .
+docker build --tag=solt9029/editmasterclient:latest .
 docker push solt9029/editmasterclient:latest
 ```
 
