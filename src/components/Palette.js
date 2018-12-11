@@ -14,7 +14,7 @@ const ModeButton = styled(Button)`
   min-width: 180px;
 `;
 
-const Palette = ({ toggleMode, isAutoMode, width, addBar, removeBar }) => {
+const Palette = ({ toggleMode, isAutoMode, addBar, removeBar }) => {
   const onModeButtonClick = () => toggleMode();
   const onAddBarButtonClick = () => addBar();
   const onRemoveBarButtonClick = () => removeBar();
@@ -31,13 +31,13 @@ const Palette = ({ toggleMode, isAutoMode, width, addBar, removeBar }) => {
       <label>譜面の種類</label>
       <Container bottom={30}>
         <Row>
-          <NoteButtonList width={width} />
+          <NoteButtonList />
         </Row>
       </Container>
       <label>1小節あたりの分割数</label>
       <Container bottom={30}>
         <Row>
-          <DivisionButtonList width={width} />
+          <DivisionButtonList />
         </Row>
       </Container>
       <BarButton block color="success" onClick={onAddBarButtonClick}>
