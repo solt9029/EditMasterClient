@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import propTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import PaletteButton from './PaletteButton';
 
 const Img = styled.img`
@@ -8,22 +8,14 @@ const Img = styled.img`
   height: auto;
 `;
 
-const NoteButton = ({
-  value,
-  src,
-  color,
-  active,
-  paletteWidth,
-  label,
-  setValue,
-}) => {
+const NoteButton = ({ value, src, color, active, size, label, onClick }) => {
   return (
     <PaletteButton
       color={color}
       active={active}
       value={value}
-      setValue={setValue}
-      paletteWidth={paletteWidth}
+      onClick={onClick}
+      size={size}
       label={label}
     >
       <Img src={src} alt={label} />
@@ -34,11 +26,11 @@ const NoteButton = ({
 export default NoteButton;
 
 NoteButton.propTypes = {
-  src: propTypes.string.isRequired,
-  label: propTypes.string.isRequired,
-  setValue: propTypes.func.isRequired,
-  color: propTypes.string.isRequired,
-  active: propTypes.bool,
-  value: propTypes.number.isRequired,
-  paletteWidth: propTypes.number.isRequired,
+  src: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
+  onClick: PropTypes.func.isRequired,
+  color: PropTypes.string.isRequired,
+  active: PropTypes.bool,
+  value: PropTypes.number.isRequired,
+  size: PropTypes.number.isRequired,
 };

@@ -162,3 +162,17 @@ export const calcSongle = beats => {
   const bpm = bpmSum / (beats.length - 60);
   return { bpm, offset };
 };
+
+/**
+ *
+ * @param {number} width the width of palette pane.
+ */
+export const calcPaletteButtonColSize = width => {
+  let size = 3;
+  if (width < 200) {
+    size = 12;
+  } else if (width < 360) {
+    size = 6;
+  }
+  return size;
+};
