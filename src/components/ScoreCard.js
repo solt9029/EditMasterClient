@@ -2,7 +2,7 @@ import React from 'react';
 import { Col, CardImg, CardText, CardBody } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import propTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import Card from '../styled/Card';
 
 const StyledCard = styled(Card)`
@@ -74,10 +74,10 @@ const ScoreCard = ({ score }) => {
 export default ScoreCard;
 
 ScoreCard.propTypes = {
-  score: propTypes.shape({
-    id: propTypes.number,
-    video_id: propTypes.string,
-    username: propTypes.string,
-    comment: propTypes.string,
+  score: PropTypes.shape({
+    id: PropTypes.number,
+    video_id: PropTypes.string,
+    username: PropTypes.string,
+    comment: PropTypes.string,
   }),
 };
