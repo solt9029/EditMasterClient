@@ -1,23 +1,17 @@
-import React, { Component } from 'react';
+import React, { Fragment } from 'react';
 import ScoreCard from './ScoreCard';
-import { Row } from 'reactstrap';
-import propTypes from 'prop-types';
-import Container from '../styled/Container';
+import PropTypes from 'prop-types';
 
-export default class ScoreCardList extends Component {
-  render() {
-    return (
-      <Container top={30} bottom={30}>
-        <Row>
-          {this.props.scores.map((score, i) => {
-            return <ScoreCard score={score} key={i} />;
-          })}
-        </Row>
-      </Container>
-    );
-  }
-}
+const ScoreCardList = ({ scores }) => (
+  <Fragment>
+    {scores.map((score, i) => {
+      return <ScoreCard score={score} key={i} />;
+    })}
+  </Fragment>
+);
+
+export default ScoreCardList;
 
 ScoreCardList.propTypes = {
-  scores: propTypes.array,
+  scores: PropTypes.array,
 };
