@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import { ModalHeader, ModalBody, ModalFooter, Button } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import { openWindow } from '../utils/twitter';
-import propTypes from 'prop-types';
+import PropTypes from 'prop-types';
 
 const ModalSuccessContent = ({ id, close }) => {
   const openTweetWindow = () => {
@@ -33,6 +33,6 @@ const ModalSuccessContent = ({ id, close }) => {
 export default ModalSuccessContent;
 
 ModalSuccessContent.propTypes = {
-  id: propTypes.number,
-  close: propTypes.func,
+  id: PropTypes.number.isRequired,
+  close: PropTypes.func.isRequired,
 };
