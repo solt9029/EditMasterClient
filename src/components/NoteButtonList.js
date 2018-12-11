@@ -1,8 +1,6 @@
-import React from 'react';
-import { Row } from 'reactstrap';
+import React, { Fragment } from 'react';
 import NoteButton from '../components/NoteButton';
 import { Ids } from '../constants';
-import Container from '../styled/Container';
 
 const notes = [
   {
@@ -57,25 +55,23 @@ const notes = [
 
 const NoteButtonList = ({ currentNote, setCurrentNote, paletteWidth }) => {
   return (
-    <Container bottom={30}>
-      <Row>
-        {notes.map((note, i) => {
-          const { src, color, label, value } = note;
-          return (
-            <NoteButton
-              src={src}
-              color={color}
-              label={label}
-              value={value}
-              active={value === currentNote}
-              setValue={setCurrentNote}
-              paletteWidth={paletteWidth}
-              key={i}
-            />
-          );
-        })}
-      </Row>
-    </Container>
+    <Fragment>
+      {notes.map((note, i) => {
+        const { src, color, label, value } = note;
+        return (
+          <NoteButton
+            src={src}
+            color={color}
+            label={label}
+            value={value}
+            active={value === currentNote}
+            setValue={setCurrentNote}
+            paletteWidth={paletteWidth}
+            key={i}
+          />
+        );
+      })}
+    </Fragment>
   );
 };
 
