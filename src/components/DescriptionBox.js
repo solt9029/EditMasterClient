@@ -1,6 +1,7 @@
 import React from 'react';
 import { Col } from 'reactstrap';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 const Title = styled.h2`
   font-size: 1.5rem;
@@ -25,3 +26,9 @@ const DescriptionBox = ({ title, children, src, alt }) => {
 };
 
 export default DescriptionBox;
+
+DescriptionBox.propTypes = {
+  title: PropTypes.string.isRequired,
+  src: PropTypes.string.isRequired,
+  alt: PropTypes.string.isRequired,
+};
