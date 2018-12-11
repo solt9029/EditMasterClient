@@ -13,7 +13,9 @@
 git clone git@github.com:solt9029/EditMasterClient.git
 cd EditMasterClient
 yarn install
-cp config.js.example config.js
+cd ./src/config
+cp api.js.example api.js
+cp google-analytics.js.example google-analytics.js
 ```
 
 
@@ -38,14 +40,19 @@ yarn deploy
 ```
 
 
-## Deploy
+## Docker
 
-- gh-pages branch of this repo has production js files and Dockerfile and docker-compose.yml
+- commit
 
 ```
-git clone git@github.com:solt9029/EditMasterClient.git
-cd EditMasterClient
-git branch gh-pages origin/gh-pages
-git checkout gh-pages
-docker-compose up -d
+docker login
+docker build —tag=solt9029/editmasterclient:latest .
+docker push solt9029/editmasterclient:latest
+```
+
+- pull
+
+```
+docker pull solt9029/editmasterclient:latest
+docker run -d -p 8053:80 solt9029/editmasterclient:latest
 ```
