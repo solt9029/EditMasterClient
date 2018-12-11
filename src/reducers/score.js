@@ -7,9 +7,9 @@ import { cloneDeep } from 'lodash'; // when you use initialState, you have to us
 const initialState = {
   username: { value: '', errors: [] },
   comment: { value: '', errors: [] },
-  bpm: { value: '', errors: [] },
-  offset: { value: '', errors: [] },
-  speed: { value: '', errors: [] },
+  bpm: { value: 0, errors: [] },
+  offset: { value: 0, errors: [] },
+  speed: { value: 0, errors: [] },
   videoId: { value: '', errors: [] },
   notes: { list: [], updatedCount: 0 },
   states: { list: [], updatedCount: 0 },

@@ -4,7 +4,7 @@ import {
   calcNoteIndexRangeInCanvas,
 } from '../utils/calculations';
 import { clear, drawNote, drawBarStartLine } from '../utils/canvas';
-import propTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import PlayerCanvas from './PlayerCanvas';
 
 export default class PlayerNotesCanvas extends PlayerCanvas {
@@ -75,12 +75,12 @@ export default class PlayerNotesCanvas extends PlayerCanvas {
 }
 
 PlayerNotesCanvas.propTypes = {
-  width: propTypes.number.isRequired,
-  height: propTypes.number.isRequired,
-  bpm: propTypes.number.isRequired,
-  speed: propTypes.number.isRequired,
-  offset: propTypes.number.isRequired,
-  currentTime: propTypes.number.isRequired,
-  notes: propTypes.arrayOf(propTypes.number).isRequired,
-  states: propTypes.arrayOf(propTypes.number).isRequired,
+  width: PropTypes.number.isRequired,
+  height: PropTypes.number.isRequired,
+  bpm: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
+  speed: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
+  offset: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
+  currentTime: PropTypes.number.isRequired,
+  notes: PropTypes.arrayOf(PropTypes.number).isRequired,
+  states: PropTypes.arrayOf(PropTypes.number).isRequired,
 };
