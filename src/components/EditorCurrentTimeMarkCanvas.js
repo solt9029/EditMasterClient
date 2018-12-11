@@ -20,7 +20,7 @@ export default class EditorCurrentTimeMarkCanvas extends EditorCanvas {
 EditorCurrentTimeMarkCanvas.propTypes = {
   width: PropTypes.number.isRequired,
   notesLength: PropTypes.number.isRequired,
-  bpm: PropTypes.number.isRequired,
-  offset: PropTypes.number.isRequired,
+  bpm: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
+  offset: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
   currentTime: PropTypes.number.isRequired,
 };
