@@ -130,11 +130,11 @@ export const drawFireworkEffect = (ctx, y, state) => {
 export const drawBackgroundEffect = (ctx, isDon, playerWidth, playerHeight) => {
   const color = ctx.createLinearGradient(0, 0, playerWidth, playerHeight);
   if (isDon) {
-    color.addColorStop(0.0, 'rgb(255, 0, 0, 0.2)');
-    color.addColorStop(1.0, 'rgb(255, 0, 0, 0)');
+    color.addColorStop(0.0, 'rgba(255, 0, 0, 0.2)');
+    color.addColorStop(1.0, 'rgba(255, 0, 0, 0)');
   } else {
-    color.addColorStop(0.0, 'rgb(0, 0, 255, 0.2)');
-    color.addColorStop(1.0, 'rgb(0, 0, 255, 0)');
+    color.addColorStop(0.0, 'rgba(0, 0, 255, 0.2)');
+    color.addColorStop(1.0, 'rgba(0, 0, 255, 0)');
   }
   ctx.fillStyle = color;
   ctx.fillRect(0, 0, playerWidth, playerHeight);
