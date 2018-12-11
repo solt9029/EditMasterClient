@@ -1,96 +1,96 @@
-import React, { Component, Fragment } from 'react';
+import React, { Fragment } from 'react';
 import { normalizeVideoId } from '../utils/url';
 import ConfigForm from './ConfigForm';
-import propTypes from 'prop-types';
+import PropTypes from 'prop-types';
 
-export default class Config extends Component {
-  render() {
-    const { props } = this;
+const Config = ({
+  setUsername,
+  setVideoId,
+  fetchSongle,
+  setBpm,
+  setOffset,
+  setSpeed,
+  setComment,
+  username,
+  videoId,
+  bpm,
+  offset,
+  speed,
+  comment,
+}) => {
+  const onUsernameChange = event => setUsername(event.target.value);
+  const onVideoIdChange = event => {
+    const videoId = normalizeVideoId(event.target.value);
+    setVideoId(videoId);
+    fetchSongle(videoId);
+  };
+  const onBpmChange = event => setBpm(event.target.value);
+  const onOffsetChange = event => setOffset(event.target.value);
+  const onSpeedChange = event => setSpeed(event.target.value);
+  const onCommentChange = event => setComment(event.target.value);
 
-    return (
-      <Fragment>
-        <ConfigForm
-          label="ユーザ名"
-          type="text"
-          placeholder="ユーザ名（例：通りすがりの創作の達人）"
-          name="username"
-          object={props.username}
-          onChange={event => {
-            props.setUsername(event.target.value);
-          }}
-        />
-        <ConfigForm
-          label="YouTube動画ID"
-          type="text"
-          placeholder="YouTube動画ID（例：PqJNc9KVIZE）"
-          name="videoId"
-          object={props.videoId}
-          onChange={event => {
-            const videoId = normalizeVideoId(event.target.value);
-            props.setVideoId(videoId);
-            props.fetchSongle(videoId);
-          }}
-        />
-        <ConfigForm
-          label="BPM"
-          type="number"
-          placeholder="BPM（例：200）"
-          name="bpm"
-          object={props.bpm}
-          onChange={event => {
-            props.setBpm(event.target.value);
-          }}
-        />
-        <ConfigForm
-          label="OFFSET：曲の始まる時間（秒）"
-          type="number"
-          placeholder="OFFSET（例：1.5）"
-          name="offset"
-          object={props.offset}
-          onChange={event => {
-            props.setOffset(event.target.value);
-          }}
-        />
-        <ConfigForm
-          label="倍速"
-          type="number"
-          placeholder="倍速（例：2）"
-          name="speed"
-          object={props.speed}
-          onChange={event => {
-            props.setSpeed(event.target.value);
-          }}
-        />
-        <ConfigForm
-          label="コメント"
-          type="text"
-          placeholder="コメント（例：創作の達人で創作譜面をしました！）"
-          name="comment"
-          object={props.comment}
-          onChange={event => {
-            props.setComment(event.target.value);
-          }}
-        />
-      </Fragment>
-    );
-  }
-}
+  return (
+    <Fragment>
+      <ConfigForm
+        label="ユーザ名"
+        type="text"
+        placeholder="ユーザ名（例：通りすがりの創作の達人）"
+        name="username"
+        form={username}
+        onChange={onUsernameChange}
+      />
+      <ConfigForm
+        label="YouTube動画ID"
+        type="text"
+        placeholder="YouTube動画ID（例：PqJNc9KVIZE）"
+        name="videoId"
+        form={videoId}
+        onChange={onVideoIdChange}
+      />
+      <ConfigForm
+        label="BPM"
+        type="number"
+        placeholder="BPM（例：200）"
+        name="bpm"
+        form={bpm}
+        onChange={onBpmChange}
+      />
+      <ConfigForm
+        label="OFFSET：曲の始まる時間（秒）"
+        type="number"
+        placeholder="OFFSET（例：1.5）"
+        name="offset"
+        form={offset}
+        onChange={onOffsetChange}
+      />
+      <ConfigForm
+        label="倍速"
+        type="number"
+        placeholder="倍速（例：2）"
+        name="speed"
+        form={speed}
+        onChange={onSpeedChange}
+      />
+      <ConfigForm
+        label="コメント"
+        type="text"
+        placeholder="コメント（例：創作の達人で創作譜面をしました！）"
+        name="comment"
+        form={comment}
+        onChange={onCommentChange}
+      />
+    </Fragment>
+  );
+};
+
+export default Config;
 
 Config.propTypes = {
-  config: propTypes.shape({
-    username: propTypes.object,
-    videoId: propTypes.object,
-    bpm: propTypes.object,
-    offset: propTypes.object,
-    speed: propTypes.object,
-    comment: propTypes.object,
-  }),
-  setUsername: propTypes.func,
-  setVideoId: propTypes.func,
-  setBpm: propTypes.func,
-  setOffset: propTypes.func,
-  setSpeed: propTypes.func,
-  setComment: propTypes.func,
-  reset: propTypes.func,
-  fetchSongle: propTypes.func,
+  setUsername: PropTypes.func.isRequired,
+  setVideoId: PropTypes.func.isRequired,
+  setBpm: PropTypes.func.isRequired,
+  setOffset: PropTypes.func.isRequired,
+  setSpeed: PropTypes.func.isRequired,
+  setComment: PropTypes.func.isRequired,
+  fetchSongle: PropTypes.func.isRequired,
 };
