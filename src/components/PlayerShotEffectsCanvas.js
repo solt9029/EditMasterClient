@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import PlayerCanvas from './PlayerCanvas';
 
 export default class PlayerShotEffectsCanvas extends PlayerCanvas {
-  updateCanvas() {
-    const { width, height, shots } = this.props;
+  updateCanvas(props) {
+    const { width, height, shots } = props;
     clear(this.ctx, width, height);
     for (let i = shots.length - 1; i >= 0; i--) {
       drawNote(this.ctx, shots[i].x, shots[i].y, 'PLAYER', shots[i].note);

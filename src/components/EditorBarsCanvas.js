@@ -7,8 +7,8 @@ import { drawBars, clear } from '../utils/canvas';
 import EditorCanvas from './EditorCanvas';
 
 export default class EditorBarsCanvas extends EditorCanvas {
-  updateCanvas() {
-    const { width, notesLength } = this.props;
+  updateCanvas(props) {
+    const { width, notesLength } = props;
 
     const height = calcEditorCanvasHeight(notesLength);
     clear(this.ctx, width - 1, height);

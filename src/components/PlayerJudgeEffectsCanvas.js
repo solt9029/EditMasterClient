@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import PlayerCanvas from './PlayerCanvas';
 
 export default class PlayerJudgeEffectsCanvas extends PlayerCanvas {
-  updateCanvas() {
-    const { width, height, judgeEffects } = this.props;
+  updateCanvas(props) {
+    const { width, height, judgeEffects } = props;
     clear(this.ctx, width, height);
     for (let i = judgeEffects.length - 1; i >= 0; i--) {
       drawJudgeEffect(this.ctx, judgeEffects[i].y, judgeEffects[i].state);
