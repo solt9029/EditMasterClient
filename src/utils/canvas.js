@@ -202,12 +202,12 @@ export const drawBar = (ctx, x, y, width) => {
   return;
 };
 
-export const drawBars = (ctx, width, num, startY = 0) => {
-  for (let i = 0; i < num; i++) {
+export const drawBars = (ctx, x, y, width, firstIndex, lastIndex) => {
+  for (let i = firstIndex; i <= lastIndex; i++) {
     drawBar(
       ctx,
-      Positions.EDITOR.BAR.X,
-      i * Sizes.EDITOR.BAR.OUTSIDE.HEIGHT + startY,
+      Positions.EDITOR.BAR.X + x,
+      i * Sizes.EDITOR.BAR.OUTSIDE.HEIGHT + y,
       width
     );
   }

@@ -44,6 +44,34 @@ export const calcInitialNoteX = (currentTime, bpm, offset, speed) => {
   return initialNoteX;
 };
 
+export const calcNoteIndexRangeInEditorCanvas = (
+  notesLength,
+  scroll,
+  height
+) => {
+  const firstBarIndex = Math.floor(scroll / Sizes.EDITOR.BAR.OUTSIDE.HEIGHT);
+  const lastBarIndex = Math.ceil(
+    (scroll + height) / Sizes.EDITOR.BAR.OUTSIDE.HEIGHT
+  );
+  const firstNoteIndex = firstBarIndex * Numbers.NOTES_PER_BAR;
+  let lastNoteIndex = lastBarIndex * Numbers.NOTES_PER_BAR - 1;
+  if (lastNoteIndex >= notesLength) {
+    lastNoteIndex = notesLength - 1;
+  }
+  return [firstNoteIndex, lastNoteIndex];
+};
+
+export const calcBarIndexRangeInCanvas = (barNum, scroll, height) => {
+  const firstBarIndex = Math.floor(scroll / Sizes.EDITOR.BAR.OUTSIDE.HEIGHT);
+  let lastBarIndex = Math.ceil(
+    (scroll + height) / Sizes.EDITOR.BAR.OUTSIDE.HEIGHT
+  );
+  if (lastBarIndex >= barNum) {
+    lastBarIndex = barNum - 1;
+  }
+  return [firstBarIndex, lastBarIndex];
+};
+
 export const calcNoteIndexRangeInCanvas = (
   notesLength,
   speed,

@@ -1,5 +1,8 @@
 import { Percentages, Sizes, Positions, Numbers, Ids } from '../constants';
-import { calcBarWidth } from '../utils/calculations';
+import {
+  calcBarWidth,
+  calcNoteIndexRangeInEditorCanvas,
+} from '../utils/calculations';
 import { clear, drawNote } from '../utils/canvas';
 import EditorCanvas from './EditorCanvas';
 
@@ -16,7 +19,13 @@ export default class EditorNotesCanvas extends EditorCanvas {
     const barStartLineX =
       Positions.EDITOR.BAR.X + barWidth * Percentages.EDITOR.BAR_START_LINE;
 
-    for (let i = notes.length - 1; i >= 0; i--) {
+    const [firstIndex, lastIndex] = calcNoteIndexRangeInEditorCanvas(
+      notes.length,
+      scroll,
+      height
+    );
+
+    for (let i = lastIndex; i >= firstIndex; i--) {
       const note = notes[i];
       if (note === Ids.NOTE.SPACE) {
         continue;
