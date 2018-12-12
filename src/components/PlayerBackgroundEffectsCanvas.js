@@ -3,8 +3,8 @@ import PlayerCanvas from './PlayerCanvas';
 import PropTypes from 'prop-types';
 
 export default class PlayerBackgroundEffectsCanvas extends PlayerCanvas {
-  updateCanvas() {
-    const { width, height, backgroundEffects } = this.props;
+  updateCanvas(props) {
+    const { width, height, backgroundEffects } = props;
     clear(this.ctx, width, height);
     for (let i = backgroundEffects.length - 1; i >= 0; i--) {
       drawBackgroundEffect(

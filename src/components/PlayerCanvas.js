@@ -6,11 +6,11 @@ export default class PlayerCanvas extends Component {
 
   componentDidMount() {
     this.ctx = this.ref.current.getContext('2d');
-    this.updateCanvas();
+    this.updateCanvas(this.props);
   }
 
   componentDidUpdate() {
-    this.updateCanvas();
+    this.updateCanvas(this.props);
   }
 
   shouldComponentUpdate(nextProps) {
@@ -18,13 +18,13 @@ export default class PlayerCanvas extends Component {
       this.props.width === nextProps.width &&
       this.props.height === nextProps.height
     ) {
-      this.updateCanvas();
+      this.updateCanvas(nextProps);
       return false;
     }
     return true;
   }
 
-  updateCanvas() {}
+  updateCanvas(props) {}
 
   render() {
     const { width, height } = this.props;

@@ -7,11 +7,11 @@ export default class EditorCanvas extends Component {
 
   componentDidMount() {
     this.ctx = this.ref.current.getContext('2d');
-    this.updateCanvas();
+    this.updateCanvas(this.props);
   }
 
   componentDidUpdate() {
-    this.updateCanvas();
+    this.updateCanvas(this.props);
   }
 
   shouldComponentUpdate(nextProps) {
@@ -19,13 +19,13 @@ export default class EditorCanvas extends Component {
       this.props.width === nextProps.width &&
       this.props.notesLength === nextProps.notesLength
     ) {
-      this.updateCanvas();
+      this.updateCanvas(nextProps);
       return false;
     }
     return true;
   }
 
-  updateCanvas() {}
+  updateCanvas(props) {}
 
   render() {
     const { width, notesLength } = this.props;

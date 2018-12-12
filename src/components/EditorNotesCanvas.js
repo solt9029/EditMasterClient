@@ -4,8 +4,8 @@ import { clear, drawNote } from '../utils/canvas';
 import EditorCanvas from './EditorCanvas';
 
 export default class EditorNotesCanvas extends EditorCanvas {
-  updateCanvas() {
-    const { notes, width } = this.props;
+  updateCanvas(props) {
+    const { notes, width } = props;
 
     const height = calcEditorCanvasHeight(notes.length);
     clear(this.ctx, width - 1, height);

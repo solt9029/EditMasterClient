@@ -7,8 +7,8 @@ import PropTypes from 'prop-types';
 import EditorCanvas from './EditorCanvas';
 
 export default class EditorCurrentTimeMarkCanvas extends EditorCanvas {
-  updateCanvas() {
-    const { notesLength, width, bpm, offset, currentTime } = this.props;
+  updateCanvas(props) {
+    const { notesLength, width, bpm, offset, currentTime } = props;
     const height = calcEditorCanvasHeight(notesLength);
     clear(this.ctx, width - 1, height);
 

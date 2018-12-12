@@ -8,7 +8,7 @@ import PropTypes from 'prop-types';
 import PlayerCanvas from './PlayerCanvas';
 
 export default class PlayerNotesCanvas extends PlayerCanvas {
-  updateCanvas() {
+  updateCanvas(props) {
     const {
       speed,
       bpm,
@@ -18,7 +18,7 @@ export default class PlayerNotesCanvas extends PlayerCanvas {
       currentTime,
       notes,
       states,
-    } = this.props;
+    } = props;
 
     const spaceWidth = speed * Percentages.PLAYER.SPEED_TO_SPACE_WIDTH;
 

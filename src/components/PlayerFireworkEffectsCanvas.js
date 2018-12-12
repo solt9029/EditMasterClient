@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import PlayerCanvas from './PlayerCanvas';
 
 export default class PlayerFireworkEffectsCanvas extends PlayerCanvas {
-  updateCanvas() {
-    const { width, height, fireworkEffects } = this.props;
+  updateCanvas(props) {
+    const { width, height, fireworkEffects } = props;
     clear(this.ctx, width, height);
     for (let i = fireworkEffects.length - 1; i >= 0; i--) {
       drawFireworkEffect(
