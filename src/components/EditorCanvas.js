@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Canvas from '../styled/Canvas';
-import { calcEditorCanvasHeight } from '../utils/calculations';
 
 export default class EditorCanvas extends Component {
   ref = React.createRef();
@@ -17,7 +16,8 @@ export default class EditorCanvas extends Component {
   shouldComponentUpdate(nextProps) {
     if (
       this.props.width === nextProps.width &&
-      this.props.notesLength === nextProps.notesLength
+      this.props.height === nextProps.height &&
+      this.props.scroll === nextProps.scroll
     ) {
       this.updateCanvas(nextProps);
       return false;
@@ -28,8 +28,14 @@ export default class EditorCanvas extends Component {
   updateCanvas(props) {}
 
   render() {
-    const { width, notesLength } = this.props;
-    const height = calcEditorCanvasHeight(notesLength);
-    return <Canvas innerRef={this.ref} width={width} height={height} />;
+    const { width, height, scroll } = this.props;
+    return (
+      <Canvas
+        innerRef={this.ref}
+        width={width}
+        height={height}
+        translateY={scroll}
+      />
+    );
   }
 }
