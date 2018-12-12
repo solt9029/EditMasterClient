@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 import { Keys } from '../constants';
 import styled from 'styled-components';
 import { calcEditorCanvasHeight } from '../utils/calculations';
-import { debounce } from 'lodash';
+import { throttle } from 'lodash';
 
 const Div = styled.div`
   width: ${({ width }) => width}px;
@@ -30,7 +30,7 @@ const Stage = styled.div`
 export default class Editor extends Component {
   ref = React.createRef();
 
-  onScroll = debounce(() => {
+  onScroll = throttle(() => {
     const { scrollTop } = this.ref.current;
     this.props.setScroll(scrollTop);
   }, 50);
