@@ -5,4 +5,5 @@ export default styled.canvas`
   top: 0;
   left: 0;
   outline: none;
+  transform: translateY(${({ translateY }) => translateY}px);
 `;

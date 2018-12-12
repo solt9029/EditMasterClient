@@ -1,13 +1,11 @@
 import { Percentages, Sizes, Positions, Numbers, Ids } from '../constants';
-import { calcEditorCanvasHeight, calcBarWidth } from '../utils/calculations';
+import { calcBarWidth } from '../utils/calculations';
 import { clear, drawNote } from '../utils/canvas';
 import EditorCanvas from './EditorCanvas';
 
 export default class EditorNotesCanvas extends EditorCanvas {
   updateCanvas(props) {
-    const { notes, width } = props;
-
-    const height = calcEditorCanvasHeight(notes.length);
+    const { notes, width, height, scroll } = props;
     clear(this.ctx, width - 1, height);
 
     const barWidth = calcBarWidth(width);
@@ -33,7 +31,7 @@ export default class EditorNotesCanvas extends EditorCanvas {
       drawNote(
         this.ctx,
         x,
-        y,
+        y - scroll,
         'EDITOR',
         note,
         spaceWidth,

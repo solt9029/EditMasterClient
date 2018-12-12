@@ -35,6 +35,7 @@ const ActionTypes = {
   UPDATE_STATE: 'UPDATE_STATE',
   SET_CARET: 'SET_CARET',
   COPY: 'COPY',
+  SET_SCROLL: 'SET_SCROLL',
 };
 
 export default ActionTypes;

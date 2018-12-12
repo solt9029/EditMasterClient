@@ -11,3 +11,4 @@ export { default as ytPlayer } from './yt-player';
 export { default as currentTime } from './current-time';
 export { default as caret } from './caret';
 export { default as clipboard } from './clipboard';
+export { default as scroll } from './scroll';
