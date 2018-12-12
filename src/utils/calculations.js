@@ -13,6 +13,13 @@ export const calcSecondsPerNote = bpm => {
   return secondsPerNote;
 };
 
+/**
+ *
+ * @param {number} secondRange
+ * @param {number} currentTime
+ * @param {number} bpm
+ * @param {number} offset
+ */
 export const calcNoteIndexRangeInSecondRange = (
   secondRange,
   currentTime,
@@ -44,6 +51,12 @@ export const calcInitialNoteX = (currentTime, bpm, offset, speed) => {
   return initialNoteX;
 };
 
+/**
+ *
+ * @param {number} notesLength
+ * @param {number} scroll
+ * @param {number} height
+ */
 export const calcNoteIndexRangeInEditorCanvas = (
   notesLength,
   scroll,
@@ -61,6 +74,12 @@ export const calcNoteIndexRangeInEditorCanvas = (
   return [firstNoteIndex, lastNoteIndex];
 };
 
+/**
+ * TODO: change func name to calcBarIndexRangeInEditorCanvas.
+ * @param {number} barNum
+ * @param {number} scroll
+ * @param {number} height
+ */
 export const calcBarIndexRangeInCanvas = (barNum, scroll, height) => {
   const firstBarIndex = Math.floor(scroll / Sizes.EDITOR.BAR.OUTSIDE.HEIGHT);
   let lastBarIndex = Math.ceil(
@@ -72,6 +91,13 @@ export const calcBarIndexRangeInCanvas = (barNum, scroll, height) => {
   return [firstBarIndex, lastBarIndex];
 };
 
+/**
+ * TODO: change func name to calcNoteIndexRangeInPlayerCanvas.
+ * @param {number} notesLength
+ * @param {number} speed
+ * @param {number} width
+ * @param {number} initialNoteX
+ */
 export const calcNoteIndexRangeInCanvas = (
   notesLength,
   speed,
@@ -100,6 +126,13 @@ export const calcNoteIndexRangeInCanvas = (
   return [initialNoteIndex, finalNoteIndex];
 };
 
+/**
+ *
+ * @param {number} mouseX
+ * @param {number} mouseY
+ * @param {number} width
+ * @param {number} division
+ */
 export const calcCaret = (mouseX, mouseY, width, division) => {
   const barWidth = width - 1 - Positions.EDITOR.BAR.X * 2;
   const actualBarWidth = barWidth * (1 - Percentages.EDITOR.BAR_START_LINE); // left side of initial beat line is not available
@@ -142,10 +175,21 @@ export const calcEditorCanvasHeight = notesLength => {
   );
 };
 
+/**
+ *
+ * @param {number} width
+ */
 export const calcBarWidth = width => {
   return width - 1 - Positions.EDITOR.BAR.X * 2;
 };
 
+/**
+ *
+ * @param {number} width
+ * @param {number} bpm
+ * @param {number} offset
+ * @param {number} currentTime
+ */
 export const calcCurrentTimeMark = (width, bpm, offset, currentTime) => {
   const barWidth = calcBarWidth(width);
   const actualBarWidth = barWidth * (1 - Percentages.EDITOR.BAR_START_LINE); // left side of initial beat line is not available
@@ -179,7 +223,6 @@ export const calcBarNum = notesLength => {
 /**
  *
  * @param {Array} beats
- * @return {Object}
  */
 export const calcSongle = beats => {
   const offset = beats[0].start / 1000;
