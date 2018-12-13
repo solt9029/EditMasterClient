@@ -4,30 +4,35 @@ import styled from 'styled-components';
 import NoteButtonList from '../containers/NoteButtonList';
 import DivisionButtonList from '../containers/DivisionButtonList';
 import Container from '../styled/Container';
+import ToggleButton from 'react-toggle-button';
 
 const BarButton = styled(Button)`
   min-width: 90px;
 `;
 
-const ModeButton = styled(Button)`
-  margin-bottom: 30px;
-  min-width: 180px;
+const PlayModeAlert = styled.span`
+  padding-left: 7px;
+  padding-top: 5px;
+  color: #999;
+  font-size: 0.8em;
 `;
 
 const Palette = ({ toggleMode, isAutoMode, addBar, removeBar }) => {
-  const onModeButtonClick = () => toggleMode();
+  const onToggle = () => toggleMode();
   const onAddBarButtonClick = () => addBar();
   const onRemoveBarButtonClick = () => removeBar();
 
   return (
     <Fragment>
-      <ModeButton
-        block
-        color={isAutoMode ? 'danger' : 'primary'}
-        onClick={onModeButtonClick}
-      >
-        {isAutoMode ? 'プレイモードにする' : 'オート再生にする'}
-      </ModeButton>
+      <label>オート再生</label>
+      <Container bottom={30}>
+        <Row>
+          <ToggleButton value={isAutoMode} onToggle={onToggle} />
+          <PlayModeAlert>
+            {isAutoMode ? '' : '現在プレイモードになっています'}
+          </PlayModeAlert>
+        </Row>
+      </Container>
       <label>譜面の種類</label>
       <Container bottom={30}>
         <Row>
