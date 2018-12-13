@@ -87,6 +87,56 @@ const Help = () => (
       </Card>
 
       <Card>
+        <CardHeader>パソコンのSafariで太鼓の音が鳴らないんだけど？</CardHeader>
+        <CardBody>
+          <CardText>
+            ● 今の所はGoogle
+            Chromeのみをサポート対象として開発を行なっております。
+          </CardText>
+          <CardText>
+            ●
+            おそらく、FirefoxやEdgeなどのブラウザでも動くかと思いますが、Safariは今の所サポートできていませんのでご了承ください。
+          </CardText>
+        </CardBody>
+      </Card>
+
+      <Card>
+        <CardHeader>太鼓さん次郎で遊ぶにはどうすればいいの？</CardHeader>
+        <CardBody>
+          <CardText>
+            ●
+            tjaファイルは「太鼓さん次郎エクスポート」ボタンからダウンロードすることができます。必要に応じてファイルの中身を書き換えてください。
+          </CardText>
+          <CardText>
+            ●
+            それに加えて、音声ファイルが必要だと思うので、別途他のサービスを利用して該当するYouTube動画の音声をダウンロードしてください（こちらは自己責任でお願いします）。
+          </CardText>
+          <CardText>
+            ●
+            2つのファイルを所定のフォルダ内におけば遊ぶことができます。OFFSETなど一部のパラメータが調整必要かもしれません。ご了承ください。
+          </CardText>
+        </CardBody>
+      </Card>
+
+      <Card>
+        <CardHeader>太鼓さん大次郎2で遊ぶにはどうすればいいの？</CardHeader>
+        <CardBody>
+          <CardText>
+            ●
+            tjaファイル自体は「太鼓さん次郎エクスポート」ボタンからダウンロードすることができます（スマートフォンではできない場合があります）。
+          </CardText>
+          <CardText>
+            ●
+            それに加えて、音声ファイルが必要だと思うので、別途他のサービスを利用して該当するYouTube動画の音声をダウンロードしてください（こちらは自己責任でお願いします）。
+          </CardText>
+          <CardText>
+            ●
+            2つのファイルをZIPでまとめるなどして、太鼓さん大次郎2にてインポートを行なってください。
+          </CardText>
+        </CardBody>
+      </Card>
+
+      <Card>
         <CardHeader>他に分からないことがあるんだけど！</CardHeader>
         <CardBody>
           <CardText>
