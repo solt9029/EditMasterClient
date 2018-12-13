@@ -18,23 +18,17 @@ const StyledNavbar = styled(RNavbar)`
 `;
 
 export default class Navbar extends Component {
-  state = {
-    isOpen: false,
-  };
+  state = { isOpen: false };
 
   toggle = () => {
-    this.setState(state => ({
-      isOpen: !state.isOpen,
-    }));
+    this.setState(state => ({ isOpen: !state.isOpen }));
   };
 
   componentWillReceiveProps(nextProps) {
     if (this.props.location.pathname === nextProps.location.pathname) {
       return;
     }
-    this.setState({
-      isOpen: false,
-    });
+    this.setState({ isOpen: false });
   }
 
   render() {

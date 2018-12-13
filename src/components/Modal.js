@@ -12,16 +12,12 @@ export default class Modal extends Component {
     if (this.props.isLoading) {
       return;
     }
-    this.setState({
-      isOpen: false,
-    });
+    this.setState({ isOpen: false });
   };
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.isLoading) {
-      this.setState({
-        isOpen: true,
-      });
+      this.setState({ isOpen: true });
     }
   }
 
