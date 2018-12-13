@@ -12,7 +12,6 @@ const BarButton = styled(Button)`
 
 const PlayModeAlert = styled.span`
   padding-left: 7px;
-  padding-top: 5px;
   color: #999;
   font-size: 0.8em;
 `;
