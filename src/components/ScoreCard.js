@@ -20,7 +20,8 @@ const StyledCardText = styled(CardText)`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  margin-bottom: 0.2rem;
+  margin-bottom: ${({ bottom }) => (bottom ? bottom : 0)}em;
+  text-align: ${({ right }) => (right ? 'right' : 'left')};
 `;
 
 const Username = styled.span`
@@ -30,7 +31,12 @@ const Username = styled.span`
 `;
 
 const Comment = styled.span`
-  color: #555;
+  color: #444;
+`;
+
+const Date = styled.span`
+  font-size: 0.6em;
+  color: #666;
 `;
 
 const Icon = styled.img`
@@ -58,12 +64,15 @@ const ScoreCard = ({ score }) => {
           alt="score"
         />
         <StyledCardBody>
-          <StyledCardText>
+          <StyledCardText bottom={0.2}>
             <Icon src="/images/icon.png" alt="icon" />
             <Username>{score.username}</Username>
           </StyledCardText>
           <StyledCardText>
             <Comment>{score.comment}</Comment>
+          </StyledCardText>
+          <StyledCardText right={1}>
+            <Date>Created at {score.created_at}</Date>
           </StyledCardText>
         </StyledCardBody>
       </StyledCard>
@@ -79,5 +88,6 @@ ScoreCard.propTypes = {
     video_id: PropTypes.string,
     username: PropTypes.string,
     comment: PropTypes.string,
+    created_at: PropTypes.string,
   }),
 };
