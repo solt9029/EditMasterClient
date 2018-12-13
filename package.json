@@ -17,6 +17,8 @@
     "css-loader": "0.28.7",
     "dotenv": "4.0.0",
     "dotenv-expand": "4.2.0",
+    "enzyme": "^3.8.0",
+    "enzyme-adapter-react-16": "^1.7.1",
     "eslint": "4.10.0",
     "eslint-config-prettier": "^3.0.1",
     "eslint-config-react-app": "^2.1.0",
@@ -53,6 +55,7 @@
     "react-redux": "^5.0.6",
     "react-router-dom": "^4.2.2",
     "react-router-redux": "^5.0.0-alpha.9",
+    "react-test-renderer": "^16.6.3",
     "react-toggle-button": "^2.2.0",
     "react-youtube": "^7.6.0",
     "reactstrap": "^6.4.0",
@@ -84,7 +87,8 @@
       "src/**/*.{js,jsx,mjs}"
     ],
     "setupFiles": [
-      "<rootDir>/config/polyfills.js"
+      "<rootDir>/config/polyfills.js",
+      "<rootDir>/src/setupTests.js"
     ],
     "testMatch": [
       "<rootDir>/src/**/__tests__/**/*.{js,jsx,mjs}",
