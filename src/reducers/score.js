@@ -135,10 +135,10 @@ const handleUpdateNotesAction = (state, { payload: { notes, index } }) => {
   }
   // add bar
   if (index >= state.notes.list.length - Numbers.NOTES_PER_BAR) {
-    for (let i = 0; i < Numbers.NOTES_PER_BAR; i++) {
-      state.notes.list.push(Ids.NOTE.SPACE);
-      state.states.list.push(Ids.STATE.FRESH);
-    }
+    state.notes.list.push(...Array(Numbers.NOTES_PER_BAR).fill(Ids.NOTE.SPACE));
+    state.states.list.push(
+      ...Array(Numbers.NOTES_PER_BAR).fill(Ids.STATE.FRESH)
+    );
   }
   return {
     ...state,
@@ -154,10 +154,8 @@ const handleUpdateNotesAction = (state, { payload: { notes, index } }) => {
 };
 
 const handleAddBarAction = state => {
-  for (let i = 0; i < Numbers.NOTES_PER_BAR; i++) {
-    state.notes.list.push(Ids.NOTE.SPACE);
-    state.states.list.push(Ids.STATE.FRESH);
-  }
+  state.notes.list.push(...Array(Numbers.NOTES_PER_BAR).fill(Ids.NOTE.SPACE));
+  state.states.list.push(...Array(Numbers.NOTES_PER_BAR).fill(Ids.STATE.FRESH));
   return {
     ...state,
     notes: {
@@ -175,10 +173,8 @@ const handleRemoveBarAction = state => {
   if (state.notes.list.length < Numbers.NOTES_PER_BAR * 2) {
     return state;
   }
-  for (let i = 0; i < Numbers.NOTES_PER_BAR; i++) {
-    state.notes.list.pop();
-    state.states.list.pop();
-  }
+  state.notes.list.splice(state.notes.list.length - Numbers.NOTES_PER_BAR);
+  state.states.list.splice(state.states.list.length - Numbers.NOTES_PER_BAR);
   return {
     ...state,
     notes: {
