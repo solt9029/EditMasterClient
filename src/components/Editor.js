@@ -8,6 +8,7 @@ import { Keys } from '../constants';
 import styled from 'styled-components';
 import { calcEditorCanvasHeight } from '../utils/calculations';
 import { throttle } from 'lodash';
+import './Editor.css';
 
 const Div = styled.div`
   width: ${({ width }) => width}px;
@@ -15,7 +16,8 @@ const Div = styled.div`
 `;
 
 const ScrollContainer = styled(Div)`
-  overflow: auto;
+  overflow-y: auto;
+  overflow-x: hidden;
 `;
 
 const LargeContainer = styled(Div)`
@@ -65,10 +67,14 @@ export default class Editor extends Component {
   render() {
     const { notesLength, width, height } = this.props;
     const largeHeight = calcEditorCanvasHeight(notesLength);
-
     return (
-      <ScrollContainer width={width} height={height} innerRef={this.ref}>
-        <LargeContainer width={width} height={largeHeight}>
+      <ScrollContainer
+        className="scroll-container"
+        width={width - 1}
+        height={height - 1}
+        innerRef={this.ref}
+      >
+        <LargeContainer width={width - 1} height={largeHeight - 1}>
           <Stage
             tabIndex={0}
             onMouseMove={this.onMouseMove}

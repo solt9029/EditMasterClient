@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import './Pane.css';
 
 function Pane(props) {
   const size = props.size || 0;
