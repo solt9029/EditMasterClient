@@ -32,8 +32,8 @@ export default class EditorCanvas extends Component {
     return (
       <Canvas
         innerRef={this.ref}
-        width={width}
-        height={height}
+        width={width - 1}
+        height={height - 1}
         translateY={scroll}
       />
     );

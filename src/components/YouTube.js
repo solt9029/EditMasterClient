@@ -4,7 +4,7 @@ import { Ids } from '../constants';
 import propTypes from 'prop-types';
 
 const opts = {
-  height: '95%',
+  height: '100%',
   width: '100%',
   playerVars: {
     autoplay: 1,

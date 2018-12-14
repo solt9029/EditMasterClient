@@ -29,6 +29,6 @@ export default class PlayerCanvas extends Component {
   render() {
     const { width, height } = this.props;
 
-    return <Canvas innerRef={this.ref} width={width} height={height} />;
+    return <Canvas innerRef={this.ref} width={width - 1} height={height - 1} />;
   }
 }

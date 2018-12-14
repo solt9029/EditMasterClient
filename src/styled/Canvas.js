@@ -6,4 +6,5 @@ export default styled.canvas`
   left: 0;
   outline: none;
   transform: translateY(${({ translateY }) => translateY}px);
+  overflow: hidden;
 `;

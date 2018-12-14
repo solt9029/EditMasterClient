@@ -1,0 +1,3 @@
+.layout-pane::-webkit-scrollbar {
+  display: none;
+}
