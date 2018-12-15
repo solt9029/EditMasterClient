@@ -4,6 +4,13 @@ import NewsCard from './NewsCard';
 const NewsCardList = () => (
   <Fragment>
     <NewsCard
+      title="エディタ画面のスクロールバーの不具合を修正しました"
+      date="2018/12/15"
+    >
+      Windowsにおいてスクロールバーの位置がずれていたりする現象を修正しました。この修正でGoogle
+      ChromeやSafariではスクロールバー自体が非表示になりますが、マウスホイールや2本指でのスクロールができます。
+    </NewsCard>
+    <NewsCard
       title="創作日時が表示されるようになりました＆オート再生ボタンのデザインが変わりました"
       date="2018/12/13"
     >
