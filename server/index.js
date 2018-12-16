@@ -29,7 +29,8 @@ app.get('/Scores/edit', (req, res) => {
 
 // serve
 app.get('/', (req, res) => {
-  if (req.headers['user-agent'].startsWith('Twitterbot')) {
+  const userAgent = req.headers['user-agent'];
+  if (userAgent.startsWith('Twitterbot') || userAgent.startsWith('Slackbot')) {
     res.sendFile(path.join(__dirname, 'ogp', 'index.html'));
     return;
   }
