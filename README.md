@@ -2,10 +2,10 @@
 
 [![CircleCI](https://circleci.com/gh/solt9029/EditMasterClient.svg?style=svg)](https://circleci.com/gh/solt9029/EditMasterClient)
 
+
 ## Environment
 
 - yarn: 1.9.4
-
 - node: 10.11.0
 
 
@@ -24,19 +24,16 @@ cp google-analytics.js.example google-analytics.js
 ## Usage
 
 - start development mode
-
 ```
 yarn start
 ```
 
 - build 
-
 ```
 yarn build
 ```
 
 - deploy to gh-pages
-
 ```
 yarn deploy
 ```
@@ -45,7 +42,6 @@ yarn deploy
 ## Docker
 
 - commit
-
 ```
 docker login
 docker build --tag=solt9029/editmasterclient:latest .
@@ -53,7 +49,6 @@ docker push solt9029/editmasterclient:latest
 ```
 
 - pull
-
 ```
 docker pull solt9029/editmasterclient:latest
 docker run -d -p 8053:80 solt9029/editmasterclient:latest
