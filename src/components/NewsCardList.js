@@ -4,6 +4,12 @@ import NewsCard from './NewsCard';
 const NewsCardList = () => (
   <Fragment>
     <NewsCard
+      title="太鼓さん次郎エクスポート機能の改善を行いました"
+      date="2019/04/07"
+    >
+      太鼓さん次郎エクスポートをする際に、連打や風船の最後が8になるように修正を行いました。
+    </NewsCard>
+    <NewsCard
       title="エディタ画面のスクロールバーの不具合を修正しました"
       date="2018/12/15"
     >
