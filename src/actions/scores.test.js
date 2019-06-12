@@ -9,7 +9,7 @@ import {
   finishFetchingScores,
 } from './scores';
 
-const axios = new AxiosMockAdapter(clients.api);
+const client = new AxiosMockAdapter(clients.api);
 const middlewares = [thunk];
 const mockStore = configureStore(middlewares);
 
@@ -49,7 +49,7 @@ describe('scores actions', () => {
       last_page: 3,
       data: [{}, {}],
     };
-    axios.onGet('/scores').reply(200, data);
+    client.onGet('/scores').reply(200, data);
     const store = mockStore({});
 
     await store.dispatch(fetchScores());
@@ -68,7 +68,7 @@ describe('scores actions', () => {
   });
 
   test('fetchScores failure', async () => {
-    axios.onGet('/scores').reply(500);
+    client.onGet('/scores').reply(500);
     const store = mockStore({});
 
     await store.dispatch(fetchScores());
