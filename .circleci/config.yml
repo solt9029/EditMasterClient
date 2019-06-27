@@ -27,7 +27,6 @@ jobs:
           - v1-dependencies-
 
       - run: yarn install
-      - run: cp src/config/api.js.example src/config/api.js && cp src/config/google-analytics.js.example src/config/google-analytics.js
 
       - save_cache:
           paths:
