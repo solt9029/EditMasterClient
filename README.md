@@ -15,9 +15,8 @@
 git clone git@github.com:solt9029/EditMasterClient.git
 cd EditMasterClient
 yarn install
-cd ./src/config
-cp api.js.example api.js
-cp google-analytics.js.example google-analytics.js
+cp .env.development.local.example .env.development.local
+cp .env.production.local.example .env.production.local
 ```
 
 
