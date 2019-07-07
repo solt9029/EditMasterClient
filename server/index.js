@@ -1,7 +1,15 @@
+// dotenv
+const dotenv = require('dotenv');
+dotenv.config();
+
 const express = require('express');
 const request = require('request');
 const path = require('path');
 const app = express();
+
+// basic auth
+const basicAuth = require('basic-auth-connect');
+app.use(basicAuth(process.env.BASIC_USERNAME, process.env.BASIC_PASSWORD));
 
 // view settings
 app.set('view engine', 'pug');
