@@ -17,6 +17,7 @@ cd EditMasterClient
 yarn install
 cp .env.development.local.example .env.development.local
 cp .env.production.local.example .env.production.local
+cp ./server/.env.example ./server/.env
 ```
 
 
