@@ -8,8 +8,11 @@ const path = require('path');
 const app = express();
 
 // basic auth
-const basicAuth = require('basic-auth-connect');
-app.use(basicAuth(process.env.BASIC_USERNAME, process.env.BASIC_PASSWORD));
+const toBool = require('to-bool');
+if (toBool(process.env.BASIC_AUTH)) {
+  const basicAuth = require('basic-auth-connect');
+  app.use(basicAuth(process.env.BASIC_USERNAME, process.env.BASIC_PASSWORD));
+}
 
 // view settings
 app.set('view engine', 'pug');
