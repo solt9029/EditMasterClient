@@ -16,7 +16,7 @@ if (toBool(process.env.BASIC_AUTH)) {
 
 // view settings
 app.set('view engine', 'pug');
-app.set('views', path.join(__dirname, 'ogp'));
+app.set('views', path.join(__dirname, 'views'));
 
 // redirect
 app.get('/Scores/index', (req, res) => {
@@ -42,7 +42,7 @@ app.get('/Scores/edit', (req, res) => {
 app.get('/', (req, res) => {
   const userAgent = req.headers['user-agent'];
   if (userAgent.startsWith('Twitterbot') || userAgent.startsWith('Slackbot')) {
-    res.sendFile(path.join(__dirname, 'ogp', 'index.html'));
+    res.sendFile(path.join(__dirname, 'views', 'index.html'));
     return;
   }
   res.sendFile(path.resolve(__dirname, '../build/index.html'));
@@ -50,7 +50,7 @@ app.get('/', (req, res) => {
 
 app.get('/help', (req, res) => {
   if (req.headers['user-agent'].startsWith('Twitterbot')) {
-    res.sendFile(path.join(__dirname, 'ogp', 'help.html'));
+    res.sendFile(path.join(__dirname, 'views', 'help.html'));
     return;
   }
   res.sendFile(path.resolve(__dirname, '../build/index.html'));
@@ -58,7 +58,7 @@ app.get('/help', (req, res) => {
 
 app.get('/scores', (req, res) => {
   if (req.headers['user-agent'].startsWith('Twitterbot')) {
-    res.sendFile(path.join(__dirname, 'ogp', 'scores', 'index.html'));
+    res.sendFile(path.join(__dirname, 'views', 'scores', 'index.html'));
     return;
   }
   res.sendFile(path.resolve(__dirname, '../build/index.html'));
@@ -66,7 +66,7 @@ app.get('/scores', (req, res) => {
 
 app.get('/scores/new', (req, res) => {
   if (req.headers['user-agent'].startsWith('Twitterbot')) {
-    res.sendFile(path.join(__dirname, 'ogp', 'scores', 'new.html'));
+    res.sendFile(path.join(__dirname, 'views', 'scores', 'new.html'));
     return;
   }
   res.sendFile(path.resolve(__dirname, '../build/index.html'));
@@ -76,9 +76,9 @@ app.get('/scores/:id', (req, res) => {
   if (req.headers['user-agent'].startsWith('Twitterbot')) {
     request.get(
       {
-        url: `http://editmasterapi.solt9029.com/scores/${req.params.id}`,
+        url: `http://editmasterapi.solt9029.com/scores/${req.params.id}`
       },
-      (error, response, body) => {
+      (response, body) => {
         const score = JSON.parse(body);
         if (score.comment === null) {
           score.comment = '';
@@ -95,9 +95,9 @@ app.get('/scores/:id', (req, res) => {
 app.use(express.static(path.resolve(__dirname, '../build')));
 
 // all
-app.get('*', (req, res) =>
-  res.sendFile(path.resolve(__dirname, '../build/index.html'))
-);
+app.get('*', (req, res) => res.sendFile(path.resolve(__dirname, '../build/index.html')));
 
 // listen
-app.listen(80);
+const port = process.env.PORT || 80;
+app.listen(port);
+console.log(`app listening on port ${port}!`);
