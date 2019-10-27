@@ -3,10 +3,10 @@ import { Api } from '../config';
 
 export const clients = {
   api: axios.create({
-    baseURL: `http://${Api.HOST}:${Api.PORT}`,
+    baseURL: `${Api.PROTOCOL}//${Api.HOST}:${Api.PORT}`,
   }),
   songle: axios.create({
-    baseURL: 'http://widget.songle.jp',
+    baseURL: 'https://widget.songle.jp',
   }),
 };
 

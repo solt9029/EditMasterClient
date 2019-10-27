@@ -60,7 +60,7 @@ const ScoreCard = ({ score }) => {
       <StyledCard tag={Link} to={`/scores/${score.id}`}>
         <CardImg
           top
-          src={`http://i.ytimg.com/vi/${score.video_id}/mqdefault.jpg`}
+          src={`https://i.ytimg.com/vi/${score.video_id}/mqdefault.jpg`}
           alt="score"
         />
         <StyledCardBody>
