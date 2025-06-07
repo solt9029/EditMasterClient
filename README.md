@@ -1,8 +1,5 @@
 # EditMasterClient
 
-[![CircleCI](https://circleci.com/gh/solt9029/EditMasterClient.svg?style=svg)](https://circleci.com/gh/solt9029/EditMasterClient)
-
-
 ## Environment
 
 - yarn: 1.9.4
